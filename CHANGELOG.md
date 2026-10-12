@@ -50,3 +50,21 @@
 
 ### Revisions, October 12, 2026 (pilot framing)
 - Section 11 is now "A pilot playbook" instead of "Recommended next step", framed for readers at any stage: a way to start, expand or reset, or an audit for teams already in production.
+
+### Revisions, October 12, 2026 (review feedback)
+Changes after outside reviews of the page:
+- Credibility:
+  - The 75.6% repeat-reliability figure now shows its sample size and margin of error (about 65% to 84%); the top three platforms are effectively tied.
+  - New "How to read this report" note: method, how vendors were chosen, how evidence is weighted, which tools are illustrative, and a disclosure (personal capacity, no commercial relationship with any vendor named).
+- Limited-memory models: reframed as "build the governed fact store now, trial limited-memory training only once it beats retrieval." Live data such as balances and appointment slots stays on tool calls.
+- Privacy: deleting a fact from the store removes it from the model, but logs, transcripts and backups need their own deletion.
+- Pilot: the gates now explain where each number comes from and how to adjust it by risk. The stop rule now targets "advice beyond approved content".
+- Identity: a friction-by-risk table (low, medium, high) with the trade-offs of liveness checks and texted codes.
+- Thinker-responder: it works beside speech-to-speech models too. Routes are committed only on the finished turn, and the agent routes again when the caller corrects themselves.
+- Emotion detection and personas: labeled as earlier-stage evidence to pilot behind the golden test set.
+- Economics: new sliders for the higher cost of escalated calls and for repeat calls, plus the agent's cost per resolved call and worst, expected and best cases. Default savings are lower as a result.
+- Structure:
+  - A five-minute read (what we know, what to watch, what to do) replaces the suggested path.
+  - Routing speed, cascade cost and the thesis checks moved to Part II, so Part I is shorter.
+- Regulation section labeled as an orientation summary, not legal advice.
+- Removed the note about sources that could not be retrieved.

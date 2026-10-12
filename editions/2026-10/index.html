@@ -188,6 +188,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .tile .v{font-family:var(--display);font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums}
 .tile.hl{background:var(--accent-soft)}
 .tile.hl .v{color:var(--accent)}
+.scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.scen .sc{border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:grid;gap:0}.scen .sc.mid{border-color:var(--accent)}.scen .k{font-size:.72rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}.scen .v{font-family:var(--display);font-weight:700;font-size:1.1rem}
 .compare{margin-top:14px;display:grid;gap:8px;font-size:.84rem}
 .compare .r{display:grid;grid-template-columns:150px minmax(0,1fr) 72px;gap:10px;align-items:center}
 .compare .bar{height:14px;border-radius:4px;background:var(--accent)}
@@ -496,6 +497,7 @@ ol.src li:target{background:var(--accent-soft)}
 .bolt-row{display:flex;gap:8px;align-items:flex-end}
 .bolt-row textarea{flex:1;min-width:0;resize:none;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink)}
 .bolt-disc{font-size:.72rem}
+.howto{margin-top:14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}.howto summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:.92rem}.howto summary:hover{color:var(--accent)}.howto-body{padding:0 14px 12px}.howto-body li{color:var(--muted)}.howto-body strong{color:var(--ink)}
 .cmt-alt{margin:var(--space-3) 0 0;color:var(--muted)}.cmt-off p{margin:0 0 var(--space-3)}.cmt-btns{display:flex;flex-wrap:wrap;gap:var(--space-2)}.cmt-btns .btn{text-decoration:none;font-weight:600}.cmt-btns .btn:not(.primary){color:var(--ink)}#cmt .utterances{max-width:100%}
 @media print{.bolt-launch,.bolt-panel,.about-links,#comments{display:none!important}}
 </style>
@@ -545,28 +547,26 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="wave-cap" aria-hidden="true"><span>caller</span><span>agent</span><span>caller</span><span>agent</span><span>handoff</span></div>
 
     <div class="bottom-line">
-      <p class="say">Voice agents are now <b>good enough to take routine calls in regulated contact centers</b>: scheduling, billing questions, balance and status checks. They are <b>not yet consistent enough</b> to run unsupervised on clinical or high-risk financial conversations. The leading platform still fails about one in four test scenarios when each one is run three times.<a class="hash" href="#gap" aria-label="See the reliability results">#</a></p>
+      <p class="say">Voice agents are now <b>good enough to take routine calls in regulated contact centers</b>: scheduling, billing questions, balance and status checks. They are <b>not yet consistent enough</b> to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in four test scenarios when each was run three times.<a class="hash" href="#gap" aria-label="See the reliability results">#</a></p>
       <div class="ask">
-        <span class="eyebrow">A suggested path</span>
-        <p><strong>Invest in evaluation first.</strong> Build a golden test set from your own calls, including noisy lines, side conversations and upset callers, and gate every change on it.</p>
-        <p><strong>Pilot narrow and measure repeatability.</strong> 90 days, inbound only, two or three call types, warm transfer to a human, judged on cost per resolved call.</p>
-        <p><strong>Think silently, then respond.</strong> A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a conversational LLM does the responding.</p>
-        <p><strong>After day 90, scale what passed.</strong> Add call types and markets in waves through the same gate, bring routing and evaluation in-house, and move contracts to price per resolved call.</p>
-        <p><strong>Invest in limited-memory model training now.</strong> Build a governed fact store from your systems of record and train a small model on one knowledge domain, run side by side with retrieval.</p>
+        <span class="eyebrow">The five-minute read</span>
+        <p><strong>What we know.</strong> The best platform passed 75.6% of test scenarios on all three tries; the top three are within the margin of error. Every published deployment result is administrative and self-reported.</p>
+        <p><strong>What to watch.</strong> Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that any model bet goes stale in a quarter.</p>
+        <p><strong>What to do.</strong> Build a golden test set from your own calls and gate every change on it. Pilot narrow, judged on cost per resolved call. Separate silent decisions from the conversation, and build a governed fact store; trial limited-memory models only once they beat retrieval.</p>
       </div>
     </div>
 
     <div class="stats">
       <div class="stat"><span class="v num">56<small>%</small></span><p>Lower call abandonment at a large health system within two weeks of go-live <a class="c" data-s="beckersTGH"></a></p><span class="chip k-ven">customer-reported</span></div>
-      <div class="stat"><span class="v num">75.6<small>%</small></span><p>Best platform's repeat reliability: share of scenarios passed on all three tries <a class="c" data-s="cekura"></a></p><span class="chip k-ven">vendor benchmark</span></div>
+      <div class="stat"><span class="v num">75.6<small>%</small></span><p>Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 65% to 84% at 95% confidence) <a class="c" data-s="cekura"></a></p><span class="chip k-ven">vendor benchmark</span></div>
       <div class="stat"><span class="v num">22<small>ms</small></span><p>To route a call intent with a small fine-tuned classifier at 93.5% accuracy, vs about 2.3 s for a frontier LLM <a class="c" data-s="sift"></a><a class="c" data-s="openrouterJev"></a></p><span class="chip k-ind">independent</span></div>
-      <div class="stat"><span class="v num">18<small>x</small></span><p>Fewer parameters: a 382M limited-memory model came close to a 7B model on factual precision <a class="c" data-s="lmlm"></a></p><span class="chip k-ind">independent</span></div>
+      <div class="stat"><span class="v num">18<small>x</small></span><p>Fewer parameters: a 382M limited-memory model came close to a 7B model on factual precision, in research on Wikipedia facts <a class="c" data-s="lmlm"></a></p><span class="chip k-ind">independent</span></div>
     </div>
 
     <div class="thesis">
       <a href="#gap"><span class="n">Thesis 1</span><span class="t">Reliability is the gap</span><p>Single demos overstate readiness by 20 to 40 points. Test repeatability on your own calls.</p></a>
       <a href="#router"><span class="n">Thesis 2</span><span class="t">A thinker-responder agent</span><p>A fast System-1 thinker decides silently; a conversational LLM speaks. People don't narrate every thought before they answer.</p></a>
-      <a href="#lmlm"><span class="n">Thesis 3</span><span class="t">Invest in governed memory</span><p>Limited-memory models look facts up instead of memorizing them. Early, cheap to trial, and the right bet for regulated data.</p></a>
+      <a href="#lmlm"><span class="n">Thesis 3</span><span class="t">Invest in governed memory</span><p>A governed fact store pays off today. Limited-memory models that look facts up are promising but research-stage: trial them against retrieval first.</p></a>
     </div>
 
     <div class="legend" style="margin-top:18px">
@@ -577,6 +577,20 @@ ol.src li:target{background:var(--accent-soft)}
       <span class="chip k-our">author's arithmetic or view</span>
       <span class="screen-only" style="display:inline-flex;gap:8px;align-items:center;margin-left:8px">Charts and tools you can use carry <span class="ix">interactive</span></span>
     </div>
+    <details class="howto" id="howto">
+      <summary>How to read this report: method, limits and disclosure</summary>
+      <div class="howto-body">
+        <ul class="tight">
+          <li><strong>Method.</strong> A review of public sources up to the research cutoff. I did not run my own tests; every figure links to its source.</li>
+          <li><strong>Which vendors.</strong> Platforms and models appear when they publish benchmark results or deployment outcomes, or run at large health systems or banks. Sierra is included in every comparison because of its healthcare footprint, and its absence from a benchmark is noted rather than filled in.</li>
+          <li><strong>How much weight.</strong> Peer-reviewed and independent tests first, then vendor benchmarks with a published method, then customer-reported outcomes, then vendor claims. The label on each figure says which it is.</li>
+          <li><strong>Illustrative tools.</strong> The router, latency, economics and limited-memory demos are models for exploring trade-offs, not measurements of a product.</li>
+          <li><strong>Recommendations.</strong> Thresholds, pilot gates and suggested paths are proposals to adapt to your risk, call mix and baseline.</li>
+          <li><strong>Disclosure.</strong> Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.</li>
+          <li><strong>Corrections.</strong> Post them in the comments or as a GitHub issue; changes are logged in the changelog.</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </header>
 
@@ -605,7 +619,7 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
       <div class="detail" id="db-detail"></div>
     </div>
-    <p class="note" style="margin-top:12px">Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.<a class="c" data-s="sierraTau"></a> Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.</p>
+    <p class="note" style="margin-top:12px">Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.<a class="c" data-s="sierraTau"></a> With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.</p>
   </div>
 </section>
 
@@ -668,7 +682,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="head">
       <p class="eyebrow">4 · Economics</p>
       <h2>The lever is resolution rate, not token price</h2>
-      <p class="lede">Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person. Defaults use published per-minute pricing<a class="c" data-s="beri"></a> and a fully loaded human cost per call<a class="c" data-s="helpware"></a>. Platform, integration and team costs are a fixed annual line.</p>
+      <p class="lede">Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person, and those tend to be the longer, harder ones. Some calls the agent closes come back as repeat calls. Defaults use published per-minute pricing<a class="c" data-s="beri"></a> and a fully loaded human cost per call<a class="c" data-s="helpware"></a>. Platform, integration and team costs are a fixed annual line.</p>
     </div>
     <div class="calc">
       <div class="panel stack" id="calc-ctrls">
@@ -679,6 +693,8 @@ ol.src li:target{background:var(--accent-soft)}
         <div class="ctrl"><label for="c-rate">AI cost per minute, all-in <output id="o-rate"></output></label><input type="range" id="c-rate" min="0.05" max="0.30" step="0.01" value="0.11"><small>Managed stacks run about $0.08 to $0.14</small></div>
         <div class="ctrl"><label for="c-res">Resolved end to end by the agent <output id="o-res"></output></label><input type="range" id="c-res" min="0" max="90" step="1" value="55"></div>
         <div class="ctrl"><label for="c-hum">Human cost per call <output id="o-hum"></output></label><input type="range" id="c-hum" min="3" max="12" step="0.25" value="6.04"></div>
+        <div class="ctrl"><label for="c-up">Escalated calls cost more than average <output id="o-up"></output></label><input type="range" id="c-up" min="0" max="60" step="5" value="25"><small>The calls left for people are the harder ones</small></div>
+        <div class="ctrl"><label for="c-rep">Agent-closed calls that come back <output id="o-rep"></output></label><input type="range" id="c-rep" min="0" max="20" step="1" value="5"><small>Repeat calls go to a person</small></div>
         <div class="ctrl"><label for="c-fix">Fixed annual cost: platform, integration, team <output id="o-fix"></output></label><input type="range" id="c-fix" min="0" max="5000000" step="100000" value="1500000"></div>
         <div class="seg" role="group" aria-label="Presets">
           <button type="button" data-preset="cons" aria-pressed="false">Cautious</button>
@@ -693,13 +709,16 @@ ol.src li:target{background:var(--accent-soft)}
           <div class="tile"><span class="k">AI + human fallback</span><span class="v" id="t-ai"></span></div>
           <div class="tile hl"><span class="k">Net monthly savings</span><span class="v" id="t-save"></span></div>
           <div class="tile"><span class="k">Break-even resolution</span><span class="v" id="t-be"></span></div>
+          <div class="tile"><span class="k">Agent cost per call it resolves</span><span class="v" id="t-cpr"></span></div>
+          <div class="tile"><span class="k">Human cost per call</span><span class="v" id="t-hpc"></span></div>
         </div>
+        <div class="scen" id="scen" aria-live="polite"></div>
         <div class="chartbox"><svg id="res-chart" viewBox="0 0 600 230" width="100%" role="img" aria-label="Net monthly savings by resolution rate"></svg></div>
         <div class="compare" id="compare"></div>
         <p class="note" style="margin-top:10px" id="calc-note"></p>
       </div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="chip k-our">author's arithmetic</span> Illustrative only. A published comparison found the pricier stack with higher resolution ($0.14/min, 70% resolved) costs less per 1,000 calls than the cheaper one ($0.09/min, 55%).<a class="c" data-s="beri"></a> Cost models that count only LLM token savings miss most of the money.</p>
+    <p class="note" style="margin-top:12px"><span class="chip k-our">author's arithmetic</span> Illustrative only. The escalation and repeat-call defaults are assumptions, not sourced figures; use your own. Worst case: resolution 15 points lower, escalations 15 points costlier, 5 points more repeat calls. Best case: resolution 10 points higher, escalations 10 points cheaper, 3 points fewer repeat calls. A published comparison found the pricier stack with higher resolution ($0.14/min, 70% resolved) costs less per 1,000 calls than the cheaper one ($0.09/min, 55%).<a class="c" data-s="beri"></a> Cost models that count only LLM token savings miss most of the money.</p>
   </div>
 </section>
 
@@ -742,6 +761,7 @@ ol.src li:target{background:var(--accent-soft)}
           <li><strong>Cheaper:</strong> the expensive model only writes the reply, not the routing.</li>
           <li><strong>Safer:</strong> the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.<a class="c" data-s="nuanced"></a></li>
           <li><strong>Converging with the industry:</strong> OpenAI and Sierra also split talking from thinking, though both put the fast model on the talking side and a slower reasoner behind it.<a class="c" data-s="openaiLive"></a><a class="c" data-s="sierraSummit"></a></li>
+          <li><strong>Works with any voice stack:</strong> the thinker does not need a speech-to-text pipeline. Beside a speech-to-speech or full-duplex model it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking.</li>
           <li><strong>Limit:</strong> the thinker handles bounded choices. Open-ended reasoning still needs a deeper planner the responder can call.</li>
         </ul></div>
     </div>
@@ -758,33 +778,7 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
     </div>
 
-    <div class="cols2" style="margin-top:16px">
-      <div class="panel">
-        <span class="lbl">Time to route one decision, against an 800 ms turn budget</span>
-        <div class="speed" id="speed" style="margin-top:12px"></div>
-        <p class="note" style="margin-top:10px">Static chart. Measured by different labs on different hardware; directional. Sierra does not publish standalone latency for its orchestration model. Frontier figure is a large model classifying Banking77 intents.<a class="c" data-s="openrouterJev"></a><a class="c" data-s="sift"></a><a class="c" data-s="laya"></a><a class="c" data-s="archRouter"></a><a class="c" data-s="hamming"></a></p>
-      </div>
-      <div class="panel stack">
-        <span class="lbl">What a cascade buys</span>
-        <p>In one public test on 3,080 banking intents, a frontier model scored 84.4% at about $2.42 per 1,000 requests. Sending everything to a decision model first, and only the low-confidence cases (below 0.90) on to the frontier model, scored 84.0% at about $0.69 per 1,000.<a class="c" data-s="openrouterJev"></a></p>
-        <div class="bars">
-          <div class="r"><span>Frontier only</span><div class="b ref" style="width:100%"></div><span>$2.42</span></div>
-          <div class="r"><span>Decision model first</span><div class="b hi" style="width:28.5%"></div><span>$0.69</span></div>
-        </div>
-        <p class="note"><span class="chip k-ven">vendor-adjacent</span> The threshold was tuned on the test set, so treat 72% savings as an upper bound.</p>
-      </div>
-    </div>
-
-    <div class="panel" style="margin-top:16px">
-      <span class="lbl">The thesis, checked</span>
-      <div class="check" style="margin-top:12px">
-        <div class="ck"><span class="chip k-ind">holds</span><span>Routing a call to a sub-agent or toolset is closed-set classification. Small decision models do it in roughly 20 to 250 ms for fractions of a cent, versus about 2 s for a frontier LLM.<a class="c" data-s="openrouterJev"></a></span></div>
-        <div class="ck"><span class="chip k-ind">holds</span><span>Narrowing tools first helps. Retrieving the right tools before selection lifted selection accuracy from 13.6% to 43.1% and cut prompt tokens by more than half in one study; Anthropic reports similar gains once agents have 10 or more tools.<a class="c" data-s="ragmcp"></a><a class="c" data-s="anthropicTool"></a></span></div>
-        <div class="ck"><span class="chip k-ven">qualify</span><span>For a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.<a class="c" data-s="sift"></a><a class="c" data-s="rodrigues"></a></span></div>
-        <div class="ck"><span class="chip k-ven">qualify</span><span>Decision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61% of correct decisions in one study.<a class="c" data-s="creativeai"></a><a class="c" data-s="jevout"></a></span></div>
-        <div class="ck"><span class="chip k-unv">guardrail</span><span>Fraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output.<a class="c" data-s="multiIntent"></a></span></div>
-      </div>
-    </div>
+    <p class="note" style="margin-top:12px">Routing speed, the cost of a cascade and a check of this thesis against the evidence are in the <a href="#t-router">technical appendix (T5)</a>.</p>
   </div>
 </section>
 
@@ -819,7 +813,7 @@ ol.src li:target{background:var(--accent-soft)}
         <p>During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.</p>
         <ul class="tight">
           <li>One contact center pilot moved from reviewing 3% of calls to emotion-aware coaching, and escalations fell from 14% to 6%.<a class="c" data-s="datamark"></a> <span class="chip k-ven">vendor case study, human agents</span></li>
-          <li>Treat emotion scores as a signal for routing and review, not a judgment of the caller, and check that they work equally across accents and age groups.</li>
+          <li>Treat emotion scores as a signal for routing and review, not a judgment of the caller. Accuracy varies, so check that they work equally across accents and age groups.</li>
           <li>In the EU, people must be told when an emotion recognition system is used.<a class="c" data-s="euai50"></a></li>
         </ul>
       </div>
@@ -833,6 +827,7 @@ ol.src li:target{background:var(--accent-soft)}
         </ul>
       </div>
     </div>
+    <p class="note" style="margin-top:12px"><span class="chip k-our">author's view</span> The first two rest on measured results. The last two are earlier: the evidence is mostly vendor case studies, and none yet shows emotion detection or multiple personas improving AI-agent outcomes at scale. Pilot them behind the golden test set before relying on them.</p>
   </div>
 </section>
 
@@ -873,6 +868,7 @@ ol.src li:target{background:var(--accent-soft)}
           <li>Liveness and deepfake detection in the contact center platform, before any protected data.</li>
           <li>Step-up verification (one-time code to the number on file), not birth date or security questions alone.</li>
           <li>For payments, prescription changes and other authorizations, add voiceprint verification with liveness detection; a voiceprint alone can be fooled by a clone.<a class="c" data-s="voiceIdBreach"></a></li>
+          <li>Match the friction to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness only for irreversible actions. Liveness checks over phone-quality audio reject some genuine callers, and texted codes lose some older or distressed callers, so always offer a person as the fallback. <span class="chip k-our">author's view</span></li>
           <li>A published "we will never ask you for" policy, owned by marketing.</li>
           <li>In the US, outbound AI calls need prior consent under the FCC's 2024 ruling, reminders included.<a class="c" data-s="fcc"></a></li>
         </ul>
@@ -887,7 +883,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="head">
       <p class="eyebrow">9 · What comes next</p>
       <h2>Models that look facts up instead of memorizing them</h2>
-      <p class="lede">A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete.<a class="c" data-s="lmlm"></a></p>
+      <p class="lede">A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete.<a class="c" data-s="lmlm"></a> It suits slow-changing knowledge such as benefits, policies and fees; live data such as balances, claims and appointment slots stays on tool and MCP calls.</p>
     </div>
 
     <div class="panel">
@@ -912,7 +908,7 @@ ol.src li:target{background:var(--accent-soft)}
           <p class="note" id="lm-note"></p>
         </div>
       </div>
-      <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model.<a class="c" data-s="lmlm"></a></p>
+      <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model.<a class="c" data-s="lmlm"></a> Logs, transcripts, caches and backups still need their own deletion.</p>
     </div>
 
     <div class="cols2" style="margin-top:16px">
@@ -931,7 +927,7 @@ ol.src li:target{background:var(--accent-soft)}
         <span class="lbl">Why it fits regulated conversations</span>
         <ul class="tight">
           <li><strong>Facts become governed data.</strong> Each one is a row with access control, versioning and change review.</li>
-          <li><strong>Deletion is real.</strong> Removing rows forgets them without retraining.<a class="c" data-s="lmlm"></a></li>
+          <li><strong>Deletion from the model is real.</strong> Removing rows forgets them without retraining.<a class="c" data-s="lmlm"></a> Copies in logs, transcripts and backups need their own retention rules.</li>
           <li><strong>Less sensitive data in weights.</strong> Researchers have extracted names, phone numbers and emails from model weights, even from data seen once.<a class="c" data-s="carlini21"></a><a class="c" data-s="nasr"></a></li>
           <li><strong>Every answer has provenance.</strong> Each lookup is a logged call with the value it returned.</li>
           <li><strong>Small enough to run privately.</strong> Sub-1B models with lookups can sit inside the enterprise boundary.</li>
@@ -940,26 +936,17 @@ ol.src li:target{background:var(--accent-soft)}
     </div>
 
     <div class="panel stack" style="margin-top:16px">
-      <span class="lbl">My recommendation: invest in limited-memory training now, in stages</span>
-      <p>Retrieval on a frontier model is the safe default today. But a governed fact store pays off with or without LMLM, and a first training run is cheap enough that waiting costs more than trying.</p>
+      <span class="lbl">My view: build the fact store now, and treat limited-memory training as a gated bet</span>
+      <p>Retrieval on a frontier model is the safe default today, and the evidence for limited-memory models is still research-stage: Wikipedia facts, models under 400M parameters, no dialog, voice or production use. A governed fact store pays off either way. Training is a bet to stage behind gates, not a commitment.</p>
       <div class="invest">
         <div class="st"><span class="w">Now · no-regret</span><span class="t" style="font-weight:600">Build the governed fact store</span><p class="note" style="font-size:.88rem">Turn plans, policies, products, providers and fees into versioned rows with owners, access control and deletion. It powers retrieval today and LMLM tomorrow.</p></div>
-        <div class="st"><span class="w">Next quarter · prove it</span><span class="t" style="font-weight:600">Train a small model on one domain</span><p class="note" style="font-size:.88rem">Start from the open LMLM code (MIT) on one de-identified domain, such as benefits or product FAQs. Score it against retrieval on factual precision, deletion, latency and cost.<a class="c" data-s="lmlmCode"></a></p></div>
-        <div class="st"><span class="w">Within 12 months · scale</span><span class="t" style="font-weight:600">Put it behind the responder</span><p class="note" style="font-size:.88rem">If it wins on precision and governance, expand domains and let the responder use it for static knowledge. Live balances and appointments stay on tools.</p></div>
+        <div class="st"><span class="w">When the store is ready · trial</span><span class="t" style="font-weight:600">Trial a small model on one domain</span><p class="note" style="font-size:.88rem">Start from the open LMLM code (MIT) on one de-identified domain, such as benefits or product FAQs. Go further only if it beats retrieval on factual precision, deletion, latency and total cost.<a class="c" data-s="lmlmCode"></a></p></div>
+        <div class="st"><span class="w">Only if it wins · scale</span><span class="t" style="font-weight:600">Put it behind the responder</span><p class="note" style="font-size:.88rem">Expand domains for static knowledge. Live balances, claims and appointment slots always stay on tools.</p></div>
       </div>
       <p class="note">Compute is not the hard part: the paper trained each model in at most 8 H100-days<a class="c" data-s="lmlm"></a>, roughly $400 to $500 at $2 to $2.69 an hour for rented H100s<a class="c" data-s="gpuPrice"></a>. <span class="chip k-our">author's arithmetic</span> Budget for data engineering, store quality and evaluation instead.</p>
     </div>
 
-    <div class="panel" style="margin-top:16px">
-      <span class="lbl">The thesis, checked</span>
-      <div class="check" style="margin-top:12px">
-        <div class="ck"><span class="chip k-ind">holds</span><span>Moving facts into a store the model must consult sharply improves factual precision at a given size and makes each fact traceable and deletable.<a class="c" data-s="lmlm"></a></span></div>
-        <div class="ck"><span class="chip k-ven">qualify</span><span>It reduces hallucination; it does not eliminate it. Wrong lookups, missing rows, extraction errors and the model answering from memory instead of looking up all remain. The authors say it "does not guarantee perfect factuality."<a class="c" data-s="lmlm"></a><a class="c" data-s="colmlm"></a></span></div>
-        <div class="ck"><span class="chip k-ven">qualify</span><span>Facts are selected by type (entity attributes), not by whether they repeat. Frequency still matters: models learn rare facts poorly, and capacity per fact drops when facts are seen less often.<a class="c" data-s="kandpal"></a><a class="c" data-s="allenzhu"></a></span></div>
-        <div class="ck"><span class="chip k-ven">qualify</span><span>No study measures what share of a frontier model's weights is fact storage. Retrieval-based models have matched models 18 to 50 times their size on knowledge-heavy tasks, which suggests the share is large.<a class="c" data-s="retro"></a><a class="c" data-s="atlas"></a></span></div>
-        <div class="ck"><span class="chip k-unv">open</span><span>Research stage: tested on Wikipedia with models under 400M parameters. No dialog, voice, enterprise data or production deployment yet.<a class="c" data-s="lmlmCode"></a></span></div>
-      </div>
-    </div>
+    <p class="note" style="margin-top:12px">What the research does and does not show yet, claim by claim, is in the <a href="#t-lmlm">technical appendix (T6)</a>.</p>
   </div>
 </section>
 
@@ -1001,12 +988,12 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="panel gate stop"><h3><span class="chip k-unv" style="font-size:.66rem">stop if</span>Kill criteria, any time</h3>
         <ul>
           <li><span>Any protected data disclosed to an unverified caller</span></li>
-          <li><span>Any clinical or financial advice given by the agent</span></li>
+          <li><span>Any advice beyond approved content: clinical guidance, or a financial recommendation outside an approved script</span></li>
           <li><span>Wrong-action rate above 0.5% of tool calls on audit</span></li>
           <li><span>A vendor refuses to export logs or evaluation data</span></li>
         </ul></div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="chip k-our">author's proposal</span> These thresholds are a starting point for operations, compliance and risk teams to adjust, not an industry standard.</p>
+    <p class="note" style="margin-top:12px"><span class="chip k-our">author's proposal</span> Starting points tied to the published results above, not an industry standard. 90% pass^3 sits above the best public score because your own scenarios are narrower than a generic benchmark. 30% lower abandonment is about half what peers report (56% to 85%). 50% resolution is in the range of reported automation (44% at one health system). Tighten the bar for higher-risk call types, and lower the resolution target for complex queues.</p>
 
     <div class="panel" style="margin-top:22px">
       <div class="toolbar">
@@ -1108,7 +1095,7 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="lat-bar" id="lat-bar"></div>
       <div class="lat-scale" id="lat-scale"></div>
       <div class="lat-grid" id="lat-ctrls"></div>
-      <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> Sourced anchors: fixed silence endpointing of 500 to 800 ms is still common<a class="c" data-s="nuanced"></a>; the fastest LLM first-token time in Regal's 27-model test was 584 ms<a class="c" data-s="regal"></a>; a self-hosted router costs 20 to 50 ms. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn.</p>
+      <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> Sourced anchors: fixed silence endpointing of 500 to 800 ms is still common<a class="c" data-s="nuanced"></a>; the fastest LLM first-token time in Regal's 27-model test was 584 ms<a class="c" data-s="regal"></a>; a self-hosted router costs 20 to 50 ms. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn. Commit a route only on the finished turn, and route again when the caller corrects themselves ("cancel... no, just move it"); any prefetch is speculative and dropped on a re-route.</p>
     </div>
     <div class="panel"><span class="lbl">Caller experience beats raw model quality</span>
       <p style="margin-top:8px">In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression.<a class="c" data-s="regal"></a> <span class="chip k-ven">vendor benchmark</span></p></div>
@@ -1206,6 +1193,33 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
     </div>
 
+    <div class="cols2">
+      <div class="panel">
+        <span class="lbl">Time to route one decision, against an 800 ms turn budget</span>
+        <div class="speed" id="speed" style="margin-top:12px"></div>
+        <p class="note" style="margin-top:10px">Static chart. Measured by different labs on different hardware; directional. Sierra does not publish standalone latency for its orchestration model. Frontier figure is a large model classifying Banking77 intents.<a class="c" data-s="openrouterJev"></a><a class="c" data-s="sift"></a><a class="c" data-s="laya"></a><a class="c" data-s="archRouter"></a><a class="c" data-s="hamming"></a></p>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">What a cascade buys</span>
+        <p>In one public test on 3,080 banking intents, a frontier model scored 84.4% at about $2.42 per 1,000 requests. Sending everything to a decision model first, and only the low-confidence cases (below 0.90) on to the frontier model, scored 84.0% at about $0.69 per 1,000.<a class="c" data-s="openrouterJev"></a></p>
+        <div class="bars">
+          <div class="r"><span>Frontier only</span><div class="b ref" style="width:100%"></div><span>$2.42</span></div>
+          <div class="r"><span>Decision model first</span><div class="b hi" style="width:28.5%"></div><span>$0.69</span></div>
+        </div>
+        <p class="note"><span class="chip k-ven">vendor-adjacent</span> The threshold was tuned on the test set, so treat 72% savings as an upper bound.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <span class="lbl">The thinker-responder thesis, checked</span>
+      <div class="check" style="margin-top:12px">
+        <div class="ck"><span class="chip k-ind">holds</span><span>Routing a call to a sub-agent or toolset is closed-set classification. Small decision models do it in roughly 20 to 250 ms for fractions of a cent, versus about 2 s for a frontier LLM.<a class="c" data-s="openrouterJev"></a></span></div>
+        <div class="ck"><span class="chip k-ind">holds</span><span>Narrowing tools first helps. Retrieving the right tools before selection lifted selection accuracy from 13.6% to 43.1% and cut prompt tokens by more than half in one study; Anthropic reports similar gains once agents have 10 or more tools.<a class="c" data-s="ragmcp"></a><a class="c" data-s="anthropicTool"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>For a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.<a class="c" data-s="sift"></a><a class="c" data-s="rodrigues"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>Decision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61% of correct decisions in one study.<a class="c" data-s="creativeai"></a><a class="c" data-s="jevout"></a></span></div>
+        <div class="ck"><span class="chip k-unv">guardrail</span><span>Fraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output.<a class="c" data-s="multiIntent"></a></span></div>
+      </div>
+    </div>
     <div class="panel stack">
       <span class="lbl">Routing to tools and MCP servers</span>
       <ul class="tight">
@@ -1327,13 +1341,21 @@ ol.src li:target{background:var(--accent-soft)}
         <tr><td>Outbound AI calls without consent (US)</td><td>Prior express consent, identification, opt-out</td><td>Dialer policy</td><td>FCC 24-17, February 2024<a class="c" data-s="fcc"></a></td></tr>
         <tr><td>Scammers posing as your organization</td><td>Published callback and "we never ask" policy; customer education</td><td>Marketing and communications</td><td>Family-impersonation clone scams documented<a class="c" data-s="techcrunchDeep"></a></td></tr>
       </tbody></table></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Risk tier</th><th>Examples</th><th>Checks</th><th>Friction to plan for</th></tr></thead>
+      <tbody>
+        <tr><td>Low</td><td>Hours, directions, appointment or card status</td><td>Passive voice, device and behavior signals; caller ID match</td><td>None for the caller</td></tr>
+        <tr><td>Medium</td><td>Address change, refill request, payment date</td><td>Passive signals plus a one-time code to the number on file, or an app push</td><td>Some older or distressed callers drop; offer a person</td></tr>
+        <tr><td>High</td><td>Payments, prescription changes, authorizations</td><td>Voiceprint plus liveness and deepfake detection, then a one-time code</td><td>False rejects on phone-quality audio; a fast route to a person is required</td></tr>
+      </tbody></table></div>
+    <p class="note"><span class="chip k-our">author's proposal</span> Tiers and examples are a starting point for fraud and compliance teams. Texted codes carry SIM-swap risk, so prefer an app push where customers have the app.</p>
   </div>
 </section>
 
 <section id="t-reg">
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">T9 · Regulation</p><h2>Mostly disclosure and consent, and tightening</h2>
-      <p class="lede">US healthcare focus. Financial services adds its own regimes (GLBA, PCI DSS, UDAAP) not reviewed here. Items marked secondary need confirmation by counsel.</p></div>
+      <p class="lede">A summary of selected US rules for orientation, not legal advice and not a complete list. US healthcare focus; financial services adds its own regimes (GLBA, PCI DSS, UDAAP) not reviewed here. Items marked secondary need confirmation by counsel.</p></div>
     <div class="tbl"><table>
       <thead><tr><th>Rule</th><th>What it requires</th><th>Status</th></tr></thead>
       <tbody>
@@ -1345,7 +1367,7 @@ ol.src li:target{background:var(--accent-soft)}
         <tr><td>Texas TRAIGA (HB 149)</td><td>Health care providers disclose AI use to patients</td><td>Effective Jan 1, 2026<a class="c" data-s="wisc"></a></td></tr>
         <tr><td>Utah AI Policy Act</td><td>Proactive disclosure in high-risk interactions by regulated occupations</td><td>In force<a class="c" data-s="conferbot"></a></td></tr>
         <tr><td>Colorado ADMT Act</td><td>Disclosure regime replacing the 2024 AI Act</td><td>Reported from Jan 2027 <span class="chip k-unv">secondary</span><a class="c" data-s="wisc"></a></td></tr>
-        <tr><td>Right to deletion (state privacy laws, GDPR)</td><td>Erase personal data on request</td><td>Easier to honor when facts live in a store, not weights<a class="c" data-s="lmlm"></a></td></tr>
+        <tr><td>Right to deletion (state privacy laws, GDPR)</td><td>Erase personal data on request</td><td>Easier to honor in the model when facts live in a store, not weights<a class="c" data-s="lmlm"></a>; logs, transcripts and backups still need their own deletion</td></tr>
       </tbody></table></div>
   </div>
 </section>
@@ -1382,7 +1404,7 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="sources">
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">Sources</p><h2>Every number traces back here</h2>
-      <p class="lede">Numbered in order of first use. Some shared reports (Botco.ai, Brilo AI, Master of Code, a Reddit guide, Gensai/Gradium, Krish Naik, a YouTube interview) could not be retrieved; no figures were taken from them.</p></div>
+      <p class="lede">Numbered in order of first use.</p></div>
     <span class="ix">Interactive · filter by source type</span>
     <div class="seg" role="group" aria-label="Filter sources" id="sf">
       <button type="button" data-f="all" aria-pressed="true">All</button>
@@ -1415,7 +1437,7 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="panel stack author">
         <span class="lbl">The author</span>
         <div class="author-row"><span class="author-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#1FA39A" stroke="#1C2541" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#1C2541"/><circle cx="41" cy="35" r="3" fill="#1C2541"/><path d="M32 14V9" stroke="#1C2541" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#FF6B5B" stroke="#1C2541" stroke-width="3"/></svg></span><div><p style="font-weight:700">Madhav Srinivasan</p><p class="note">Director of Software Engineering. Builds AI agents, voice AI and platforms for banking and healthcare.</p></div></div>
-        <p class="note">Written in a personal capacity; not affiliated with any organization or vendor named.</p>
+        <p class="note">Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.</p>
         <div class="about-links"><a class="btn primary" href="https://sbmadhav.com/">Back to sbmadhav.com</a><a class="btn" href="https://www.linkedin.com/in/sbmadhav/" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
       </div>
     </div>
@@ -1423,7 +1445,7 @@ ol.src li:target{background:var(--accent-soft)}
 </section>
 
 <footer class="foot">
-  <div class="wrap"><strong style="color:var(--ink)">By Madhav Srinivasan</strong> · October 2026 edition · Research cutoff October 12, 2026<br>Bracketed numbers in the text link to the numbered sources above. Past editions: <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">github.com/sbmadhav/state-of-voice-agents</a>.<br>Written in a personal capacity; not affiliated with any organization or vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.</div>
+  <div class="wrap"><strong style="color:var(--ink)">By Madhav Srinivasan</strong> · October 2026 edition · Research cutoff October 12, 2026<br>Bracketed numbers in the text link to the numbered sources above. Past editions: <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">github.com/sbmadhav/state-of-voice-agents</a>.<br>Written in a personal capacity; views are my own. No commercial relationship with any vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.</div>
 </footer>
 </main>
 
@@ -1651,15 +1673,20 @@ renderDB();
 
 /* calculator */
 const usd=n=>{const a=Math.abs(n),s=n<0?'−':'';return s+(a>=1e6?'$'+(a/1e6).toFixed(2)+'M':a>=1e3?'$'+Math.round(a/1e3)+'K':'$'+Math.round(a))};
-const PRESETS={cons:{'c-scope':20,'c-min':5,'c-rate':0.14,'c-res':35,'c-hum':5,'c-fix':2500000},base:{'c-scope':30,'c-min':4,'c-rate':0.11,'c-res':55,'c-hum':6.04,'c-fix':1500000},tgh:{'c-scope':40,'c-min':3.5,'c-rate':0.11,'c-res':70,'c-hum':6.04,'c-fix':1500000}};
+const PRESETS={cons:{'c-scope':20,'c-min':5,'c-rate':0.14,'c-res':35,'c-hum':5,'c-up':40,'c-rep':8,'c-fix':2500000},base:{'c-scope':30,'c-min':4,'c-rate':0.11,'c-res':55,'c-hum':6.04,'c-up':25,'c-rep':5,'c-fix':1500000},tgh:{'c-scope':40,'c-min':3.5,'c-rate':0.11,'c-res':70,'c-hum':6.04,'c-up':15,'c-rep':3,'c-fix':1500000}};
 function calc(){
-  const calls=+$('c-calls').value,scope=+$('c-scope').value/100,mins=+$('c-min').value,rate=+$('c-rate').value,res=+$('c-res').value/100,hum=+$('c-hum').value,fix=+$('c-fix').value;
+  const calls=+$('c-calls').value,scope=+$('c-scope').value/100,mins=+$('c-min').value,rate=+$('c-rate').value,res=+$('c-res').value/100,hum=+$('c-hum').value,fix=+$('c-fix').value,up=+$('c-up').value/100,rp=+$('c-rep').value/100;
+  $('o-up').textContent='+'+Math.round(up*100)+'%';$('o-rep').textContent=Math.round(rp*100)+'%';
   $('o-calls').textContent=calls.toLocaleString();$('o-scope').textContent=Math.round(scope*100)+'%';$('o-min').textContent=mins+' min';$('o-rate').textContent='$'+rate.toFixed(2);$('o-res').textContent=Math.round(res*100)+'%';$('o-hum').textContent='$'+hum.toFixed(2);$('o-fix').textContent=usd(fix);
   const N=calls*scope*30, fixM=fix/12, human=N*hum;
-  const ai=r=>N*mins*rate+N*(1-r)*hum+fixM, save=r=>human-ai(r);
-  const be=Math.max(0,(mins*rate+fixM/N)/hum);
+  const cl=(v,a,b)=>Math.min(b,Math.max(a,v));
+  const aiX=(r,u,q)=>N*mins*rate+N*(1-r)*hum*(1+u)+N*r*q*hum*(1+u)+fixM, ai=r=>aiX(r,up,rp), save=r=>human-ai(r);
+  const be=Math.max(0,(mins*rate+fixM/N+hum*up)/(hum*(1+up)*(1-rp)));
   $('t-human').textContent=usd(human);$('t-ai').textContent=usd(ai(res));$('t-save').textContent=usd(save(res));$('t-be').textContent=be>1?'never':Math.round(be*100)+'%';
-  const per5=0.05*N*hum;
+  const kept=N*res*(1-rp);$('t-cpr').textContent=kept>0?'$'+((N*mins*rate+fixM)/kept).toFixed(2):'n/a';$('t-hpc').textContent='$'+hum.toFixed(2);
+  const sc=[['Worst case',human-aiX(cl(res-0.15,0,0.9),up+0.15,cl(rp+0.05,0,1))],['Expected',save(res)],['Best case',human-aiX(cl(res+0.10,0,0.9),Math.max(0,up-0.10),Math.max(0,rp-0.03))]];
+  $('scen').innerHTML=sc.map(([k,v],i)=>`<div class="sc${i===1?' mid':''}"><span class="k">${k}</span><span class="v num">${usd(v)}</span><span class="note">net a month</span></div>`).join('');
+  const per5=0.05*N*hum*(1+up)*(1-rp);
   $('calc-note').textContent=`Each 5 points of resolution is worth about ${usd(per5)} a month here, ${(per5/11017).toFixed(1)} times the $11K a month that one widely shared token-only model projected.`;
   const s=Math.max(save(res),0),mx=Math.max(s,11017,1);
   $('compare').innerHTML=`<div class="r"><span>Resolution economics</span><div class="bar" style="width:${Math.max(2,s/mx*100)}%"></div><span>${usd(save(res))}</span></div>
@@ -1679,7 +1706,7 @@ function calc(){
    <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
    ${be<=0.9?`<line x1="${xs(be)}" x2="${xs(be)}" y1="${T}" y2="${H-B}" stroke="var(--signal)" stroke-dasharray="4 4"/><text x="${xs(be)+6}" y="${T+12}" font-size="12" fill="var(--signal)">break-even</text>`:''}
    <circle cx="${xs(res)}" cy="${ys(save(res))}" r="6" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
-   <text x="${W-R}" y="${H-12}" text-anchor="end" font-size="11" fill="var(--muted)">resolved by agent →</text>`;
+   <text x="${W-R}" y="${H-B-8}" text-anchor="end" font-size="11" fill="var(--muted)">resolved by agent →</text>`;
 }
 document.querySelectorAll('#calc-ctrls input').forEach(i=>i.addEventListener('input',()=>{document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed','false'));calc()}));
 seg(document.querySelector('#calc-ctrls .seg'),b=>{const p=PRESETS[b.dataset.preset];Object.keys(p).forEach(k=>$(k).value=p[k]);calc()});
@@ -1790,7 +1817,7 @@ renderLM();
 const OPT=[
  {t:"Buy a platform or vertical vendor",s:"Sierra, Hyro, Hippocratic AI",pros:["Fastest time to value","Integrations and compliance contracts are standard","Vendor carries tuning, safety layers and ops"],cons:["Opaque pricing","Less control over evaluation, routing and data","Lock-in at the integration layer"],roi:"Abandonment and scheduling lift convert to revenue; labor avoided on in-scope queues.",verdict:"Strong for the pilot itself."},
  {t:"Build on a platform",s:"Retell, LiveKit, Pipecat",pros:["Full transparency and model choice","Lowest per-minute cost","Own every trace and the router"],cons:["Needs a dedicated team","You own integration and safety","Slower first launch"],roi:"About $0.08 to $0.14 a minute against roughly $6 a human call; break-even depends on resolution rate.",verdict:"Right later, not first."},
- {t:"Hybrid",s:"Buy now, own the router and evals",rec:true,pros:["Quick wins from a vertical vendor","You build the test suite, routing layer, logs and governed fact store in parallel","Starts the limited-memory training program on your own data","Keeps the exit door open"],cons:["Two workstreams to govern","Needs contract terms for log and eval export"],roi:"Captures near-term savings while building leverage for the next contract cycle.",verdict:"Recommended."},
+ {t:"Hybrid",s:"Buy now, own the router and evals",rec:true,pros:["Quick wins from a vertical vendor","You build the test suite, routing layer, logs and governed fact store in parallel","Builds the governed fact store, with the option to trial limited-memory models","Keeps the exit door open"],cons:["Two workstreams to govern","Needs contract terms for log and eval export"],roi:"Captures near-term savings while building leverage for the next contract cycle.",verdict:"Recommended."},
  {t:"Wait",s:"Revisit in 2027",pros:["No execution risk","Models and benchmarks keep improving"],cons:["Peers compound gains","IVR frustration persists","No internal evaluation muscle"],roi:"Negative: forgone abandonment and scheduling gains.",verdict:"Not recommended."}
 ];
 let oSel=2;
@@ -1810,7 +1837,7 @@ const PER=[
  {n:"CISO & Privacy Officer",p:"Hosted APIs only under contract. Self-host the small models. Prefer facts in governed stores.",e:"Hosted decision APIs need a BAA or equivalent; self-hosted encoders avoid the question. Extraction attacks have pulled personal data from model weights.",c:"Voice cloning, prompt injection, retention terms that change.",m:"A signed contract and SOC 2 Type II from every layer, testing vendor included."},
  {n:"Contact Center Operations",p:"Start with scheduling, billing and status checks; warm transfer with full context.",e:"Intermountain: 44% of repetitive calls automated and 85% lower abandonment.",c:"Wrong write-backs, misroutes, authentication failures, staff morale.",m:"Misroute or wrong-action rate above 0.5% on audit."},
  {n:"Clinical & Risk Safety Lead",p:"Administrative only. No triage, no advice. Escalation by rule, not by threshold.",e:"No validated autonomous triage deployment found. Best models reach only about 53% on multi-intent benchmarks.",c:"Missed red flags, older and non-English callers, regulatory exposure.",m:"An independent safety evaluation with prospective outcomes."},
- {n:"AI Platform Architect",p:"Thinker-responder: tiered router in front, narrowed tools per sub-agent, and an LMLM prototype for static knowledge. On a managed platform such as Sierra, insist on exporting routing decisions and logs.",e:"A 0.1B fine-tuned classifier hits 93.5% on Banking77 in 22 ms. Tool retrieval more than tripled selection accuracy. A 382M LMLM approached a 7B model on factual precision.",c:"Lock-in at orchestration and integration layers; model churn every few weeks.",m:"A vendor refusing to export logs or routing decisions."},
+ {n:"AI Platform Architect",p:"Thinker-responder: tiered router in front, narrowed tools per sub-agent, and a governed fact store, with a limited-memory trial for static knowledge once it beats retrieval. On a managed platform such as Sierra, insist on exporting routing decisions and logs.",e:"A 0.1B fine-tuned classifier hits 93.5% on Banking77 in 22 ms. Tool retrieval more than tripled selection accuracy. A 382M LMLM approached a 7B model on factual precision.",c:"Lock-in at orchestration and integration layers; model churn every few weeks.",m:"A vendor refusing to export logs or routing decisions."},
  {n:"Skeptic / red team",p:"Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers.",e:"Jev's Banking77 score varies 10.7 points by lab. Benign context flipped 61% of correct decisions. LMLM is untested above 400M parameters or on dialog. Sierra publishes single-run voice scores, not repeat reliability.",c:"Every outcome figure here is customer- or vendor-reported, with no control group.",m:"90%+ pass^3 on your own scenarios, audited by an independent party."}
 ];
 let pSel=0;
@@ -1861,7 +1888,7 @@ $('pk-p').addEventListener('input',renderPK);renderPK();
 const AFTER={
  scale:{h:"Gates met: scale in waves",c:[
   ["Months 4 to 6","Widen",["Add two or three call types and one more market at a time, each through the same pass^3 gate","Retrain the router on pilot transcripts; you now have real labeled intents","Outbound only where consent is on file"]],
-  ["Months 7 to 12","Own",["Move routing and evaluation in-house; keep vendors on the responder and voice stack","Renegotiate on price per resolved call, with log and routing export rights","Start the limited-memory training program on one knowledge domain"]],
+  ["Months 7 to 12","Own",["Move routing and evaluation in-house; keep vendors on the responder and voice stack","Renegotiate on price per resolved call, with log and routing export rights","Trial a limited-memory model on one knowledge domain, if the fact store is ready"]],
   ["Ongoing","Govern",["Monthly review of misroutes, wrong actions and complaints","Change control: re-run the golden set before any model, prompt or persona change","Grow the golden set every week from real failures","Score sentiment on every call and review the angriest calls weekly","Report resolved calls, abandonment and satisfaction to the board quarterly"]]]},
  adjust:{h:"Some gates missed: fix, then re-run",c:[
   ["Weeks 1 to 4","Diagnose",["Rank failures from the logs; most trace to audio, identity or integration, not the model","Narrow scope to the call types that passed"]],
@@ -1894,6 +1921,7 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dlg.hidden)close()});
  const restore=()=>{if(prev===null)return;if(prev==='')root.removeAttribute('data-theme');else root.setAttribute('data-theme',prev);prev=null};
  window.addEventListener('afterprint',restore);
+ window.addEventListener('beforeprint',()=>{const h=document.getElementById('howto');if(h)h.open=true});
  $('pdf-go').addEventListener('click',()=>{
   const t=document.querySelector('input[name="pdf-theme"]:checked').value;
   prev=root.getAttribute('data-theme')||'';root.setAttribute('data-theme',t);dlg.hidden=true;
@@ -1907,7 +1935,7 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
  const BOLT_ENDPOINT = ''; // Set to the deployed Cloudflare Worker URL, e.g. https://bolt-voice.<you>.workers.dev
  const PAGE_URL = 'https://sbmadhav.com/state-of-voice-agents/';
  const panel=$('bolt-panel'),log=$('bolt-log'),q=$('bolt-q'),launch=$('bolt-open');
- const SUGG=['What should a health system pilot first?','Explain the thinker-responder model in two sentences','Why invest in limited-memory models now?','What has changed in voice AI since this edition?'];
+ const SUGG=['What should a health system pilot first?','Explain the thinker-responder model in two sentences','Where do limited-memory models stand today?','What has changed in voice AI since this edition?'];
  const history=[];
  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  const md=t=>{const lines=esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').split(/\n/);let h='',ul=false;

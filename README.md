@@ -12,12 +12,13 @@ Three theses:
 
 1. **Reliability is the gap.** A single demo overstates readiness by 20 to 40 points. Measure repeatability (pass^3) on your own call types.
 2. **Think silently, then respond.** A fast System-1 "thinker" makes silent, typed decisions: intent, risk, which sub-agent and which MCP tools. A conversational LLM "responder" does the talking.
-3. **Invest in governed memory.** Limited Memory Language Models look facts up in a governed store instead of memorizing them. That makes facts traceable and deletable, and a model can be trained on your own data.
+3. **Invest in governed memory.** Build a governed fact store now; it pays off with retrieval today. Limited Memory Language Models, which look facts up instead of memorizing them, are promising but research-stage: trial one on a single domain and scale only if it beats retrieval.
 
 The page is in two parts:
 
 - **Part I, for executives:**
-  - Reliability benchmark, published results and an economics model.
+  - A five-minute read (what we know, what to watch, what to do) and a "How to read this report" note on method, limits and disclosure.
+  - Reliability benchmark with its margin of error, published results, and an economics model with escalation costs, repeat calls and worst, expected and best cases.
   - The thinker-responder router demo, where to start, and trust and identity.
   - Limited-memory models, the options, and a 90-day pilot with a plan for after day 90.
   - A seven-seat debate.
