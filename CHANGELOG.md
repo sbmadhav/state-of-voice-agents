@@ -16,3 +16,10 @@
   - Claim check and sources.
 - Features: interactive tags, system, light and dark themes, and PDF export.
 - Research cutoff: October 12, 2026.
+
+### Revisions, October 12, 2026
+- Failure modes: added background noise and chatter, and wrong-speaker turns, with mitigations (isolating the caller's voice, diarization, speaker-aware VAD).
+- Fraud controls: added voiceprint verification with liveness detection for critical transactions and authorizations.
+- PDF export: the page header, footer and page numbers now follow the chosen theme, so they stay readable in dark mode.
+- Navigation: Download PDF and the theme switcher are pinned outside the scrolling section links. Fixed horizontal overflow on phones.
+- Evidence labels: replaced a venue label ("ICLR 2026") with the standard "independent" label.

@@ -60,7 +60,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;gap:18px;align-items:center;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.nav .wrap{display:flex;gap:14px;align-items:center;padding-block:8px}
+.navlinks{display:flex;gap:18px;align-items:center;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1;padding-block:2px;mask-image:linear-gradient(to right,#000 92%,transparent)}
+.navtools{display:flex;gap:8px;align-items:center;flex:none;padding-left:12px;border-left:1px solid var(--line)}
+@media (max-width:640px){.nav .wrap{flex-wrap:wrap;row-gap:6px}.navtools{order:-1;width:100%;justify-content:flex-end;border-left:0;padding-left:0}.navlinks{flex-basis:100%}}
 .nav .brand{font-family:var(--display);font-weight:700;white-space:nowrap}
 .nav a{font-size:.88rem;color:var(--muted);text-decoration:none;white-space:nowrap}
 .nav a:hover{color:var(--ink)}
@@ -69,8 +72,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* hero */
 .hero{padding-block:48px 40px}
 .hero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:.9rem;margin-top:18px}
-.wave{display:flex;align-items:center;gap:3px;height:56px;margin:26px 0 8px}
-.wave i{flex:1;min-width:2px;border-radius:2px;background:var(--accent);opacity:.85}
+.wave{display:flex;align-items:center;gap:clamp(1px,.3vw,3px);height:56px;margin:26px 0 8px;overflow:hidden}
+.wave i{flex:1;min-width:0;border-radius:2px;background:var(--accent);opacity:.85}
 .wave i.alt{background:var(--signal)}
 .wave-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){.wave i{animation:pulse 2.6s ease-in-out infinite;transform-origin:center}}
@@ -356,10 +359,10 @@ ol.src li:target{background:var(--accent-soft)}
 .thesis .t{font-weight:600}
 .thesis p{font-size:.86rem;color:var(--muted)}
 @media (max-width:760px){.thesis{grid-template-columns:1fr}}
-.ix{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
+.ix{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--accent);white-space:normal;max-width:100%}
+.stack>*,.calc>*,.router>*,.cols2>*{min-width:0}
 .ix::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid currentColor;box-shadow:0 0 0 3px var(--accent-soft);flex:none}
 .ix.wrapok{white-space:normal}
-.nav .pdfbtn{margin-left:auto}
 .nav .theme{flex:none}
 .nav .theme button{padding:4px 10px;font-size:.76rem}
 .pdfbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:4px 12px;font-size:.76rem;flex:none}
@@ -384,7 +387,17 @@ ol.src li:target{background:var(--accent-soft)}
 .invest .st .w{font-family:var(--mono);font-size:.72rem;color:var(--signal)}
 .edition{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;padding:3px 9px;border-radius:99px;background:var(--signal-soft);color:var(--signal)}
 @media print{
-  @page{size:letter;margin:12mm 11mm}
+  @page{size:letter;margin:14mm 12mm;
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}
+    @top-right{content:"sbmadhav.github.io/state-of-voice-agents";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}}
+  @page dark{background:#0D131A;
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}
+    @top-right{content:"sbmadhav.github.io/state-of-voice-agents";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}}
+  html[data-theme="dark"] body{page:dark}
   html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:var(--bg)!important}
   body{font-size:10.5pt}
   .nav,.ix,input[type=range],.seg,.btn,.dlg,.wave,.wave-cap,.thesis,#lm-del,.screen-only{display:none!important}
@@ -410,12 +423,14 @@ ol.src li:target{background:var(--accent-soft)}
   .stats{break-inside:avoid}
   .lm,.router,.calc{grid-template-columns:1fr 1fr}
 }
+@media print and (prefers-color-scheme: dark){html:not([data-theme="light"]) body{page:dark}}
 </style>
 
 </head>
 <body>
 <nav class="nav" aria-label="Sections">
   <div class="wrap">
+    <div class="navlinks">
     <span class="brand">Voice Agents</span>
     <span class="part">Part I</span>
     <a href="#brief">Bottom line</a>
@@ -434,15 +449,17 @@ ol.src li:target{background:var(--accent-soft)}
     <a href="#t-lmlm">LMLM</a>
     <a href="#verify">Claims</a>
     <a href="#sources">Sources</a>
+    </div>
+    <div class="navtools">
     <button type="button" class="pdfbtn" id="pdf-open">Download PDF</button>
     <div class="seg theme" role="group" aria-label="Color theme" id="theme"><button type="button" data-t="system" aria-pressed="true">System</button><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
+    </div>
   </div>
 </nav>
 
 <main>
 <header class="hero" id="brief">
   <div class="wrap">
-    <div class="print-only nav-print"><span>Voice Agents at the Front Door · October 2026 edition</span><span>sbmadhav.github.io/state-of-voice-agents</span></div>
     <p class="eyebrow">State of conversational voice agents · Healthcare and financial services</p>
     <p style="margin-top:8px"><span class="edition">October 2026 edition · updated every 30 days</span></p>
     <h1 style="margin-top:12px">Voice agents at the front door</h1>
@@ -464,7 +481,7 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="stat"><span class="v num">56<small>%</small></span><p>Lower call abandonment at a large health system within two weeks of go-live <a class="c" data-s="beckersTGH"></a></p><span class="chip k-ven">customer-reported</span></div>
       <div class="stat"><span class="v num">75.6<small>%</small></span><p>Best platform's repeat reliability: share of scenarios passed on all three tries <a class="c" data-s="cekura"></a></p><span class="chip k-ven">vendor benchmark</span></div>
       <div class="stat"><span class="v num">22<small>ms</small></span><p>To route a call intent with a small fine-tuned classifier at 93.5% accuracy, vs about 2.3 s for a frontier LLM <a class="c" data-s="sift"></a><a class="c" data-s="openrouterJev"></a></p><span class="chip k-ind">independent</span></div>
-      <div class="stat"><span class="v num">18<small>x</small></span><p>Fewer parameters: a 382M limited-memory model came close to a 7B model on factual precision <a class="c" data-s="lmlm"></a></p><span class="chip k-ind">peer-reviewed research</span></div>
+      <div class="stat"><span class="v num">18<small>x</small></span><p>Fewer parameters: a 382M limited-memory model came close to a 7B model on factual precision <a class="c" data-s="lmlm"></a></p><span class="chip k-ind">independent</span></div>
     </div>
 
     <div class="thesis">
@@ -732,6 +749,7 @@ ol.src li:target{background:var(--accent-soft)}
         <ul class="tight">
           <li>Liveness and deepfake detection in the contact center platform, before any protected data.</li>
           <li>Step-up verification (one-time code to the number on file), not birth date or security questions alone.</li>
+          <li>For payments, prescription changes and other authorizations, add voiceprint verification with liveness detection; a voiceprint alone can be fooled by a clone.<a class="c" data-s="voiceIdBreach"></a></li>
           <li>A published "we will never ask you for" policy, owned by marketing.</li>
           <li>In the US, outbound AI calls need prior consent under the FCC's 2024 ruling, reminders included.<a class="c" data-s="fcc"></a></li>
         </ul>
@@ -784,7 +802,7 @@ ol.src li:target{background:var(--accent-soft)}
           <div class="r"><span>7B standard (18x larger)</span><div class="b ref" style="width:81.7%"></div><span>34.0</span></div>
           <div class="r"><span>8B standard (21x larger)</span><div class="b ref" style="width:96.9%"></div><span>40.3</span></div>
         </div>
-        <p class="note">Higher is better. Turning the store off drops the LMLM below baseline, which shows it really relies on the store.<a class="c" data-s="lmlm"></a> <span class="chip k-ind">ICLR 2026</span></p>
+        <p class="note">Higher is better. Turning the store off drops the LMLM below baseline, which shows it really relies on the store. Peer-reviewed at ICLR 2026.<a class="c" data-s="lmlm"></a> <span class="chip k-ind">independent</span></p>
       </div>
       <div class="panel stack">
         <span class="lbl">Why it fits regulated conversations</span>
@@ -941,7 +959,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="panel">
       <span class="lbl">Reference flow (cascaded, with a System-1 router)</span>
       <div class="arch" style="margin-top:12px">
-        <div class="lane"><span class="ln">Audio in</span><div class="flow"><span class="box">Caller (phone, 8 kHz)</span><span class="arr">→</span><span class="box">Echo cancel</span><span class="arr">→</span><span class="box">VAD + turn model</span><span class="arr">→</span><span class="box">Streaming STT</span></div></div>
+        <div class="lane"><span class="ln">Audio in</span><div class="flow"><span class="box">Caller (phone, 8 kHz)</span><span class="arr">→</span><span class="box">Echo cancel</span><span class="arr">→</span><span class="box">Isolate caller's voice + diarize</span><span class="arr">→</span><span class="box">Speaker-aware VAD + turn model</span><span class="arr">→</span><span class="box">Streaming STT</span></div></div>
         <div class="lane"><span class="ln">Thinker · System 1</span><div class="flow"><span class="box s1">Router: intent, risk flags (typed probabilities)</span><span class="arr">→</span><span class="box s1">Pick sub-agent + its MCP servers</span><span class="arr">→</span><span class="box h">Fraud, clinical, complaint or low confidence: escalate</span></div></div>
         <div class="lane"><span class="ln">Responder · System 2</span><div class="flow"><span class="box s2">Sub-agent LLM with narrowed tools</span><span class="arr">→</span><span class="box s2">Facts from governed store or system of record</span><span class="arr">→</span><span class="box s2">Read-back before any write</span><span class="arr">→</span><span class="box">TTS</span></div></div>
         <div class="lane"><span class="ln">Always</span><div class="flow"><span class="box">One correlation ID across VAD, STT, router, LLM, tool and TTS events</span><span class="arr">→</span><span class="box">Replayable trace</span></div></div>
@@ -989,7 +1007,7 @@ ol.src li:target{background:var(--accent-soft)}
     </div>
     <div class="panel"><span class="lbl">Release scorecard</span>
       <ul class="tight">
-        <li><strong>Perception:</strong> word error rate on phone-grade audio, by accent and language; entity accuracy for names, dates, phone and account numbers.</li>
+        <li><strong>Perception:</strong> word error rate on phone-grade audio, by accent and language, and on noisy, multi-speaker recordings (TV, car, a family member talking); entity accuracy for names, dates, phone and account numbers.</li>
         <li><strong>Routing:</strong> intent accuracy, out-of-scope recall, misroute rate (transfers after routing), calibration error.</li>
         <li><strong>Turn-taking:</strong> false and missed barge-ins, backchannel handling.</li>
         <li><strong>Latency:</strong> P95 turn time, not mean; dead air over 10 s.</li>
@@ -1005,6 +1023,8 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="tbl"><table>
       <thead><tr><th>Failure</th><th>Mechanism</th><th>Evidence</th><th>Mitigation</th></tr></thead>
       <tbody>
+        <tr><td>Background noise and chatter</td><td>TV, traffic or other people in the room get transcribed as the caller, causing inserted words, false turns and false barge-ins</td><td>Background speech pushed streaming STT error rates to 22% to 31%; isolating the main speaker cut them by up to 43%, mostly by removing inserted words<a class="c" data-s="aicoustics"></a> <span class="chip k-ven">vendor test</span></td><td>Isolate the caller's voice before STT and VAD; avoid generic noise suppression, which raised one call's error rate from 15.7% to 79.3%<a class="c" data-s="sanas"></a></td></tr>
+        <tr><td>Wrong speaker answered</td><td>A caregiver or bystander answers a verification question, or the agent follows the wrong voice</td><td>Speaker-conditioned VAD detects the target speaker frame by frame and ignores others<a class="c" data-s="personalvad"></a><a class="c" data-s="tsvad"></a></td><td>Diarize, lock onto the caller's voice in the first seconds, and re-verify if the voice changes before any sensitive step</td></tr>
         <tr><td>Self-reply to echo</td><td>Agent's own speech leaks back, is transcribed as the caller, and gets answered</td><td class="n">21% Edge vs 4% Chrome sessions<a class="c" data-s="webrtchacks"></a></td><td>Strong echo cancellation; compare input against agent playback</td></tr>
         <tr><td>False barge-in</td><td>Echo treated as interruption; agent stops mid-word</td><td>A turn model marked echo "complete" at p=0.954<a class="c" data-s="webrtchacks"></a></td><td>Speaker or echo attribution before turn detection</td></tr>
         <tr><td>VAD threshold trade-off</td><td>Lower thresholds speed replies but admit short echo bursts</td><td class="n">500 → 384 ms saved 116 ms, added 3 failures<a class="c" data-s="webrtchacks"></a></td><td>Tune per channel; validate on real devices</td></tr>
@@ -1175,6 +1195,7 @@ ol.src li:target{background:var(--accent-soft)}
         <tr><td>Knowledge-based answers stolen in breaches</td><td>Step-up verification to the number on file or app push</td><td>Agent workflow, deterministic</td><td>Fraudsters bypass knowledge questions in over half of attempts<a class="c" data-s="pindrop"></a> <span class="chip k-ven">vendor</span></td></tr>
         <tr><td>Misheard identity details, wrong-account match</td><td>Recognition biased with the record on file; spell-back</td><td>STT layer</td><td>Up to 15% fewer major transcription errors<a class="c" data-s="sierraASR"></a> <span class="chip k-ven">vendor</span></td></tr>
         <tr><td>Fraud intent buried in a routine call</td><td>Router hard rule: any fraud signal escalates regardless of confidence</td><td>System-1 router</td><td><span class="chip k-our">author's design</span></td></tr>
+        <tr><td>Critical transactions and authorizations</td><td>Voiceprint match plus liveness and deepfake detection, then a one-time code for anything irreversible</td><td>Contact center platform + agent workflow</td><td>A reporter passed a bank's voice ID with an AI clone of his own voice in 2023<a class="c" data-s="voiceIdBreach"></a>; liveness is now offered alongside voiceprints<a class="c" data-s="pindrop"></a></td></tr>
         <tr><td>Bots or AI agents calling in at scale</td><td>Detect machine callers before the agent engages</td><td>Agent platform</td><td>Sierra Fleming, announced Oct 2026<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor</span></td></tr>
         <tr><td>Outbound AI calls without consent (US)</td><td>Prior express consent, identification, opt-out</td><td>Dialer policy</td><td>FCC 24-17, February 2024<a class="c" data-s="fcc"></a></td></tr>
         <tr><td>Scammers posing as your organization</td><td>Published callback and "we never ask" policy; customer education</td><td>Marketing and communications</td><td>Family-impersonation clone scams documented<a class="c" data-s="techcrunchDeep"></a></td></tr>
@@ -1259,7 +1280,7 @@ ol.src li:target{background:var(--accent-soft)}
       <label class="opt-r"><input type="radio" name="pdf-theme" id="pdf-light" value="light"> Light</label>
       <label class="opt-r"><input type="radio" name="pdf-theme" id="pdf-dark" value="dark"> Dark</label>
     </fieldset>
-    <p class="note">The page is reformatted for letter-size pages: controls are hidden, tabs and filters are expanded, and charts print as you left them. In the print window, choose <strong>Save as PDF</strong>.</p>
+    <p class="note">The page is reformatted for letter-size pages: controls are hidden, tabs and filters are expanded, and charts print as you left them. In the print window, choose <strong>Save as PDF</strong>, keep <strong>Background graphics</strong> on and turn <strong>Headers and footers</strong> off; the PDF adds its own page header and page numbers in the matching theme.</p>
     <p class="note" id="pdf-frame" hidden>PDF export is not available in this preview. Open the public page to download it: <a href="https://sbmadhav.github.io/state-of-voice-agents/" target="_blank" rel="noopener">sbmadhav.github.io/state-of-voice-agents</a></p>
     <div class="dlg-actions"><button type="button" class="btn" id="pdf-cancel">Cancel</button><button type="button" class="btn primary" id="pdf-go">Create PDF</button></div>
   </div>
@@ -1321,6 +1342,11 @@ const S={
  arcade:["Arcade: Testing tool search with 4,000 tools (Dec 3, 2025)","https://arcade.dev/blog/anthropic-tool-search-4000-tools-test","ven"],
  msPosition:["Singh, Bastos, Mulang: Position, avoid overstretching LLMs for every enterprise task (arXiv 2605.09365)","https://arxiv.org/abs/2605.09365","ind"],
  gpuPrice:["IntuitionLabs: Hosted AI API vs self-hosted LLM cost (H100 rental rates)","https://intuitionlabs.ai/articles/hosted-ai-api-vs-self-hosted-llm-cost","ind"],
+ aicoustics:["ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026)","https://ai-coustics.com/blog/voice-focus-2.0-deepdive","ven"],
+ sanas:["Sanas: ASR-optimized noise cancellation for agentic AI (Dec 12, 2025)","https://www.sanas.ai/science/inside-sanas-asr-optimized-noise-cancellation-for-agentic-ai","ven"],
+ personalvad:["Ding et al. (Google): Personal VAD, speaker-conditioned voice activity detection (2020)","https://arxiv.org/abs/1908.04284","ind"],
+ tsvad:["Online target-speaker voice activity detection for speaker diarization (arXiv 2207.05920)","https://arxiv.org/abs/2207.05920","ind"],
+ voiceIdBreach:["AI Incident Database #485: reporter accesses own bank account with AI-cloned voice (2023)","https://incidentdatabase.ai/cite/485/","ind"],
  openaiBAA:["OpenAI Help Center: HIPAA-eligible products and functionality (Oct 2026)","https://help.openai.com/en/articles/20001069-hipaa-eligible-products-and-functionality","ven"],
  aws:["AWS: Amazon Nova 2 Sonic service card","https://docs.aws.amazon.com/ai/responsible-ai/nova-2-sonic/overview.html","ven"],
  anthropicBAA:["Anthropic: Covered models under a BAA","https://support.claude.com/en/articles/15455031-covered-models-under-a-business-associate-agreement-baa","ven"],
