@@ -496,7 +496,7 @@ ol.src li:target{background:var(--accent-soft)}
 .bolt-row{display:flex;gap:8px;align-items:flex-end}
 .bolt-row textarea{flex:1;min-width:0;resize:none;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink)}
 .bolt-disc{font-size:.72rem}
-.cmt-alt{margin:var(--space-3) 0 0;color:var(--muted)}#cmt .utterances{max-width:100%}
+.cmt-alt{margin:var(--space-3) 0 0;color:var(--muted)}.cmt-off p{margin:0 0 var(--space-3)}.cmt-btns{display:flex;flex-wrap:wrap;gap:var(--space-2)}.cmt-btns .btn{text-decoration:none;font-weight:600}.cmt-btns .btn:not(.primary){color:var(--ink)}#cmt .utterances{max-width:100%}
 @media print{.bolt-launch,.bolt-panel,.about-links,#comments{display:none!important}}
 </style>
 
@@ -1398,7 +1398,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head"><p class="eyebrow">Discussion</p><h2>Questions and comments</h2>
       <p class="lede">Corrections, counterpoints and field experience are welcome. Comments are public and stored as GitHub issues on this report's repository through utterances, which is free and open source, with no ads or tracking. Sign in with GitHub to post.</p></div>
-    <div class="panel"><div id="cmt"></div>
+    <div class="panel"><div id="cmt"><div class="cmt-off"><p>The comment box opens on the published page.</p><p class="cmt-btns"><a class="btn primary" href="https://sbmadhav.com/state-of-voice-agents/#comments" target="_blank" rel="noopener">Open comments on sbmadhav.com</a> <a class="btn" href="https://github.com/sbmadhav/state-of-voice-agents/issues/new?labels=comments&amp;title=Comment%3A%20October%202026%20edition" target="_blank" rel="noopener">Post on GitHub</a></p></div></div>
       <p class="cmt-alt"><small>Comments not loading? <a href="https://github.com/sbmadhav/state-of-voice-agents/issues?q=label%3Acomments" target="_blank" rel="noopener">Read them on GitHub</a> or <a href="https://github.com/sbmadhav/state-of-voice-agents/issues/new?labels=comments&amp;title=Comment%3A%20October%202026%20edition" target="_blank" rel="noopener">post one there</a>.</small></p></div>
   </div>
 </section>
@@ -1953,7 +1953,7 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
  const root=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
  const uTheme=()=>{const t=root.getAttribute('data-theme')||(mq.matches?'dark':'light');return t==='dark'?'github-dark':'github-light'};
  let loaded=false;
- const load=()=>{if(loaded)return;loaded=true;
+ const load=()=>{if(loaded)return;loaded=true;$('cmt').innerHTML='';
   const sc=document.createElement('script');sc.src='https://utteranc.es/client.js';sc.async=true;sc.crossOrigin='anonymous';
   Object.entries({repo:'sbmadhav/state-of-voice-agents','issue-term':'Comments: October 2026 edition',label:'comments',theme:uTheme()}).forEach(([k,v])=>sc.setAttribute(k,v));
   $('cmt').appendChild(sc)};
@@ -1966,15 +1966,6 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 </script>
 
 <script src="/assets/explore.js" defer></script>
-<script src="/assets/analytics.js" defer></script>
-<script>
-/* Count a few key actions on this page (anonymous, via /assets/analytics.js) */
-document.addEventListener('click', function (e) {
-  if (!window.siteTrack || !e.target.closest) return;
-  if (e.target.closest('#pdf-open')) siteTrack('voice/pdf', 'Opened Download PDF');
-  else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
-}, true);
-</script>
 
 </body>
 </html>
