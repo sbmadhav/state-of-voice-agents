@@ -39,3 +39,8 @@
 - Color mode choice is shared with every sbmadhav.com page (same saved setting), applied before the page paints.
 - Ask Bolt is hidden for now while a thinker-responder version is designed.
 - Added a comments section using giscus (GitHub Discussions). It stays hidden until Discussions is enabled and its category id is set.
+
+### Revisions, October 12, 2026 (production essentials)
+- New section, "What separates a good agent": a golden test set and evaluation framework, hearing the right caller (noise, side conversations, diarization), real-time emotion detection with sentiment on every call, and persona as brand.
+- Woven through the page: evaluation-first in the suggested path, the pilot's golden set (200+ scenarios incl. noise and upset callers), the release scorecard, the after-day-90 plan, the think tank and the thinker's decisions (speaker and emotion).
+- Dropped "System-2" terminology; the responder is a conversational LLM.

@@ -511,6 +511,7 @@ ol.src li:target{background:var(--accent-soft)}
     <a href="#peers">Results</a>
     <a href="#calc">Economics</a>
     <a href="#router">Fast router</a>
+    <a href="#essentials">Essentials</a>
     <a href="#usecases">Where to start</a>
     <a href="#lmlm">What's next</a>
     <a href="#options">Options</a>
@@ -546,6 +547,7 @@ ol.src li:target{background:var(--accent-soft)}
       <p class="say">Voice agents are now <b>good enough to take routine calls in regulated contact centers</b>: scheduling, billing questions, balance and status checks. They are <b>not yet consistent enough</b> to run unsupervised on clinical or high-risk financial conversations. The leading platform still fails about one in four test scenarios when each one is run three times.<a class="hash" href="#gap" aria-label="See the reliability results">#</a></p>
       <div class="ask">
         <span class="eyebrow">A suggested path</span>
+        <p><strong>Invest in evaluation first.</strong> Build a golden test set from your own calls, including noisy lines, side conversations and upset callers, and gate every change on it.</p>
         <p><strong>Pilot narrow and measure repeatability.</strong> 90 days, inbound only, two or three call types, warm transfer to a human, judged on cost per resolved call.</p>
         <p><strong>Think silently, then respond.</strong> A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a conversational LLM does the responding.</p>
         <p><strong>After day 90, scale what passed.</strong> Add call types and markets in waves through the same gate, bring routing and evaluation in-house, and move contracts to price per resolved call.</p>
@@ -729,6 +731,8 @@ ol.src li:target{background:var(--accent-soft)}
           <li><strong>Risk:</strong> fraud, clinical, vulnerable-caller or complaint flags that force a handoff</li>
           <li><strong>Tools:</strong> which MCP servers to expose, and which facts to fetch before speaking</li>
           <li><strong>Turn state:</strong> is the caller done, correcting themselves, or just saying "mm-hmm"</li>
+          <li><strong>Speaker:</strong> is this the caller, or someone else in the room</li>
+          <li><strong>Emotion:</strong> frustration or confusion that should change the tone, slow things down or hand off</li>
           <li><strong>Confidence:</strong> a probability on each, so low-confidence turns hand off instead of guessing</li>
         </ul></div>
       <div class="panel stack"><span class="lbl">Why it works</span>
@@ -783,10 +787,58 @@ ol.src li:target{background:var(--accent-soft)}
   </div>
 </section>
 
+<section id="essentials">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">6 · What separates a good agent</p>
+      <h2>Four investments that decide whether callers trust it</h2>
+      <p class="lede">Models change every month. These four capabilities are what make an agent hold up on real calls, and they carry over from one model or vendor to the next.</p>
+    </div>
+    <div class="cols2">
+      <div class="panel stack">
+        <span class="lbl">1 · A golden test set and an evaluation framework</span>
+        <p>The most valuable asset a team builds. Hundreds of real, de-identified call scenarios, each with a known right answer, run three times on every change to models, prompts, tools or personas.</p>
+        <ul class="tight">
+          <li>Common guidance: 200+ scenarios before production, 500+ for multilingual enterprise use, and about 100 observations to detect a 5% change with confidence.<a class="c" data-s="hammingEval"></a> <span class="chip k-ven">vendor guidance</span></li>
+          <li>Mix happy paths with edge cases, errors, adversarial callers and noisy audio, and add every production failure as a new case.</li>
+          <li>Block a release when a score drops, the same way failing tests block code.</li>
+        </ul>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">2 · Hearing the right caller</span>
+        <p>Real callers phone from cars, kitchens and waiting rooms, with a TV on or someone talking beside them. How the agent performs there matters more than how it performs in a quiet demo.</p>
+        <ul class="tight">
+          <li>Background speech pushed streaming speech-to-text error rates to 22% to 31%; isolating the main speaker cut errors by up to 43%.<a class="c" data-s="aicoustics"></a> <span class="chip k-ven">vendor test</span></li>
+          <li>Separate the voices (diarization), lock onto the caller, and re-verify identity if a different voice takes over before a sensitive step.<a class="c" data-s="personalvad"></a></li>
+          <li>Test at several noise levels and with side conversations, not just clean audio.</li>
+        </ul>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">3 · Emotion in real time, sentiment on every call</span>
+        <p>During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.</p>
+        <ul class="tight">
+          <li>One contact center pilot moved from reviewing 3% of calls to emotion-aware coaching, and escalations fell from 14% to 6%.<a class="c" data-s="datamark"></a> <span class="chip k-ven">vendor case study, human agents</span></li>
+          <li>Treat emotion scores as a signal for routing and review, not a judgment of the caller, and check that they work equally across accents and age groups.</li>
+          <li>In the EU, people must be told when an emotion recognition system is used.<a class="c" data-s="euai50"></a></li>
+        </ul>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">4 · Persona is the brand</span>
+        <p>Callers judge the organization by how its agent sounds. Voice, pace, warmth and word choice deserve the same care as a brand guide.</p>
+        <ul class="tight">
+          <li>One subscription business reported resolution rates up more than 50% after tuning its voice persona.<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor-reported</span></li>
+          <li>Offering a few personas keeps repeat callers from hearing the same voice every time; let callers keep the one they prefer. <span class="chip k-our">author's view</span></li>
+          <li>Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.<a class="c" data-s="clunic"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="usecases">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">6 · Where to start</p>
+      <p class="eyebrow">7 · Where to start</p>
       <h2>Readiness against risk, by call type</h2>
       <p class="lede">Healthcare shown, because that is where results are published. Green is the pilot zone. Red stays human until there is independent safety evidence.</p>
     </div>
@@ -809,7 +861,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="callout">
       <div>
-        <p class="eyebrow">7 · Trust and identity</p>
+        <p class="eyebrow">8 · Trust and identity</p>
         <p class="big num" style="margin-top:10px">Over half</p>
         <p style="margin-top:8px">of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice, bots and IVR reconnaissance.<a class="c" data-s="pindrop"></a> <span class="chip k-ven">vendor-reported</span></p>
       </div>
@@ -832,7 +884,7 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="lmlm">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">8 · What comes next</p>
+      <p class="eyebrow">9 · What comes next</p>
       <h2>Models that look facts up instead of memorizing them</h2>
       <p class="lede">A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete.<a class="c" data-s="lmlm"></a></p>
     </div>
@@ -913,7 +965,7 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="options">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">9 · The decision</p>
+      <p class="eyebrow">10 · The decision</p>
       <h2>Four ways to play the next 12 months</h2>
       <span class="ix">Interactive · tap an option</span>
     </div>
@@ -926,12 +978,12 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="pilot">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">10 · Recommended next step</p>
+      <p class="eyebrow">11 · Recommended next step</p>
       <h2>A 90-day pilot with gates set before launch</h2>
       <p class="lede">One market or line of business, inbound only, two or three call types, warm transfer with full context. The pre-launch bar is set above the best public benchmark on purpose, because public scenarios are generic.</p>
     </div>
     <div class="pilot">
-      <div class="ph"><span class="w">Weeks 0 to 4</span><span class="t">Build the test suite</span><p>100+ scenarios from your own calls: accents, older callers, Spanish, number dictation, mid-call corrections. Silent shadow test on de-identified recorded audio.</p></div>
+      <div class="ph"><span class="w">Weeks 0 to 4</span><span class="t">Build the golden test set</span><p>200+ scenarios from your own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, upset callers. Silent shadow test on recorded audio.</p></div>
       <div class="ph"><span class="w">Gate · end of week 4</span><span class="t">90%+ pass^3 to go live</span><p>Every scenario run three times on phone-grade audio. Router thresholds calibrated on held-out data. Identity controls signed off.</p></div>
       <div class="ph"><span class="w">Weeks 5 to 12</span><span class="t">Live in one market</span><p>Every failure becomes a regression test. Weekly audit of tool-call write-backs and misroutes (transfers after routing).</p></div>
       <div class="ph"><span class="w">Day 90</span><span class="t">Scale, adjust, or stop</span><p>Decide against the criteria below, not against a demo.</p></div>
@@ -974,7 +1026,7 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="debate">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">11 · Think tank</p>
+      <p class="eyebrow">12 · Think tank</p>
       <h2>Seven seats at the table</h2>
       <p class="lede">A structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models?</p>
     </div>
@@ -986,6 +1038,7 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="panel"><span class="lbl">Where all seven agree</span>
         <ul class="tight">
           <li>Start with inbound administrative calls and warm human transfer.</li>
+          <li>Build a golden evaluation set before choosing a vendor, and gate every change on it.</li>
           <li>Measure repeat reliability and cost per resolved call, not containment or demo quality.</li>
           <li>Use a fast router, with calibrated thresholds and rule-based escalation.</li>
           <li>Own the evaluation data, routing logs and call logs, whichever vendor wins.</li>
@@ -1082,7 +1135,9 @@ ol.src li:target{background:var(--accent-soft)}
         <li><strong>Turn-taking:</strong> false and missed barge-ins, backchannel handling.</li>
         <li><strong>Latency:</strong> P95 turn time, not mean; dead air over 10 s.</li>
         <li><strong>Action correctness:</strong> exact argument match on every tool call. This is the hard gate.<a class="c" data-s="nuanced"></a></li>
-        <li><strong>Repeatability:</strong> pass^3 on 100+ scenarios; every production failure becomes a regression case.</li>
+        <li><strong>Repeatability:</strong> pass^3 on a golden set of 200+ scenarios; every production failure becomes a regression case; block a release if task completion drops more than 3 points or latency rises more than 10%.<a class="c" data-s="hammingEval"></a></li>
+        <li><strong>Emotion:</strong> frustration and confusion caught in real time on labeled calls, checked across accents and age groups; sentiment scored on every call after it ends.</li>
+        <li><strong>Persona:</strong> each persona passes the same golden set; tone may differ, facts and policies may not.</li>
       </ul></div>
   </div>
 </section>
@@ -1461,6 +1516,9 @@ const S={
  personalvad:["Ding et al. (Google): Personal VAD, speaker-conditioned voice activity detection (2020)","https://arxiv.org/abs/1908.04284","ind"],
  tsvad:["Online target-speaker voice activity detection for speaker diarization (arXiv 2207.05920)","https://arxiv.org/abs/2207.05920","ind"],
  voiceIdBreach:["AI Incident Database #485: reporter accesses own bank account with AI-cloned voice (2023)","https://incidentdatabase.ai/cite/485/","ind"],
+ hammingEval:["Hamming: How to evaluate voice agents, framework, metrics and checklists (Jan 2026)","https://hamming.ai/blog/how-to-evaluate-voice-agents","ven"],
+ datamark:["DATAMARK: Fortune 500 energy company post-call experience case study (2026)","https://www.datamark.net/how-a-fortune-500energy-leadertransformed-thepost-call-experience/","ven"],
+ euai50:["EU AI Act, Article 50: transparency obligations, including emotion recognition","https://artificialintelligenceact.eu/article/50/","ind"],
  openaiBAA:["OpenAI Help Center: HIPAA-eligible products and functionality (Oct 2026)","https://help.openai.com/en/articles/20001069-hipaa-eligible-products-and-functionality","ven"],
  aws:["AWS: Amazon Nova 2 Sonic service card","https://docs.aws.amazon.com/ai/responsible-ai/nova-2-sonic/overview.html","ven"],
  anthropicBAA:["Anthropic: Covered models under a BAA","https://support.claude.com/en/articles/15455031-covered-models-under-a-business-associate-agreement-baa","ven"],
@@ -1802,7 +1860,7 @@ const AFTER={
  scale:{h:"Gates met: scale in waves",c:[
   ["Months 4 to 6","Widen",["Add two or three call types and one more market at a time, each through the same pass^3 gate","Retrain the router on pilot transcripts; you now have real labeled intents","Outbound only where consent is on file"]],
   ["Months 7 to 12","Own",["Move routing and evaluation in-house; keep vendors on the responder and voice stack","Renegotiate on price per resolved call, with log and routing export rights","Start the limited-memory training program on one knowledge domain"]],
-  ["Ongoing","Govern",["Monthly review of misroutes, wrong actions and complaints","Change control: re-run the full suite before any model or prompt change","Report resolved calls, abandonment and satisfaction to the board quarterly"]]]},
+  ["Ongoing","Govern",["Monthly review of misroutes, wrong actions and complaints","Change control: re-run the golden set before any model, prompt or persona change","Grow the golden set every week from real failures","Score sentiment on every call and review the angriest calls weekly","Report resolved calls, abandonment and satisfaction to the board quarterly"]]]},
  adjust:{h:"Some gates missed: fix, then re-run",c:[
   ["Weeks 1 to 4","Diagnose",["Rank failures from the logs; most trace to audio, identity or integration, not the model","Narrow scope to the call types that passed"]],
   ["Weeks 5 to 8","Fix",["Swap the weak component (speech-to-text, turn detection, router thresholds) rather than the whole platform","Add every failure to the test suite"]],
