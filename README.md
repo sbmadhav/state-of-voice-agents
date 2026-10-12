@@ -11,7 +11,7 @@ An interactive, vendor-neutral look at conversational voice agents in regulated 
 Three theses:
 
 1. **Reliability is the gap.** A single demo overstates readiness by 20 to 40 points. Measure repeatability (pass^3) on your own call types.
-2. **Think silently, then respond.** A fast System-1 "thinker" makes silent, typed decisions: intent, risk, which sub-agent and which MCP tools. A System-2 LLM "responder" does the talking.
+2. **Think silently, then respond.** A fast System-1 "thinker" makes silent, typed decisions: intent, risk, which sub-agent and which MCP tools. A conversational LLM "responder" does the talking.
 3. **Invest in governed memory.** Limited Memory Language Models look facts up in a governed store instead of memorizing them. That makes facts traceable and deletable, and a model can be trained on your own data.
 
 The page is in two parts:
