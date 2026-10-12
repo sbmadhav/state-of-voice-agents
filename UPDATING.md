@@ -19,6 +19,7 @@ A new edition goes out every 30 days. Use this checklist each time.
 
 ## 3. Publish
 - [ ] Copy `index.html` to `editions/YYYY-MM/index.html`, along with `og.png`.
+- [ ] Regenerate `bolt-context.txt` from the new page text so Bolt answers from the new edition.
 - [ ] Add a row to the README's Editions table and an entry to `CHANGELOG.md`.
 - [ ] Commit, push, and confirm the GitHub Pages build.
 - [ ] Post a short "what changed this month" update on LinkedIn.

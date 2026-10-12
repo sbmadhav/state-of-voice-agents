@@ -23,3 +23,9 @@
 - PDF export: the page header, footer and page numbers now follow the chosen theme, so they stay readable in dark mode.
 - Navigation: Download PDF and the theme switcher are pinned outside the scrolling section links. Fixed horizontal overflow on phones.
 - Evidence labels: replaced a venue label ("ICLR 2026") with the standard "independent" label.
+
+### Revisions, October 12, 2026 (later)
+- Restyled to the sbmadhav.com design system colors and type, kept in a calm, executive register. Added the site favicon and the Bolt mark in the header, which links back to sbmadhav.com.
+- Added an About section with links to sbmadhav.com and LinkedIn.
+- Added Ask Bolt, a Q&A assistant grounded in the report with optional web research, plus the Cloudflare Worker that powers it (`worker/`).
+- Canonical address is now https://www.sbmadhav.com/state-of-voice-agents/.

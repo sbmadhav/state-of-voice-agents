@@ -1,0 +1,18 @@
+name = "bolt-voice-agents"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+MODEL = "claude-sonnet-5-5"
+CONTEXT_URL = "https://www.sbmadhav.com/state-of-voice-agents/bolt-context.txt"
+ALLOWED_ORIGINS = "https://www.sbmadhav.com,https://sbmadhav.com,https://sbmadhav.github.io"
+MAX_SEARCHES = "3"
+
+# 10 questions per minute per visitor IP
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60

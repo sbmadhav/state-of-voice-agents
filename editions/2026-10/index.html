@@ -5,44 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="State of conversational voice agents, October 2026 edition: reliability, economics, a thinker-responder architecture, and limited-memory models for regulated contact centers.">
 <meta name="author" content="Madhav Srinivasan">
-<link rel="canonical" href="https://sbmadhav.github.io/state-of-voice-agents/">
+<meta name="theme-color" content="#FFF8EE">
+<link rel="canonical" href="https://www.sbmadhav.com/state-of-voice-agents/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Voice Agents at the Front Door · October 2026">
 <meta property="og:description" content="Reliability, economics, a thinker-responder architecture, and limited-memory models for regulated contact centers. Every figure sourced.">
-<meta property="og:url" content="https://sbmadhav.github.io/state-of-voice-agents/">
-<meta property="og:image" content="https://sbmadhav.github.io/state-of-voice-agents/og.png">
+<meta property="og:url" content="https://www.sbmadhav.com/state-of-voice-agents/">
+<meta property="og:image" content="https://www.sbmadhav.com/state-of-voice-agents/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
 <style>[hidden]{display:none!important}img{max-width:100%}:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
 <title>Voice Agents at the Front Door</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='14' width='48' height='40' rx='14' fill='%231FA39A'/%3E%3Ccircle cx='24' cy='34' r='7' fill='white'/%3E%3Ccircle cx='40' cy='34' r='7' fill='white'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='41' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='32' cy='7' r='5' fill='%23FF6B5B'/%3E%3C/svg%3E">
 <style>
-/* Layout: one long brief. Part I is an executive story with live tools; Part II is a dense technical appendix. Sticky jump nav. */
+/* Layout: one long brief. Part I is an executive story with live tools; Part II is a dense technical appendix. Sticky jump nav.
+   Colors follow the sbmadhav.com design system (Daybreak light, Deep Space dark). Accent text colors are deeper shades of the
+   system's sky, coral, teal and gold so they pass WCAG AA as text; fills use the system values. Display face is the system's
+   Space Grotesk in both schemes, for a calmer executive register. */
 :root{
-  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#E9EDF2; --ink:#14202E; --muted:#5B6878; --line:#D8DFE7;
-  --accent:#2343C4; --accent-soft:#E2E8FA; --signal:#C2650F; --signal-soft:#FBEBDA;
-  --good:#1D7A4E; --good-soft:#DDF1E6; --warn:#9A6A0E; --warn-soft:#F7ECD3; --bad:#B23A2F; --bad-soft:#F8E1DE;
-  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
-  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --r:10px;
+  --bg:#FFF8EE; --surface:#FFFFFF; --sunk:#FDF0DC; --ink:#1C2541; --muted:#5B6479; --line:#EADFCC;
+  --accent:#3563C9; --accent-soft:#E7EEFC; --signal:#C8402F; --signal-soft:#FFE6E1;
+  --good:#137A73; --good-soft:#DCF3F0; --warn:#8A6100; --warn-soft:#FFF0C7; --bad:#B5392A; --bad-soft:#FDE3DF;
+  --sky:#5B8DEF; --coral:#FF6B5B; --teal:#1FA39A; --sun:#FFC53D; --plum:#8E6BD8; --on-accent:#1C2541;
+  --display:"Space Grotesk", "Nunito Sans", system-ui, sans-serif;
+  --body:"Nunito Sans", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:16px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0D131A; --surface:#141C26; --sunk:#1A2430; --ink:#E6ECF3; --muted:#95A3B4; --line:#273342;
-  --accent:#8199FF; --accent-soft:#1D2849; --signal:#EE9F4E; --signal-soft:#3A2814;
-  --good:#58C38D; --good-soft:#15301F; --warn:#E3B457; --warn-soft:#33290F; --bad:#F07F74; --bad-soft:#3A1A17; color-scheme:dark}}
+  --bg:#07061A; --surface:#16133A; --sunk:#0D0B2A; --ink:#EEEAFF; --muted:#A7A2D8; --line:#2D2766;
+  --accent:#48B6FF; --accent-soft:#132552; --signal:#FF4FD8; --signal-soft:#3A1240;
+  --good:#22E6C8; --good-soft:#0C2F36; --warn:#C8FF45; --warn-soft:#28320E; --bad:#FF7A6B; --bad-soft:#3A1520;
+  --sky:#48B6FF; --coral:#FF4FD8; --teal:#22E6C8; --sun:#C8FF45; --plum:#A47BFF; --on-accent:#07061A; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0D131A; --surface:#141C26; --sunk:#1A2430; --ink:#E6ECF3; --muted:#95A3B4; --line:#273342;
-  --accent:#8199FF; --accent-soft:#1D2849; --signal:#EE9F4E; --signal-soft:#3A2814;
-  --good:#58C38D; --good-soft:#15301F; --warn:#E3B457; --warn-soft:#33290F; --bad:#F07F74; --bad-soft:#3A1A17; color-scheme:dark}
+  --bg:#07061A; --surface:#16133A; --sunk:#0D0B2A; --ink:#EEEAFF; --muted:#A7A2D8; --line:#2D2766;
+  --accent:#48B6FF; --accent-soft:#132552; --signal:#FF4FD8; --signal-soft:#3A1240;
+  --good:#22E6C8; --good-soft:#0C2F36; --warn:#C8FF45; --warn-soft:#28320E; --bad:#FF7A6B; --bad-soft:#3A1520;
+  --sky:#48B6FF; --coral:#FF4FD8; --teal:#22E6C8; --sun:#C8FF45; --plum:#A47BFF; --on-accent:#07061A; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0;font-weight:700;letter-spacing:-.01em}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.025em}
 h1{font-size:clamp(2.1rem,6vw,3.7rem)}
 h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
 h3{font-size:1.15rem;font-weight:500}
@@ -56,7 +64,7 @@ section .head{display:grid;gap:10px;margin-bottom:28px}
 .stack{display:grid;gap:16px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
 button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
 
 /* nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -74,7 +82,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .hero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:.9rem;margin-top:18px}
 .wave{display:flex;align-items:center;gap:clamp(1px,.3vw,3px);height:56px;margin:26px 0 8px;overflow:hidden}
 .wave i{flex:1;min-width:0;border-radius:2px;background:var(--accent);opacity:.85}
-.wave i.alt{background:var(--signal)}
+.wave i.alt{background:var(--coral)}
 .wave-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){.wave i{animation:pulse 2.6s ease-in-out infinite;transform-origin:center}}
 @keyframes pulse{50%{transform:scaleY(.55)}}
@@ -274,7 +282,7 @@ td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowra
 
 /* latency sim */
 .lat-bar{display:flex;height:34px;border-radius:6px;overflow:hidden;background:var(--sunk);position:relative}
-.lat-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;color:#fff;overflow:hidden;white-space:nowrap}
+.lat-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;color:var(--on-accent);overflow:hidden;white-space:nowrap}
 .lat-scale{position:relative;height:40px;margin-top:4px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
 .lat-scale .m{position:absolute;top:0;border-left:1px dashed var(--muted);height:14px}
 .lat-scale .m span{position:absolute;top:14px;left:0;transform:translateX(-50%);white-space:nowrap}
@@ -373,7 +381,7 @@ ol.src li:target{background:var(--accent-soft)}
 .dlg-card label.opt-r{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer}
 .dlg-card label.opt-r:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
 .dlg-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 .print-only{display:none}
 .roadmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
 @media (max-width:760px){.roadmap{grid-template-columns:1fr}}
@@ -388,15 +396,15 @@ ol.src li:target{background:var(--accent-soft)}
 .edition{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;padding:3px 9px;border-radius:99px;background:var(--signal-soft);color:var(--signal)}
 @media print{
   @page{size:letter;margin:14mm 12mm;
-    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}
-    @top-right{content:"sbmadhav.github.io/state-of-voice-agents";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}
-    @bottom-left{content:"By Madhav Srinivasan";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}
-    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#5B6878}}
-  @page dark{background:#0D131A;
-    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}
-    @top-right{content:"sbmadhav.github.io/state-of-voice-agents";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}
-    @bottom-left{content:"By Madhav Srinivasan";font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}
-    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"IBM Plex Mono",monospace;font-size:7.5pt;color:#E6ECF3}}
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
+    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}}
+  @page dark{background:#07061A;
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}
+    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}}
   html[data-theme="dark"] body{page:dark}
   html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:var(--bg)!important}
   body{font-size:10.5pt}
@@ -424,6 +432,42 @@ ol.src li:target{background:var(--accent-soft)}
   .lm,.router,.calc{grid-template-columns:1fr 1fr}
 }
 @media print and (prefers-color-scheme: dark){html:not([data-theme="light"]) body{page:dark}}
+
+/* brand, about, Bolt */
+.nav .brand{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-family:var(--display);font-weight:600;white-space:nowrap}
+.nav .brand:hover{color:var(--ink)}
+.brand-ico svg{width:24px;height:26px;display:block}
+.about .author-row{display:flex;gap:14px;align-items:center}
+.author-ico svg{width:46px;height:49px;display:block}
+.about-links{display:flex;flex-wrap:wrap;gap:10px}
+.about-links .btn{text-decoration:none;color:var(--ink);font-weight:600}
+.about-links .btn.primary{color:var(--bg)}
+.bolt-launch{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;padding:6px 16px 6px 8px;border-radius:999px;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 12px 30px -14px rgba(28,37,65,.45);font-weight:700;font-size:.92rem}
+.bolt-launch:hover{border-color:var(--accent)}
+.bolt-launch .bolt-ico svg{width:30px;height:32px;display:block}
+.bolt-panel{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;width:min(420px,calc(100vw - 32px));height:min(640px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 24px 60px -20px rgba(7,6,26,.5);overflow:hidden}
+.bolt-panel[hidden]{display:none!important}
+.bolt-head{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.bolt-head .bolt-ico svg{width:32px;height:34px;display:block}
+.bolt-x{margin-left:auto;border:0;background:transparent;font-size:1.5rem;line-height:1;color:var(--muted);padding:4px 8px;border-radius:8px}
+.bolt-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:10px 12px;border-radius:14px;font-size:.92rem;line-height:1.5;overflow-wrap:anywhere}
+.msg.u{align-self:flex-end;background:var(--accent-soft);border-bottom-right-radius:4px}
+.msg.b{align-self:flex-start;background:var(--sunk);border-bottom-left-radius:4px}
+.msg p+p,.msg ul{margin-top:6px}
+.msg ul{padding-left:18px;margin-bottom:0}
+.msg .srcs{margin-top:8px;border-top:1px solid var(--line);padding-top:6px;font-size:.8rem}
+.msg .srcs a{display:block;overflow-wrap:anywhere}
+.msg.wait{color:var(--muted);font-style:italic}
+.bolt-sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+.bolt-sugg button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 10px;font-size:.8rem;color:var(--ink);text-align:left}
+.bolt-sugg button:hover{border-color:var(--accent)}
+.bolt-form{border-top:1px solid var(--line);padding:10px 14px 12px;display:grid;gap:8px}
+.bolt-web{display:flex;gap:8px;align-items:center;font-size:.82rem;color:var(--muted)}
+.bolt-row{display:flex;gap:8px;align-items:flex-end}
+.bolt-row textarea{flex:1;min-width:0;resize:none;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink)}
+.bolt-disc{font-size:.72rem}
+@media print{.bolt-launch,.bolt-panel,.about-links{display:none!important}}
 </style>
 
 </head>
@@ -431,7 +475,7 @@ ol.src li:target{background:var(--accent-soft)}
 <nav class="nav" aria-label="Sections">
   <div class="wrap">
     <div class="navlinks">
-    <span class="brand">Voice Agents</span>
+    <a class="brand" href="https://www.sbmadhav.com/" title="Back to sbmadhav.com"><span class="brand-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span><span>State of Voice Agents</span></a>
     <span class="part">Part I</span>
     <a href="#brief">Bottom line</a>
     <a href="#gap">Reliability</a>
@@ -449,6 +493,7 @@ ol.src li:target{background:var(--accent-soft)}
     <a href="#t-lmlm">LMLM</a>
     <a href="#verify">Claims</a>
     <a href="#sources">Sources</a>
+    <a href="#about">About</a>
     </div>
     <div class="navtools">
     <button type="button" class="pdfbtn" id="pdf-open">Download PDF</button>
@@ -1261,10 +1306,45 @@ ol.src li:target{background:var(--accent-soft)}
 </section>
 </div>
 
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">About</p><h2>About this report</h2></div>
+    <div class="cols2">
+      <div class="panel stack">
+        <span class="lbl">The report</span>
+        <p>A vendor-neutral view of conversational voice agents for leaders in regulated contact centers, published as a monthly edition. Every figure links to its source, and vendor-reported numbers are labeled as such.</p>
+        <p class="note">Corrections and source suggestions are welcome as issues on <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">GitHub</a>, which also keeps past editions.</p>
+      </div>
+      <div class="panel stack author">
+        <span class="lbl">The author</span>
+        <div class="author-row"><span class="author-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span><div><p style="font-weight:700">Madhav Srinivasan</p><p class="note">Director of Software Engineering. Builds AI agents, voice AI and platforms for banking and healthcare.</p></div></div>
+        <p class="note">Written in a personal capacity; not affiliated with any organization or vendor named.</p>
+        <div class="about-links"><a class="btn primary" href="https://www.sbmadhav.com/">Back to sbmadhav.com</a><a class="btn" href="https://www.linkedin.com/in/sbmadhav/" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="foot">
   <div class="wrap"><strong style="color:var(--ink)">By Madhav Srinivasan</strong> · October 2026 edition · Research cutoff October 12, 2026<br>Bracketed numbers in the text link to the numbered sources above. Past editions: <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">github.com/sbmadhav/state-of-voice-agents</a>.<br>Written in a personal capacity; not affiliated with any organization or vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.</div>
 </footer>
 </main>
+
+<button type="button" class="bolt-launch" id="bolt-open" aria-haspopup="dialog" aria-controls="bolt-panel"><span class="bolt-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span><span>Ask Bolt</span></button>
+<div class="bolt-panel" id="bolt-panel" role="dialog" aria-modal="false" aria-labelledby="bolt-title" hidden>
+  <header class="bolt-head">
+    <span class="bolt-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span>
+    <div style="min-width:0"><p id="bolt-title" style="font-weight:700">Ask Bolt</p><p class="note">Questions about this report, with optional web research</p></div>
+    <button type="button" class="bolt-x" id="bolt-close" aria-label="Close Bolt">×</button>
+  </header>
+  <div class="bolt-log" id="bolt-log" aria-live="polite"></div>
+  <div class="bolt-sugg" id="bolt-sugg"></div>
+  <form class="bolt-form" id="bolt-form">
+    <label class="bolt-web"><input type="checkbox" id="bolt-web" checked> Search the web for newer sources</label>
+    <div class="bolt-row"><textarea id="bolt-q" rows="2" maxlength="1500" placeholder="Ask about the findings, the pilot, or what changed since this edition" aria-label="Your question"></textarea><button type="submit" class="btn primary" id="bolt-send">Ask</button></div>
+    <p class="note bolt-disc">Bolt is an AI assistant. Answers can be wrong; check the cited sources.</p>
+  </form>
+</div>
 
 <div class="dlg" id="pdf-dlg" role="dialog" aria-modal="true" aria-labelledby="pdf-h" hidden>
   <div class="dlg-card">
@@ -1275,7 +1355,7 @@ ol.src li:target{background:var(--accent-soft)}
       <label class="opt-r"><input type="radio" name="pdf-theme" id="pdf-dark" value="dark"> Dark</label>
     </fieldset>
     <p class="note">The page is reformatted for letter-size pages: controls are hidden, tabs and filters are expanded, and charts print as you left them. In the print window, choose <strong>Save as PDF</strong>, keep <strong>Background graphics</strong> on and turn <strong>Headers and footers</strong> off; the PDF adds its own page header and page numbers in the matching theme.</p>
-    <p class="note" id="pdf-frame" hidden>PDF export is not available in this preview. Open the public page to download it: <a href="https://sbmadhav.github.io/state-of-voice-agents/" target="_blank" rel="noopener">sbmadhav.github.io/state-of-voice-agents</a></p>
+    <p class="note" id="pdf-frame" hidden>PDF export is not available in this preview. Open the public page to download it: <a href="https://www.sbmadhav.com/state-of-voice-agents/" target="_blank" rel="noopener">sbmadhav.com/state-of-voice-agents</a></p>
     <div class="dlg-actions"><button type="button" class="btn" id="pdf-cancel">Cancel</button><button type="button" class="btn primary" id="pdf-go">Create PDF</button></div>
   </div>
 </div>
@@ -1641,12 +1721,12 @@ renderPer();
 
 /* latency */
 const STG=[
- {k:"net",n:"Network and telephony",c:"#6B7A8F",max:600},
- {k:"ep",n:"Endpointing (turn end)",c:"#C2650F",max:1200},
- {k:"stt",n:"STT finalize",c:"#3A8C6E",max:600},
- {k:"tool",n:"Tool call (blocking)",c:"#B23A2F",max:1500},
- {k:"llm",n:"LLM first token",c:"#2343C4",max:2000},
- {k:"tts",n:"TTS first audio",c:"#7A4FB8",max:800}
+ {k:"net",n:"Network and telephony",c:"var(--muted)",max:600},
+ {k:"ep",n:"Endpointing (turn end)",c:"var(--coral)",max:1200},
+ {k:"stt",n:"STT finalize",c:"var(--teal)",max:600},
+ {k:"tool",n:"Tool call (blocking)",c:"var(--sun)",max:1500},
+ {k:"llm",n:"LLM first token",c:"var(--sky)",max:2000},
+ {k:"tts",n:"TTS first audio",c:"var(--plum)",max:800}
 ];
 const LP={seq:{net:150,ep:650,stt:150,tool:450,llm:870,tts:200},par:{net:150,ep:400,stt:150,tool:0,llm:600,tts:180},fd:{net:120,ep:150,stt:0,tool:0,llm:450,tts:0}};
 let LV={...LP.seq};
@@ -1713,6 +1793,50 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
   prev=root.getAttribute('data-theme')||'';root.setAttribute('data-theme',t);dlg.hidden=true;
   setTimeout(()=>{try{window.print()}catch(e){} setTimeout(restore,500)},80);
  });
+})();
+/* Bolt: Q&A about this report, with optional web research */
+(function(){
+ const BOLT_ENDPOINT = ''; // Set to the deployed Cloudflare Worker URL, e.g. https://bolt-voice.<you>.workers.dev
+ const PAGE_URL = 'https://www.sbmadhav.com/state-of-voice-agents/';
+ const panel=$('bolt-panel'),log=$('bolt-log'),q=$('bolt-q'),launch=$('bolt-open');
+ const SUGG=['What should a health system pilot first?','Explain the thinker-responder model in two sentences','Why invest in limited-memory models now?','What has changed in voice AI since this edition?'];
+ const history=[];
+ const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const md=t=>{const lines=esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').split(/\n/);let h='',ul=false;
+   for(const l of lines){const m=l.match(/^\s*[-*]\s+(.*)/);if(m){if(!ul){h+='<ul>';ul=true}h+='<li>'+m[1]+'</li>'}else{if(ul){h+='</ul>';ul=false}if(l.trim())h+='<p>'+l+'</p>'}}
+   return h+(ul?'</ul>':'')};
+ const add=(cls,html)=>{const d=document.createElement('div');d.className='msg '+cls;d.innerHTML=html;log.appendChild(d);log.scrollTop=log.scrollHeight;return d};
+ const greet=()=>{if(!log.children.length)add('b','<p>Hi, I\'m Bolt. Ask me about anything in this report. With web search on, I can also look for newer sources and cite them.</p>')};
+ $('bolt-sugg').innerHTML=SUGG.map(t=>`<button type="button">${esc(t)}</button>`).join('');
+ $('bolt-sugg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;q.value=b.textContent;ask()});
+ const open=()=>{panel.hidden=false;launch.hidden=true;greet();q.focus()};
+ const close=()=>{panel.hidden=true;launch.hidden=false;launch.focus()};
+ launch.addEventListener('click',open);$('bolt-close').addEventListener('click',close);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)close()});
+ q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();ask()}});
+ $('bolt-form').addEventListener('submit',e=>{e.preventDefault();ask()});
+ async function ask(){
+  const text=q.value.trim();if(!text)return;q.value='';$('bolt-sugg').hidden=true;
+  add('u','<p>'+esc(text)+'</p>');
+  if(!BOLT_ENDPOINT){
+   const prompt=`I'm reading "Voice Agents at the Front Door" (October 2026 edition): ${PAGE_URL} . Using that report, and searching the web for newer sources where useful, please answer and cite sources: ${text}`;
+   add('b',`<p>Live answers aren't switched on for this page yet. You can ask Claude directly with the report as context:</p><p><a href="https://claude.ai/new?q=${encodeURIComponent(prompt)}" target="_blank" rel="noopener">Open this question in Claude</a></p>`);
+   return;
+  }
+  history.push({role:'user',content:text});
+  const wait=add('b wait',$('bolt-web').checked?'Reading the report and searching the web…':'Reading the report…');
+  $('bolt-send').disabled=true;
+  try{
+   const r=await fetch(BOLT_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-10),web:$('bolt-web').checked})});
+   const data=await r.json().catch(()=>({}));
+   if(!r.ok)throw new Error(data.error||('Request failed ('+r.status+')'));
+   wait.remove();
+   const srcs=(data.sources||[]).slice(0,6).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title||x.url)}</a>`).join('');
+   add('b',md(data.answer||'')+(srcs?`<div class="srcs"><span class="lbl">Web sources</span>${srcs}</div>`:''));
+   history.push({role:'assistant',content:data.answer||''});
+  }catch(err){wait.remove();history.pop();add('b','<p>'+esc(err.message||'Something went wrong.')+' Please try again in a moment.</p>')}
+  finally{$('bolt-send').disabled=false}
+ }
 })();
 })();
 </script>
