@@ -2,7 +2,7 @@
 
 An interactive, vendor-neutral look at conversational voice agents in regulated contact centers (healthcare and financial services). It is published as a monthly edition and updated every 30 days.
 
-**Read it:** https://www.sbmadhav.com/state-of-voice-agents/
+**Read it:** https://sbmadhav.com/state-of-voice-agents/
 
 ![Voice Agents at the Front Door](og.png)
 
@@ -39,12 +39,12 @@ Every figure links to its source. Vendor-reported numbers are labeled as such.
 
 | Edition | Link | Notes |
 |---|---|---|
-| October 2026 | [editions/2026-10](https://www.sbmadhav.com/state-of-voice-agents/editions/2026-10/) | First edition |
+| October 2026 | [editions/2026-10](https://sbmadhav.com/state-of-voice-agents/editions/2026-10/) | First edition |
 
 The root `index.html` always holds the latest edition. Each month's edition is also archived under `editions/YYYY-MM/`. See [UPDATING.md](UPDATING.md) for the monthly checklist and [CHANGELOG.md](CHANGELOG.md) for what changed.
 
 ## About
 
-Part of [sbmadhav.com](https://www.sbmadhav.com/) and styled with its design system. By Madhav Srinivasan. Written in a personal capacity; not affiliated with any organization or vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
+Part of [sbmadhav.com](https://sbmadhav.com/) and styled with its design system. By Madhav Srinivasan. Written in a personal capacity; not affiliated with any organization or vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
 
 Corrections and source suggestions are welcome as GitHub issues.

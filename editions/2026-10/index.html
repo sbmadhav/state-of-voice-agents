@@ -6,12 +6,12 @@
 <meta name="description" content="State of conversational voice agents, October 2026 edition: reliability, economics, a thinker-responder architecture, and limited-memory models for regulated contact centers.">
 <meta name="author" content="Madhav Srinivasan">
 <meta name="theme-color" content="#FFF8EE">
-<link rel="canonical" href="https://www.sbmadhav.com/state-of-voice-agents/">
+<link rel="canonical" href="https://sbmadhav.com/state-of-voice-agents/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Voice Agents at the Front Door · October 2026">
 <meta property="og:description" content="Reliability, economics, a thinker-responder architecture, and limited-memory models for regulated contact centers. Every figure sourced.">
-<meta property="og:url" content="https://www.sbmadhav.com/state-of-voice-agents/">
-<meta property="og:image" content="https://www.sbmadhav.com/state-of-voice-agents/og.png">
+<meta property="og:url" content="https://sbmadhav.com/state-of-voice-agents/">
+<meta property="og:image" content="https://sbmadhav.com/state-of-voice-agents/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
@@ -20,31 +20,35 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='14' width='48' height='40' rx='14' fill='%231FA39A'/%3E%3Ccircle cx='24' cy='34' r='7' fill='white'/%3E%3Ccircle cx='40' cy='34' r='7' fill='white'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='41' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='32' cy='7' r='5' fill='%23FF6B5B'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://sbmadhav.com/assets/icons/apple-touch-icon.png">
 <style>
 /* Layout: one long brief. Part I is an executive story with live tools; Part II is a dense technical appendix. Sticky jump nav.
-   Colors follow the sbmadhav.com design system (Daybreak light, Deep Space dark). Accent text colors are deeper shades of the
-   system's sky, coral, teal and gold so they pass WCAG AA as text; fills use the system values. Display face is the system's
+   Colors follow the sbmadhav.com design system (Daybreak light, Deep Space dark). Uses the design system's fill and strong levels:
+   strong shades for text and marks, fills only with on-accent text, so every pairing meets WCAG 2.1 AA in both modes. Display face is the system's
    Space Grotesk in both schemes, for a calmer executive register. */
 :root{
   --bg:#FFF8EE; --surface:#FFFFFF; --sunk:#FDF0DC; --ink:#1C2541; --muted:#5B6479; --line:#EADFCC;
-  --accent:#3563C9; --accent-soft:#E7EEFC; --signal:#C8402F; --signal-soft:#FFE6E1;
-  --good:#137A73; --good-soft:#DCF3F0; --warn:#8A6100; --warn-soft:#FFF0C7; --bad:#B5392A; --bad-soft:#FDE3DF;
-  --sky:#5B8DEF; --coral:#FF6B5B; --teal:#1FA39A; --sun:#FFC53D; --plum:#8E6BD8; --on-accent:#1C2541;
+  --accent:#2F5BBE; --accent-soft:#E8EFFD; --signal:#B83A2B; --signal-soft:#FFEAE8;
+  --good:#0F6E68; --good-soft:#E0F2F1; --warn:#7A5600; --warn-soft:#FFF7E4; --bad:#B83A2B; --bad-soft:#FFEAE8;
+  --plum-strong:#6646B8; --plum-soft:#F3EFFC;
+  --sky:#5B8DEF; --coral:#FF6B5B; --teal:#1FA39A; --sun:#FFC53D; --plum:#A88EEA; --on-accent:#1C2541; --edge:#1C2541;
   --display:"Space Grotesk", "Nunito Sans", system-ui, sans-serif;
   --body:"Nunito Sans", system-ui, sans-serif;
   --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --r:16px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#07061A; --surface:#16133A; --sunk:#0D0B2A; --ink:#EEEAFF; --muted:#A7A2D8; --line:#2D2766;
-  --accent:#48B6FF; --accent-soft:#132552; --signal:#FF4FD8; --signal-soft:#3A1240;
-  --good:#22E6C8; --good-soft:#0C2F36; --warn:#C8FF45; --warn-soft:#28320E; --bad:#FF7A6B; --bad-soft:#3A1520;
-  --sky:#48B6FF; --coral:#FF4FD8; --teal:#22E6C8; --sun:#C8FF45; --plum:#A47BFF; --on-accent:#07061A; color-scheme:dark}}
+  --bg:#0A0B18; --surface:#171A31; --sunk:#11132A; --ink:#EDEEFA; --muted:#A9AECB; --line:#2A2E4A;
+  --accent:#73BCFF; --accent-soft:#263452; --signal:#FF8F87; --signal-soft:#3C2D3F;
+  --good:#45D9C3; --good-soft:#1E3948; --warn:#D6F075; --warn-soft:#363C3C; --bad:#FF8F87; --bad-soft:#3C2D3F;
+  --plum-strong:#B6A4F7; --plum-soft:#303051;
+  --sky:#73BCFF; --coral:#FF8F87; --teal:#45D9C3; --sun:#D6F075; --plum:#B6A4F7; --on-accent:#0A0B18; --edge:#7C86C4; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#07061A; --surface:#16133A; --sunk:#0D0B2A; --ink:#EEEAFF; --muted:#A7A2D8; --line:#2D2766;
-  --accent:#48B6FF; --accent-soft:#132552; --signal:#FF4FD8; --signal-soft:#3A1240;
-  --good:#22E6C8; --good-soft:#0C2F36; --warn:#C8FF45; --warn-soft:#28320E; --bad:#FF7A6B; --bad-soft:#3A1520;
-  --sky:#48B6FF; --coral:#FF4FD8; --teal:#22E6C8; --sun:#C8FF45; --plum:#A47BFF; --on-accent:#07061A; color-scheme:dark}
+  --bg:#0A0B18; --surface:#171A31; --sunk:#11132A; --ink:#EDEEFA; --muted:#A9AECB; --line:#2A2E4A;
+  --accent:#73BCFF; --accent-soft:#263452; --signal:#FF8F87; --signal-soft:#3C2D3F;
+  --good:#45D9C3; --good-soft:#1E3948; --warn:#D6F075; --warn-soft:#363C3C; --bad:#FF8F87; --bad-soft:#3C2D3F;
+  --plum-strong:#B6A4F7; --plum-soft:#303051;
+  --sky:#73BCFF; --coral:#FF8F87; --teal:#45D9C3; --sun:#D6F075; --plum:#B6A4F7; --on-accent:#0A0B18; --edge:#7C86C4; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -64,7 +68,7 @@ section .head{display:grid;gap:10px;margin-bottom:28px}
 .stack{display:grid;gap:16px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
 button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 
 /* nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -400,11 +404,11 @@ ol.src li:target{background:var(--accent-soft)}
     @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
     @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
     @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}}
-  @page dark{background:#07061A;
-    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}
-    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}
-    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}
-    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EEEAFF}}
+  @page dark{background:#0A0B18;
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}
+    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}}
   html[data-theme="dark"] body{page:dark}
   html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:var(--bg)!important}
   body{font-size:10.5pt}
@@ -436,9 +440,9 @@ ol.src li:target{background:var(--accent-soft)}
 /* brand, about, Bolt */
 .nav .brand{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-family:var(--display);font-weight:600;white-space:nowrap}
 .nav .brand:hover{color:var(--ink)}
-.brand-ico svg{width:24px;height:26px;display:block}
+.brand-ico svg{width:28px;height:28px;display:block}
 .about .author-row{display:flex;gap:14px;align-items:center}
-.author-ico svg{width:46px;height:49px;display:block}
+.author-ico svg{width:46px;height:46px;display:block}
 .about-links{display:flex;flex-wrap:wrap;gap:10px}
 .about-links .btn{text-decoration:none;color:var(--ink);font-weight:600}
 .about-links .btn.primary{color:var(--bg)}
@@ -475,7 +479,7 @@ ol.src li:target{background:var(--accent-soft)}
 <nav class="nav" aria-label="Sections">
   <div class="wrap">
     <div class="navlinks">
-    <a class="brand" href="https://www.sbmadhav.com/" title="Back to sbmadhav.com"><span class="brand-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span><span>State of Voice Agents</span></a>
+    <a class="brand" href="https://sbmadhav.com/" title="Back to sbmadhav.com"><span class="brand-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#1FA39A" stroke="#1C2541" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#1C2541"/><circle cx="41" cy="35" r="3" fill="#1C2541"/><path d="M32 14V9" stroke="#1C2541" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#FF6B5B" stroke="#1C2541" stroke-width="3"/></svg></span><span>State of Voice Agents</span></a>
     <span class="part">Part I</span>
     <a href="#brief">Bottom line</a>
     <a href="#gap">Reliability</a>
@@ -1317,9 +1321,9 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
       <div class="panel stack author">
         <span class="lbl">The author</span>
-        <div class="author-row"><span class="author-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span><div><p style="font-weight:700">Madhav Srinivasan</p><p class="note">Director of Software Engineering. Builds AI agents, voice AI and platforms for banking and healthcare.</p></div></div>
+        <div class="author-row"><span class="author-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#1FA39A" stroke="#1C2541" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#1C2541"/><circle cx="41" cy="35" r="3" fill="#1C2541"/><path d="M32 14V9" stroke="#1C2541" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#FF6B5B" stroke="#1C2541" stroke-width="3"/></svg></span><div><p style="font-weight:700">Madhav Srinivasan</p><p class="note">Director of Software Engineering. Builds AI agents, voice AI and platforms for banking and healthcare.</p></div></div>
         <p class="note">Written in a personal capacity; not affiliated with any organization or vendor named.</p>
-        <div class="about-links"><a class="btn primary" href="https://www.sbmadhav.com/">Back to sbmadhav.com</a><a class="btn" href="https://www.linkedin.com/in/sbmadhav/" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
+        <div class="about-links"><a class="btn primary" href="https://sbmadhav.com/">Back to sbmadhav.com</a><a class="btn" href="https://www.linkedin.com/in/sbmadhav/" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
       </div>
     </div>
   </div>
@@ -1355,7 +1359,7 @@ ol.src li:target{background:var(--accent-soft)}
       <label class="opt-r"><input type="radio" name="pdf-theme" id="pdf-dark" value="dark"> Dark</label>
     </fieldset>
     <p class="note">The page is reformatted for letter-size pages: controls are hidden, tabs and filters are expanded, and charts print as you left them. In the print window, choose <strong>Save as PDF</strong>, keep <strong>Background graphics</strong> on and turn <strong>Headers and footers</strong> off; the PDF adds its own page header and page numbers in the matching theme.</p>
-    <p class="note" id="pdf-frame" hidden>PDF export is not available in this preview. Open the public page to download it: <a href="https://www.sbmadhav.com/state-of-voice-agents/" target="_blank" rel="noopener">sbmadhav.com/state-of-voice-agents</a></p>
+    <p class="note" id="pdf-frame" hidden>PDF export is not available in this preview. Open the public page to download it: <a href="https://sbmadhav.com/state-of-voice-agents/" target="_blank" rel="noopener">sbmadhav.com/state-of-voice-agents</a></p>
     <div class="dlg-actions"><button type="button" class="btn" id="pdf-cancel">Cancel</button><button type="button" class="btn primary" id="pdf-go">Create PDF</button></div>
   </div>
 </div>
@@ -1797,7 +1801,7 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 /* Bolt: Q&A about this report, with optional web research */
 (function(){
  const BOLT_ENDPOINT = ''; // Set to the deployed Cloudflare Worker URL, e.g. https://bolt-voice.<you>.workers.dev
- const PAGE_URL = 'https://www.sbmadhav.com/state-of-voice-agents/';
+ const PAGE_URL = 'https://sbmadhav.com/state-of-voice-agents/';
  const panel=$('bolt-panel'),log=$('bolt-log'),q=$('bolt-q'),launch=$('bolt-open');
  const SUGG=['What should a health system pilot first?','Explain the thinker-responder model in two sentences','Why invest in limited-memory models now?','What has changed in voice AI since this edition?'];
  const history=[];

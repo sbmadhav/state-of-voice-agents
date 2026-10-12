@@ -6,8 +6,8 @@
 
 const DEFAULTS = {
   MODEL: 'claude-sonnet-5-5',
-  CONTEXT_URL: 'https://www.sbmadhav.com/state-of-voice-agents/bolt-context.txt',
-  ALLOWED_ORIGINS: 'https://www.sbmadhav.com,https://sbmadhav.com,https://sbmadhav.github.io',
+  CONTEXT_URL: 'https://sbmadhav.com/state-of-voice-agents/bolt-context.txt',
+  ALLOWED_ORIGINS: 'https://sbmadhav.com,https://sbmadhav.com,https://sbmadhav.github.io',
   MAX_SEARCHES: '3',
 };
 

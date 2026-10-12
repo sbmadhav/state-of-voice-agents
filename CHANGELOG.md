@@ -29,3 +29,8 @@
 - Added an About section with links to sbmadhav.com and LinkedIn.
 - Added Ask Bolt, a Q&A assistant grounded in the report with optional web research, plus the Cloudflare Worker that powers it (`worker/`).
 - Canonical address is now https://www.sbmadhav.com/state-of-voice-agents/.
+
+### Revisions, October 12, 2026 (accessibility)
+- Adopted design system 2.0: every text, control, hover, pressed and focus state meets WCAG 2.1 AA in light and dark (checked automatically on every element).
+- Dark mode is calmer: soft coral and lavender accents instead of neon pink and purple.
+- The sbmadhav.com home logo is now the header icon and favicon. Canonical address is https://sbmadhav.com/state-of-voice-agents/.

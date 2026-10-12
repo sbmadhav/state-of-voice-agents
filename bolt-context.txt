@@ -1,5 +1,5 @@
 Voice Agents at the Front Door, October 2026 edition, by Madhav Srinivasan.
-URL: https://www.sbmadhav.com/state-of-voice-agents/
+URL: https://sbmadhav.com/state-of-voice-agents/
 Bracketed numbers like [12] refer to the numbered Sources list at the end.
 
 STATE OF CONVERSATIONAL VOICE AGENTS · HEALTHCARE AND FINANCIAL SERVICES
