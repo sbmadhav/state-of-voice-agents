@@ -269,7 +269,22 @@ table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:640px}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunk)}
 tr:last-child td{border-bottom:0}
-td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.n{font-family:var(--mono);font-size:.8rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+table.t-router{table-layout:fixed;min-width:0}
+table.t-router td,table.t-router th{overflow-wrap:anywhere}
+table.t-router td.n .chip{white-space:normal;margin-top:4px}
+@media (max-width:760px){
+  .tbl{overflow-x:visible}
+  .tbl table{min-width:0}
+  .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tbl table,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%!important}
+  .tbl tr{padding:10px 12px;border-bottom:1px solid var(--line)}
+  .tbl tr:last-child{border-bottom:0}
+  .tbl td{border:0;padding:3px 0;display:grid;grid-template-columns:minmax(84px,32%) minmax(0,1fr);gap:10px}
+  .tbl td::before{content:attr(data-label);font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px}
+  .tbl td:first-child{font-weight:700}
+  .tbl colgroup{display:none}
+}
 .tech h2{font-size:clamp(1.3rem,2.8vw,1.7rem)}
 .tech section{padding-block:44px}
 
@@ -383,7 +398,7 @@ ol.src li:target{background:var(--accent-soft)}
 .xp-btn:hover{border-color:var(--edge)}
 @media (max-width:420px){.xp-btn span{display:none}.xp-btn{padding:3px 6px}}
 .kid{display:none}
-@media print{.xp-btn,dialog.xp{display:none!important}}
+@media print{.xp-btn,dialog.xpm{display:none!important}}
 .pdfbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:4px 12px;font-size:.76rem;flex:none}
 .pdfbtn:hover{border-color:var(--accent)}
 .dlg{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,var(--ink) 40%,transparent);display:grid;place-items:center;padding:16px}
@@ -1095,17 +1110,18 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">T5 · System-1 routing</p><h2>Typed decision models and routers, compared</h2>
       <p class="lede">A System-1 model returns typed answers (choice, score, yes/no) with probabilities in one pass and never writes prose. Three families now compete for the routing job: hosted decision APIs, open decision models, and plain fine-tuned classifiers.</p></div>
-    <div class="tbl"><table>
+    <div class="tbl"><table class="t-router">
+      <colgroup><col style="width:17%"><col style="width:16%"><col style="width:16%"><col style="width:11%"><col style="width:11%"><col style="width:29%"></colgroup>
       <thead><tr><th>Option</th><th>Type</th><th>Output</th><th>Latency</th><th>Cost</th><th>Evidence</th></tr></thead>
       <tbody>
-        <tr><td>OpenAI Decisions API</td><td>Closed, hosted; public beta Oct 6, 2026</td><td>Predicate, choice, score with probabilities</td><td>"About 10x faster" than Responses API <span class="chip k-ven">vendor</span></td><td class="n">$0.10/M input, no output charge</td><td>Text and images; HIPAA for eligible customers with a BAA<a class="c" data-s="openaiDecisions"></a></td></tr>
-        <tr><td>TypeSafe Jev</td><td>Closed, hosted</td><td>Choice, Score, Noul with probabilities</td><td class="n">p50 175 ms, p95 270 ms</td><td class="n">$0.042/M input; $0.11 per 1k Banking77 calls</td><td>Banking77 81.0% vs frontier 84.4%; no public BAA<a class="c" data-s="openrouterJev"></a><a class="c" data-s="typesafe"></a></td></tr>
-        <tr><td>Laya (Convai)</td><td>Open, Apache-2.0; 421M and 322M multilingual</td><td>Same typed interface</td><td class="n">33 to 40 ms on a T4; runs on CPU</td><td>Self-host</td><td>Base checkpoints near chance zero-shot (Banking77 42.5%); fine-tuned typed accuracy 76.6%<a class="c" data-s="laya"></a></td></tr>
-        <tr><td>Arch-Router-1.5B (Katanemo)</td><td>Open weights</td><td>Route name</td><td class="n">51 ms on L40S</td><td>Self-host</td><td>93.2% routing accuracy vs 92.8% for a frontier model<a class="c" data-s="archRouter"></a></td></tr>
-        <tr><td>Fine-tuned ModernBERT-base</td><td>Open, 0.1B</td><td>Intent label</td><td class="n">22.5 ms on a T4</td><td>Self-host</td><td>Banking77 93.5%<a class="c" data-s="sift"></a></td></tr>
-        <tr><td>semantic-router (Aurelio)</td><td>Open, MIT</td><td>Route or none</td><td>Embedding call</td><td>Embedding cost</td><td>Returns "none" below threshold; good for out-of-scope<a class="c" data-s="semrouter"></a></td></tr>
-        <tr><td>Sierra Curie</td><td>Closed, inside the Sierra platform</td><td>Orchestration decisions across Sierra's model "constellation"</td><td>Not published</td><td>Bundled in platform pricing</td><td>Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor</span></td></tr>
-        <tr><td>RouteLLM</td><td>Open</td><td>Strong vs weak model</td><td>n/a</td><td>n/a</td><td>Cuts cost "over 2x" without quality loss (model routing, not intent)<a class="c" data-s="routellm"></a></td></tr>
+        <tr><td>OpenAI Decisions API</td><td>Closed, hosted; beta since Oct 6, 2026</td><td>Predicate, choice, score + probabilities</td><td class="n">~10x faster than Responses <span class="chip k-ven">vendor</span></td><td class="n">$0.10/M in; output free</td><td>Text and images; HIPAA for eligible customers with a BAA<a class="c" data-s="openaiDecisions"></a></td></tr>
+        <tr><td>TypeSafe Jev</td><td>Closed, hosted</td><td>Choice, Score, Noul + probabilities</td><td class="n">p50 175 ms; p95 270 ms</td><td class="n">$0.042/M in; ~$0.11 per 1k calls</td><td>Banking77 81.0% vs frontier 84.4%; no public BAA<a class="c" data-s="openrouterJev"></a><a class="c" data-s="typesafe"></a></td></tr>
+        <tr><td>Laya (Convai)</td><td>Open, Apache-2.0; 421M and 322M multilingual</td><td>Same typed interface</td><td class="n">33 to 40 ms (T4); CPU OK</td><td class="n">Self-host</td><td>Base checkpoints near chance zero-shot (Banking77 42.5%); fine-tuned typed accuracy 76.6%<a class="c" data-s="laya"></a></td></tr>
+        <tr><td>Arch-Router-1.5B (Katanemo)</td><td>Open weights</td><td>Route name</td><td class="n">51 ms (L40S)</td><td class="n">Self-host</td><td>93.2% routing accuracy vs 92.8% for a frontier model<a class="c" data-s="archRouter"></a></td></tr>
+        <tr><td>Fine-tuned ModernBERT-base</td><td>Open, 0.1B</td><td>Intent label</td><td class="n">22.5 ms (T4)</td><td class="n">Self-host</td><td>Banking77 93.5%<a class="c" data-s="sift"></a></td></tr>
+        <tr><td>semantic-router (Aurelio)</td><td>Open, MIT</td><td>Route or none</td><td class="n">One embedding call</td><td class="n">Embedding cost</td><td>Returns "none" below threshold; good for out-of-scope<a class="c" data-s="semrouter"></a></td></tr>
+        <tr><td>Sierra Curie</td><td>Closed, inside the Sierra platform</td><td>Orchestration across Sierra's model "constellation"</td><td class="n">Not published</td><td class="n">In platform pricing</td><td>Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor</span></td></tr>
+        <tr><td>RouteLLM</td><td>Open</td><td>Strong vs weak model</td><td class="n">n/a</td><td class="n">n/a</td><td>Cuts cost "over 2x" without quality loss (model routing, not intent)<a class="c" data-s="routellm"></a></td></tr>
       </tbody></table></div>
 
     <div class="cols2">
@@ -1642,6 +1658,11 @@ function renderRouter(){
 $('utts').addEventListener('click',e=>{const b=e.target.closest('.utt');if(!b)return;uSel=+b.dataset.i;renderRouter()});
 $('r-th').addEventListener('input',renderRouter);
 renderRouter();
+
+/* Tables: label each cell with its column header so rows can stack on phones */
+document.querySelectorAll('.tbl table').forEach(t=>{const h=[...t.querySelectorAll('thead th')].map(th=>th.textContent.trim());t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>td.setAttribute('data-label',h[i]||'')))});
+const _labelObs=new MutationObserver(()=>document.querySelectorAll('.tbl table').forEach(t=>{const h=[...t.querySelectorAll('thead th')].map(th=>th.textContent.trim());t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{if(!td.hasAttribute('data-label'))td.setAttribute('data-label',h[i]||'')}))}));
+document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childList:true}));
 
 /* thinker-responder */
 function renderTR(m){
