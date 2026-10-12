@@ -979,9 +979,9 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="pilot">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">11 · Recommended next step</p>
+      <p class="eyebrow">11 · A pilot playbook</p>
       <h2>A 90-day pilot with gates set before launch</h2>
-      <p class="lede">One market or line of business, inbound only, two or three call types, warm transfer with full context. The pre-launch bar is set above the best public benchmark on purpose, because public scenarios are generic.</p>
+      <p class="lede">Teams are at different points on this path. If you are starting out, expanding to new call types or resetting a stalled rollout, this is one way to run it; if you are already in production, the golden test set, gates and kill criteria work as an audit of what you have. The shape: one market or line of business, inbound only, two or three call types, warm transfer with full context. The pre-launch bar is set above the best public benchmark on purpose, because public scenarios are generic.</p>
     </div>
     <div class="pilot">
       <div class="ph"><span class="w">Weeks 0 to 4</span><span class="t">Build the golden test set</span><p>200+ scenarios from your own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, upset callers. Silent shadow test on recorded audio.</p></div>
@@ -1966,15 +1966,6 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 </script>
 
 <script src="/assets/explore.js" defer></script>
-<script src="/assets/analytics.js" defer></script>
-<script>
-/* Count a few key actions on this page (anonymous, via /assets/analytics.js) */
-document.addEventListener('click', function (e) {
-  if (!window.siteTrack || !e.target.closest) return;
-  if (e.target.closest('#pdf-open')) siteTrack('voice/pdf', 'Opened Download PDF');
-  else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
-}, true);
-</script>
 
 </body>
 </html>

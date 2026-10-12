@@ -47,3 +47,6 @@
 
 ### Revisions, October 12, 2026 (public comments)
 - Comments are live: a public section using utterances (GitHub issues, free and open source, no ads or tracking), replacing the hidden giscus setup. It follows the page theme and loads only when scrolled near. Direct GitHub links are shown as a fallback.
+
+### Revisions, October 12, 2026 (pilot framing)
+- Section 11 is now "A pilot playbook" instead of "Recommended next step", framed for readers at any stage: a way to start, expand or reset, or an audit for teams already in production.
