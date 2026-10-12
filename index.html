@@ -377,6 +377,12 @@ ol.src li:target{background:var(--accent-soft)}
 .ix.wrapok{white-space:normal}
 .nav .theme{flex:none}
 .nav .theme button{padding:4px 10px;font-size:.76rem}
+.xp-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:3px 12px 3px 8px;font-size:.76rem;font-weight:600;flex:none;cursor:pointer}
+.xp-btn svg{width:18px;height:18px}
+.xp-btn:hover{border-color:var(--edge)}
+@media (max-width:420px){.xp-btn span{display:none}.xp-btn{padding:3px 6px}}
+.kid{display:none}
+@media print{.xp-btn,dialog.xp{display:none!important}}
 .pdfbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:4px 12px;font-size:.76rem;flex:none}
 .pdfbtn:hover{border-color:var(--accent)}
 .dlg{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,var(--ink) 40%,transparent);display:grid;place-items:center;padding:16px}
@@ -500,6 +506,7 @@ ol.src li:target{background:var(--accent-soft)}
     <a href="#about">About</a>
     </div>
     <div class="navtools">
+    <button type="button" class="xp-btn" id="exploreBtn" aria-label="Explore all pages on sbmadhav.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7l6 4 6-5M12 11l-3 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".55"/><circle cx="6" cy="7" r="2.4" fill="var(--coral)"/><circle cx="12" cy="11" r="2.4" fill="var(--sun)"/><circle cx="18" cy="6" r="2.4" fill="var(--teal)"/><circle cx="9" cy="18" r="2.4" fill="var(--sky)"/></svg><span>Explore</span></button>
     <button type="button" class="pdfbtn" id="pdf-open">Download PDF</button>
     <div class="seg theme" role="group" aria-label="Color theme" id="theme"><button type="button" data-t="system" aria-pressed="true">System</button><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
     </div>
@@ -1845,5 +1852,6 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 })();
 </script>
 
+<script src="/assets/explore.js" defer></script>
 </body>
 </html>
