@@ -11,6 +11,10 @@ A new edition goes out every 30 days. Use this checklist each time.
 - [ ] **Regulation:** check FCC/TCPA and state AI disclosure laws (CA, TX, UT, CO), and confirm any items marked "secondary".
 - [ ] **Fraud:** look for new deepfake and voice fraud data.
 
+## November 2026 edition: planned additions
+- [ ] Financial services coverage, so the subtitle can drop "healthcare first": published bank and credit union voice-agent results, a readiness map for financial call types, and GLBA, PCI DSS and UDAAP in the regulation section.
+- [ ] Give the comments a new thread name for the edition (the utterances `issue-term`, for example "Comments: November 2026 edition").
+
 ## 2. Update the page
 - [ ] Edit `index.html`: the edition badge, research cutoff and "Next edition" date, then the content and sources.
 - [ ] Re-verify every changed number against its source, and keep the evidence labels accurate.
@@ -21,5 +25,6 @@ A new edition goes out every 30 days. Use this checklist each time.
 - [ ] Copy `index.html` to `editions/YYYY-MM/index.html`, along with `og.png`. Keep the Explore menu and analytics scripts (see CLAUDE.md).
 - [ ] Regenerate `bolt-context.txt` from the new page text so Bolt answers from the new edition.
 - [ ] Add a row to the README's Editions table and an entry to `CHANGELOG.md`.
+- [ ] Pre-render the JavaScript-built content (sources, claim check, print tables, footnote numbers) into the HTML so crawlers and no-JS readers see it.
 - [ ] Commit, push, and confirm the GitHub Pages build.
 - [ ] Post a short "what changed this month" update on LinkedIn.

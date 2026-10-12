@@ -90,3 +90,28 @@ Changes after outside reviews of the page:
   - Jev cascade: the upper-bound note worded as the source does.
   - DATAMARK: its inconsistent baseline is noted.
   - Human cost per call: labeled as a published illustration.
+
+### Revisions, October 12, 2026 (third review)
+- Scope: the subtitle is now "Healthcare first, with notes for financial services"; full financial services coverage is planned for November.
+- Corrections:
+  - Tampa General is shown as 6.2 to 2.4 minutes rather than a percentage.
+  - Banking77 described as 3,080 questions across 77 intents.
+  - Replaced the "100 observations to detect a 5% change" rule with a correct estimate (several hundred runs per version).
+  - Clarified which model each T-REx score belongs to.
+  - Glossed Jev's Noul output type (a 0 to 1 "is this true?" answer).
+  - Removed a duplicated statistic and an internally inconsistent case study.
+- Framing:
+  - The thinker-responder model is described as a deliberate difference from OpenAI's and Sierra's fast-talker design, not a convergence.
+  - Thesis 1 now cites the measured 18 to 38 point gap.
+  - The headline routing-speed figure was replaced with the CX survey finding.
+- Additions:
+  - A stop control so the thinker can cut audio mid-turn.
+  - Resolution counted only with no repeat contact within 48 hours.
+  - Multilingual routers for callers who mix languages.
+  - Checking outbound lists against the FCC Reassigned Numbers Database.
+- Section 6: two foundations (golden test set, hearing the right caller) and two experiments (emotion, persona). Personas are now a choice, then kept consistent per caller.
+- Method note: Sierra appears in the market analysis where evidence exists; it was not part of the seven-platform test.
+- Evidence labels: consolidated to the legend's set. Verdicts such as "holds" and "qualify" now use a neutral style. Unconfirmed laws are labeled "unverified".
+- Trimmed weak evidence (a single-call noise figure, browser echo rates, a one-day gateway share, developer burnout). Think tank seats labeled as synthetic perspectives. The disclosure no longer repeats in the footer. Added a "That is the executive read" stop point after the pilot.
+- Author line no longer names industries.
+- Sources, the claim check, print tables and footnote numbers are now in the HTML itself, not only built by JavaScript.

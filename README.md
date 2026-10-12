@@ -1,6 +1,6 @@
 # State of Voice Agents
 
-An interactive, vendor-neutral look at conversational voice agents in regulated contact centers (healthcare and financial services). It is published as a monthly edition and updated every 30 days.
+An interactive, vendor-neutral look at conversational voice agents in regulated contact centers: healthcare first, with notes for financial services. It is published as a monthly edition and updated every 30 days.
 
 **Read it:** https://sbmadhav.com/state-of-voice-agents/
 
