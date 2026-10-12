@@ -17,6 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <style>[hidden]{display:none!important}img{max-width:100%}:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
 <title>Voice Agents at the Front Door</title>
+<script>/* Same saved color mode as every sbmadhav.com page, applied before paint */try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='14' width='48' height='40' rx='14' fill='%231FA39A'/%3E%3Ccircle cx='24' cy='34' r='7' fill='white'/%3E%3Ccircle cx='40' cy='34' r='7' fill='white'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='41' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='32' cy='7' r='5' fill='%23FF6B5B'/%3E%3C/svg%3E">
@@ -477,7 +478,7 @@ ol.src li:target{background:var(--accent-soft)}
 .bolt-row{display:flex;gap:8px;align-items:flex-end}
 .bolt-row textarea{flex:1;min-width:0;resize:none;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink)}
 .bolt-disc{font-size:.72rem}
-@media print{.bolt-launch,.bolt-panel,.about-links{display:none!important}}
+@media print{.bolt-launch,.bolt-panel,.about-links,#comments{display:none!important}}
 </style>
 
 </head>
@@ -503,6 +504,7 @@ ol.src li:target{background:var(--accent-soft)}
     <a href="#t-lmlm">LMLM</a>
     <a href="#verify">Claims</a>
     <a href="#sources">Sources</a>
+    <a href="#comments" id="nav-comments" hidden>Comments</a>
     <a href="#about">About</a>
     </div>
     <div class="navtools">
@@ -1317,6 +1319,14 @@ ol.src li:target{background:var(--accent-soft)}
 </section>
 </div>
 
+<section id="comments" class="comments" hidden>
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Discussion</p><h2>Questions and comments</h2>
+      <p class="lede">Corrections, counterpoints and field experience are welcome. Comments are hosted on GitHub Discussions through giscus, with no ads or tracking; you need a GitHub account to post.</p></div>
+    <div class="panel"><div class="giscus" id="giscus"></div></div>
+  </div>
+</section>
+
 <section id="about" class="about">
   <div class="wrap">
     <div class="head"><p class="eyebrow">About</p><h2>About this report</h2></div>
@@ -1519,9 +1529,10 @@ function seg(el,cb){el.addEventListener('click',e=>{const b=e.target.closest('bu
 seg(document.getElementById('sf'),b=>{document.querySelectorAll('#src li').forEach(li=>li.hidden=!(b.dataset.f==='all'||li.dataset.t===b.dataset.f))});
 seg(document.getElementById('vf'),b=>{document.querySelectorAll('#claims tr').forEach(tr=>tr.hidden=!(b.dataset.f==='all'||tr.dataset.v===b.dataset.f))});
 const $=id=>document.getElementById(id);
-(function(){const root=document.documentElement;let t='system';try{t=localStorage.getItem('va-theme')||'system'}catch(e){}
+(function(){const root=document.documentElement;let t='';try{t=localStorage.getItem('theme')||''}catch(e){}
+ if(t!=='light'&&t!=='dark')t='system';
  const apply=v=>{if(v==='system')root.removeAttribute('data-theme');else root.setAttribute('data-theme',v);document.querySelectorAll('#theme button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===v))};
- apply(t);$('theme').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;apply(b.dataset.t);try{localStorage.setItem('va-theme',b.dataset.t)}catch(err){}})})();
+ apply(t);$('theme').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;apply(b.dataset.t);try{localStorage.setItem('theme',b.dataset.t==='system'?'':b.dataset.t)}catch(err){}})})();
 
 /* waveform */
 let wh='';
@@ -1807,6 +1818,8 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 })();
 /* Bolt: Q&A about this report, with optional web research */
 (function(){
+ const BOLT_ENABLED = false; // Paused until the thinker-responder version is ready; see worker/README.md
+ if(!BOLT_ENABLED){$('bolt-open').hidden=true;$('bolt-panel').hidden=true;return;}
  const BOLT_ENDPOINT = ''; // Set to the deployed Cloudflare Worker URL, e.g. https://bolt-voice.<you>.workers.dev
  const PAGE_URL = 'https://sbmadhav.com/state-of-voice-agents/';
  const panel=$('bolt-panel'),log=$('bolt-log'),q=$('bolt-q'),launch=$('bolt-open');
@@ -1849,9 +1862,25 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
   finally{$('bolt-send').disabled=false}
  }
 })();
+/* Comments: giscus (GitHub Discussions). Shown once the Discussions category id is set. */
+(function(){
+ const G={repo:'sbmadhav/state-of-voice-agents',repoId:'R_kgDOVF9g8g',category:'Comments',categoryId:'',term:'October 2026 edition'};
+ const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+ if(!G.categoryId||inFrame)return;
+ $('comments').hidden=false;$('nav-comments').hidden=false;
+ const root=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
+ const gTheme=()=>{const t=root.getAttribute('data-theme')||(mq.matches?'dark':'light');return t==='dark'?'noborder_dark':'noborder_light'};
+ const sc=document.createElement('script');sc.src='https://giscus.app/client.js';sc.async=true;sc.crossOrigin='anonymous';
+ Object.entries({repo:G.repo,'repo-id':G.repoId,category:G.category,'category-id':G.categoryId,mapping:'specific',term:G.term,strict:'1','reactions-enabled':'1','emit-metadata':'0','input-position':'top',theme:gTheme(),lang:'en',loading:'lazy'}).forEach(([k,v])=>sc.setAttribute('data-'+k,v));
+ $('giscus').appendChild(sc);
+ const sync=()=>{const f=document.querySelector('iframe.giscus-frame');if(f)f.contentWindow.postMessage({giscus:{setConfig:{theme:gTheme()}}},'https://giscus.app')};
+ new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['data-theme']});
+ mq.addEventListener('change',sync);
+})();
 })();
 </script>
 
 <script src="/assets/explore.js" defer></script>
+
 </body>
 </html>

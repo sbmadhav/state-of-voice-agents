@@ -2,7 +2,7 @@
 
 A small Cloudflare Worker that lets readers ask Bolt questions about the report. Bolt answers from the report text (`bolt-context.txt` at the site root) and, when the reader leaves "Search the web" on, uses the Claude API web search tool to find and cite newer sources.
 
-Until the Worker is deployed and its URL is set in `index.html`, the page's Bolt panel offers to open the question in Claude instead.
+**Status: paused.** Bolt is hidden on the page (`BOLT_ENABLED = false` in `index.html`) while a thinker-responder version is designed. This Worker is kept for reference.
 
 ## Deploy (about 10 minutes)
 

@@ -34,3 +34,8 @@
 - Adopted design system 2.0: every text, control, hover, pressed and focus state meets WCAG 2.1 AA in light and dark (checked automatically on every element).
 - Dark mode is calmer: soft coral and lavender accents instead of neon pink and purple.
 - The sbmadhav.com home logo is now the header icon and favicon. Canonical address is https://sbmadhav.com/state-of-voice-agents/.
+
+### Revisions, October 12, 2026 (settings and comments)
+- Color mode choice is shared with every sbmadhav.com page (same saved setting), applied before the page paints.
+- Ask Bolt is hidden for now while a thinker-responder version is designed.
+- Added a comments section using giscus (GitHub Discussions). It stays hidden until Discussions is enabled and its category id is set.
