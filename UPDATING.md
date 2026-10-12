@@ -13,6 +13,13 @@ A new edition goes out every 30 days. Use this checklist each time.
 
 ## November 2026 edition: planned additions
 - [ ] Financial services coverage, so the subtitle can drop "healthcare first": published bank and credit union voice-agent results, a readiness map for financial call types, and GLBA, PCI DSS and UDAAP in the regulation section.
+- [ ] Real failure examples: anonymized transcripts with root cause, consequence and the fix that prevented a repeat.
+- [ ] Caller experience: whether callers want AI, how often they ask for a person, satisfaction by customer group.
+- [ ] Long-term performance after launch (drift, novelty effects, changing call mix).
+- [ ] Privacy depth: data retention, data residency, subprocessors and deletion across logs and backups.
+- [ ] Economics: a cost-of-failure line (complaints, wrong actions, failed transfers, churn).
+- [ ] Consider moving the technical appendix to its own page.
+- [ ] Ask two or three human reviewers (a contact center operations leader, a compliance or privacy lead) before publishing.
 - [ ] Give the comments a new thread name for the edition (the utterances `issue-term`, for example "Comments: November 2026 edition").
 
 ## 2. Update the page

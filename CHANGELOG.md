@@ -115,3 +115,13 @@ Changes after outside reviews of the page:
 - Trimmed weak evidence (a single-call noise figure, browser echo rates, a one-day gateway share, developer burnout). Think tank seats labeled as synthetic perspectives. The disclosure no longer repeats in the footer. Added a "That is the executive read" stop point after the pilot.
 - Author line no longer names industries.
 - Sources, the claim check, print tables and footnote numbers are now in the HTML itself, not only built by JavaScript.
+
+### Revisions, October 12, 2026 (executive summary; edition frozen)
+- New ten-minute executive summary after the opening: nine plain-language points, each linked to its evidence.
+- Added:
+  - PCI guidance for card payments by phone (pause recording, or masked keypad entry).
+  - Redacting personal data from transcripts.
+  - State call-recording consent laws.
+  - Phone-network audio and integrations as practical limits.
+  - What counts as a failed benchmark scenario.
+- The October edition is now frozen; further changes go to the November edition (see UPDATING.md).

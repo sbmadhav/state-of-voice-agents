@@ -17,7 +17,7 @@ Three theses:
 The page is in two parts:
 
 - **Part I, for executives:**
-  - A five-minute read (what we know, what to watch, what to do) and a "How to read this report" note on method, limits and disclosure.
+  - A one-minute read and a ten-minute executive summary (nine points: reliability, evaluation, the thinker-responder model, hearing the right caller, emotion and persona, governed memory, identity, economics, the 90-day pilot) and a "How to read this report" note on method, limits and disclosure.
   - Reliability benchmark with its margin of error, published results, and an economics model with escalation costs, repeat calls and worst, expected and best cases.
   - The thinker-responder router demo, where to start, and trust and identity.
   - Limited-memory models, the options, and a 90-day pilot with a plan for after day 90.
