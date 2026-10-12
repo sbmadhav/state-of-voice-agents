@@ -18,7 +18,7 @@ A new edition goes out every 30 days. Use this checklist each time.
 - [ ] Test light and dark themes, phone width, and Download PDF in both themes.
 
 ## 3. Publish
-- [ ] Copy `index.html` to `editions/YYYY-MM/index.html`, along with `og.png`.
+- [ ] Copy `index.html` to `editions/YYYY-MM/index.html`, along with `og.png`. Keep the Explore menu and analytics scripts (see CLAUDE.md).
 - [ ] Regenerate `bolt-context.txt` from the new page text so Bolt answers from the new edition.
 - [ ] Add a row to the README's Editions table and an entry to `CHANGELOG.md`.
 - [ ] Commit, push, and confirm the GitHub Pages build.
