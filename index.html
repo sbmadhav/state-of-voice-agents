@@ -559,8 +559,8 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="stats">
       <div class="stat"><span class="v num">56<small>%</small></span><p>Lower call abandonment at a large health system within two weeks of go-live <a class="c" data-s="beckersTGH"></a></p><span class="chip k-ven">customer-reported</span></div>
       <div class="stat"><span class="v num">75.6<small>%</small></span><p>Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 65% to 84% at 95% confidence) <a class="c" data-s="cekura"></a></p><span class="chip k-ven">vendor benchmark</span></div>
-      <div class="stat"><span class="v num">22<small>ms</small></span><p>To route a call intent with a small fine-tuned classifier at 93.5% accuracy, vs about 2.3 s for a frontier LLM <a class="c" data-s="sift"></a><a class="c" data-s="openrouterJev"></a></p><span class="chip k-ind">independent</span></div>
-      <div class="stat"><span class="v num">18<small>x</small></span><p>Fewer parameters: a 382M limited-memory model came close to a 7B model on factual precision, in research on Wikipedia facts <a class="c" data-s="lmlm"></a></p><span class="chip k-ind">independent</span></div>
+      <div class="stat"><span class="v num">22<small>ms</small></span><p>To route a call intent with a small fine-tuned classifier at 93.5% accuracy; a frontier LLM took about 2.3 s in a separate study <a class="c" data-s="sift"></a><a class="c" data-s="openrouterJev"></a></p><span class="chip k-ind">independent · cross-study</span></div>
+      <div class="stat"><span class="v num">Over half</span><p>Of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice <a class="c" data-s="pindrop"></a></p><span class="chip k-ven">vendor-reported</span></div>
     </div>
 
     <div class="thesis">
@@ -599,7 +599,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="head">
       <p class="eyebrow">1 · Reliability</p>
       <h2>A demo call is not a production call</h2>
-      <p class="lede">The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, over real phone lines. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.<a class="c" data-s="cekura"></a><a class="c" data-s="cekuraBook"></a></p>
+      <p class="lede">The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.<a class="c" data-s="cekura"></a><a class="c" data-s="cekuraBook"></a></p>
     </div>
     <div class="panel">
       <div class="toolbar">
@@ -648,7 +648,7 @@ ol.src li:target{background:var(--accent-soft)}
         <span class="eyebrow">WellSpan · Hippocratic AI</span>
         <span class="big num">160K+</span>
         <p class="who">Patient calls a month handled by an AI agent</p>
-        <p>About 7,000 hours of conversation; expanded system-wide July 30, 2026, including outreach in Spanish. <a class="c" data-s="beckers12"></a></p>
+        <p>About 7,000 hours of conversation; partnership expanded July 30, 2026. <a class="c" data-s="beckers12"></a></p>
         <span class="chip k-ven">customer-reported</span>
       </article>
       <article class="panel peer">
@@ -660,8 +660,8 @@ ol.src li:target{background:var(--accent-soft)}
       </article>
     </div>
     <div class="panel" style="margin-top:16px">
-      <p><strong>For financial services,</strong> I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. <span class="chip k-our">author's view</span> Contact center leaders broadly report the same gap: 98% have AI somewhere in the customer journey, but only 5% can clearly quantify its business impact.<a class="c" data-s="talkdesk"></a></p>
-      <p style="margin-top:10px"><strong>Enterprise agent platforms are moving into healthcare too.</strong> Sierra says it serves most Fortune 50 healthcare companies, and a large health system's voice services leader presented at Sierra Summit 2026. No outcome figures have been published yet.<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor claim</span></p>
+      <p><strong>For financial services,</strong> I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. <span class="chip k-our">author's view</span> CX, IT and operations leaders report the same gap: 98% have deployed AI in the customer journey, but only 5% can quantify its impact on business outcomes.<a class="c" data-s="talkdesk"></a></p>
+      <p style="margin-top:10px"><strong>Enterprise agent platforms are moving into healthcare too.</strong> Sierra says it serves most Fortune 50 healthcare companies, and announced new voice models at Sierra Summit 2026. No healthcare outcome figures have been published yet.<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor claim</span></p>
     </div>
   </div>
 </section>
@@ -692,7 +692,7 @@ ol.src li:target{background:var(--accent-soft)}
         <div class="ctrl"><label for="c-min">Average minutes per call <output id="o-min"></output></label><input type="range" id="c-min" min="1" max="10" step="0.5" value="4"></div>
         <div class="ctrl"><label for="c-rate">AI cost per minute, all-in <output id="o-rate"></output></label><input type="range" id="c-rate" min="0.05" max="0.30" step="0.01" value="0.11"><small>Managed stacks run about $0.08 to $0.14</small></div>
         <div class="ctrl"><label for="c-res">Resolved end to end by the agent <output id="o-res"></output></label><input type="range" id="c-res" min="0" max="90" step="1" value="55"></div>
-        <div class="ctrl"><label for="c-hum">Human cost per call <output id="o-hum"></output></label><input type="range" id="c-hum" min="3" max="12" step="0.25" value="6.04"></div>
+        <div class="ctrl"><label for="c-hum">Human cost per call <output id="o-hum"></output></label><input type="range" id="c-hum" min="3" max="12" step="0.25" value="6.04"><small>A published illustration: about $6 at six calls an hour, $9 at four</small></div>
         <div class="ctrl"><label for="c-up">Escalated calls cost more than average <output id="o-up"></output></label><input type="range" id="c-up" min="0" max="60" step="5" value="25"><small>The calls left for people are the harder ones</small></div>
         <div class="ctrl"><label for="c-rep">Agent-closed calls that come back <output id="o-rep"></output></label><input type="range" id="c-rep" min="0" max="20" step="1" value="5"><small>Repeat calls go to a person</small></div>
         <div class="ctrl"><label for="c-fix">Fixed annual cost: platform, integration, team <output id="o-fix"></output></label><input type="range" id="c-fix" min="0" max="5000000" step="100000" value="1500000"></div>
@@ -812,7 +812,7 @@ ol.src li:target{background:var(--accent-soft)}
         <span class="lbl">3 · Emotion in real time, sentiment on every call</span>
         <p>During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.</p>
         <ul class="tight">
-          <li>One contact center pilot moved from reviewing 3% of calls to emotion-aware coaching, and escalations fell from 14% to 6%.<a class="c" data-s="datamark"></a> <span class="chip k-ven">vendor case study, human agents</span></li>
+          <li>One contact center pilot moved from reviewing 3% of calls to emotion-aware coaching, and escalations fell from 14% to 6% (the same case study also cites a 30% baseline, so treat it as directional).<a class="c" data-s="datamark"></a> <span class="chip k-ven">vendor case study, human agents</span></li>
           <li>Treat emotion scores as a signal for routing and review, not a judgment of the caller. Accuracy varies, so check that they work equally across accents and age groups.</li>
           <li>In the EU, people must be told when an emotion recognition system is used.<a class="c" data-s="euai50"></a></li>
         </ul>
@@ -870,7 +870,7 @@ ol.src li:target{background:var(--accent-soft)}
           <li>For payments, prescription changes and other authorizations, add voiceprint verification with liveness detection; a voiceprint alone can be fooled by a clone.<a class="c" data-s="voiceIdBreach"></a></li>
           <li>Match the friction to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness only for irreversible actions. Liveness checks over phone-quality audio reject some genuine callers, and texted codes lose some older or distressed callers, so always offer a person as the fallback. <span class="chip k-our">author's view</span></li>
           <li>A published "we will never ask you for" policy, owned by marketing.</li>
-          <li>In the US, outbound AI calls need prior consent under the FCC's 2024 ruling, reminders included.<a class="c" data-s="fcc"></a></li>
+          <li>In the US, outbound AI-voice calls count as artificial-voice calls under the TCPA since the FCC's 2024 ruling, so they generally need prior express consent; healthcare exemptions are narrow, so check reminder programs with counsel.<a class="c" data-s="fcc"></a></li>
         </ul>
       </div>
     </div>
@@ -911,28 +911,15 @@ ol.src li:target{background:var(--accent-soft)}
       <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model.<a class="c" data-s="lmlm"></a> Logs, transcripts, caches and backups still need their own deletion.</p>
     </div>
 
-    <div class="cols2" style="margin-top:16px">
-      <div class="panel stack">
-        <span class="lbl">Factual precision (FactScore), same small model</span>
-        <div class="bars">
-          <div class="r"><span>382M standard</span><div class="b" style="width:33.7%"></div><span>14.0</span></div>
-          <div class="r"><span>382M LMLM, store off</span><div class="b" style="width:30.8%"></div><span>12.8</span></div>
-          <div class="r"><span>382M LMLM</span><div class="b hi" style="width:76.7%"></div><span>31.9</span></div>
-          <div class="r"><span>7B standard (18x larger)</span><div class="b ref" style="width:81.7%"></div><span>34.0</span></div>
-          <div class="r"><span>8B standard (21x larger)</span><div class="b ref" style="width:96.9%"></div><span>40.3</span></div>
-        </div>
-        <p class="note">Higher is better. Turning the store off drops the LMLM below baseline, which shows it really relies on the store. Peer-reviewed at ICLR 2026.<a class="c" data-s="lmlm"></a> <span class="chip k-ind">independent</span></p>
-      </div>
-      <div class="panel stack">
-        <span class="lbl">Why it fits regulated conversations</span>
+    <div class="panel stack" style="margin-top:16px">
+        <span class="lbl">Why a governed fact store fits regulated conversations</span>
         <ul class="tight">
           <li><strong>Facts become governed data.</strong> Each one is a row with access control, versioning and change review.</li>
           <li><strong>Deletion from the model is real.</strong> Removing rows forgets them without retraining.<a class="c" data-s="lmlm"></a> Copies in logs, transcripts and backups need their own retention rules.</li>
           <li><strong>Less sensitive data in weights.</strong> Researchers have extracted names, phone numbers and emails from model weights, even from data seen once.<a class="c" data-s="carlini21"></a><a class="c" data-s="nasr"></a></li>
           <li><strong>Every answer has provenance.</strong> Each lookup is a logged call with the value it returned.</li>
-          <li><strong>Small enough to run privately.</strong> Sub-1B models with lookups can sit inside the enterprise boundary.</li>
+          <li><strong>Room to shrink the model.</strong> In research, a 382M limited-memory model came close to a 7B model on factual precision; details are in the <a href="#t-lmlm">technical appendix (T6)</a>.<a class="c" data-s="lmlm"></a></li>
         </ul>
-      </div>
     </div>
 
     <div class="panel stack" style="margin-top:16px">
@@ -972,7 +959,7 @@ ol.src li:target{background:var(--accent-soft)}
     </div>
     <div class="pilot">
       <div class="ph"><span class="w">Weeks 0 to 4</span><span class="t">Build the golden test set</span><p>200+ scenarios from your own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, upset callers. Silent shadow test on recorded audio.</p></div>
-      <div class="ph"><span class="w">Gate · end of week 4</span><span class="t">90%+ pass^3 to go live</span><p>Every scenario run three times on phone-grade audio. Router thresholds calibrated on held-out data. Identity controls signed off.</p></div>
+      <div class="ph"><span class="w">Gate · end of week 4</span><span class="t">Pass^3 bar set by risk</span><p>About 85% for informational calls, 95% for anything that writes data or moves money, and zero critical failures at any rate. Every scenario run three times on phone-grade audio. Router thresholds calibrated on held-out data. Identity controls signed off.</p></div>
       <div class="ph"><span class="w">Weeks 5 to 12</span><span class="t">Live in one market</span><p>Every failure becomes a regression test. Weekly audit of tool-call write-backs and misroutes (transfers after routing).</p></div>
       <div class="ph"><span class="w">Day 90</span><span class="t">Scale, adjust, or stop</span><p>Decide against the criteria below, not against a demo.</p></div>
     </div>
@@ -993,7 +980,7 @@ ol.src li:target{background:var(--accent-soft)}
           <li><span>A vendor refuses to export logs or evaluation data</span></li>
         </ul></div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="chip k-our">author's proposal</span> Starting points tied to the published results above, not an industry standard. 90% pass^3 sits above the best public score because your own scenarios are narrower than a generic benchmark. 30% lower abandonment is about half what peers report (56% to 85%). 50% resolution is in the range of reported automation (44% at one health system). Tighten the bar for higher-risk call types, and lower the resolution target for complex queues.</p>
+    <p class="note" style="margin-top:12px"><span class="chip k-our">author's proposal</span> Starting points tied to the published results above, not an industry standard. The pre-launch bar is a risk-management choice, not a benchmark-derived number: a narrow golden set of two or three call types is easier than a broad generic benchmark, so it can sit above the best public score (75.6%), and the bar rises with the harm a failure can do. A high overall pass rate never offsets a critical failure, such as protected data given to the wrong caller or a wrong payment; one of those blocks launch. With 200 scenarios, a measured 90% carries a margin of about plus or minus 4 points. 30% lower abandonment is about half what peers report (56% to 85%). 50% resolution is in the range of reported automation (44% at one health system). Tighten the bar for higher-risk call types, and lower the resolution target for complex queues.</p>
 
     <div class="panel" style="margin-top:22px">
       <div class="toolbar">
@@ -1082,7 +1069,8 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="t-latency">
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">T2 · Latency budget</p><h2>Where the seconds go in a turn</h2>
-      <p class="lede">Human turn gaps across ten languages cluster around a quarter second.<a class="c" data-s="stivers"></a> Measured platform turns in the benchmark averaged 1.27 s to 3.08 s.<a class="c" data-s="cekura"></a> Adjust the stages, or pick a preset.</p></div>
+      <p class="lede">Human turn gaps across ten languages cluster around a quarter second.<a class="c" data-s="stivers"></a> Measured platform turns in the benchmark averaged 1.27 s to 3.08 s.<a class="c" data-s="cekura"></a> Adjust the stages, or pick a preset.</p>
+      <p style="margin-top:8px">Be candid about the trade-off: a cascade (speech-to-text, LLM, text-to-speech) takes turns like a walkie-talkie. Even with a fast router and prefetch it lands near 1.5 s a turn, and cutting endpointing further clips callers mid-sentence. If turns under 800 ms are a hard requirement, use a speech-to-speech or full-duplex model and accept a coarser, after-the-fact audit trail. The thinker fits beside either.</p></div>
     <div class="panel">
       <div class="toolbar">
         <div class="seg" role="group" aria-label="Latency presets">
@@ -1162,7 +1150,7 @@ ol.src li:target{background:var(--accent-soft)}
       <tbody>
         <tr><td>OpenAI Decisions API</td><td>Closed, hosted; beta since Oct 6, 2026</td><td>Predicate, choice, score + probabilities</td><td class="n">~10x faster than Responses <span class="chip k-ven">vendor</span></td><td class="n">$0.10/M in; output free</td><td>Text and images; HIPAA for eligible customers with a BAA<a class="c" data-s="openaiDecisions"></a></td></tr>
         <tr><td>TypeSafe Jev</td><td>Closed, hosted</td><td>Choice, Score, Noul + probabilities</td><td class="n">p50 175 ms; p95 270 ms</td><td class="n">$0.042/M in; ~$0.11 per 1k calls</td><td>Banking77 81.0% vs frontier 84.4%; no public BAA<a class="c" data-s="openrouterJev"></a><a class="c" data-s="typesafe"></a></td></tr>
-        <tr><td>Laya (Convai)</td><td>Open, Apache-2.0; 421M and 322M multilingual</td><td>Same typed interface</td><td class="n">33 to 40 ms (T4); CPU OK</td><td class="n">Self-host</td><td>Base checkpoints near chance zero-shot (Banking77 42.5%); fine-tuned typed accuracy 76.6%<a class="c" data-s="laya"></a></td></tr>
+        <tr><td>Laya (Convai)</td><td>Open, Apache-2.0; 421M and 322M multilingual</td><td>Same typed interface</td><td class="n">33 to 40 ms (T4); CPU OK</td><td class="n">Self-host</td><td>Routed base checkpoint 42.5% on Banking77; 76.6% on its own typed-decisions benchmark after fine-tuning on that benchmark's training split<a class="c" data-s="laya"></a></td></tr>
         <tr><td>Arch-Router-1.5B (Katanemo)</td><td>Open weights</td><td>Route name</td><td class="n">51 ms (L40S)</td><td class="n">Self-host</td><td>93.2% routing accuracy vs 92.8% for a frontier model<a class="c" data-s="archRouter"></a></td></tr>
         <tr><td>Fine-tuned ModernBERT-base</td><td>Open, 0.1B</td><td>Intent label</td><td class="n">22.5 ms (T4)</td><td class="n">Self-host</td><td>Banking77 93.5%<a class="c" data-s="sift"></a></td></tr>
         <tr><td>semantic-router (Aurelio)</td><td>Open, MIT</td><td>Route or none</td><td class="n">One embedding call</td><td class="n">Embedding cost</td><td>Returns "none" below threshold; good for out-of-scope<a class="c" data-s="semrouter"></a></td></tr>
@@ -1178,7 +1166,7 @@ ol.src li:target{background:var(--accent-soft)}
           <div class="r"><span>bge-small + logistic reg.</span><div class="b hi" style="width:93.3%"></div><span>93.3</span></div>
           <div class="r"><span>Frontier LLM (Opus 5)</span><div class="b ref" style="width:84.4%"></div><span>84.4</span></div>
           <div class="r"><span>Jev, zero-shot</span><div class="b" style="width:81%"></div><span>81.0</span></div>
-          <div class="r"><span>Laya base, zero-shot</span><div class="b" style="width:42.5%"></div><span>42.5</span></div>
+          <div class="r"><span>Laya base, routed</span><div class="b" style="width:42.5%"></div><span>42.5</span></div>
         </div>
         <p class="note">Different labs and setups; directional. Jev's own score ranges from 76.3% to 87.0% depending on who measured it.<a class="c" data-s="sift"></a><a class="c" data-s="creativeai"></a><a class="c" data-s="openrouterJev"></a><a class="c" data-s="laya"></a></p>
       </div>
@@ -1206,7 +1194,7 @@ ol.src li:target{background:var(--accent-soft)}
           <div class="r"><span>Frontier only</span><div class="b ref" style="width:100%"></div><span>$2.42</span></div>
           <div class="r"><span>Decision model first</span><div class="b hi" style="width:28.5%"></div><span>$0.69</span></div>
         </div>
-        <p class="note"><span class="chip k-ven">vendor-adjacent</span> The threshold was tuned on the test set, so treat 72% savings as an upper bound.</p>
+        <p class="note"><span class="chip k-ven">vendor-adjacent</span> The cascade was scored on the same 3,080 examples used to measure accuracy, so treat the 72% saving as an upper bound.</p>
       </div>
     </div>
 
@@ -1239,6 +1227,7 @@ ol.src li:target{background:var(--accent-soft)}
         <li><strong>Hard rules:</strong> fraud, clinical concern, complaints and vulnerable-customer signals always escalate.</li>
         <li><strong>Narrow tools:</strong> each sub-agent exposes only its own MCP servers, with a broader-tools fallback when retrieval scores are low.</li>
         <li><strong>Injection hygiene:</strong> classify the caller's turn only, without retrieved or third-party text in context.<a class="c" data-s="jevout"></a></li>
+        <li><strong>Who owns state:</strong> one call-state object per call, held by the orchestrator. The thinker runs on every finished turn and writes typed fields (intent, risk, speaker, emotion, confidence). The responder owns the conversation, slot filling and clarifying questions ("does Dr. Smith work Fridays?"), and reads the thinker's fields before it speaks. A new intent, topic shift or correction triggers a re-route; slots already filled carry over.</li>
         <li><strong>Audit:</strong> log input hash, label, probabilities, threshold, model version and final disposition; re-run evals on every model change.</li>
         <li><strong>Compliance:</strong> hosted decision APIs need a BAA or equivalent for protected data; self-hosted encoders avoid the question.</li>
       </ol>
@@ -1333,7 +1322,7 @@ ol.src li:target{background:var(--accent-soft)}
       <thead><tr><th>Risk</th><th>Control</th><th>Runs in</th><th>Evidence</th></tr></thead>
       <tbody>
         <tr><td>Cloned customer voice requesting protected data</td><td>Liveness detection plus passive voice, device and behavior signals</td><td>Contact center platform</td><td>Embedded in NICE CXone and Zoom Contact Center<a class="c" data-s="cxtodayNice"></a><a class="c" data-s="biometric"></a></td></tr>
-        <tr><td>Knowledge-based answers stolen in breaches</td><td>Step-up verification to the number on file or app push</td><td>Agent workflow, deterministic</td><td>Fraudsters bypass knowledge questions in over half of attempts<a class="c" data-s="pindrop"></a> <span class="chip k-ven">vendor</span></td></tr>
+        <tr><td>Knowledge-based answers stolen in breaches</td><td>Step-up verification to the number on file or app push</td><td>Agent workflow, deterministic</td><td>In one payer case, knowledge-based checks missed a fraud pattern across 1,200 targeted accounts<a class="c" data-s="pindrop"></a> <span class="chip k-ven">vendor</span></td></tr>
         <tr><td>Misheard identity details, wrong-account match</td><td>Recognition biased with the record on file; spell-back</td><td>STT layer</td><td>Up to 15% fewer major transcription errors<a class="c" data-s="sierraASR"></a> <span class="chip k-ven">vendor</span></td></tr>
         <tr><td>Fraud intent buried in a routine call</td><td>Router hard rule: any fraud signal escalates regardless of confidence</td><td>System-1 router</td><td><span class="chip k-our">author's design</span></td></tr>
         <tr><td>Critical transactions and authorizations</td><td>Voiceprint match plus liveness and deepfake detection, then a one-time code for anything irreversible</td><td>Contact center platform + agent workflow</td><td>A reporter passed a bank's voice ID with an AI clone of his own voice in 2023<a class="c" data-s="voiceIdBreach"></a>; liveness is now offered alongside voiceprints<a class="c" data-s="pindrop"></a></td></tr>
@@ -1359,14 +1348,14 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="tbl"><table>
       <thead><tr><th>Rule</th><th>What it requires</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>TCPA, FCC 24-17</td><td>AI voices count as "artificial"; outbound calls need prior express consent; $500 to $1,500 per violation</td><td>In force since Feb 8, 2024<a class="c" data-s="fcc"></a><a class="c" data-s="wiley"></a></td></tr>
+        <tr><td>TCPA, FCC 24-17</td><td>AI voices count as "artificial"; outbound calls generally need prior express consent, with narrow healthcare exemptions; $500 to $1,500 per violation</td><td>In force since Feb 8, 2024<a class="c" data-s="fcc"></a><a class="c" data-s="wiley"></a></td></tr>
         <tr><td>HIPAA BAAs</td><td>Every layer that touches PHI: model, router, STT, TTS, orchestration, telephony, testing</td><td>Available from major model providers with retention options<a class="c" data-s="openaiBAA"></a><a class="c" data-s="anthropicBAA"></a></td></tr>
         <tr><td>California AB 3030</td><td>Disclaimer and a route to a human on generative AI clinical messages, unless clinician-reviewed</td><td>Effective Jan 1, 2025<a class="c" data-s="clunic"></a></td></tr>
         <tr><td>California AB 489</td><td>AI may not imply it holds a health care license</td><td>Effective Jan 1, 2026<a class="c" data-s="clunic"></a></td></tr>
         <tr><td>California AB 1609</td><td>Large businesses disclose chatbots and offer a human within set times</td><td>Reported signed Sept 28, 2026 <span class="chip k-unv">secondary</span><a class="c" data-s="conferbot"></a></td></tr>
         <tr><td>Texas TRAIGA (HB 149)</td><td>Health care providers disclose AI use to patients</td><td>Effective Jan 1, 2026<a class="c" data-s="wisc"></a></td></tr>
         <tr><td>Utah AI Policy Act</td><td>Proactive disclosure in high-risk interactions by regulated occupations</td><td>In force<a class="c" data-s="conferbot"></a></td></tr>
-        <tr><td>Colorado ADMT Act</td><td>Disclosure regime replacing the 2024 AI Act</td><td>Reported from Jan 2027 <span class="chip k-unv">secondary</span><a class="c" data-s="wisc"></a></td></tr>
+        <tr><td>Colorado SB 26-189</td><td>Replaces the 2024 AI Act, which never took effect; covers automated decisions in consequential areas such as credit, employment and housing, with no general chatbot disclosure duty</td><td>Reported effective Jan 1, 2027 <span class="chip k-unv">secondary</span><a class="c" data-s="conferbot"></a></td></tr>
         <tr><td>Right to deletion (state privacy laws, GDPR)</td><td>Erase personal data on request</td><td>Easier to honor in the model when facts live in a store, not weights<a class="c" data-s="lmlm"></a>; logs, transcripts and backups still need their own deletion</td></tr>
       </tbody></table></div>
   </div>
@@ -1600,7 +1589,7 @@ const CLAIMS=[
  ["Jev is calibrated and cannot hallucinate","p","Output is always schema-valid; calibration weaker than claimed in independent tests","beriJev"],
  ["Decision models are 400x cheaper than LLMs","u","Not in primary sources; real savings in one cascade test were about 72%","openrouterJev"],
  ["OpenAI Decisions API is generally available","u","Public beta since Oct 6, 2026","openaiDecisions"],
- ["Open-source Laya is a drop-in router","u","Base checkpoints are near chance zero-shot; fine-tuning required","laya"],
+ ["Open-source Laya is a drop-in router","u","Routed base checkpoint scores 42.5% on Banking77; fine-tuning required","laya"],
  ["Open models hit 78.4% of AI Gateway token volume","v","Exact post; one-day record on a developer-heavy gateway","rauch"],
  ["Regulated enterprises are moving inference off public APIs","p","Private cloud endpoints common; no named US on-prem voice deployment","stanford"],
  ["Decision-offload simulator: about 730 ms vs 1,900 ms turns","u","Simulated, not measured","cekura"],

@@ -68,3 +68,25 @@ Changes after outside reviews of the page:
   - Routing speed, cascade cost and the thesis checks moved to Part II, so Part I is shorter.
 - Regulation section labeled as an orientation summary, not legal advice.
 - Removed the note about sources that could not be retrieved.
+
+### Revisions, October 12, 2026 (precision pass)
+- Latency: says plainly that a speech-to-text, LLM, text-to-speech cascade lands near 1.5 s a turn even with a router and prefetch. Turns under 800 ms need speech-to-speech or full-duplex models.
+- Pilot gate:
+  - The pass^3 bar is now set by risk: about 85% for informational calls, 95% for anything that writes data or moves money.
+  - A single critical failure blocks launch.
+  - Framed as a risk-management choice, with its margin of error.
+- Router design: new "who owns state" rule. The thinker writes typed fields each turn, the responder owns the conversation and the details it collects, and corrections or topic shifts trigger a re-route.
+- Headline stats: the 18x research figure replaced with the healthcare fraud statistic; 22 ms vs 2.3 s labeled as a cross-study comparison.
+- Section 9: the factual-precision chart moved to Part II; Part I keeps the business case for a governed fact store.
+- Source audit, corrections:
+  - Cekura Bench: "over real phone lines" replaced with "on live calls" plus how platforms were configured.
+  - WellSpan: removed an unsupported Spanish-outreach detail.
+  - Sierra: removed an unsupported mention of a health system speaker.
+  - Talkdesk survey: respondents described correctly.
+  - Knowledge-based authentication: an unsupported "over half" figure replaced with the sourced payer case.
+  - Colorado: the replacement law (SB 26-189) covers automated decisions, not chatbot disclosure.
+  - TCPA: consent wording notes the narrow healthcare exemptions.
+  - Laya: the 76.6% score is on its own benchmark, not Banking77.
+  - Jev cascade: the upper-bound note worded as the source does.
+  - DATAMARK: its inconsistent baseline is noted.
+  - Human cost per call: labeled as a published illustration.
