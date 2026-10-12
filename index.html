@@ -1966,6 +1966,15 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 </script>
 
 <script src="/assets/explore.js" defer></script>
+<script src="/assets/analytics.js" defer></script>
+<script>
+/* Count a few key actions on this page (anonymous, via /assets/analytics.js) */
+document.addEventListener('click', function (e) {
+  if (!window.siteTrack || !e.target.closest) return;
+  if (e.target.closest('#pdf-open')) siteTrack('voice/pdf', 'Opened Download PDF');
+  else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
+}, true);
+</script>
 
 </body>
 </html>
