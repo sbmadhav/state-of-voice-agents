@@ -44,3 +44,6 @@
 - New section, "What separates a good agent": a golden test set and evaluation framework, hearing the right caller (noise, side conversations, diarization), real-time emotion detection with sentiment on every call, and persona as brand.
 - Woven through the page: evaluation-first in the suggested path, the pilot's golden set (200+ scenarios incl. noise and upset callers), the release scorecard, the after-day-90 plan, the think tank and the thinker's decisions (speaker and emotion).
 - Dropped "System-2" terminology; the responder is a conversational LLM.
+
+### Revisions, October 12, 2026 (public comments)
+- Comments are live: a public section using utterances (GitHub issues, free and open source, no ads or tracking), replacing the hidden giscus setup. It follows the page theme and loads only when scrolled near. Direct GitHub links are shown as a fallback.
