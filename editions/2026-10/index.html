@@ -547,7 +547,7 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="ask">
         <span class="eyebrow">A suggested path</span>
         <p><strong>Pilot narrow and measure repeatability.</strong> 90 days, inbound only, two or three call types, warm transfer to a human, judged on cost per resolved call.</p>
-        <p><strong>Think silently, then respond.</strong> A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a System-2 LLM does the responding.</p>
+        <p><strong>Think silently, then respond.</strong> A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a conversational LLM does the responding.</p>
         <p><strong>After day 90, scale what passed.</strong> Add call types and markets in waves through the same gate, bring routing and evaluation in-house, and move contracts to price per resolved call.</p>
         <p><strong>Invest in limited-memory model training now.</strong> Build a governed fact store from your systems of record and train a small model on one knowledge domain, run side by side with retrieval.</p>
       </div>
@@ -562,7 +562,7 @@ ol.src li:target{background:var(--accent-soft)}
 
     <div class="thesis">
       <a href="#gap"><span class="n">Thesis 1</span><span class="t">Reliability is the gap</span><p>Single demos overstate readiness by 20 to 40 points. Test repeatability on your own calls.</p></a>
-      <a href="#router"><span class="n">Thesis 2</span><span class="t">A thinker-responder agent</span><p>A fast System-1 thinker decides silently; a System-2 responder speaks. People don't narrate every thought before they answer.</p></a>
+      <a href="#router"><span class="n">Thesis 2</span><span class="t">A thinker-responder agent</span><p>A fast System-1 thinker decides silently; a conversational LLM speaks. People don't narrate every thought before they answer.</p></a>
       <a href="#lmlm"><span class="n">Thesis 3</span><span class="t">Invest in governed memory</span><p>Limited-memory models look facts up instead of memorizing them. Early, cheap to trial, and the right bet for regulated data.</p></a>
     </div>
 
@@ -706,7 +706,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="head">
       <p class="eyebrow">5 · Think silently, then respond</p>
       <h2>A thinker-responder model for conversational agents</h2>
-      <p class="lede">People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the <strong>thinker</strong>, making typed decisions silently, and a System-2 LLM is the <strong>responder</strong>, turning those decisions into a natural reply.<a class="c" data-s="openaiDecisions"></a><a class="c" data-s="laya"></a><a class="c" data-s="typesafe"></a></p>
+      <p class="lede">People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the <strong>thinker</strong>, making typed decisions silently, and a conversational LLM is the <strong>responder</strong>, turning those decisions into a natural reply.<a class="c" data-s="openaiDecisions"></a><a class="c" data-s="laya"></a><a class="c" data-s="typesafe"></a></p>
     </div>
 
     <div class="panel" style="margin-bottom:16px">
@@ -1031,7 +1031,7 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="arch" style="margin-top:12px">
         <div class="lane"><span class="ln">Audio in</span><div class="flow"><span class="box">Caller (phone, 8 kHz)</span><span class="arr">→</span><span class="box">Echo cancel</span><span class="arr">→</span><span class="box">Isolate caller's voice + diarize</span><span class="arr">→</span><span class="box">Speaker-aware VAD + turn model</span><span class="arr">→</span><span class="box">Streaming STT</span></div></div>
         <div class="lane"><span class="ln">Thinker · System 1</span><div class="flow"><span class="box s1">Router: intent, risk flags (typed probabilities)</span><span class="arr">→</span><span class="box s1">Pick sub-agent + its MCP servers</span><span class="arr">→</span><span class="box h">Fraud, clinical, complaint or low confidence: escalate</span></div></div>
-        <div class="lane"><span class="ln">Responder · System 2</span><div class="flow"><span class="box s2">Sub-agent LLM with narrowed tools</span><span class="arr">→</span><span class="box s2">Facts from governed store or system of record</span><span class="arr">→</span><span class="box s2">Read-back before any write</span><span class="arr">→</span><span class="box">TTS</span></div></div>
+        <div class="lane"><span class="ln">Responder · LLM</span><div class="flow"><span class="box s2">Sub-agent LLM with narrowed tools</span><span class="arr">→</span><span class="box s2">Facts from governed store or system of record</span><span class="arr">→</span><span class="box s2">Read-back before any write</span><span class="arr">→</span><span class="box">TTS</span></div></div>
         <div class="lane"><span class="ln">Always</span><div class="flow"><span class="box">One correlation ID across VAD, STT, router, LLM, tool and TTS events</span><span class="arr">→</span><span class="box">Replayable trace</span></div></div>
       </div>
     </div>

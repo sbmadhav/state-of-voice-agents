@@ -8,13 +8,13 @@ October 2026 edition
 
 Voice agents at the front door
 
-Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. The leading platform still fails one in four test scenarios across three tries.
+Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. The leading platform still fails about one in four test scenarios when each one is run three times.#
 
 A SUGGESTED PATH
 
 Pilot narrow and measure repeatability. 90 days, inbound only, two or three call types, warm transfer to a human, judged on cost per resolved call.
 
-Think silently, then respond. A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a System-2 LLM does the responding.
+Think silently, then respond. A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a conversational LLM does the responding.
 
 After day 90, scale what passed. Add call types and markets in waves through the same gate, bring routing and evaluation in-house, and move contracts to price per resolved call.
 
@@ -48,7 +48,7 @@ Single demos overstate readiness by 20 to 40 points. Test repeatability on your 
 Thesis 2
 A thinker-responder agent
 
-A fast System-1 thinker decides silently; a System-2 responder speaks. People don't narrate every thought before they answer.
+A fast System-1 thinker decides silently; a conversational LLM speaks. People don't narrate every thought before they answer.
 
 Thesis 3
 Invest in governed memory
@@ -235,7 +235,7 @@ author's arithmetic Illustrative only. A published comparison found the pricier 
 
 A thinker-responder model for conversational agents
 
-People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the thinker, making typed decisions silently, and a System-2 LLM is the responder, turning those decisions into a natural reply.[20][18][17]
+People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the thinker, making typed decisions silently, and a conversational LLM is the responder, turning those decisions into a natural reply.[20][18][17]
 
 ONE CALLER TURN, TWO WAYS
 Caller: "I got charged twice for my visit last month."
@@ -717,7 +717,7 @@ Router: intent, risk flags (typed probabilities)
 Pick sub-agent + its MCP servers
 →
 Fraud, clinical, complaint or low confidence: escalate
-RESPONDER · SYSTEM 2
+RESPONDER · LLM
 Sub-agent LLM with narrowed tools
 →
 Facts from governed store or system of record
@@ -822,13 +822,13 @@ Typed decision models and routers, compared
 A System-1 model returns typed answers (choice, score, yes/no) with probabilities in one pass and never writes prose. Three families now compete for the routing job: hosted decision APIs, open decision models, and plain fine-tuned classifiers.
 
 OPTION	TYPE	OUTPUT	LATENCY	COST	EVIDENCE
-OpenAI Decisions API	Closed, hosted; public beta Oct 6, 2026	Predicate, choice, score with probabilities	"About 10x faster" than Responses API vendor	$0.10/M input, no output charge	Text and images; HIPAA for eligible customers with a BAA[20]
-TypeSafe Jev	Closed, hosted	Choice, Score, Noul with probabilities	p50 175 ms, p95 270 ms	$0.042/M input; $0.11 per 1k Banking77 calls	Banking77 81.0% vs frontier 84.4%; no public BAA[4][17]
-Laya (Convai)	Open, Apache-2.0; 421M and 322M multilingual	Same typed interface	33 to 40 ms on a T4; runs on CPU	Self-host	Base checkpoints near chance zero-shot (Banking77 42.5%); fine-tuned typed accuracy 76.6%[18]
-Arch-Router-1.5B (Katanemo)	Open weights	Route name	51 ms on L40S	Self-host	93.2% routing accuracy vs 92.8% for a frontier model[25]
-Fine-tuned ModernBERT-base	Open, 0.1B	Intent label	22.5 ms on a T4	Self-host	Banking77 93.5%[3]
-semantic-router (Aurelio)	Open, MIT	Route or none	Embedding call	Embedding cost	Returns "none" below threshold; good for out-of-scope[58]
-Sierra Curie	Closed, inside the Sierra platform	Orchestration decisions across Sierra's model "constellation"	Not published	Bundled in platform pricing	Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers[11] vendor
+OpenAI Decisions API	Closed, hosted; beta since Oct 6, 2026	Predicate, choice, score + probabilities	~10x faster than Responses vendor	$0.10/M in; output free	Text and images; HIPAA for eligible customers with a BAA[20]
+TypeSafe Jev	Closed, hosted	Choice, Score, Noul + probabilities	p50 175 ms; p95 270 ms	$0.042/M in; ~$0.11 per 1k calls	Banking77 81.0% vs frontier 84.4%; no public BAA[4][17]
+Laya (Convai)	Open, Apache-2.0; 421M and 322M multilingual	Same typed interface	33 to 40 ms (T4); CPU OK	Self-host	Base checkpoints near chance zero-shot (Banking77 42.5%); fine-tuned typed accuracy 76.6%[18]
+Arch-Router-1.5B (Katanemo)	Open weights	Route name	51 ms (L40S)	Self-host	93.2% routing accuracy vs 92.8% for a frontier model[25]
+Fine-tuned ModernBERT-base	Open, 0.1B	Intent label	22.5 ms (T4)	Self-host	Banking77 93.5%[3]
+semantic-router (Aurelio)	Open, MIT	Route or none	One embedding call	Embedding cost	Returns "none" below threshold; good for out-of-scope[58]
+Sierra Curie	Closed, inside the Sierra platform	Orchestration across Sierra's model "constellation"	Not published	In platform pricing	Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers[11] vendor
 RouteLLM	Open	Strong vs weak model	n/a	n/a	Cuts cost "over 2x" without quality loss (model routing, not intent)[59]
 BANKING77 INTENT ACCURACY (77 BANKING INTENTS)
 ModernBERT 0.1B, fine-tuned
