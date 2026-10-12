@@ -1,0 +1,1701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="State of conversational voice agents, October 2026 edition: reliability, economics, a thinker-responder architecture, and limited-memory models for regulated contact centers.">
+<meta name="author" content="Madhav Srinivasan">
+<link rel="canonical" href="https://sbmadhav.github.io/state-of-voice-agents/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Voice Agents at the Front Door · October 2026">
+<meta property="og:description" content="Reliability, economics, a thinker-responder architecture, and limited-memory models for regulated contact centers. Every figure sourced.">
+<meta property="og:url" content="https://sbmadhav.github.io/state-of-voice-agents/">
+<meta property="og:image" content="https://sbmadhav.github.io/state-of-voice-agents/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<style>[hidden]{display:none!important}img{max-width:100%}:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
+<title>Voice Agents at the Front Door</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long brief. Part I is an executive story with live tools; Part II is a dense technical appendix. Sticky jump nav. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#E9EDF2; --ink:#14202E; --muted:#5B6878; --line:#D8DFE7;
+  --accent:#2343C4; --accent-soft:#E2E8FA; --signal:#C2650F; --signal-soft:#FBEBDA;
+  --good:#1D7A4E; --good-soft:#DDF1E6; --warn:#9A6A0E; --warn-soft:#F7ECD3; --bad:#B23A2F; --bad-soft:#F8E1DE;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D131A; --surface:#141C26; --sunk:#1A2430; --ink:#E6ECF3; --muted:#95A3B4; --line:#273342;
+  --accent:#8199FF; --accent-soft:#1D2849; --signal:#EE9F4E; --signal-soft:#3A2814;
+  --good:#58C38D; --good-soft:#15301F; --warn:#E3B457; --warn-soft:#33290F; --bad:#F07F74; --bad-soft:#3A1A17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D131A; --surface:#141C26; --sunk:#1A2430; --ink:#E6ECF3; --muted:#95A3B4; --line:#273342;
+  --accent:#8199FF; --accent-soft:#1D2849; --signal:#EE9F4E; --signal-soft:#3A2814;
+  --good:#58C38D; --good-soft:#15301F; --warn:#E3B457; --warn-soft:#33290F; --bad:#F07F74; --bad-soft:#3A1A17; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0;font-weight:700;letter-spacing:-.01em}
+h1{font-size:clamp(2.1rem,6vw,3.7rem)}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+h3{font-size:1.15rem;font-weight:500}
+p{margin:0}
+.lede{color:var(--muted);max-width:66ch;font-size:1.05rem}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono)}
+section{padding-block:56px;border-top:1px solid var(--line)}
+section .head{display:grid;gap:10px;margin-bottom:28px}
+.stack{display:grid;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;gap:18px;align-items:center;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.nav .brand{font-family:var(--display);font-weight:700;white-space:nowrap}
+.nav a{font-size:.88rem;color:var(--muted);text-decoration:none;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav .part{font-family:var(--mono);font-size:.7rem;padding:2px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+
+/* hero */
+.hero{padding-block:48px 40px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:.9rem;margin-top:18px}
+.wave{display:flex;align-items:center;gap:3px;height:56px;margin:26px 0 8px}
+.wave i{flex:1;min-width:2px;border-radius:2px;background:var(--accent);opacity:.85}
+.wave i.alt{background:var(--signal)}
+.wave-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.wave i{animation:pulse 2.6s ease-in-out infinite;transform-origin:center}}
+@keyframes pulse{50%{transform:scaleY(.55)}}
+.bottom-line{margin-top:30px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:start}
+.bottom-line .say{font-family:var(--display);font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.3;font-weight:500}
+.bottom-line .say b{color:var(--accent);font-weight:700}
+.ask{border-left:3px solid var(--signal);padding:4px 0 4px 16px;display:grid;gap:8px}
+.ask p{color:var(--muted)}
+.ask strong{color:var(--ink)}
+@media (max-width:760px){.bottom-line{grid-template-columns:1fr}}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:34px}
+.stat{background:var(--surface);padding:18px;display:grid;gap:6px;align-content:start}
+.stat .v{font-family:var(--display);font-size:2.1rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.stat .v small{font-size:1rem}
+.stat p{font-size:.9rem;color:var(--muted)}
+@media (max-width:820px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.stats{grid-template-columns:1fr}}
+
+/* evidence chips */
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.68rem;letter-spacing:.03em;padding:2px 8px;border-radius:99px;white-space:nowrap;vertical-align:middle}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.k-ind{background:var(--good-soft);color:var(--good)}
+.k-ven{background:var(--warn-soft);color:var(--warn)}
+.k-unv{background:var(--bad-soft);color:var(--bad)}
+.k-our{background:var(--accent-soft);color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.85rem;color:var(--muted)}
+
+/* citations */
+a.c{font-family:var(--mono);font-size:.68em;vertical-align:super;line-height:0;text-decoration:none;margin-left:1px;color:var(--accent)}
+a.c:hover{text-decoration:underline}
+
+/* segmented controls */
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--sunk);padding:4px;border-radius:99px}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:99px;font-size:.84rem;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:14px}
+
+/* dumbbell */
+.db{display:grid;gap:4px}
+.db-row{display:grid;grid-template-columns:170px minmax(0,1fr) 110px;gap:14px;align-items:center;padding:9px 10px;border-radius:8px;border:1px solid transparent;background:transparent;text-align:left;width:100%}
+.db-row:hover{background:var(--sunk)}
+.db-row[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.db-name{font-weight:600;font-size:.95rem}
+.db-name small{display:block;font-weight:400;color:var(--muted);font-size:.74rem;font-family:var(--mono)}
+.track{position:relative;height:22px}
+.track::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.track .gap{position:absolute;top:calc(50% - 3px);height:6px;background:var(--signal-soft);border-radius:3px}
+.track .d{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%}
+.track .d.p3{background:var(--accent)}
+.track .d.p1{background:var(--surface);border:3px solid var(--muted)}
+.db-val{font-family:var(--mono);font-size:.82rem;text-align:right;font-variant-numeric:tabular-nums}
+.db-val b{color:var(--accent)}
+.axis{display:grid;grid-template-columns:170px minmax(0,1fr) 110px;gap:14px;padding:0 10px}
+.axis .ticks{position:relative;height:18px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.axis .ticks span{position:absolute;transform:translateX(-50%)}
+.detail{margin-top:14px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.detail .k{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.detail .v{font-size:1.05rem;font-weight:600;font-variant-numeric:tabular-nums}
+.detail .wide{grid-column:1/-1;color:var(--muted);font-size:.92rem}
+@media (max-width:700px){
+  .db-row{grid-template-columns:minmax(0,1fr) 100px;grid-template-areas:"n v" "t t";row-gap:6px}
+  .db-name{grid-area:n}.db-val{grid-area:v}.track{grid-area:t}
+  .axis{grid-template-columns:1fr}.axis>div:first-child,.axis>div:last-child{display:none}
+  .detail{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.keyline{display:flex;flex-wrap:wrap;gap:16px;font-size:.82rem;color:var(--muted);margin-top:10px}
+.keyline span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+/* peers */
+.peers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.peer{display:grid;gap:10px;align-content:start}
+.peer .big{font-family:var(--display);font-size:2.6rem;font-weight:700;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.peer .who{font-weight:600}
+.peer p{font-size:.92rem;color:var(--muted)}
+.minibar{display:grid;gap:6px;font-size:.8rem}
+.minibar .r{display:grid;grid-template-columns:62px minmax(0,1fr) 56px;gap:8px;align-items:center}
+.minibar .b{height:10px;border-radius:5px;background:var(--muted);opacity:.35}
+.minibar .b.after{background:var(--accent);opacity:1}
+@media (max-width:820px){.peers{grid-template-columns:1fr}}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.ctrl{display:grid;gap:4px}
+.ctrl label{display:flex;justify-content:space-between;gap:10px;font-size:.88rem}
+.ctrl label output{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:500}
+.ctrl small{color:var(--muted);font-size:.74rem}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{background:var(--sunk);border-radius:8px;padding:12px 14px;display:grid;gap:2px}
+.tile .k{font-size:.74rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.tile .v{font-family:var(--display);font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums}
+.tile.hl{background:var(--accent-soft)}
+.tile.hl .v{color:var(--accent)}
+.compare{margin-top:14px;display:grid;gap:8px;font-size:.84rem}
+.compare .r{display:grid;grid-template-columns:150px minmax(0,1fr) 72px;gap:10px;align-items:center}
+.compare .bar{height:14px;border-radius:4px;background:var(--accent)}
+.compare .bar.wp{background:var(--signal)}
+.compare .r span:last-child{font-family:var(--mono);text-align:right}
+@media (max-width:480px){.compare .r{grid-template-columns:100px minmax(0,1fr) 64px}}
+svg text{font-family:var(--mono)}
+.chartbox{margin-top:14px}
+.note{font-size:.8rem;color:var(--muted)}
+
+/* use case grid */
+.ucg{display:grid;grid-template-columns:90px repeat(3,minmax(0,1fr));gap:6px}
+.ucg .hdr{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;align-self:end;padding:4px}
+.ucg .rowh{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;padding:4px}
+.cell{border-radius:8px;padding:8px;min-height:84px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.z-go{background:var(--good-soft)}.z-next{background:var(--accent-soft)}.z-sup{background:var(--warn-soft)}.z-no{background:var(--bad-soft)}.z-empty{background:var(--sunk)}
+.uc{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 10px;font-size:.8rem;text-align:left}
+.uc[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:600}
+.zonekey{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--muted);margin-top:10px}
+.zonekey span{display:inline-flex;gap:6px;align-items:center}
+.zonekey i{width:14px;height:14px;border-radius:4px;display:inline-block}
+@media (max-width:640px){.ucg{grid-template-columns:56px repeat(3,minmax(0,1fr));gap:4px}.cell{padding:5px;min-height:60px}.uc{font-size:.72rem;padding:3px 7px}}
+
+/* options */
+.opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:14px;text-align:left;display:grid;gap:6px;align-content:start}
+.opt[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt .t{font-weight:600}
+.opt .s{font-size:.82rem;color:var(--muted)}
+.rec{font-family:var(--mono);font-size:.66rem;color:var(--good);text-transform:uppercase;letter-spacing:.08em}
+@media (max-width:820px){.opts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:700px){.cols2{grid-template-columns:1fr}}
+ul.tight{margin:6px 0 0;padding-left:18px;display:grid;gap:5px;font-size:.93rem}
+.lbl{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* timeline / pilot */
+.pilot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative}
+.ph{padding:16px 14px 16px 0;display:grid;gap:8px;align-content:start;border-top:3px solid var(--accent);position:relative}
+.ph:nth-child(2){border-color:var(--signal)}
+.ph:nth-child(4){border-color:var(--good)}
+.ph .w{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.ph .t{font-weight:600}
+.ph p{font-size:.88rem;color:var(--muted)}
+@media (max-width:820px){.pilot{grid-template-columns:1fr 1fr;gap:14px}}
+@media (max-width:480px){.pilot{grid-template-columns:1fr}}
+.gates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+@media (max-width:700px){.gates{grid-template-columns:1fr}}
+.gate h3{display:flex;align-items:center;gap:8px}
+.gate ul{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+.gate li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:.92rem}
+.gate li::before{content:"";width:16px;height:16px;border-radius:4px;margin-top:3px}
+.gate.ok li::before{background:var(--good-soft);box-shadow:inset 0 0 0 2px var(--good)}
+.gate.stop li::before{background:var(--bad-soft);box-shadow:inset 0 0 0 2px var(--bad)}
+
+/* year strip */
+.year{display:flex;gap:0;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}
+.ev{flex:0 0 190px;scroll-snap-align:start;border-left:1px solid var(--line);padding:0 14px 4px;display:grid;gap:4px;align-content:start}
+.ev .d{font-family:var(--mono);font-size:.72rem;color:var(--signal)}
+.ev .t{font-size:.88rem}
+
+/* personas */
+.personas{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.persona{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 14px;font-size:.86rem}
+.persona[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pdetail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pdetail .pos{grid-column:1/-1;font-family:var(--display);font-size:1.3rem;font-weight:500;line-height:1.3}
+@media (max-width:700px){.pdetail{grid-template-columns:1fr}}
+
+/* callout */
+.callout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px;align-items:center}
+.callout .big{font-family:var(--display);font-size:clamp(2.4rem,7vw,4rem);font-weight:700;color:var(--signal);line-height:1}
+@media (max-width:760px){.callout{grid-template-columns:1fr}}
+
+/* part divider */
+.partdiv{padding-block:64px 24px;border-top:1px solid var(--line)}
+.partdiv .lede{margin-top:10px}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:640px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tech h2{font-size:clamp(1.3rem,2.8vw,1.7rem)}
+.tech section{padding-block:44px}
+
+/* architecture diagram */
+.arch{display:grid;gap:10px}
+.lane{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center}
+.lane .ln{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.box{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 10px;font-size:.82rem}
+.box.s1{border-color:var(--signal);background:var(--signal-soft)}
+.box.s2{border-color:var(--accent);background:var(--accent-soft)}
+.box.h{border-color:var(--good);background:var(--good-soft)}
+.arr{color:var(--muted);font-family:var(--mono)}
+@media (max-width:600px){.lane{grid-template-columns:1fr;gap:4px}}
+
+/* latency sim */
+.lat-bar{display:flex;height:34px;border-radius:6px;overflow:hidden;background:var(--sunk);position:relative}
+.lat-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;color:#fff;overflow:hidden;white-space:nowrap}
+.lat-scale{position:relative;height:40px;margin-top:4px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.lat-scale .m{position:absolute;top:0;border-left:1px dashed var(--muted);height:14px}
+.lat-scale .m span{position:absolute;top:14px;left:0;transform:translateX(-50%);white-space:nowrap}
+.lat-scale .band{position:absolute;top:0;height:8px;background:var(--bad-soft);border:1px solid var(--bad);border-radius:3px}
+.lat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 20px;margin-top:18px}
+@media (max-width:700px){.lat-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.lat-grid{grid-template-columns:1fr}}
+
+/* passk */
+.pk{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:end;height:170px;margin-top:16px}
+.pk .col{display:grid;gap:6px;justify-items:center;align-content:end;height:100%}
+.pk .bar{width:100%;max-width:70px;background:var(--accent);border-radius:6px 6px 0 0;transition:height .25s}
+.pk .col:nth-child(3) .bar{background:var(--signal)}
+.pk .v{font-family:var(--mono);font-size:.8rem;font-variant-numeric:tabular-nums}
+.pk .k{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+
+/* sources */
+ol.src{padding-left:0;list-style:none;display:grid;gap:8px;font-size:.86rem;counter-reset:none}
+ol.src li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+ol.src li .i{font-family:var(--mono);color:var(--muted)}
+ol.src li a{word-break:break-word}
+ol.src li:target{background:var(--accent-soft)}
+.foot{padding-block:40px 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+/* router demo */
+.router{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px}
+@media (max-width:860px){.router{grid-template-columns:1fr}}
+.utts{display:grid;gap:8px}
+.utt{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;text-align:left;font-size:.9rem;display:grid;gap:2px}
+.utt small{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.utt[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.probs{display:grid;gap:8px}
+.pr{display:grid;grid-template-columns:150px minmax(0,1fr) 46px;gap:10px;align-items:center;font-size:.86rem}
+.pr .t{position:relative;height:14px;background:var(--sunk);border-radius:4px;overflow:visible}
+.pr .f{height:100%;border-radius:4px;background:var(--muted);opacity:.45;transition:width .25s}
+.pr.on .f{background:var(--accent);opacity:1}
+.pr.esc .f{background:var(--bad);opacity:1}
+.pr .th{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--signal)}
+.pr span:last-child{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.pr{grid-template-columns:100px minmax(0,1fr) 40px}}
+.verdict{border-radius:8px;padding:12px 14px;display:grid;gap:4px}
+.verdict.v-go{background:var(--good-soft)}.verdict.v-esc{background:var(--bad-soft)}.verdict.v-fb{background:var(--warn-soft)}.verdict.v-multi{background:var(--accent-soft)}
+.verdict .h{font-weight:600}
+.verdict .mcp{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.speed{display:grid;gap:8px;margin-top:6px}
+.sp{display:grid;grid-template-columns:190px minmax(0,1fr) 80px;gap:10px;align-items:center;font-size:.84rem}
+.sp .t{position:relative;height:16px}
+.sp .b{height:100%;border-radius:4px;background:var(--accent)}
+.sp .b.slow{background:var(--bad)}
+.sp span:last-child{font-family:var(--mono);text-align:right}
+.sp .budget{position:absolute;top:-6px;bottom:-6px;border-left:2px dashed var(--signal)}
+@media (max-width:560px){.sp{grid-template-columns:110px minmax(0,1fr) 64px}}
+.check{display:grid;gap:10px}
+.ck{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:start;font-size:.93rem}
+@media (max-width:480px){.ck{grid-template-columns:1fr;gap:4px}}
+
+/* lmlm demo */
+.lm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.lm{grid-template-columns:1fr}}
+.lm .pane{display:grid;gap:10px;align-content:start}
+.say-box{background:var(--sunk);border-radius:8px;padding:12px 14px;font-size:.95rem;min-height:70px}
+.say-box mark{background:var(--accent-soft);color:var(--accent);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:.85em}
+.say-box mark.mem{background:var(--signal-soft);color:var(--signal)}
+.say-box mark.gone{background:var(--good-soft);color:var(--good)}
+.store{font-family:var(--mono);font-size:.76rem;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.store div{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:6px 10px;border-bottom:1px solid var(--line)}
+.store div:last-child{border-bottom:0}
+.store .hd{background:var(--sunk);color:var(--muted)}
+.store .del{text-decoration:line-through;color:var(--muted)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:7px 14px;font-size:.86rem}
+.btn:hover{border-color:var(--accent)}
+.bars{display:grid;gap:9px}
+.bars .r{display:grid;grid-template-columns:200px minmax(0,1fr) 52px;gap:10px;align-items:center;font-size:.85rem}
+.bars .b{height:16px;border-radius:4px;background:var(--muted);opacity:.45}
+.bars .b.hi{background:var(--accent);opacity:1}
+.bars .b.ref{background:var(--signal);opacity:.85}
+.bars span:last-child{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.bars .r{grid-template-columns:120px minmax(0,1fr) 46px}}
+.thesis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
+.thesis a{text-decoration:none;color:inherit;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:14px;display:grid;gap:4px}
+.thesis a:hover{border-color:var(--accent)}
+.thesis .n{font-family:var(--mono);font-size:.7rem;color:var(--accent)}
+.thesis .t{font-weight:600}
+.thesis p{font-size:.86rem;color:var(--muted)}
+@media (max-width:760px){.thesis{grid-template-columns:1fr}}
+.ix{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
+.ix::before{content:"";width:7px;height:7px;border-radius:50%;border:1.5px solid currentColor;box-shadow:0 0 0 3px var(--accent-soft);flex:none}
+.ix.wrapok{white-space:normal}
+.nav .pdfbtn{margin-left:auto}
+.nav .theme{flex:none}
+.nav .theme button{padding:4px 10px;font-size:.76rem}
+.pdfbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:4px 12px;font-size:.76rem;flex:none}
+.pdfbtn:hover{border-color:var(--accent)}
+.dlg{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,var(--ink) 40%,transparent);display:grid;place-items:center;padding:16px}
+.dlg-card{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:22px;max-width:440px;width:100%;display:grid;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.dlg-card fieldset{border:0;padding:0;margin:0;display:flex;gap:10px;flex-wrap:wrap}
+.dlg-card label.opt-r{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer}
+.dlg-card label.opt-r:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.dlg-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.print-only{display:none}
+.roadmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+@media (max-width:760px){.roadmap{grid-template-columns:1fr}}
+.rm{display:grid;gap:6px;align-content:start;border-top:3px solid var(--accent);padding-top:12px}
+.rm .w{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.rm .t{font-weight:600}
+.rm ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.9rem}
+.invest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.invest{grid-template-columns:1fr}}
+.invest .st{display:grid;gap:6px;align-content:start}
+.invest .st .w{font-family:var(--mono);font-size:.72rem;color:var(--signal)}
+.edition{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;padding:3px 9px;border-radius:99px;background:var(--signal-soft);color:var(--signal)}
+@media print{
+  @page{size:letter;margin:12mm 11mm}
+  html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:var(--bg)!important}
+  body{font-size:10.5pt}
+  .nav,.ix,input[type=range],.seg,.btn,.dlg,.wave,.wave-cap,.thesis,#lm-del,.screen-only{display:none!important}
+  .print-only{display:block!important}
+  .wrap{max-width:none;padding-inline:0}
+  section{padding-block:14pt;border-top:1px solid var(--line)}
+  .hero{padding-block:0 10pt}
+  h1{font-size:26pt} h2{font-size:16pt} .tech h2{font-size:14pt}
+  h2,h3,.head,.lbl,.eyebrow{break-after:avoid}
+  .panel,.stat,.peer,.opt,.ph,.gate,tr,.pr,.ck,.ev,.tile,.lane,.rm,.st,.db-row,.utt,.ctrl,.verdict,.bars .r,.sp,.callout,.persona-print,.uc-print tr{break-inside:avoid}
+  .partdiv{break-before:page;padding-block:0 10pt}
+  #sources{break-before:page}
+  .year{flex-wrap:wrap;overflow:visible;gap:8px 0}
+  .ev{flex:0 0 33%}
+  .tbl{overflow:visible} table{min-width:0;font-size:8.5pt} th,td{padding:6px 8px}
+  .db-row[aria-pressed="true"]{background:transparent;border-color:transparent}
+  .panel{padding:12px}
+  #personas,#pdetail,#opts,#opt-detail,#uc-detail{display:none!important}
+  #claims tr[hidden]{display:table-row!important}
+  #src li[hidden]{display:grid!important}
+  a{text-decoration:none}
+  .nav-print{display:flex!important;justify-content:space-between;font-family:var(--mono);font-size:8pt;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6pt;margin-bottom:10pt}
+  .stats{break-inside:avoid}
+  .lm,.router,.calc{grid-template-columns:1fr 1fr}
+}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <span class="brand">Voice Agents</span>
+    <span class="part">Part I</span>
+    <a href="#brief">Bottom line</a>
+    <a href="#gap">Reliability</a>
+    <a href="#peers">Results</a>
+    <a href="#calc">Economics</a>
+    <a href="#router">Fast router</a>
+    <a href="#usecases">Where to start</a>
+    <a href="#lmlm">What's next</a>
+    <a href="#options">Options</a>
+    <a href="#pilot">Pilot</a>
+    <a href="#debate">Debate</a>
+    <span class="part">Part II</span>
+    <a href="#tech">Technical</a>
+    <a href="#t-router">Routing</a>
+    <a href="#t-lmlm">LMLM</a>
+    <a href="#verify">Claims</a>
+    <a href="#sources">Sources</a>
+    <button type="button" class="pdfbtn" id="pdf-open">Download PDF</button>
+    <div class="seg theme" role="group" aria-label="Color theme" id="theme"><button type="button" data-t="system" aria-pressed="true">System</button><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="brief">
+  <div class="wrap">
+    <div class="print-only nav-print"><span>Voice Agents at the Front Door · October 2026 edition</span><span>sbmadhav.github.io/state-of-voice-agents</span></div>
+    <p class="eyebrow">State of conversational voice agents · Healthcare and financial services</p>
+    <p style="margin-top:8px"><span class="edition">October 2026 edition · updated every 30 days</span></p>
+    <h1 style="margin-top:12px">Voice agents at the front door</h1>
+    <div class="wave" id="wave" aria-hidden="true"></div>
+    <div class="wave-cap" aria-hidden="true"><span>caller</span><span>agent</span><span>caller</span><span>agent</span><span>handoff</span></div>
+
+    <div class="bottom-line">
+      <p class="say">Voice agents are now <b>good enough to take routine calls in regulated contact centers</b>: scheduling, billing questions, balance and status checks. They are <b>not yet consistent enough</b> to run unsupervised on clinical or high-risk financial conversations. The leading platform still fails one in four test scenarios across three tries.</p>
+      <div class="ask">
+        <span class="eyebrow">What I recommend</span>
+        <p><strong>Pilot narrow and measure repeatability.</strong> 90 days, inbound only, two or three call types, warm transfer to a human, judged on cost per resolved call.</p>
+        <p><strong>Think silently, then respond.</strong> A fast System-1 model does the "thinking" (intent, risk, which sub-agent and tools) without saying a word; a System-2 LLM does the responding.</p>
+        <p><strong>After day 90, scale what passed.</strong> Add call types and markets in waves through the same gate, bring routing and evaluation in-house, and move contracts to price per resolved call.</p>
+        <p><strong>Invest in limited-memory model training now.</strong> Build a governed fact store from your systems of record and train a small model on one knowledge domain, run side by side with retrieval.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="v num">56<small>%</small></span><p>Lower call abandonment at a large health system within two weeks of go-live <a class="c" data-s="beckersTGH"></a></p><span class="chip k-ven">customer-reported</span></div>
+      <div class="stat"><span class="v num">75.6<small>%</small></span><p>Best platform's repeat reliability: share of scenarios passed on all three tries <a class="c" data-s="cekura"></a></p><span class="chip k-ven">vendor benchmark</span></div>
+      <div class="stat"><span class="v num">22<small>ms</small></span><p>To route a call intent with a small fine-tuned classifier at 93.5% accuracy, vs about 2.3 s for a frontier LLM <a class="c" data-s="sift"></a><a class="c" data-s="openrouterJev"></a></p><span class="chip k-ind">independent</span></div>
+      <div class="stat"><span class="v num">18<small>x</small></span><p>Fewer parameters: a 382M limited-memory model came close to a 7B model on factual precision <a class="c" data-s="lmlm"></a></p><span class="chip k-ind">peer-reviewed research</span></div>
+    </div>
+
+    <div class="thesis">
+      <a href="#gap"><span class="n">Thesis 1</span><span class="t">Reliability is the gap</span><p>Single demos overstate readiness by 20 to 40 points. Test repeatability on your own calls.</p></a>
+      <a href="#router"><span class="n">Thesis 2</span><span class="t">A thinker-responder agent</span><p>A fast System-1 thinker decides silently; a System-2 responder speaks. People don't narrate every thought before they answer.</p></a>
+      <a href="#lmlm"><span class="n">Thesis 3</span><span class="t">Invest in governed memory</span><p>Limited-memory models look facts up instead of memorizing them. Early, cheap to trial, and the right bet for regulated data.</p></a>
+    </div>
+
+    <div class="legend" style="margin-top:18px">
+      <span>Evidence labels used throughout:</span>
+      <span class="chip k-ind">independent</span>
+      <span class="chip k-ven">vendor or self-reported</span>
+      <span class="chip k-unv">unverified</span>
+      <span class="chip k-our">author's arithmetic or view</span>
+      <span class="screen-only" style="display:inline-flex;gap:8px;align-items:center;margin-left:8px">Charts and tools you can use carry <span class="ix">interactive</span></span>
+    </div>
+    <div class="meta">
+      <span>By Madhav Srinivasan</span>
+      <span>Research cutoff October 12, 2026</span>
+      <span>Next edition November 2026</span>
+      <span>Bracketed numbers link to sources</span>
+    </div>
+  </div>
+</header>
+
+<section id="gap">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">1 · Reliability</p>
+      <h2>A demo call is not a production call</h2>
+      <p class="lede">The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, over real phone lines. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.<a class="c" data-s="cekura"></a><a class="c" data-s="cekuraBook"></a></p>
+    </div>
+    <div class="panel">
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Sort platforms">
+          <button type="button" data-sort="p3" aria-pressed="true">Sort by repeat reliability</button>
+          <button type="button" data-sort="gap" aria-pressed="false">By demo gap</button>
+          <button type="button" data-sort="lat" aria-pressed="false">By speed</button>
+        </div>
+        <span class="ix">Interactive · sort, then tap a platform</span>
+      </div>
+      <div class="axis" aria-hidden="true"><div></div><div class="ticks" id="ticks"></div><div></div></div>
+      <div class="db" id="db"></div>
+      <div class="keyline">
+        <span><i class="sw" style="background:var(--accent)"></i>Passed all 3 tries (pass^3)</span>
+        <span><i class="sw" style="border:3px solid var(--muted)"></i>Single-run task completion</span>
+        <span><i class="sw" style="background:var(--signal-soft);border-radius:3px;width:20px;height:8px"></i>The demo gap</span>
+      </div>
+      <div class="detail" id="db-detail"></div>
+    </div>
+    <p class="note" style="margin-top:12px">Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.<a class="c" data-s="sierraTau"></a> Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.</p>
+  </div>
+</section>
+
+<section id="peers">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">2 · Published results</p>
+      <h2>Where it is already working: access and service, not advice</h2>
+      <p class="lede">The strongest published results so far come from health systems, and every one is administrative. All figures are reported by the organization or its vendor, with no control group, so expect some regression at scale.</p>
+    </div>
+    <div class="peers">
+      <article class="panel peer">
+        <span class="eyebrow">Tampa General · Hyro</span>
+        <span class="big num">−58%</span>
+        <p class="who">Call wait time in two weeks</p>
+        <div class="minibar">
+          <div class="r"><span>Wait, before</span><div class="b" style="width:100%"></div><span class="num">6.2 min</span></div>
+          <div class="r"><span>Wait, after</span><div class="b after" style="width:39%"></div><span class="num">2.4 min</span></div>
+          <div class="r"><span>Abandon, before</span><div class="b" style="width:100%"></div><span class="num">34%</span></div>
+          <div class="r"><span>Abandon, after</span><div class="b after" style="width:44%"></div><span class="num">14.9%</span></div>
+        </div>
+        <p>Also 21% more appointments scheduled. <a class="c" data-s="beckersTGH"></a><a class="c" data-s="hyro"></a></p>
+        <span class="chip k-ven">customer-reported</span>
+      </article>
+      <article class="panel peer">
+        <span class="eyebrow">WellSpan · Hippocratic AI</span>
+        <span class="big num">160K+</span>
+        <p class="who">Patient calls a month handled by an AI agent</p>
+        <p>About 7,000 hours of conversation; expanded system-wide July 30, 2026, including outreach in Spanish. <a class="c" data-s="beckers12"></a></p>
+        <span class="chip k-ven">customer-reported</span>
+      </article>
+      <article class="panel peer">
+        <span class="eyebrow">Intermountain · Hyro + Agentforce Health</span>
+        <span class="big num">44%</span>
+        <p class="who">Of repetitive calls automated</p>
+        <p>Call abandonment down 85% on in-scope lines such as patient portal support. <a class="c" data-s="beckers12"></a></p>
+        <span class="chip k-ven">customer-reported</span>
+      </article>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <p><strong>For financial services,</strong> I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. <span class="chip k-our">author's view</span> Contact center leaders broadly report the same gap: 98% have AI somewhere in the customer journey, but only 5% can clearly quantify its business impact.<a class="c" data-s="talkdesk"></a></p>
+      <p style="margin-top:10px"><strong>Enterprise agent platforms are moving into healthcare too.</strong> Sierra says it serves most Fortune 50 healthcare companies, and a large health system's voice services leader presented at Sierra Summit 2026. No outcome figures have been published yet.<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor claim</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="year">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">3 · Pace of change</p>
+      <h2>2026 moved fast. Snapshots go stale in a quarter.</h2>
+      <p class="lede">On Sierra's voice benchmark, the best score rose from 30% to 67% in eight months.<a class="c" data-s="sierraTau"></a> Lock in your data and evaluations, not a model.</p>
+    </div>
+    <div class="year" id="year-strip"></div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">4 · Economics</p>
+      <h2>The lever is resolution rate, not token price</h2>
+      <p class="lede">Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person. Defaults use published per-minute pricing<a class="c" data-s="beri"></a> and a fully loaded human cost per call<a class="c" data-s="helpware"></a>. Platform, integration and team costs are a fixed annual line.</p>
+    </div>
+    <div class="calc">
+      <div class="panel stack" id="calc-ctrls">
+        <span class="ix">Interactive · drag sliders or pick a preset</span>
+        <div class="ctrl"><label for="c-calls">Daily inbound calls, all queues <output id="o-calls"></output></label><input type="range" id="c-calls" min="2000" max="60000" step="1000" value="15000"></div>
+        <div class="ctrl"><label for="c-scope">Share in scope for the agent <output id="o-scope"></output></label><input type="range" id="c-scope" min="5" max="80" step="5" value="30"><small>Scheduling, status checks, billing questions, routing</small></div>
+        <div class="ctrl"><label for="c-min">Average minutes per call <output id="o-min"></output></label><input type="range" id="c-min" min="1" max="10" step="0.5" value="4"></div>
+        <div class="ctrl"><label for="c-rate">AI cost per minute, all-in <output id="o-rate"></output></label><input type="range" id="c-rate" min="0.05" max="0.30" step="0.01" value="0.11"><small>Managed stacks run about $0.08 to $0.14</small></div>
+        <div class="ctrl"><label for="c-res">Resolved end to end by the agent <output id="o-res"></output></label><input type="range" id="c-res" min="0" max="90" step="1" value="55"></div>
+        <div class="ctrl"><label for="c-hum">Human cost per call <output id="o-hum"></output></label><input type="range" id="c-hum" min="3" max="12" step="0.25" value="6.04"></div>
+        <div class="ctrl"><label for="c-fix">Fixed annual cost: platform, integration, team <output id="o-fix"></output></label><input type="range" id="c-fix" min="0" max="5000000" step="100000" value="1500000"></div>
+        <div class="seg" role="group" aria-label="Presets">
+          <button type="button" data-preset="cons" aria-pressed="false">Cautious</button>
+          <button type="button" data-preset="base" aria-pressed="true">Default</button>
+          <button type="button" data-preset="tgh" aria-pressed="false">Strong peer result</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div style="margin-bottom:10px"><span class="ix">Updates live · chart dot follows the resolution slider</span></div>
+        <div class="tiles">
+          <div class="tile"><span class="k">Human only, monthly</span><span class="v" id="t-human"></span></div>
+          <div class="tile"><span class="k">AI + human fallback</span><span class="v" id="t-ai"></span></div>
+          <div class="tile hl"><span class="k">Net monthly savings</span><span class="v" id="t-save"></span></div>
+          <div class="tile"><span class="k">Break-even resolution</span><span class="v" id="t-be"></span></div>
+        </div>
+        <div class="chartbox"><svg id="res-chart" viewBox="0 0 600 230" width="100%" role="img" aria-label="Net monthly savings by resolution rate"></svg></div>
+        <div class="compare" id="compare"></div>
+        <p class="note" style="margin-top:10px" id="calc-note"></p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:12px"><span class="chip k-our">author's arithmetic</span> Illustrative only. A published comparison found the pricier stack with higher resolution ($0.14/min, 70% resolved) costs less per 1,000 calls than the cheaper one ($0.09/min, 55%).<a class="c" data-s="beri"></a> Cost models that count only LLM token savings miss most of the money.</p>
+  </div>
+</section>
+
+<!-- ROUTER -->
+<section id="router">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">5 · Think silently, then respond</p>
+      <h2>A thinker-responder model for conversational agents</h2>
+      <p class="lede">People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the <strong>thinker</strong>, making typed decisions silently, and a System-2 LLM is the <strong>responder</strong>, turning those decisions into a natural reply.<a class="c" data-s="openaiDecisions"></a><a class="c" data-s="laya"></a><a class="c" data-s="typesafe"></a></p>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px">
+      <div class="toolbar">
+        <span class="stack" style="gap:4px"><span class="lbl">One caller turn, two ways</span><span class="ix">Interactive · switch modes</span></span>
+        <div class="seg" role="group" aria-label="Agent style" id="tr-mode">
+          <button type="button" data-m="tr" aria-pressed="true">Thinker-responder</button>
+          <button type="button" data-m="loud" aria-pressed="false">Thinks out loud</button>
+        </div>
+      </div>
+      <div class="say-box" style="margin-bottom:12px">Caller: "I got charged twice for my visit last month."</div>
+      <div id="tr-flow" class="arch"></div>
+      <p class="note" style="margin-top:10px" id="tr-note"></p>
+    </div>
+
+    <div class="cols2" style="margin-bottom:16px">
+      <div class="panel stack"><span class="lbl">What the thinker decides (System 1, silent, typed)</span>
+        <ul class="tight">
+          <li><strong>Intent:</strong> which sub-agent owns this turn (billing, scheduling, complaint)</li>
+          <li><strong>Risk:</strong> fraud, clinical, vulnerable-caller or complaint flags that force a handoff</li>
+          <li><strong>Tools:</strong> which MCP servers to expose, and which facts to fetch before speaking</li>
+          <li><strong>Turn state:</strong> is the caller done, correcting themselves, or just saying "mm-hmm"</li>
+          <li><strong>Confidence:</strong> a probability on each, so low-confidence turns hand off instead of guessing</li>
+        </ul></div>
+      <div class="panel stack"><span class="lbl">Why it works</span>
+        <ul class="tight">
+          <li><strong>Faster:</strong> decisions take tens to hundreds of milliseconds, so the responder starts with data already fetched.</li>
+          <li><strong>Cheaper:</strong> the expensive model only writes the reply, not the routing.</li>
+          <li><strong>Safer:</strong> the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.<a class="c" data-s="nuanced"></a></li>
+          <li><strong>Converging with the industry:</strong> OpenAI and Sierra also split talking from thinking, though both put the fast model on the talking side and a slower reasoner behind it.<a class="c" data-s="openaiLive"></a><a class="c" data-s="sierraSummit"></a></li>
+          <li><strong>Limit:</strong> the thinker handles bounded choices. Open-ended reasoning still needs a deeper planner the responder can call.</li>
+        </ul></div>
+    </div>
+    <div class="router">
+      <div class="panel stack">
+        <span class="lbl">Pick a caller turn</span><span class="ix">Interactive · tap a turn, then move the threshold</span>
+        <div class="utts" id="utts"></div>
+      </div>
+      <div class="panel stack">
+        <div class="ctrl"><label for="r-th">Confidence threshold <output id="o-th"></output></label><input type="range" id="r-th" min="0.4" max="0.95" step="0.05" value="0.6"><small>Below the threshold, the router hands off instead of guessing</small></div>
+        <div class="probs" id="probs"></div>
+        <div id="rverdict"></div>
+        <p class="note"><span class="chip k-our">illustrative</span> Probabilities are examples of a calibrated multi-label router, not output from a specific product.</p>
+      </div>
+    </div>
+
+    <div class="cols2" style="margin-top:16px">
+      <div class="panel">
+        <span class="lbl">Time to route one decision, against an 800 ms turn budget</span>
+        <div class="speed" id="speed" style="margin-top:12px"></div>
+        <p class="note" style="margin-top:10px">Static chart. Measured by different labs on different hardware; directional. Sierra does not publish standalone latency for its orchestration model. Frontier figure is a large model classifying Banking77 intents.<a class="c" data-s="openrouterJev"></a><a class="c" data-s="sift"></a><a class="c" data-s="laya"></a><a class="c" data-s="archRouter"></a><a class="c" data-s="hamming"></a></p>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">What a cascade buys</span>
+        <p>In one public test on 3,080 banking intents, a frontier model scored 84.4% at about $2.42 per 1,000 requests. Sending everything to a decision model first, and only the low-confidence cases (below 0.90) on to the frontier model, scored 84.0% at about $0.69 per 1,000.<a class="c" data-s="openrouterJev"></a></p>
+        <div class="bars">
+          <div class="r"><span>Frontier only</span><div class="b ref" style="width:100%"></div><span>$2.42</span></div>
+          <div class="r"><span>Decision model first</span><div class="b hi" style="width:28.5%"></div><span>$0.69</span></div>
+        </div>
+        <p class="note"><span class="chip k-ven">vendor-adjacent</span> The threshold was tuned on the test set, so treat 72% savings as an upper bound.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <span class="lbl">The thesis, checked</span>
+      <div class="check" style="margin-top:12px">
+        <div class="ck"><span class="chip k-ind">holds</span><span>Routing a call to a sub-agent or toolset is closed-set classification. Small decision models do it in roughly 20 to 250 ms for fractions of a cent, versus about 2 s for a frontier LLM.<a class="c" data-s="openrouterJev"></a></span></div>
+        <div class="ck"><span class="chip k-ind">holds</span><span>Narrowing tools first helps. Retrieving the right tools before selection lifted selection accuracy from 13.6% to 43.1% and cut prompt tokens by more than half in one study; Anthropic reports similar gains once agents have 10 or more tools.<a class="c" data-s="ragmcp"></a><a class="c" data-s="anthropicTool"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>For a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.<a class="c" data-s="sift"></a><a class="c" data-s="rodrigues"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>Decision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61% of correct decisions in one study.<a class="c" data-s="creativeai"></a><a class="c" data-s="jevout"></a></span></div>
+        <div class="ck"><span class="chip k-unv">guardrail</span><span>Fraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output.<a class="c" data-s="multiIntent"></a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usecases">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">6 · Where to start</p>
+      <h2>Readiness against risk, by call type</h2>
+      <p class="lede">Healthcare shown, because that is where results are published. Green is the pilot zone. Red stays human until there is independent safety evidence.</p>
+    </div>
+    <div class="panel">
+      <div style="margin-bottom:10px"><span class="ix">Interactive · tap a call type for details</span></div>
+      <div class="ucg" id="ucg"></div>
+      <div class="zonekey">
+        <span><i class="z-go"></i>Start here</span>
+        <span><i class="z-next"></i>Next wave</span>
+        <span><i class="z-sup"></i>Clinically supervised only</span>
+        <span><i class="z-no"></i>Not yet</span>
+      </div>
+      <div id="uc-detail" class="cols2" style="margin-top:18px"></div>
+      <div class="print-only tbl uc-print" id="uc-print" style="margin-top:14px"></div>
+    </div>
+  </div>
+</section>
+
+<section id="fraud">
+  <div class="wrap">
+    <div class="callout">
+      <div>
+        <p class="eyebrow">7 · Trust and identity</p>
+        <p class="big num" style="margin-top:10px">Over half</p>
+        <p style="margin-top:8px">of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice, bots and IVR reconnaissance.<a class="c" data-s="pindrop"></a> <span class="chip k-ven">vendor-reported</span></p>
+      </div>
+      <div class="stack">
+        <h2>A voice is no longer proof of identity</h2>
+        <p class="lede">This is a brand question as much as a security one. Customers will be targeted by callers pretending to be you, and your agent will hear callers pretending to be customers.<a class="c" data-s="techcrunchDeep"></a></p>
+        <ul class="tight">
+          <li>Liveness and deepfake detection in the contact center platform, before any protected data.</li>
+          <li>Step-up verification (one-time code to the number on file), not birth date or security questions alone.</li>
+          <li>A published "we will never ask you for" policy, owned by marketing.</li>
+          <li>In the US, outbound AI calls need prior consent under the FCC's 2024 ruling, reminders included.<a class="c" data-s="fcc"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LMLM -->
+<section id="lmlm">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">8 · What comes next</p>
+      <h2>Models that look facts up instead of memorizing them</h2>
+      <p class="lede">A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete.<a class="c" data-s="lmlm"></a></p>
+    </div>
+
+    <div class="panel">
+      <div class="toolbar">
+<span class="ix">Interactive · switch models, then delete the record</span>
+        <div class="seg" role="group" aria-label="Model type" id="lm-mode">
+          <button type="button" data-m="std" aria-pressed="false">Standard model</button>
+          <button type="button" data-m="lm" aria-pressed="true">Limited-memory model</button>
+        </div>
+        <button type="button" class="btn" id="lm-del">Customer asks to be forgotten: delete record</button>
+      </div>
+      <div class="lm">
+        <div class="pane">
+          <span class="lbl">Caller asks</span>
+          <div class="say-box">"What's the coverage limit on my plan, member 4471?"</div>
+          <span class="lbl">Agent answers</span>
+          <div class="say-box" id="lm-answer"></div>
+        </div>
+        <div class="pane">
+          <span class="lbl" id="lm-src-lbl"></span>
+          <div id="lm-src"></div>
+          <p class="note" id="lm-note"></p>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model.<a class="c" data-s="lmlm"></a></p>
+    </div>
+
+    <div class="cols2" style="margin-top:16px">
+      <div class="panel stack">
+        <span class="lbl">Factual precision (FactScore), same small model</span>
+        <div class="bars">
+          <div class="r"><span>382M standard</span><div class="b" style="width:33.7%"></div><span>14.0</span></div>
+          <div class="r"><span>382M LMLM, store off</span><div class="b" style="width:30.8%"></div><span>12.8</span></div>
+          <div class="r"><span>382M LMLM</span><div class="b hi" style="width:76.7%"></div><span>31.9</span></div>
+          <div class="r"><span>7B standard (18x larger)</span><div class="b ref" style="width:81.7%"></div><span>34.0</span></div>
+          <div class="r"><span>8B standard (21x larger)</span><div class="b ref" style="width:96.9%"></div><span>40.3</span></div>
+        </div>
+        <p class="note">Higher is better. Turning the store off drops the LMLM below baseline, which shows it really relies on the store.<a class="c" data-s="lmlm"></a> <span class="chip k-ind">ICLR 2026</span></p>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">Why it fits regulated conversations</span>
+        <ul class="tight">
+          <li><strong>Facts become governed data.</strong> Each one is a row with access control, versioning and change review.</li>
+          <li><strong>Deletion is real.</strong> Removing rows forgets them without retraining.<a class="c" data-s="lmlm"></a></li>
+          <li><strong>Less sensitive data in weights.</strong> Researchers have extracted names, phone numbers and emails from model weights, even from data seen once.<a class="c" data-s="carlini21"></a><a class="c" data-s="nasr"></a></li>
+          <li><strong>Every answer has provenance.</strong> Each lookup is a logged call with the value it returned.</li>
+          <li><strong>Small enough to run privately.</strong> Sub-1B models with lookups can sit inside the enterprise boundary.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel stack" style="margin-top:16px">
+      <span class="lbl">My recommendation: invest in limited-memory training now, in stages</span>
+      <p>Retrieval on a frontier model is the safe default today. But a governed fact store pays off with or without LMLM, and a first training run is cheap enough that waiting costs more than trying.</p>
+      <div class="invest">
+        <div class="st"><span class="w">Now · no-regret</span><span class="t" style="font-weight:600">Build the governed fact store</span><p class="note" style="font-size:.88rem">Turn plans, policies, products, providers and fees into versioned rows with owners, access control and deletion. It powers retrieval today and LMLM tomorrow.</p></div>
+        <div class="st"><span class="w">Next quarter · prove it</span><span class="t" style="font-weight:600">Train a small model on one domain</span><p class="note" style="font-size:.88rem">Start from the open LMLM code (MIT) on one de-identified domain, such as benefits or product FAQs. Score it against retrieval on factual precision, deletion, latency and cost.<a class="c" data-s="lmlmCode"></a></p></div>
+        <div class="st"><span class="w">Within 12 months · scale</span><span class="t" style="font-weight:600">Put it behind the responder</span><p class="note" style="font-size:.88rem">If it wins on precision and governance, expand domains and let the responder use it for static knowledge. Live balances and appointments stay on tools.</p></div>
+      </div>
+      <p class="note">Compute is not the hard part: the paper trained each model in at most 8 H100-days<a class="c" data-s="lmlm"></a>, roughly $400 to $500 at $2 to $2.69 an hour for rented H100s<a class="c" data-s="gpuPrice"></a>. <span class="chip k-our">author's arithmetic</span> Budget for data engineering, store quality and evaluation instead.</p>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <span class="lbl">The thesis, checked</span>
+      <div class="check" style="margin-top:12px">
+        <div class="ck"><span class="chip k-ind">holds</span><span>Moving facts into a store the model must consult sharply improves factual precision at a given size and makes each fact traceable and deletable.<a class="c" data-s="lmlm"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>It reduces hallucination; it does not eliminate it. Wrong lookups, missing rows, extraction errors and the model answering from memory instead of looking up all remain. The authors say it "does not guarantee perfect factuality."<a class="c" data-s="lmlm"></a><a class="c" data-s="colmlm"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>Facts are selected by type (entity attributes), not by whether they repeat. Frequency still matters: models learn rare facts poorly, and capacity per fact drops when facts are seen less often.<a class="c" data-s="kandpal"></a><a class="c" data-s="allenzhu"></a></span></div>
+        <div class="ck"><span class="chip k-ven">qualify</span><span>No study measures what share of a frontier model's weights is fact storage. Retrieval-based models have matched models 18 to 50 times their size on knowledge-heavy tasks, which suggests the share is large.<a class="c" data-s="retro"></a><a class="c" data-s="atlas"></a></span></div>
+        <div class="ck"><span class="chip k-unv">open</span><span>Research stage: tested on Wikipedia with models under 400M parameters. No dialog, voice, enterprise data or production deployment yet.<a class="c" data-s="lmlmCode"></a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="options">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">9 · The decision</p>
+      <h2>Four ways to play the next 12 months</h2>
+      <span class="ix">Interactive · tap an option</span>
+    </div>
+    <div class="opts" id="opts"></div>
+    <div class="panel" style="margin-top:14px" id="opt-detail"></div>
+    <div class="print-only" id="opt-print"></div>
+  </div>
+</section>
+
+<section id="pilot">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">10 · Recommended next step</p>
+      <h2>A 90-day pilot with gates set before launch</h2>
+      <p class="lede">One market or line of business, inbound only, two or three call types, warm transfer with full context. The pre-launch bar is set above the best public benchmark on purpose, because public scenarios are generic.</p>
+    </div>
+    <div class="pilot">
+      <div class="ph"><span class="w">Weeks 0 to 4</span><span class="t">Build the test suite</span><p>100+ scenarios from your own calls: accents, older callers, Spanish, number dictation, mid-call corrections. Silent shadow test on de-identified recorded audio.</p></div>
+      <div class="ph"><span class="w">Gate · end of week 4</span><span class="t">90%+ pass^3 to go live</span><p>Every scenario run three times on phone-grade audio. Router thresholds calibrated on held-out data. Identity controls signed off.</p></div>
+      <div class="ph"><span class="w">Weeks 5 to 12</span><span class="t">Live in one market</span><p>Every failure becomes a regression test. Weekly audit of tool-call write-backs and misroutes (transfers after routing).</p></div>
+      <div class="ph"><span class="w">Day 90</span><span class="t">Scale, adjust, or stop</span><p>Decide against the criteria below, not against a demo.</p></div>
+    </div>
+    <div class="gates">
+      <div class="panel gate ok"><h3><span class="chip k-ind" style="font-size:.66rem">scale if</span>Success at day 90</h3>
+        <ul>
+          <li><span>Abandonment down 30% or more on in-scope queues</span></li>
+          <li><span>50% or more of in-scope calls resolved without a person</span></li>
+          <li><span>Zero wrong-customer or wrong-account write-backs on audit</span></li>
+          <li><span>Satisfaction at or above the human baseline</span></li>
+          <li><span>Recording, transcript, routing decision and tool trace on 100% of calls</span></li>
+        </ul></div>
+      <div class="panel gate stop"><h3><span class="chip k-unv" style="font-size:.66rem">stop if</span>Kill criteria, any time</h3>
+        <ul>
+          <li><span>Any protected data disclosed to an unverified caller</span></li>
+          <li><span>Any clinical or financial advice given by the agent</span></li>
+          <li><span>Wrong-action rate above 0.5% of tool calls on audit</span></li>
+          <li><span>A vendor refuses to export logs or evaluation data</span></li>
+        </ul></div>
+    </div>
+    <p class="note" style="margin-top:12px"><span class="chip k-our">author's proposal</span> These thresholds are a starting point for operations, compliance and risk teams to adjust, not an industry standard.</p>
+
+    <div class="panel" style="margin-top:22px">
+      <div class="toolbar">
+        <span class="stack" style="gap:4px"><span class="lbl">After day 90: what to do next</span><span class="ix">Interactive · pick a pilot outcome</span></span>
+        <div class="seg" role="group" aria-label="Pilot outcome" id="after-mode">
+          <button type="button" data-o="scale" aria-pressed="true">Gates met</button>
+          <button type="button" data-o="adjust" aria-pressed="false">Some gates missed</button>
+          <button type="button" data-o="stop" aria-pressed="false">Kill criterion hit</button>
+        </div>
+      </div>
+      <div id="after" class="screen-only"></div>
+      <div class="print-only" id="after-print"></div>
+      <p class="note" style="margin-top:12px"><span class="chip k-our">author's proposal</span> Whatever the outcome, keep the test suite, routing logs and call recordings. They are the most valuable thing the pilot produces.</p>
+    </div>
+  </div>
+</section>
+
+<section id="debate">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">11 · Think tank</p>
+      <h2>Seven seats at the table</h2>
+      <p class="lede">A structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models?</p>
+    </div>
+    <div style="margin-bottom:10px"><span class="ix">Interactive · tap a seat to hear that view</span></div>
+    <div class="personas" id="personas" role="group" aria-label="Choose a perspective"></div>
+    <div class="panel pdetail" id="pdetail"></div>
+    <div class="print-only" id="per-print"></div>
+    <div class="cols2" style="margin-top:16px">
+      <div class="panel"><span class="lbl">Where all seven agree</span>
+        <ul class="tight">
+          <li>Start with inbound administrative calls and warm human transfer.</li>
+          <li>Measure repeat reliability and cost per resolved call, not containment or demo quality.</li>
+          <li>Use a fast router, with calibrated thresholds and rule-based escalation.</li>
+          <li>Own the evaluation data, routing logs and call logs, whichever vendor wins.</li>
+        </ul></div>
+      <div class="panel"><span class="lbl">Still unresolved</span>
+        <ul class="tight">
+          <li>Fine-tuned classifier (cheapest, most accurate on fixed intents) versus a hosted decision API (no training data, adapts to new intents).</li>
+          <li>When a private limited-memory model beats retrieval on a frontier model, on total cost.</li>
+          <li>Speed versus safety on outbound calls, where consent rules bite at scale.</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PART II ======================= -->
+<div class="partdiv" id="tech">
+  <div class="wrap">
+    <p class="eyebrow">Part II · Technical appendix</p>
+    <h2 style="margin-top:10px;font-size:clamp(1.8rem,4vw,2.6rem)">For architects, platform and AI engineering teams</h2>
+    <p class="lede">Architecture, latency, reliability measurement, failure modes, System-1 routing, limited-memory models, deployment and data posture, fraud controls, regulation, and a check of claims circulating in the market.</p>
+  </div>
+</div>
+
+<div class="tech">
+<section id="t-arch">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T1 · Architecture</p><h2>Three generations, converging on "talk fast, think slow"</h2>
+      <p class="lede">OpenAI's GPT-Live removes the separate turn detector and delegates search and reasoning to a frontier model behind an asynchronous boundary, so a slow tool call cannot stall audio.<a class="c" data-s="openaiLive"></a><a class="c" data-s="infoqLive"></a> Sierra's Tandem Voice pairs a real-time conversation layer with a reasoning layer.<a class="c" data-s="sierraSummit"></a> Gemini 3.8 Live calls tools in the background.<a class="c" data-s="marktech"></a> A typed System-1 router fits beside any of these as the dispatch layer.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Dimension</th><th>Cascaded (STT, LLM, TTS)</th><th>Native speech-to-speech</th><th>Continuous full-duplex</th></tr></thead>
+      <tbody>
+        <tr><td>Examples</td><td>Pipecat, LiveKit, Retell; Agentforce Voice<a class="c" data-s="salesforce"></a></td><td>gpt-realtime-2.1; Gemini Live API</td><td>OpenAI GPT-Live; Gemini 3.8 Live; Sierra Tandem Voice</td></tr>
+        <tr><td>Turn-taking</td><td>VAD plus turn detector</td><td>Turn detector still decides when to start</td><td>Model controls turns, can backchannel</td></tr>
+        <tr><td>Tone and prosody</td><td>Lost in transcription</td><td>Kept</td><td>Kept</td></tr>
+        <tr><td>Tools and reasoning</td><td>Inside the LLM step, blocking</td><td>In-model or blocking</td><td>Async delegation to a frontier model</td></tr>
+        <tr><td>Audit trail</td><td>Native text at every step</td><td>Transcripts available</td><td>Transcripts derived after the fact</td></tr>
+        <tr><td>Control and vendor choice</td><td>Highest</td><td>Medium</td><td>Lowest today (single vendor)</td></tr>
+        <tr><td>Fit for regulated work</td><td>Per-step audit and per-component contracts</td><td>Simpler flows with one covered vendor</td><td>Watch closely; GPT-Live API announced as upcoming<a class="c" data-s="openaiLive"></a></td></tr>
+      </tbody></table></div>
+
+    <div class="panel">
+      <span class="lbl">Reference flow (cascaded, with a System-1 router)</span>
+      <div class="arch" style="margin-top:12px">
+        <div class="lane"><span class="ln">Audio in</span><div class="flow"><span class="box">Caller (phone, 8 kHz)</span><span class="arr">→</span><span class="box">Echo cancel</span><span class="arr">→</span><span class="box">VAD + turn model</span><span class="arr">→</span><span class="box">Streaming STT</span></div></div>
+        <div class="lane"><span class="ln">Thinker · System 1</span><div class="flow"><span class="box s1">Router: intent, risk flags (typed probabilities)</span><span class="arr">→</span><span class="box s1">Pick sub-agent + its MCP servers</span><span class="arr">→</span><span class="box h">Fraud, clinical, complaint or low confidence: escalate</span></div></div>
+        <div class="lane"><span class="ln">Responder · System 2</span><div class="flow"><span class="box s2">Sub-agent LLM with narrowed tools</span><span class="arr">→</span><span class="box s2">Facts from governed store or system of record</span><span class="arr">→</span><span class="box s2">Read-back before any write</span><span class="arr">→</span><span class="box">TTS</span></div></div>
+        <div class="lane"><span class="ln">Always</span><div class="flow"><span class="box">One correlation ID across VAD, STT, router, LLM, tool and TTS events</span><span class="arr">→</span><span class="box">Replayable trace</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="t-latency">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T2 · Latency budget</p><h2>Where the seconds go in a turn</h2>
+      <p class="lede">Human turn gaps across ten languages cluster around a quarter second.<a class="c" data-s="stivers"></a> Measured platform turns in the benchmark averaged 1.27 s to 3.08 s.<a class="c" data-s="cekura"></a> Adjust the stages, or pick a preset.</p></div>
+    <div class="panel">
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Latency presets">
+          <button type="button" data-lp="seq" aria-pressed="true">Cascaded, sequential tool</button>
+          <button type="button" data-lp="par" aria-pressed="false">Cascaded, router + prefetch</button>
+          <button type="button" data-lp="fd" aria-pressed="false">Full-duplex</button>
+        </div>
+        <span style="display:inline-flex;gap:14px;align-items:center"><span class="ix">Interactive · presets and sliders</span><span class="mono num" style="font-size:1.4rem;font-weight:500" id="lat-total"></span></span>
+      </div>
+      <div class="lat-bar" id="lat-bar"></div>
+      <div class="lat-scale" id="lat-scale"></div>
+      <div class="lat-grid" id="lat-ctrls"></div>
+      <p class="note" style="margin-top:12px"><span class="chip k-our">illustrative</span> Sourced anchors: fixed silence endpointing of 500 to 800 ms is still common<a class="c" data-s="nuanced"></a>; the fastest LLM first-token time in Regal's 27-model test was 584 ms<a class="c" data-s="regal"></a>; a self-hosted router costs 20 to 50 ms. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn.</p>
+    </div>
+    <div class="panel"><span class="lbl">Caller experience beats raw model quality</span>
+      <p style="margin-top:8px">In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression.<a class="c" data-s="regal"></a> <span class="chip k-ven">vendor benchmark</span></p></div>
+  </div>
+</section>
+
+<section id="t-rel">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T3 · Measuring reliability</p><h2>pass^k: why single-run numbers flatter every vendor</h2>
+      <p class="lede">pass^k counts a scenario only when all k runs succeed. It came from Sierra's tau-bench and now appears in Cekura Bench and tau2-bench voice mode. Even assuming independent runs, small per-call error rates compound quickly.</p></div>
+    <div class="panel">
+      <div style="margin-bottom:10px"><span class="ix">Interactive · drag the slider</span></div>
+      <div class="ctrl"><label for="pk-p">Per-call success probability <output id="o-pk"></output></label><input type="range" id="pk-p" min="50" max="99.5" step="0.5" value="94"></div>
+      <div class="pk" id="pk"></div>
+      <p class="note" style="margin-top:10px" id="pk-note"></p>
+    </div>
+    <div class="cols2">
+      <div class="panel"><span class="lbl">Same model, different harness</span><p style="margin-top:8px">In Cekura's speech-to-speech benchmark (11 models, 2,952 calls), GPT Realtime 2.1 alone reached 79.3% pass^3, while its mini sibling scored 50.0% and saved all fields correctly on only 64.5% of data-saving calls versus 92.0%.<a class="c" data-s="cekuraS2S"></a></p></div>
+      <div class="panel"><span class="lbl">Recovery is its own axis</span><p style="margin-top:8px">A 2026 interruption benchmark found task completion and recovery quality only partly related.<a class="c" data-s="ihbench"></a> Test barge-in and correction separately from happy paths.</p></div>
+    </div>
+    <div class="panel"><span class="lbl">Release scorecard</span>
+      <ul class="tight">
+        <li><strong>Perception:</strong> word error rate on phone-grade audio, by accent and language; entity accuracy for names, dates, phone and account numbers.</li>
+        <li><strong>Routing:</strong> intent accuracy, out-of-scope recall, misroute rate (transfers after routing), calibration error.</li>
+        <li><strong>Turn-taking:</strong> false and missed barge-ins, backchannel handling.</li>
+        <li><strong>Latency:</strong> P95 turn time, not mean; dead air over 10 s.</li>
+        <li><strong>Action correctness:</strong> exact argument match on every tool call. This is the hard gate.<a class="c" data-s="nuanced"></a></li>
+        <li><strong>Repeatability:</strong> pass^3 on 100+ scenarios; every production failure becomes a regression case.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section id="t-fail">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T4 · Failure modes</p><h2>Agents mostly break on audio, identity and integration</h2></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Failure</th><th>Mechanism</th><th>Evidence</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Self-reply to echo</td><td>Agent's own speech leaks back, is transcribed as the caller, and gets answered</td><td class="n">21% Edge vs 4% Chrome sessions<a class="c" data-s="webrtchacks"></a></td><td>Strong echo cancellation; compare input against agent playback</td></tr>
+        <tr><td>False barge-in</td><td>Echo treated as interruption; agent stops mid-word</td><td>A turn model marked echo "complete" at p=0.954<a class="c" data-s="webrtchacks"></a></td><td>Speaker or echo attribution before turn detection</td></tr>
+        <tr><td>VAD threshold trade-off</td><td>Lower thresholds speed replies but admit short echo bursts</td><td class="n">500 → 384 ms saved 116 ms, added 3 failures<a class="c" data-s="webrtchacks"></a></td><td>Tune per channel; validate on real devices</td></tr>
+        <tr><td>Misroute</td><td>Router picks the wrong sub-agent, or one intent of two</td><td>Best models reach only 53.4% on a multi-intent benchmark<a class="c" data-s="multiIntent"></a></td><td>Multi-label output, thresholds, frontier fallback</td></tr>
+        <tr><td>Context-flipped decision</td><td>Extra benign text changes a correct routing decision</td><td class="n">61.4% of correct decisions flipped<a class="c" data-s="jevout"></a></td><td>Route on the caller's turn only, not retrieved or third-party text</td></tr>
+        <tr><td>Entity drift</td><td>Transcript correct, different value reaches the tool</td><td>Observed phone number mismatch<a class="c" data-s="retellBlog"></a></td><td>Read-back confirmation; server-side validation</td></tr>
+        <tr><td>Wrong saved data</td><td>Fields written incorrectly</td><td class="n">64.5% vs 92.0% all-correct by model<a class="c" data-s="cekuraS2S"></a></td><td>Exact-match audits on write-backs</td></tr>
+        <tr><td>Dead air</td><td>10+ s silence from stalled provider or reasoning</td><td class="n">3.3% to 5.3% of calls by model<a class="c" data-s="cekuraS2S"></a></td><td>Async tools; filler speech; timeouts with handoff</td></tr>
+        <tr><td>Connection failures</td><td>Call never completes cleanly</td><td class="n">Clean calls as low as 72.4%<a class="c" data-s="cekura"></a></td><td>Telephony redundancy; count against reliability</td></tr>
+        <tr><td>Misheard identity details</td><td>Names, emails, IDs garbled; verification fails and cascades</td><td>Context-aware ASR cut major errors up to 15%<a class="c" data-s="sierraASR"></a></td><td>Bias recognition with the record on file; spell-back</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="t-router">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T5 · System-1 routing</p><h2>Typed decision models and routers, compared</h2>
+      <p class="lede">A System-1 model returns typed answers (choice, score, yes/no) with probabilities in one pass and never writes prose. Three families now compete for the routing job: hosted decision APIs, open decision models, and plain fine-tuned classifiers.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Option</th><th>Type</th><th>Output</th><th>Latency</th><th>Cost</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>OpenAI Decisions API</td><td>Closed, hosted; public beta Oct 6, 2026</td><td>Predicate, choice, score with probabilities</td><td>"About 10x faster" than Responses API <span class="chip k-ven">vendor</span></td><td class="n">$0.10/M input, no output charge</td><td>Text and images; HIPAA for eligible customers with a BAA<a class="c" data-s="openaiDecisions"></a></td></tr>
+        <tr><td>TypeSafe Jev</td><td>Closed, hosted</td><td>Choice, Score, Noul with probabilities</td><td class="n">p50 175 ms, p95 270 ms</td><td class="n">$0.042/M input; $0.11 per 1k Banking77 calls</td><td>Banking77 81.0% vs frontier 84.4%; no public BAA<a class="c" data-s="openrouterJev"></a><a class="c" data-s="typesafe"></a></td></tr>
+        <tr><td>Laya (Convai)</td><td>Open, Apache-2.0; 421M and 322M multilingual</td><td>Same typed interface</td><td class="n">33 to 40 ms on a T4; runs on CPU</td><td>Self-host</td><td>Base checkpoints near chance zero-shot (Banking77 42.5%); fine-tuned typed accuracy 76.6%<a class="c" data-s="laya"></a></td></tr>
+        <tr><td>Arch-Router-1.5B (Katanemo)</td><td>Open weights</td><td>Route name</td><td class="n">51 ms on L40S</td><td>Self-host</td><td>93.2% routing accuracy vs 92.8% for a frontier model<a class="c" data-s="archRouter"></a></td></tr>
+        <tr><td>Fine-tuned ModernBERT-base</td><td>Open, 0.1B</td><td>Intent label</td><td class="n">22.5 ms on a T4</td><td>Self-host</td><td>Banking77 93.5%<a class="c" data-s="sift"></a></td></tr>
+        <tr><td>semantic-router (Aurelio)</td><td>Open, MIT</td><td>Route or none</td><td>Embedding call</td><td>Embedding cost</td><td>Returns "none" below threshold; good for out-of-scope<a class="c" data-s="semrouter"></a></td></tr>
+        <tr><td>Sierra Curie</td><td>Closed, inside the Sierra platform</td><td>Orchestration decisions across Sierra's model "constellation"</td><td>Not published</td><td>Bundled in platform pricing</td><td>Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor</span></td></tr>
+        <tr><td>RouteLLM</td><td>Open</td><td>Strong vs weak model</td><td>n/a</td><td>n/a</td><td>Cuts cost "over 2x" without quality loss (model routing, not intent)<a class="c" data-s="routellm"></a></td></tr>
+      </tbody></table></div>
+
+    <div class="cols2">
+      <div class="panel stack">
+        <span class="lbl">Banking77 intent accuracy (77 banking intents)</span>
+        <div class="bars">
+          <div class="r"><span>ModernBERT 0.1B, fine-tuned</span><div class="b hi" style="width:93.5%"></div><span>93.5</span></div>
+          <div class="r"><span>bge-small + logistic reg.</span><div class="b hi" style="width:93.3%"></div><span>93.3</span></div>
+          <div class="r"><span>Frontier LLM (Opus 5)</span><div class="b ref" style="width:84.4%"></div><span>84.4</span></div>
+          <div class="r"><span>Jev, zero-shot</span><div class="b" style="width:81%"></div><span>81.0</span></div>
+          <div class="r"><span>Laya base, zero-shot</span><div class="b" style="width:42.5%"></div><span>42.5</span></div>
+        </div>
+        <p class="note">Different labs and setups; directional. Jev's own score ranges from 76.3% to 87.0% depending on who measured it.<a class="c" data-s="sift"></a><a class="c" data-s="creativeai"></a><a class="c" data-s="openrouterJev"></a><a class="c" data-s="laya"></a></p>
+      </div>
+      <div class="panel stack">
+        <span class="lbl">When a classifier wins, and when an LLM wins</span>
+        <ul class="tight">
+          <li>Fine-tuned RoBERTa beat a small LLM on ATIS (95.9% vs 84.1%) and tied on CLINC150, at roughly three orders of magnitude lower cost and latency.<a class="c" data-s="rodrigues"></a></li>
+          <li>The LLM won on out-of-scope recall (85.6% vs 58.1%) and on very noisy speech (92.5% vs 80.0%).<a class="c" data-s="rodrigues"></a></li>
+          <li>A classifier trained on one app's intents scored 0% on a new app's; a schema-prompted model served both at about 94%.<a class="c" data-s="rodrigues"></a></li>
+          <li>Implication: classifier for stable, high-volume intents; decision API or LLM for new, rare or out-of-scope ones.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel stack">
+      <span class="lbl">Routing to tools and MCP servers</span>
+      <ul class="tight">
+        <li>Retrieving candidate tools before selection raised selection accuracy from 13.6% to 43.1% and cut prompt tokens by more than half.<a class="c" data-s="ragmcp"></a></li>
+        <li>MCP-Zero selected from about 2,800 tools across 308 servers with 98% fewer tokens on one benchmark.<a class="c" data-s="mcpzero"></a></li>
+        <li>Anthropic reports 58 tools across 5 servers consume about 55K tokens before a conversation starts; tool search lifted accuracy from 49% to 74% on one model.<a class="c" data-s="anthropicTool"></a></li>
+        <li>With 4,027 tools, the right tool reached the top results only 56% to 64% of the time, so retrieval recall becomes the new bottleneck.<a class="c" data-s="arcade"></a></li>
+      </ul>
+    </div>
+
+    <div class="panel stack">
+      <span class="lbl">Recommended router design</span>
+      <ol class="tight">
+        <li><strong>Tier 0:</strong> fine-tuned encoder or self-hosted decision model, multi-label (per-intent sigmoid), so "billing and complaint" returns both.</li>
+        <li><strong>Calibrate</strong> with temperature scaling on your own data; set per-intent thresholds on a held-out set, never the test set.</li>
+        <li><strong>Gate:</strong> below threshold, out of scope, or two high-stakes intents goes to a frontier model with the full schema, or to a person.</li>
+        <li><strong>Hard rules:</strong> fraud, clinical concern, complaints and vulnerable-customer signals always escalate.</li>
+        <li><strong>Narrow tools:</strong> each sub-agent exposes only its own MCP servers, with a broader-tools fallback when retrieval scores are low.</li>
+        <li><strong>Injection hygiene:</strong> classify the caller's turn only, without retrieved or third-party text in context.<a class="c" data-s="jevout"></a></li>
+        <li><strong>Audit:</strong> log input hash, label, probabilities, threshold, model version and final disposition; re-run evals on every model change.</li>
+        <li><strong>Compliance:</strong> hosted decision APIs need a BAA or equivalent for protected data; self-hosted encoders avoid the question.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="t-lmlm">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T6 · Limited Memory Language Models</p><h2>How LMLM works, and what it has shown</h2>
+      <p class="lede">Zhao et al., "Pre-training Limited Memory Language Models with Internal and External Knowledge," ICLR 2026. Code and 176M and 382M checkpoints are public under MIT.<a class="c" data-s="lmlm"></a><a class="c" data-s="lmlmCode"></a></p></div>
+    <div class="cols2">
+      <div class="panel stack"><span class="lbl">Mechanism</span>
+        <ul class="tight">
+          <li>Training text is annotated with inline lookups: entity, relation, then the retrieved value.</li>
+          <li>Loss is zeroed on the retrieved value tokens. The model still trains on every other token, so it learns when and how to look up, not the value itself.</li>
+          <li>The store holds 54.6M (entity, relation, value) triples extracted from Wikipedia by an 8B annotator trained on GPT-4o-labeled seeds.</li>
+          <li>At inference, a lookup token pauses generation; the query is matched by embedding similarity (rejection threshold 0.6) and the value is inserted.</li>
+          <li>Budget: about 3B tokens, 8 epochs, at most 8 H100-days per model.</li>
+        </ul></div>
+      <div class="panel stack"><span class="lbl">Follow-up: Co-LMLM (July 2026)</span>
+        <ul class="tight">
+          <li>Replaces relational triples with vector keys and free-text values, so knowledge is no longer limited to entity attributes.</li>
+          <li>About 2.2 ms per retrieval versus 28.6 ms for a question-generating lookup, which fits inside a voice turn.</li>
+          <li>Reports that lookup timing is imperfect: forcing lookups added 5.9 points on SimpleQA.<a class="c" data-s="colmlm"></a></li>
+        </ul></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Model</th><th>Params</th><th>FactScore</th><th>T-REx EM</th><th>PopQA</th></tr></thead>
+      <tbody>
+        <tr><td>LLaMA2 standard</td><td class="n">382M</td><td class="n">14.0</td><td class="n">52.0</td><td class="n">22.7</td></tr>
+        <tr><td>LLaMA2 LMLM</td><td class="n">382M</td><td class="n">31.9</td><td class="n">58.1</td><td class="n">50.8</td></tr>
+        <tr><td>LLaMA2 LMLM, store off</td><td class="n">382M</td><td class="n">12.8</td><td class="n">38.5</td><td class="n">n/a</td></tr>
+        <tr><td>LLaMA2</td><td class="n">7B</td><td class="n">34.0</td><td class="n">60.5</td><td class="n">29.2</td></tr>
+        <tr><td>LLaMA3.1</td><td class="n">8B</td><td class="n">40.3</td><td class="n">67.3</td><td class="n">29.4</td></tr>
+      </tbody></table></div>
+    <p class="note">Source: Zhao et al.<a class="c" data-s="lmlm"></a> A 355M RAG baseline scored higher on T-REx (75.8 vs 58.7) but lower on FactScore and PopQA, so retrieval-augmented frontier models remain the practical benchmark to beat.</p>
+
+    <div class="panel stack"><span class="lbl">How much of a model is fact storage?</span>
+      <div class="bars">
+        <div class="r"><span>LMLM 382M ≈ LLaMA2-7B</span><div class="b hi" style="width:36%"></div><span>18x</span></div>
+        <div class="r"><span>RETRO 7.5B ≈ GPT-3 175B</span><div class="b hi" style="width:50%"></div><span>25x</span></div>
+        <div class="r"><span>Atlas 11B > 540B on NQ</span><div class="b hi" style="width:100%"></div><span>50x</span></div>
+      </div>
+      <p class="note">Parameter reduction at comparable performance on knowledge-heavy tasks.<a class="c" data-s="lmlm"></a><a class="c" data-s="retro"></a><a class="c" data-s="atlas"></a> Models store about 2 bits of knowledge per parameter, falling toward 1 bit for rarely seen facts.<a class="c" data-s="allenzhu"></a> Question-answering accuracy tracks how often a fact appears in training data.<a class="c" data-s="kandpal"></a> None of these measure the share of a frontier model's weights spent on facts; reasoning, code and multilingual skill need parameters too.</p>
+    </div>
+
+    <div class="tbl"><table>
+      <thead><tr><th>Claim often made</th><th>Verdict</th><th>Defensible version</th></tr></thead>
+      <tbody>
+        <tr><td>Every fact it shares is correct; it cannot hallucinate</td><td><span class="chip k-unv">overstated</span></td><td>It cuts hallucination sharply and makes each fact traceable; errors from wrong lookups, missing rows and extraction remain.</td></tr>
+        <tr><td>It keeps non-repeating data out of the model</td><td><span class="chip k-ven">partly</span></td><td>It offloads factual attributes by type, common and rare alike; rare facts are where models learn worst.</td></tr>
+        <tr><td>Fact storage is ~99% of model bloat</td><td><span class="chip k-unv">unsupported</span></td><td>Retrieval models match models 18 to 50 times larger on knowledge tasks; the exact share is unmeasured.</td></tr>
+        <tr><td>It makes training cheap</td><td><span class="chip k-ven">partly</span></td><td>It still trains on the full corpus and adds lookup and store-building cost; the saving is fewer parameters for a given factual accuracy, which lowers serving cost.</td></tr>
+        <tr><td>It keeps sensitive data out of weights</td><td><span class="chip k-ven">plausible, untested</span></td><td>Designed to, and extraction attacks show why it matters, but no privacy-attack evaluation has been published.<a class="c" data-s="carlini21"></a><a class="c" data-s="nasr"></a></td></tr>
+      </tbody></table></div>
+
+    <div class="panel stack"><span class="lbl">What has to be true for regulated contact centers</span>
+      <ul class="tight">
+        <li><strong>Extraction quality:</strong> turning CRM, EHR and policy text into rows relies on LLM annotators; their errors become confident wrong answers.</li>
+        <li><strong>Beyond entity facts:</strong> contact center knowledge is often procedural ("if the plan is X and the claim is Y"). Free-text values help, unproven here.</li>
+        <li><strong>Reliable lookups:</strong> the model must know when to look up and must not fall back on weights.</li>
+        <li><strong>Live data still needs tools:</strong> balances and appointments change by the minute; LMLM covers static knowledge, not transactions.</li>
+        <li><strong>Total cost versus RAG:</strong> pre-training a private small model plus building and refreshing the store must beat retrieval on a frontier API.</li>
+        <li><strong>Evidence at scale:</strong> nothing yet on dialog, speech, models above about 400M, or enterprise data. A 2026 position paper argues for this direction but reports no deployments.<a class="c" data-s="msPosition"></a></li>
+      </ul></div>
+  </div>
+</section>
+
+<section id="t-deploy">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T7 · Deployment and data posture</p><h2>"Sovereign" in practice means private endpoints under contract</h2>
+      <p class="lede">The case for keeping protected data and conversation logs under your control is strong. The case for running voice inference on your own GPUs is weak for 2026 to 2027, except for small models such as routers.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Posture</th><th>Status in 2026</th><th>Pros</th><th>Cons</th></tr></thead>
+      <tbody>
+        <tr><td>Model API under a BAA or equivalent, modified or zero retention</td><td>OpenAI covers the Realtime API with modified retention<a class="c" data-s="openaiBAA"></a>; Bedrock stores no prompts by default<a class="c" data-s="aws"></a>; Anthropic covers its HIPAA-ready API<a class="c" data-s="anthropicBAA"></a></td><td>Fastest; frontier quality; vendor carries ops</td><td>Terms can change; contracts needed for every component</td></tr>
+        <tr><td>Dedicated cloud tenancy over private network</td><td>Stanford runs Secure GPT this way on Azure<a class="c" data-s="stanford"></a></td><td>No public internet path; enterprise audit</td><td>More integration work; not every voice model offered</td></tr>
+        <tr><td>Managed enterprise agent platform</td><td>Sierra runs the full voice stack (Tandem Voice, Curie, Fleming) and prices on outcomes<a class="c" data-s="sierraSummit"></a></td><td>Fastest to production; vendor owns tuning and safety layers</td><td>Least control over models, routing and logs; negotiate export rights</td></tr>
+        <tr><td>Self-hosted small models (routers, classifiers)</td><td>Encoders run in tens of ms on one GPU or CPU<a class="c" data-s="sift"></a><a class="c" data-s="laya"></a></td><td>Cheap; no data leaves; no contract question</td><td>You own training, calibration and monitoring</td></tr>
+        <tr><td>Self-hosted large open-weight models</td><td>No named US health system found doing this for patient-facing voice</td><td>Full control</td><td>Beat the cheapest API in only 24% of 900 modeled scenarios<a class="c" data-s="navyaai"></a></td></tr>
+      </tbody></table></div>
+    <div class="panel"><span class="lbl">Open versus closed models</span>
+      <p style="margin-top:8px">Open-weight models reached 78.4% of one day's token volume on Vercel's AI Gateway in September 2026.<a class="c" data-s="rauch"></a> That was a single-day record on a developer-heavy gateway where closed models still took most of the spend; enterprise surveys put open source near 11% of LLM API share.<a class="c" data-s="officechai"></a><a class="c" data-s="menlo"></a> Open models win on cheap volume, which is exactly the router's job.</p></div>
+  </div>
+</section>
+
+<section id="t-fraud">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T8 · Fraud and identity controls</p><h2>Design identity in from day one</h2></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Risk</th><th>Control</th><th>Runs in</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>Cloned customer voice requesting protected data</td><td>Liveness detection plus passive voice, device and behavior signals</td><td>Contact center platform</td><td>Embedded in NICE CXone and Zoom Contact Center<a class="c" data-s="cxtodayNice"></a><a class="c" data-s="biometric"></a></td></tr>
+        <tr><td>Knowledge-based answers stolen in breaches</td><td>Step-up verification to the number on file or app push</td><td>Agent workflow, deterministic</td><td>Fraudsters bypass knowledge questions in over half of attempts<a class="c" data-s="pindrop"></a> <span class="chip k-ven">vendor</span></td></tr>
+        <tr><td>Misheard identity details, wrong-account match</td><td>Recognition biased with the record on file; spell-back</td><td>STT layer</td><td>Up to 15% fewer major transcription errors<a class="c" data-s="sierraASR"></a> <span class="chip k-ven">vendor</span></td></tr>
+        <tr><td>Fraud intent buried in a routine call</td><td>Router hard rule: any fraud signal escalates regardless of confidence</td><td>System-1 router</td><td><span class="chip k-our">author's design</span></td></tr>
+        <tr><td>Bots or AI agents calling in at scale</td><td>Detect machine callers before the agent engages</td><td>Agent platform</td><td>Sierra Fleming, announced Oct 2026<a class="c" data-s="sierraSummit"></a> <span class="chip k-ven">vendor</span></td></tr>
+        <tr><td>Outbound AI calls without consent (US)</td><td>Prior express consent, identification, opt-out</td><td>Dialer policy</td><td>FCC 24-17, February 2024<a class="c" data-s="fcc"></a></td></tr>
+        <tr><td>Scammers posing as your organization</td><td>Published callback and "we never ask" policy; customer education</td><td>Marketing and communications</td><td>Family-impersonation clone scams documented<a class="c" data-s="techcrunchDeep"></a></td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="t-reg">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T9 · Regulation</p><h2>Mostly disclosure and consent, and tightening</h2>
+      <p class="lede">US healthcare focus. Financial services adds its own regimes (GLBA, PCI DSS, UDAAP) not reviewed here. Items marked secondary need confirmation by counsel.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Rule</th><th>What it requires</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>TCPA, FCC 24-17</td><td>AI voices count as "artificial"; outbound calls need prior express consent; $500 to $1,500 per violation</td><td>In force since Feb 8, 2024<a class="c" data-s="fcc"></a><a class="c" data-s="wiley"></a></td></tr>
+        <tr><td>HIPAA BAAs</td><td>Every layer that touches PHI: model, router, STT, TTS, orchestration, telephony, testing</td><td>Available from major model providers with retention options<a class="c" data-s="openaiBAA"></a><a class="c" data-s="anthropicBAA"></a></td></tr>
+        <tr><td>California AB 3030</td><td>Disclaimer and a route to a human on generative AI clinical messages, unless clinician-reviewed</td><td>Effective Jan 1, 2025<a class="c" data-s="clunic"></a></td></tr>
+        <tr><td>California AB 489</td><td>AI may not imply it holds a health care license</td><td>Effective Jan 1, 2026<a class="c" data-s="clunic"></a></td></tr>
+        <tr><td>California AB 1609</td><td>Large businesses disclose chatbots and offer a human within set times</td><td>Reported signed Sept 28, 2026 <span class="chip k-unv">secondary</span><a class="c" data-s="conferbot"></a></td></tr>
+        <tr><td>Texas TRAIGA (HB 149)</td><td>Health care providers disclose AI use to patients</td><td>Effective Jan 1, 2026<a class="c" data-s="wisc"></a></td></tr>
+        <tr><td>Utah AI Policy Act</td><td>Proactive disclosure in high-risk interactions by regulated occupations</td><td>In force<a class="c" data-s="conferbot"></a></td></tr>
+        <tr><td>Colorado ADMT Act</td><td>Disclosure regime replacing the 2024 AI Act</td><td>Reported from Jan 2027 <span class="chip k-unv">secondary</span><a class="c" data-s="wisc"></a></td></tr>
+        <tr><td>Right to deletion (state privacy laws, GDPR)</td><td>Erase personal data on request</td><td>Easier to honor when facts live in a store, not weights<a class="c" data-s="lmlm"></a></td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="verify">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T10 · Claim check</p><h2>Claims circulating about voice AI, checked</h2>
+      <p class="lede">Benchmark figures, vendor claims and one widely shared decision-offload cost model, each traced to a source. Filter by verdict.</p></div>
+    <span class="ix">Interactive · filter by verdict</span>
+    <div class="seg" role="group" aria-label="Filter claims" id="vf">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="v" aria-pressed="false">Verified</button>
+      <button type="button" data-f="p" aria-pressed="false">Partly or vendor-only</button>
+      <button type="button" data-f="u" aria-pressed="false">Unverified or wrong</button>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Claim</th><th>Verdict</th><th>What the evidence shows</th></tr></thead>
+      <tbody id="claims"></tbody></table></div>
+  </div>
+</section>
+
+<section id="t-research">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">T11 · Tooling and implementation</p><h2>What to borrow, what to avoid</h2></div>
+    <div class="cols2">
+      <div class="panel"><span class="lbl">Frontend and developer tooling</span>
+        <p style="margin-top:8px">Vercel's AI Voice Elements give React components for persona, mic capture, transcript and playback; useful for web prototypes, irrelevant to telephony.<a class="c" data-s="vercelVoice"></a> Developer sentiment on AI is split, 49% positive and 42% negative, with 62% reporting burnout at some point; plan change management for internal builders too.<a class="c" data-s="stateofdevs"></a></p></div>
+      <div class="panel"><span class="lbl">Why implementations fail</span>
+        <p style="margin-top:8px">Abstract goals instead of concrete use cases, bots isolated from scheduling and CRM systems, no handoff path, messy knowledge, and no measurement after launch.<a class="c" data-s="netguru"></a> <span class="chip k-ven">vendor</span> OpenAI's own rebuild relied on a silent production test to find failures synthetic load tests missed.<a class="c" data-s="infoqLive"></a><a class="c" data-s="bytebytego"></a></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">Sources</p><h2>Every number traces back here</h2>
+      <p class="lede">Numbered in order of first use. Some shared reports (Botco.ai, Brilo AI, Master of Code, a Reddit guide, Gensai/Gradium, Krish Naik, a YouTube interview) could not be retrieved; no figures were taken from them.</p></div>
+    <span class="ix">Interactive · filter by source type</span>
+    <div class="seg" role="group" aria-label="Filter sources" id="sf">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="ind" aria-pressed="false">Independent</button>
+      <button type="button" data-f="ven" aria-pressed="false">Vendor</button>
+    </div>
+    <ol class="src" id="src"></ol>
+  </div>
+</section>
+</div>
+
+<footer class="foot">
+  <div class="wrap">October 2026 edition, updated every 30 days. Past and future editions: <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">github.com/sbmadhav/state-of-voice-agents</a>.<br>By Madhav Srinivasan. Written in a personal capacity; not affiliated with any organization or vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.</div>
+</footer>
+</main>
+
+<div class="dlg" id="pdf-dlg" role="dialog" aria-modal="true" aria-labelledby="pdf-h" hidden>
+  <div class="dlg-card">
+    <h3 id="pdf-h">Download as PDF</h3>
+    <fieldset>
+      <legend class="lbl" style="margin-bottom:8px;width:100%">Theme for the PDF</legend>
+      <label class="opt-r"><input type="radio" name="pdf-theme" id="pdf-light" value="light"> Light</label>
+      <label class="opt-r"><input type="radio" name="pdf-theme" id="pdf-dark" value="dark"> Dark</label>
+    </fieldset>
+    <p class="note">The page is reformatted for letter-size pages: controls are hidden, tabs and filters are expanded, and charts print as you left them. In the print window, choose <strong>Save as PDF</strong>.</p>
+    <p class="note" id="pdf-frame" hidden>PDF export is not available in this preview. Open the public page to download it: <a href="https://sbmadhav.github.io/state-of-voice-agents/" target="_blank" rel="noopener">sbmadhav.github.io/state-of-voice-agents</a></p>
+    <div class="dlg-actions"><button type="button" class="btn" id="pdf-cancel">Cancel</button><button type="button" class="btn primary" id="pdf-go">Create PDF</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+const S={
+ cekura:["Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)","https://benchmarks.cekura.ai/","ven"],
+ cekuraBook:["Cekura: Booking and reservation flow testing for voice agents","https://www.cekura.ai/discover/booking-reservation-flow-testing-voice-agents","ven"],
+ cekuraS2S:["Cekura: Speech-to-speech benchmark","https://benchmarks.cekura.ai/speech-to-speech","ven"],
+ retellBlog:["Retell AI: Retell vs Bland vs Vapi vs ElevenLabs (cites Cekura Bench)","https://www.retellai.com/blog/retell-vs-bland-vs-vapi-vs-elevenlabs","ven"],
+ beckersTGH:["Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout","https://www.beckershospitalreview.com/healthcare-information-technology/ai/tampa-general-cuts-call-wait-times-58-with-ai-rollout/","ind"],
+ beckers12:["Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)","https://www.beckershospitalreview.com/healthcare-information-technology/ai/12-health-systems-expanding-their-use-of-agentic-ai/","ind"],
+ hyro:["Hyro: Tampa General Hospital case study","https://www.hyro.ai/case-study/tampa-general-hospital/","ven"],
+ talkdesk:["Talkdesk / NewtonX: The State of Agentic Automation in CX (Aug 25, 2026)","https://www.globenewswire.com/news-release/2026/08/25/3350556/0/en/companies-are-deploying-ai-in-customer-experience-faster-than-they-can-make-it-work.html","ven"],
+ sierraTau:["Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)","https://sierra.ai/blog/tau-voice-benchmarking-real-time-voice-agents-on-real-world-tasks","ven"],
+ beri:["beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)","https://www.beri.net/article/voice-ai-per-minute-pricing-vapi-retell-elevenlabs-bland-cost-per-resolved-call","ind"],
+ helpware:["Helpware: Healthcare call center costs (2026)","https://helpware.com/blog/healthcare-call-center","ven"],
+ openaiDecisions:["OpenAI: Decisions API guide and changelog (public beta Oct 6, 2026)","https://developers.openai.com/api/docs/guides/decisions","ven"],
+ laya:["Convai Innovations: Laya model card, Apache-2.0 (Sep 2026)","https://huggingface.co/convaiinnovations/laya","ven"],
+ typesafe:["TypeSafe AI: Introducing System One models and Jev (Sep 15, 2026)","https://typesafe.ai/blog/introducing-system-one-models-and-jev","ven"],
+ openrouterJev:["OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026)","https://openrouter.ai/blog/insights/jev-vs-claude-opus-5-classification","ven"],
+ sift:["sift-banking77-modernbert model card (Hugging Face)","https://huggingface.co/DarioFrK/sift-banking77-modernbert","ind"],
+ archRouter:["Katanemo: Arch-Router, preference-aligned routing (arXiv 2506.16655)","https://arxiv.org/abs/2506.16655","ven"],
+ hamming:["Hamming: Voice AI latency, what's fast and what's slow (Jan 12, 2026)","https://hamming.ai/blog/voice-ai-latency-whats-fast-whats-slow-how-to-fix-it","ven"],
+ ragmcp:["Gan and Sun: RAG-MCP, mitigating prompt bloat in tool selection (arXiv 2505.03275)","https://arxiv.org/abs/2505.03275","ind"],
+ anthropicTool:["Anthropic Engineering: Advanced tool use (Nov 24, 2025)","https://www.anthropic.com/engineering/advanced-tool-use","ven"],
+ rodrigues:["Rodrigues and Vas: classifiers vs LLMs for intent detection (arXiv 2608.20371)","https://arxiv.org/abs/2608.20371","ind"],
+ creativeai:["CreativeAINews: Open Jev clones and benchmark disagreement (Sep 2026)","https://creativeainews.com/articles/open-jev-clones-benchmark-disagreement-2026","ind"],
+ jevout:["JevOut: Natural context can flip decision models (arXiv 2609.30243)","https://arxiv.org/abs/2609.30243","ind"],
+ multiIntent:["Multi-intent spoken language understanding with LLMs (arXiv 2403.04481)","https://arxiv.org/abs/2403.04481","ind"],
+ pindrop:["Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)","https://finance.yahoo.com/news/pindrop-expands-ai-powered-deepfake-150000934.html","ven"],
+ techcrunchDeep:["TechCrunch: After a deepfake voice fooled her grandfather, this founder sprang into action (Sep 28, 2026)","https://techcrunch.com/2026/09/28/after-a-deepfake-voice-fooled-her-grandfather-this-founder-sprang-into-action/","ind"],
+ fcc:["FCC: AI-generated voices in robocalls are illegal without consent (Feb 8, 2024)","https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal","ind"],
+ lmlm:["Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)","https://arxiv.org/abs/2505.15962","ind"],
+ carlini21:["Carlini et al., Extracting Training Data from Large Language Models (USENIX Security 2021)","https://arxiv.org/abs/2012.07805","ind"],
+ nasr:["Nasr et al., Scalable Extraction of Training Data from Production Language Models (2023)","https://arxiv.org/abs/2311.17035","ind"],
+ colmlm:["Feldman, Zhao et al., Co-LMLM: Continuous-Query Limited Memory Language Models (arXiv 2607.07707)","https://arxiv.org/abs/2607.07707","ind"],
+ kandpal:["Kandpal et al., Large Language Models Struggle to Learn Long-Tail Knowledge (ICML 2023)","https://arxiv.org/abs/2211.08411","ind"],
+ allenzhu:["Allen-Zhu and Li, Physics of Language Models 3.3: Knowledge Capacity Scaling Laws (ICLR 2025)","https://arxiv.org/abs/2404.05405","ind"],
+ retro:["Borgeaud et al. (DeepMind), RETRO: Improving language models by retrieving from trillions of tokens","https://arxiv.org/abs/2112.04426","ind"],
+ atlas:["Izacard et al. (Meta), Atlas: Few-shot learning with retrieval augmented language models","https://arxiv.org/abs/2208.03299","ind"],
+ lmlmCode:["kilian-group/LMLM code and checkpoints (GitHub, MIT)","https://github.com/kilian-group/LMLM","ind"],
+ openaiLive:["OpenAI: Continuous voice interaction with GPT-Live (Aug 3, 2026)","https://openai.com/index/continuous-voice-interaction-with-gpt-live/","ven"],
+ infoqLive:["InfoQ: OpenAI details GPT-Live's architecture (Sep 2, 2026)","https://www.infoq.com/news/2026/09/openai-gpt-live/","ind"],
+ sierraSummit:["Sierra: Summit 2026 recap (Oct 2026)","https://sierra.ai/blog/summit-recap-2026","ven"],
+ marktech:["MarkTechPost: Google releases Gemini 3.8 Live (Sep 15, 2026)","https://www.marktechpost.com/2026/09/15/google-releases-gemini-3-8-live-and-3-8-live-extended-thinking-for-production-grade-voice-agents/","ind"],
+ salesforce:["Salesforce Developers: Agentforce Voice for Agent Script (Oct 1, 2026)","https://developer.salesforce.com/blogs/2026/10/agentforce-voice-for-agent-script-voice-enabling-best-practices","ven"],
+ stivers:["Stivers et al., Universals and cultural variation in turn-taking, PNAS 2009","https://pubmed.ncbi.nlm.nih.gov/19553212/","ind"],
+ nuanced:["The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026)","https://thenuancedperspective.substack.com/p/where-voice-agents-actually-break","ind"],
+ regal:["Regal: Best LLMs for voice AI agents, Voice CX Benchmark (Oct 6, 2026)","https://www.regal.ai/listicles/best-llms-for-voice-ai-agents","ven"],
+ ihbench:["IHBench: interruption handling benchmark (arXiv 2606.19595)","https://arxiv.org/pdf/2606.19595","ind"],
+ webrtchacks:["webrtcHacks: Voice agents get confused by echo too (Oct 8, 2026)","https://webrtchacks.com/voice-agents-get-confused-by-echo-too/","ind"],
+ sierraASR:["Sierra: Voice AI is only as good as what it hears (May 18, 2026)","https://sierra.ai/blog/voice-ai-is-only-as-good-as-what-it-hears","ven"],
+ semrouter:["Aurelio Labs: semantic-router (GitHub, MIT)","https://github.com/aurelio-labs/semantic-router","ven"],
+ routellm:["LMSYS: RouteLLM, learning to route LLMs with preference data (arXiv 2406.18665)","https://arxiv.org/abs/2406.18665","ind"],
+ mcpzero:["Fei et al., MCP-Zero: proactive toolchain construction (arXiv 2506.01056)","https://arxiv.org/abs/2506.01056","ind"],
+ arcade:["Arcade: Testing tool search with 4,000 tools (Dec 3, 2025)","https://arcade.dev/blog/anthropic-tool-search-4000-tools-test","ven"],
+ msPosition:["Singh, Bastos, Mulang: Position, avoid overstretching LLMs for every enterprise task (arXiv 2605.09365)","https://arxiv.org/abs/2605.09365","ind"],
+ gpuPrice:["IntuitionLabs: Hosted AI API vs self-hosted LLM cost (H100 rental rates)","https://intuitionlabs.ai/articles/hosted-ai-api-vs-self-hosted-llm-cost","ind"],
+ openaiBAA:["OpenAI Help Center: HIPAA-eligible products and functionality (Oct 2026)","https://help.openai.com/en/articles/20001069-hipaa-eligible-products-and-functionality","ven"],
+ aws:["AWS: Amazon Nova 2 Sonic service card","https://docs.aws.amazon.com/ai/responsible-ai/nova-2-sonic/overview.html","ven"],
+ anthropicBAA:["Anthropic: Covered models under a BAA","https://support.claude.com/en/articles/15455031-covered-models-under-a-business-associate-agreement-baa","ven"],
+ stanford:["PMC: Stanford Secure GPT deployment (2025)","https://pmc.ncbi.nlm.nih.gov/articles/PMC11833461/","ind"],
+ navyaai:["navyaai: Self-host LLM vs API cost (Sep 2026)","https://www.navyaai.com/guides/self-host-llm-vs-api-cost","ind"],
+ rauch:["Guillermo Rauch on X: open models share of AI Gateway tokens (Sep 2026)","https://x.com/rauchg/status/2101186741042663579","ven"],
+ officechai:["OfficeChai: Share of closed models has fallen on Vercel data (Sep 2026)","https://officechai.com/ai/share-of-closed-models-has-fallen-from-around-70-to-21-in-the-last-3-months-vercel-data/","ind"],
+ menlo:["Menlo Ventures: 2025, the state of generative AI in the enterprise","https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/","ven"],
+ cxtodayNice:["CX Today: Pindrop and NICE CXone integration","https://www.cxtoday.com/contact-center/pindrop-nice-integration-deepfake-detection-cxone/","ind"],
+ biometric:["Biometric Update: Zoom expands Pindrop deepfake detection (Mar 2026)","https://www.biometricupdate.com/202603/zoom-expands-pindrop-deepfake-detection-to-customer-service","ind"],
+ wiley:["Wiley Rein: FCC TCPA restrictions cover AI-generated voices","https://www.wiley.law/alert-FCC-Extends-Regulatory-Reach-Over-AI-Announces-TCPA-Restrictions-Cover-AI-Generated-Voices-in-Outbound-Calls","ind"],
+ clunic:["Clunic: California AI health care laws","https://clunic.com/regulations/california-ai-healthcare-laws","ind"],
+ conferbot:["Conferbot: AI chatbot disclosure laws guide","https://www.conferbot.com/blog/ai-chatbot-disclosure-laws-compliance-guide","ven"],
+ wisc:["Wisconsin Legislative Council: US state AI laws overview (Aug 13, 2026)","https://docs.legis.wisconsin.gov/misc/lc/study/2026/3042/090_august_13_2026_meeting_10_00_a_m_room_411_south_state_capitol/003_us_state_ai_laws_an_overview_final","ind"],
+ vercelVoice:["Vercel changelog: AI Voice Elements (Jan 14, 2026)","https://vercel.com/changelog/ai-voice-elements","ven"],
+ stateofdevs:["Devographics: State of Devs 2026","https://2026.stateofdevs.com/en-US","ind"],
+ netguru:["Netguru: Why most chatbot implementations fail (Jul 2026)","https://www.netguru.com/blog/why-most-chatbot-implementations-fail","ven"],
+ bytebytego:["ByteByteGo: How OpenAI delivers low-latency voice AI (Jul 1, 2026)","https://blog.bytebytego.com/p/how-openai-delivers-low-latency-voice","ind"],
+ techcrunchEleven:["TechCrunch: ElevenLabs raises $500M at $11B valuation (Feb 4, 2026)","https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/","ind"],
+ flowith:["Flowith: GPT-Live in ChatGPT Voice guide","https://flowith.io/blog/gpt-live-chatgpt-voice-full-duplex-guide/","ind"],
+ runtimewire:["RuntimeWire: DevDay 2026 live updates","https://runtimewire.com/article/devday-2026-live-updates","ind"],
+ infoqDevday:["InfoQ: OpenAI DevDay 2026","https://www.infoq.com/news/2026/10/openai-devday-2026/","ind"],
+ sanity:["Sanity glossary: Jev, TypeSafe AI's decision model (Oct 6, 2026)","https://www.sanity.io/glossary/jev-typesafe-ai-model","ven"],
+ typesafeDocs:["TypeSafe docs: System One concepts","https://docs.typesafe.ai/concepts/system-one","ven"],
+ beriJev:["beri.net: Jev calibration, decomposition and shadow eval","https://www.beri.net/article/typesafe-jev-typed-decision-model-calibration-decomposition-shadow-eval","ind"],
+ infoqJev:["InfoQ: TypeSafe AI releases Jev (Oct 1, 2026)","https://www.infoq.com/news/2026/10/typesafe-ai-jev-released/","ind"]
+};
+
+const YEAR=[
+ ["Feb 4","ElevenLabs raises $500M at an $11B valuation","techcrunchEleven"],
+ ["Feb 26","Deepfake detection vendor expands into healthcare contact centers","pindrop"],
+ ["May 1","Sierra publishes tau-voice: best voice score 67%, up from 30%","sierraTau"],
+ ["Jul 8","GPT-Live begins rolling out in ChatGPT Voice","flowith"],
+ ["Jul 8","Co-LMLM extends limited-memory models beyond triples","colmlm"],
+ ["Sep 10 to 14","GPT-Live 1 and gpt-realtime-2.1 released","runtimewire"],
+ ["Sep 15","TypeSafe Jev early access; Gemini 3.8 Live launches","typesafe"],
+ ["Sep 18 to 20","Open-source Laya decision model released","laya"],
+ ["Sep 29","OpenAI DevDay: Decisions API announced","infoqDevday"],
+ ["Oct 6","Decisions API public beta; Sierra Tandem Voice","openaiDecisions"],
+ ["Oct 9","Field analysis of where voice agents break","nuanced"]
+];
+document.getElementById('year-strip').innerHTML=YEAR.map(e=>`<div class="ev"><span class="d">${e[0]}, 2026</span><span class="t">${e[1]}<a class="c" data-s="${e[2]}"></a></span></div>`).join('');
+
+const CLAIMS=[
+ ["Cekura Bench: 7 configurations, 82 scenarios, 3 repeats, 246 calls each","p","Design confirmed; the live hub now lists 8 platforms","cekuraBook"],
+ ["pass^3 is the primary metric","v","Share of scenarios where all three retained calls pass","cekura"],
+ ["Retell, ElevenLabs, Vapi and Gemini Live figures","v","Exact match on all four reported metrics","retellBlog"],
+ ["LiveKit 70.73% and Pipecat 63.41% pass^3","v","pass^3 confirmed; other metrics not seen","cekura"],
+ ["GPT Realtime 64.63% pass^3","u","Not found; the separate speech-to-speech benchmark shows 79.3%","cekuraS2S"],
+ ["Per-platform model stacks","u","Providers chose their own stacks; not independently confirmed","cekura"],
+ ["Entity drift between transcript and tool call","v","Documented instance with a phone number","retellBlog"],
+ ["TypeSafe Jev exists, built by an ex-OpenAI researcher","v","Released Sep 15, 2026","infoqJev"],
+ ["Jev latency 70 to 150 ms","u","Vendor quotes 70 to 500 ms; one test measured p50 175 ms, p95 270 ms","openrouterJev"],
+ ["Jev $0.042 per million input tokens, free output","p","Matches early-access vendor pricing","typesafe"],
+ ["Jev is calibrated and cannot hallucinate","p","Output is always schema-valid; calibration weaker than claimed in independent tests","beriJev"],
+ ["Decision models are 400x cheaper than LLMs","u","Not in primary sources; real savings in one cascade test were about 72%","openrouterJev"],
+ ["OpenAI Decisions API is generally available","u","Public beta since Oct 6, 2026","openaiDecisions"],
+ ["Open-source Laya is a drop-in router","u","Base checkpoints are near chance zero-shot; fine-tuning required","laya"],
+ ["Open models hit 78.4% of AI Gateway token volume","v","Exact post; one-day record on a developer-heavy gateway","rauch"],
+ ["Regulated enterprises are moving inference off public APIs","p","Private cloud endpoints common; no named US on-prem voice deployment","stanford"],
+ ["Decision-offload simulator: about 730 ms vs 1,900 ms turns","u","Simulated, not measured","cekura"],
+ ["Decision-offload simulator: $11,017 a month saved","p","Plausible arithmetic, but about 6% of run rate with no infrastructure modeled","beri"],
+ ["Sierra serves 80% of Fortune 50 healthcare companies","p","Vendor claim from Sierra Summit 2026; not independently verified","sierraSummit"],
+ ["Limited-memory models cannot hallucinate","u","Authors: does not guarantee perfect factuality","lmlm"],
+ ["Fact storage is about 99% of model size","u","No study measures it; retrieval models match 18x to 50x larger models on knowledge tasks","retro"]
+];
+const VL={v:["k-ind","verified"],p:["k-ven","partial or vendor"],u:["k-unv","unverified or wrong"]};
+document.getElementById('claims').innerHTML=CLAIMS.map(c=>`<tr data-v="${c[1]}"><td>${c[0]}</td><td><span class="chip ${VL[c[1]][0]}">${VL[c[1]][1]}</span></td><td>${c[2]}<a class="c" data-s="${c[3]}"></a></td></tr>`).join('');
+
+/* static cites used inside JS-rendered blocks are added below before numbering */
+const speedEl=document.getElementById('speed');
+const SPEED=[["Fine-tuned encoder (0.1B)",22.5,""],["Laya, open (421M)",36,""],["Arch-Router (1.5B)",51,""],["Jev, hosted p50",175,""],["Jev, hosted p95",270,""],["Frontier LLM p50",2266,"slow"]];
+const smax=2300;
+speedEl.innerHTML=SPEED.map(s=>`<div class="sp"><span>${s[0]}</span><span class="t"><div class="b ${s[2]}" style="width:${Math.max(.8,s[1]/smax*100)}%"></div><span class="budget" style="left:${800/smax*100}%"></span></span><span>${s[1]>=1000?(s[1]/1000).toFixed(2)+' s':Math.round(s[1])+' ms'}</span></div>`).join('')+`<div class="note" style="margin-top:2px">Dashed line: 800 ms end-to-end turn target</div>`;
+
+const order=[];
+document.querySelectorAll('a.c').forEach(a=>{
+  const k=a.dataset.s; if(!S[k]) return;
+  if(!order.includes(k)) order.push(k);
+  const n=order.indexOf(k)+1; a.textContent='['+n+']'; a.href='#src-'+k; a.title=S[k][0];
+});
+document.getElementById('src').innerHTML=order.map((k,i)=>`<li id="src-${k}" data-t="${S[k][2]}"><span class="i">[${i+1}]</span><span>${S[k][0]} <span class="chip ${S[k][2]==='ind'?'k-ind':'k-ven'}">${S[k][2]==='ind'?'independent':'vendor'}</span><br><a href="${S[k][1]}" target="_blank" rel="noopener">${S[k][1]}</a></span></li>`).join('');
+
+function seg(el,cb){el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!el.contains(b))return;el.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));cb(b)})}
+seg(document.getElementById('sf'),b=>{document.querySelectorAll('#src li').forEach(li=>li.hidden=!(b.dataset.f==='all'||li.dataset.t===b.dataset.f))});
+seg(document.getElementById('vf'),b=>{document.querySelectorAll('#claims tr').forEach(tr=>tr.hidden=!(b.dataset.f==='all'||tr.dataset.v===b.dataset.f))});
+const $=id=>document.getElementById(id);
+(function(){const root=document.documentElement;let t='system';try{t=localStorage.getItem('va-theme')||'system'}catch(e){}
+ const apply=v=>{if(v==='system')root.removeAttribute('data-theme');else root.setAttribute('data-theme',v);document.querySelectorAll('#theme button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===v))};
+ apply(t);$('theme').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;apply(b.dataset.t);try{localStorage.setItem('va-theme',b.dataset.t)}catch(err){}})})();
+
+/* waveform */
+let wh='';
+for(let i=0;i<96;i++){const s5=Math.floor(i/19.2);const amp=s5===4?0.25:(0.25+0.75*Math.abs(Math.sin(i*0.9)*Math.cos(i*0.23)));
+ wh+=`<i class="${s5%2?'alt':''}" style="height:${Math.round(amp*100)}%;animation-delay:${(i%12)*0.11}s"></i>`}
+$('wave').innerHTML=wh;
+
+/* dumbbell */
+const P=[
+ {n:"Retell",s:"Retell STT · GPT-5.5 · Eleven Flash v2",p3:75.61,tc:93.88,cl:98.37,lat:2.21,st:"verified"},
+ {n:"LiveKit",s:"Nova-3 · GPT-4.1 · Sonic-3",p3:70.73,tc:95.12,cl:99.19,lat:2.59,st:"pass^3 verified"},
+ {n:"ElevenLabs",s:"Scribe RT · Qwen3.5-397B · Flash v2",p3:69.51,tc:91.46,cl:100,lat:1.27,st:"verified"},
+ {n:"GPT Realtime",s:"gpt-realtime-2.1 (native)",p3:64.63,tc:92.68,cl:95.53,lat:1.58,st:"unverified"},
+ {n:"Pipecat",s:"Nova-3 · GPT-4.1 · Sonic-3.5",p3:63.41,tc:94.21,cl:97.15,lat:1.97,st:"pass^3 verified"},
+ {n:"Vapi",s:"Provider-chosen stack",p3:59.76,tc:97.56,cl:82.93,lat:3.08,st:"verified"},
+ {n:"Gemini Live",s:"Native speech-to-speech",p3:30.49,tc:87.80,cl:72.36,lat:3.05,st:"verified"}
+];
+$('ticks').innerHTML=[0,25,50,75,100].map(t=>`<span style="left:${t}%">${t}%</span>`).join('');
+let sel=0,sortKey='p3';
+function renderDB(){
+  const arr=P.map((p,i)=>({...p,i})).sort((a,b)=>sortKey==='p3'?b.p3-a.p3:sortKey==='gap'?(b.tc-b.p3)-(a.tc-a.p3):a.lat-b.lat);
+  $('db').innerHTML=arr.map(p=>`<button type="button" class="db-row" data-i="${p.i}" aria-pressed="${p.i===sel}">
+   <span class="db-name">${p.n}<small>${p.s}</small></span>
+   <span class="track"><span class="gap" style="left:${p.p3}%;width:${p.tc-p.p3}%"></span><span class="d p3" style="left:${p.p3}%"></span><span class="d p1" style="left:${p.tc}%"></span></span>
+   <span class="db-val"><b>${p.p3.toFixed(1)}</b> / ${p.tc.toFixed(1)}</span></button>`).join('');
+  const p=P[sel];const stc=p.st==='unverified'?'k-unv':(p.st==='verified'?'k-ind':'k-ven');
+  $('db-detail').innerHTML=`
+   <div><div class="k">Demo gap</div><div class="v">${(p.tc-p.p3).toFixed(1)} pts</div></div>
+   <div><div class="k">Mean turn time</div><div class="v">${p.lat.toFixed(2)} s</div></div>
+   <div><div class="k">Clean calls</div><div class="v">${p.cl.toFixed(1)}%</div></div>
+   <div><div class="k">Figures</div><div class="v"><span class="chip ${stc}">${p.st}</span></div></div>
+   <div class="wide">${p.n}: of 82 scenarios, about ${Math.round(p.p3*0.82)} passed all three tries. Single runs succeeded ${p.tc.toFixed(1)}% of the time, so a one-call demo overstates readiness by ${(p.tc-p.p3).toFixed(0)} points. Each provider chose its own model stack.</div>`;
+}
+$('db').addEventListener('click',e=>{const b=e.target.closest('.db-row');if(!b)return;sel=+b.dataset.i;renderDB()});
+seg(document.querySelector('#gap .seg'),b=>{sortKey=b.dataset.sort;renderDB()});
+renderDB();
+
+/* calculator */
+const usd=n=>{const a=Math.abs(n),s=n<0?'−':'';return s+(a>=1e6?'$'+(a/1e6).toFixed(2)+'M':a>=1e3?'$'+Math.round(a/1e3)+'K':'$'+Math.round(a))};
+const PRESETS={cons:{'c-scope':20,'c-min':5,'c-rate':0.14,'c-res':35,'c-hum':5,'c-fix':2500000},base:{'c-scope':30,'c-min':4,'c-rate':0.11,'c-res':55,'c-hum':6.04,'c-fix':1500000},tgh:{'c-scope':40,'c-min':3.5,'c-rate':0.11,'c-res':70,'c-hum':6.04,'c-fix':1500000}};
+function calc(){
+  const calls=+$('c-calls').value,scope=+$('c-scope').value/100,mins=+$('c-min').value,rate=+$('c-rate').value,res=+$('c-res').value/100,hum=+$('c-hum').value,fix=+$('c-fix').value;
+  $('o-calls').textContent=calls.toLocaleString();$('o-scope').textContent=Math.round(scope*100)+'%';$('o-min').textContent=mins+' min';$('o-rate').textContent='$'+rate.toFixed(2);$('o-res').textContent=Math.round(res*100)+'%';$('o-hum').textContent='$'+hum.toFixed(2);$('o-fix').textContent=usd(fix);
+  const N=calls*scope*30, fixM=fix/12, human=N*hum;
+  const ai=r=>N*mins*rate+N*(1-r)*hum+fixM, save=r=>human-ai(r);
+  const be=Math.max(0,(mins*rate+fixM/N)/hum);
+  $('t-human').textContent=usd(human);$('t-ai').textContent=usd(ai(res));$('t-save').textContent=usd(save(res));$('t-be').textContent=be>1?'never':Math.round(be*100)+'%';
+  const per5=0.05*N*hum;
+  $('calc-note').textContent=`Each 5 points of resolution is worth about ${usd(per5)} a month here, ${(per5/11017).toFixed(1)} times the $11K a month that one widely shared token-only model projected.`;
+  const s=Math.max(save(res),0),mx=Math.max(s,11017,1);
+  $('compare').innerHTML=`<div class="r"><span>Resolution economics</span><div class="bar" style="width:${Math.max(2,s/mx*100)}%"></div><span>${usd(save(res))}</span></div>
+   <div class="r"><span>Token-only saving</span><div class="bar wp" style="width:${Math.max(2,11017/mx*100)}%"></div><span>$11K</span></div>`;
+  const W=600,H=230,L=64,R=16,T=14,B=34;const xs=r=>L+(r/0.9)*(W-L-R);
+  const vals=[];for(let r=0;r<=0.9001;r+=0.01)vals.push([r,save(r)]);
+  let ymin=Math.min(...vals.map(v=>v[1]),0),ymax=Math.max(...vals.map(v=>v[1]),0);const pad=(ymax-ymin)*0.08||1;ymin-=pad;ymax+=pad;
+  const ys=v=>T+(ymax-v)/(ymax-ymin)*(H-T-B);
+  const step=(()=>{const raw=(ymax-ymin)/4,mag=Math.pow(10,Math.floor(Math.log10(raw)));return [1,2,2.5,5,10].map(m=>m*mag).find(m=>m>=raw)})();
+  let g='';for(let v=Math.ceil(ymin/step)*step;v<=ymax;v+=step){g+=`<line x1="${L}" x2="${W-R}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--line)"/><text x="${L-8}" y="${ys(v)+4}" text-anchor="end" font-size="12" fill="var(--muted)">${usd(v)}</text>`}
+  [0,0.2,0.4,0.6,0.8].forEach(r=>{g+=`<text x="${xs(r)}" y="${H-12}" text-anchor="middle" font-size="12" fill="var(--muted)">${Math.round(r*100)}%</text>`});
+  const path=vals.map((v,i)=>(i?'L':'M')+xs(v[0]).toFixed(1)+' '+ys(v[1]).toFixed(1)).join(' ');
+  const area=path+` L${xs(0.9)} ${ys(0)} L${xs(0)} ${ys(0)} Z`;
+  $('res-chart').innerHTML=`${g}
+   <line x1="${L}" x2="${W-R}" y1="${ys(0)}" y2="${ys(0)}" stroke="var(--ink)" stroke-width="1"/>
+   <path d="${area}" fill="var(--accent)" opacity=".1"/>
+   <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+   ${be<=0.9?`<line x1="${xs(be)}" x2="${xs(be)}" y1="${T}" y2="${H-B}" stroke="var(--signal)" stroke-dasharray="4 4"/><text x="${xs(be)+6}" y="${T+12}" font-size="12" fill="var(--signal)">break-even</text>`:''}
+   <circle cx="${xs(res)}" cy="${ys(save(res))}" r="6" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
+   <text x="${W-R}" y="${H-12}" text-anchor="end" font-size="11" fill="var(--muted)">resolved by agent →</text>`;
+}
+document.querySelectorAll('#calc-ctrls input').forEach(i=>i.addEventListener('input',()=>{document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed','false'));calc()}));
+seg(document.querySelector('#calc-ctrls .seg'),b=>{const p=PRESETS[b.dataset.preset];Object.keys(p).forEach(k=>$(k).value=p[k]);calc()});
+calc();
+
+/* router demo */
+const INT=[
+ {k:"bill",n:"Billing & payments",mcp:"billing-mcp, payments-mcp"},
+ {k:"sched",n:"Scheduling",mcp:"scheduling-mcp, calendar-mcp"},
+ {k:"acct",n:"Account & card",mcp:"accounts-mcp, card-mcp"},
+ {k:"comp",n:"Complaints",mcp:"case-mcp, crm-mcp",esc:1},
+ {k:"fraud",n:"Fraud & security",mcp:"fraud-desk (human)",esc:1},
+ {k:"clin",n:"Clinical concern",mcp:"nurse line (human)",esc:1}
+];
+const UT=[
+ {tag:"Healthcare billing",t:"I got charged twice for my visit last month.",p:{bill:.91,sched:.04,acct:.08,comp:.12,fraud:.03,clin:.01}},
+ {tag:"Multi-intent",t:"Third time I've been overcharged and nobody ever calls me back.",p:{bill:.71,sched:.02,acct:.06,comp:.68,fraud:.04,clin:.01}},
+ {tag:"Scheduling",t:"I need to move my Thursday appointment to next week.",p:{bill:.02,sched:.95,acct:.03,comp:.02,fraud:.01,clin:.04}},
+ {tag:"Banking",t:"What's the available balance on my checking account?",p:{bill:.07,sched:.01,acct:.92,comp:.01,fraud:.02,clin:.0}},
+ {tag:"Fraud signal",t:"Someone called pretending to be you and asked for my card number.",p:{bill:.03,sched:.0,acct:.31,comp:.22,fraud:.64,clin:.0}},
+ {tag:"Clinical signal",t:"My chest has been hurting since this morning, should I still come in?",p:{bill:.0,sched:.38,acct:.0,comp:.01,fraud:.0,clin:.57}},
+ {tag:"Ambiguous",t:"Yeah, it's about the thing from before.",p:{bill:.28,sched:.22,acct:.18,comp:.12,fraud:.03,clin:.02}}
+];
+let uSel=1;
+function renderRouter(){
+  const th=+$('r-th').value;$('o-th').textContent=th.toFixed(2);
+  $('utts').innerHTML=UT.map((u,i)=>`<button type="button" class="utt" data-i="${i}" aria-pressed="${i===uSel}"><small>${u.tag}</small>"${u.t}"</button>`).join('');
+  const u=UT[uSel];
+  const escHit=INT.filter(x=>x.esc&&(x.k==='fraud'||x.k==='clin')&&u.p[x.k]>=0.3);
+  const on=INT.filter(x=>u.p[x.k]>=th);
+  $('probs').innerHTML=INT.map(x=>{const v=u.p[x.k];const cls=(escHit.includes(x))?'esc':(v>=th?'on':'');return `<div class="pr ${cls}"><span>${x.n}</span><span class="t"><div class="f" style="width:${v*100}%"></div><span class="th" style="left:${th*100}%"></span></span><span>${v.toFixed(2)}</span></div>`}).join('');
+  let h,c;
+  if(escHit.length){c='v-esc';h=`<span class="h">Escalate by rule: ${escHit.map(x=>x.n.toLowerCase()).join(', ')}</span><span>Any fraud or clinical signal above 0.30 goes to a person, whatever the threshold says.</span><span class="mcp">→ ${escHit.map(x=>x.mcp).join(' · ')}</span>`}
+  else if(!on.length){c='v-fb';h=`<span class="h">No intent clears ${th.toFixed(2)}: hand off instead of guessing</span><span>Ask one clarifying question, or send the turn to a frontier model with the full intent schema.</span><span class="mcp">→ frontier LLM fallback · adds about 2 s</span>`}
+  else if(on.length>1){const top=on.find(x=>x.esc)||on[0];c='v-multi';h=`<span class="h">Multi-intent: ${on.map(x=>x.n).join(' + ')}</span><span>Route to ${top.n.toLowerCase()} and give it the other sub-agent's tools too, so nothing is dropped.</span><span class="mcp">→ ${on.map(x=>x.mcp).join(' · ')} (${on.length*2} of 40+ tools exposed)</span>`}
+  else{const x=on[0];c=x.esc?'v-esc':'v-go';h=`<span class="h">Route to ${x.n} sub-agent</span><span>Decided in tens of milliseconds, before the conversation model starts talking.</span><span class="mcp">→ ${x.mcp} (2 of 40+ tools exposed)</span>`}
+  $('rverdict').innerHTML=`<div class="verdict ${c}">${h}</div>`;
+}
+$('utts').addEventListener('click',e=>{const b=e.target.closest('.utt');if(!b)return;uSel=+b.dataset.i;renderRouter()});
+$('r-th').addEventListener('input',renderRouter);
+renderRouter();
+
+/* thinker-responder */
+function renderTR(m){
+  if(m==='tr'){
+    $('tr-flow').innerHTML=`<div class="lane"><span class="ln">Thinker · silent</span><div class="flow"><span class="box s1">intent = billing (0.91)</span><span class="box s1">risk = none</span><span class="box s1">tools = billing-mcp</span><span class="box s1">fetch = recent charges</span><span class="arr">~50 ms</span></div></div>
+     <div class="lane"><span class="ln">Responder · speaks</span><div class="flow"><span class="box s2">"I can see two charges of $140 on March 3. I'll reverse the duplicate now. Is that the card ending 4471?"</span></div></div>`;
+    $('tr-note').textContent='The caller hears one direct answer. The decisions are logged as structured data, not spoken.';
+  }else{
+    $('tr-flow').innerHTML=`<div class="lane"><span class="ln">One LLM, out loud</span><div class="flow"><span class="box">"Okay, let me think about that. It sounds like a billing question. Let me look up your account... I'm checking your recent charges now... it looks like there may be a duplicate..."</span><span class="arr">~2 s before the first useful word</span></div></div>`;
+    $('tr-note').textContent='Reasoning spoken as filler adds seconds, leaks internal steps, and invites the model to describe results it has not actually received.';
+  }
+}
+seg($('tr-mode'),b=>renderTR(b.dataset.m));
+renderTR('tr');
+
+/* use cases */
+const UC=[
+ {n:"Confirm, cancel, reschedule",m:0,r:0,o:"Abandonment down 56%, appointments up 21% at Tampa General",v:"Hyro, Assort, Hello Patient, Zocdoc Zo",d:"Tampa General and others"},
+ {n:"Routing and FAQ, portal help",m:0,r:0,o:"44% of repetitive calls automated, abandonment down 85% at Intermountain",v:"Hyro, Talkdesk, Sierra",d:"Intermountain Health"},
+ {n:"Ambient documentation",m:0,r:1,o:"Adjacent category, widely piloted for clinical notes and handoffs",v:"Abridge, Microsoft/Nuance, Commure",d:"Many health systems"},
+ {n:"Refill status",m:1,r:1,o:"Included in Tampa General scope; no isolated metric found",v:"Hyro, Assort",d:"Tampa General"},
+ {n:"Billing and revenue cycle",m:1,r:1,o:"Billing agent live in 40 days at one urgent care network (vendor-reported)",v:"Hello Patient, Infinitus, Prosper",d:"Piedmont Urgent Care"},
+ {n:"Prior auth and payer calls",m:1,r:1,o:"Positioned by vendors; no outcome metric found",v:"Infinitus, Prosper, Sierra",d:"None found"},
+ {n:"Post-discharge follow-up",m:1,r:2,o:"9.0/10 patient rating reported by vendor; heavy clinical supervision",v:"Hippocratic AI",d:"WellSpan, UHS"},
+ {n:"Screening outreach (outbound)",m:1,r:2,o:"Higher kit requests among Spanish-speaking patients (vendor-reported); consent rules apply",v:"Hippocratic AI",d:"WellSpan"},
+ {n:"Nurse triage lines",m:2,r:2,o:"No validated autonomous deployment found; vendors exclude diagnosis",v:"None recommended",d:"None"}
+];
+const zone=(m,r)=>m===2&&r===2?'z-no':r===2?'z-sup':m===0&&r===0?'z-go':(m===2?'z-empty':'z-next');
+const ML=["High","Medium","Low"],RL=["Low risk","Medium risk","High risk"];
+let ucSel=0;
+function renderUC(){
+  let h='<div class="hdr">Maturity</div>'+RL.map(r=>`<div class="hdr">${r}</div>`).join('');
+  for(let m=0;m<3;m++){h+=`<div class="rowh">${ML[m]}</div>`;for(let r=0;r<3;r++){h+=`<div class="cell ${zone(m,r)}">`+UC.map((u,i)=>u.m===m&&u.r===r?`<button type="button" class="uc" data-i="${i}" aria-pressed="${i===ucSel}">${u.n}</button>`:'').join('')+'</div>'}}
+  $('ucg').innerHTML=h;
+  const u=UC[ucSel];const z={'z-go':'Start here','z-next':'Next wave','z-sup':'Clinically supervised only','z-no':'Not yet'}[zone(u.m,u.r)];
+  $('uc-detail').innerHTML=`<div><span class="lbl">${z}</span><h3 style="margin-top:6px">${u.n}</h3><p style="margin-top:8px">${u.o}</p></div>
+   <div class="stack" style="gap:8px"><div><span class="lbl">Example vendors</span><p>${u.v}</p></div><div><span class="lbl">Example deployments</span><p>${u.d}</p></div></div>`;
+}
+$('ucg').addEventListener('click',e=>{const b=e.target.closest('.uc');if(!b)return;ucSel=+b.dataset.i;renderUC()});
+renderUC();
+
+/* lmlm demo */
+let lmMode='lm',deleted=false;
+function renderLM(){
+  if(lmMode==='lm'){
+    $('lm-answer').innerHTML=deleted?`"I don't have a record for that member. Let me connect you with someone who can help." <mark class="gone">lookup → no row</mark>`:`"Your plan's annual coverage limit is <mark>$250,000</mark>." <mark>lookup(member 4471, coverage_limit)</mark>`;
+    $('lm-src-lbl').textContent='Where the fact came from: governed store';
+    $('lm-src').innerHTML=`<div class="store"><div class="hd"><span>entity</span><span>relation</span><span>value</span></div><div class="${deleted?'del':''}"><span>member 4471</span><span>coverage_limit</span><span>$250,000</span></div><div class="${deleted?'del':''}"><span>member 4471</span><span>plan</span><span>Gold PPO</span></div><div><span>Gold PPO</span><span>deductible</span><span>$1,500</span></div></div>`;
+    $('lm-note').textContent=deleted?'Rows deleted. The model forgets them immediately; nothing to retrain.':'Every value is a logged lookup with access control and an audit trail.';
+  }else{
+    $('lm-answer').innerHTML=`"Your plan's annual coverage limit is <mark class="mem">$250,000</mark>." <mark class="mem">from weights</mark>`;
+    $('lm-src-lbl').textContent='Where the fact came from: model weights';
+    $('lm-src').innerHTML=`<div class="say-box" style="font-size:.86rem">Memorized during training. No row to inspect, no lookup to log${deleted?'. The deletion request did not change what the model says; forgetting would mean retraining or gradient-based unlearning, which degraded models in the paper.':'.'}</div>`;
+    $('lm-note').textContent='Correcting or deleting this fact means retraining.';
+  }
+}
+seg($('lm-mode'),b=>{lmMode=b.dataset.m;renderLM()});
+$('lm-del').addEventListener('click',()=>{deleted=!deleted;$('lm-del').textContent=deleted?'Restore record':'Customer asks to be forgotten: delete record';renderLM()});
+renderLM();
+
+/* options */
+const OPT=[
+ {t:"Buy a platform or vertical vendor",s:"Sierra, Hyro, Hippocratic AI",pros:["Fastest time to value","Integrations and compliance contracts are standard","Vendor carries tuning, safety layers and ops"],cons:["Opaque pricing","Less control over evaluation, routing and data","Lock-in at the integration layer"],roi:"Abandonment and scheduling lift convert to revenue; labor avoided on in-scope queues.",verdict:"Strong for the pilot itself."},
+ {t:"Build on a platform",s:"Retell, LiveKit, Pipecat",pros:["Full transparency and model choice","Lowest per-minute cost","Own every trace and the router"],cons:["Needs a dedicated team","You own integration and safety","Slower first launch"],roi:"About $0.08 to $0.14 a minute against roughly $6 a human call; break-even depends on resolution rate.",verdict:"Right later, not first."},
+ {t:"Hybrid",s:"Buy now, own the router and evals",rec:true,pros:["Quick wins from a vertical vendor","You build the test suite, routing layer, logs and governed fact store in parallel","Starts the limited-memory training program on your own data","Keeps the exit door open"],cons:["Two workstreams to govern","Needs contract terms for log and eval export"],roi:"Captures near-term savings while building leverage for the next contract cycle.",verdict:"Recommended."},
+ {t:"Wait",s:"Revisit in 2027",pros:["No execution risk","Models and benchmarks keep improving"],cons:["Peers compound gains","IVR frustration persists","No internal evaluation muscle"],roi:"Negative: forgone abandonment and scheduling gains.",verdict:"Not recommended."}
+];
+let oSel=2;
+function renderOpt(){
+  $('opts').innerHTML=OPT.map((o,i)=>`<button type="button" class="opt" data-i="${i}" aria-pressed="${i===oSel}">${o.rec?'<span class="rec">Recommended</span>':''}<span class="t">${o.t}</span><span class="s">${o.s}</span></button>`).join('');
+  const o=OPT[oSel];
+  $('opt-detail').innerHTML=`<div class="cols2"><div><span class="lbl">Pros</span><ul class="tight">${o.pros.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><span class="lbl">Cons</span><ul class="tight">${o.cons.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+   <div class="cols2" style="margin-top:14px"><div><span class="lbl">ROI logic</span><p style="margin-top:6px">${o.roi}</p></div><div><span class="lbl">Verdict</span><p style="margin-top:6px;font-weight:600">${o.verdict}</p></div></div>`;
+}
+$('opts').addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;oSel=+b.dataset.i;renderOpt()});
+renderOpt();
+
+/* personas */
+const PER=[
+ {n:"Chief Digital & CX Officer",p:"Expand in phases. Voice is the front door, and it is now also a brand-trust channel.",e:"A large health system cut abandonment 56% and scheduled 21% more appointments in two weeks.",c:"One bad call becomes the story. Scammers posing as your brand erode trust in every legitimate call.",m:"Pilot satisfaction falling below the human baseline."},
+ {n:"CFO",p:"Fund a pilot, not a platform. Pay for resolved calls.",e:"The higher-resolution stack is cheaper per 1,000 calls despite a higher per-minute rate. A decision-first cascade cut classification cost about 72% in one test.",c:"Vertical vendors rarely publish pricing. Early-access model prices may be subsidized.",m:"Verified cost per resolved call below half the human cost at day 90."},
+ {n:"CISO & Privacy Officer",p:"Hosted APIs only under contract. Self-host the small models. Prefer facts in governed stores.",e:"Hosted decision APIs need a BAA or equivalent; self-hosted encoders avoid the question. Extraction attacks have pulled personal data from model weights.",c:"Voice cloning, prompt injection, retention terms that change.",m:"A signed contract and SOC 2 Type II from every layer, testing vendor included."},
+ {n:"Contact Center Operations",p:"Start with scheduling, billing and status checks; warm transfer with full context.",e:"Intermountain: 44% of repetitive calls automated and 85% lower abandonment.",c:"Wrong write-backs, misroutes, authentication failures, staff morale.",m:"Misroute or wrong-action rate above 0.5% on audit."},
+ {n:"Clinical & Risk Safety Lead",p:"Administrative only. No triage, no advice. Escalation by rule, not by threshold.",e:"No validated autonomous triage deployment found. Best models reach only about 53% on multi-intent benchmarks.",c:"Missed red flags, older and non-English callers, regulatory exposure.",m:"An independent safety evaluation with prospective outcomes."},
+ {n:"AI Platform Architect",p:"Thinker-responder: tiered router in front, narrowed tools per sub-agent, and an LMLM prototype for static knowledge. On a managed platform such as Sierra, insist on exporting routing decisions and logs.",e:"A 0.1B fine-tuned classifier hits 93.5% on Banking77 in 22 ms. Tool retrieval more than tripled selection accuracy. A 382M LMLM approached a 7B model on factual precision.",c:"Lock-in at orchestration and integration layers; model churn every few weeks.",m:"A vendor refusing to export logs or routing decisions."},
+ {n:"Skeptic / red team",p:"Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers.",e:"Jev's Banking77 score varies 10.7 points by lab. Benign context flipped 61% of correct decisions. LMLM is untested above 400M parameters or on dialog. Sierra publishes single-run voice scores, not repeat reliability.",c:"Every outcome figure here is customer- or vendor-reported, with no control group.",m:"90%+ pass^3 on your own scenarios, audited by an independent party."}
+];
+let pSel=0;
+function renderPer(){
+  $('personas').innerHTML=PER.map((p,i)=>`<button type="button" class="persona" data-i="${i}" aria-pressed="${i===pSel}">${p.n}</button>`).join('');
+  const p=PER[pSel];
+  $('pdetail').innerHTML=`<p class="pos">${p.p}</p>
+   <div><span class="lbl">Strongest evidence</span><p style="margin-top:6px">${p.e}</p></div>
+   <div><span class="lbl">Key concern</span><p style="margin-top:6px">${p.c}</p></div>
+   <div style="grid-column:1/-1"><span class="lbl">What would change their mind</span><p style="margin-top:6px">${p.m}</p></div>`;
+}
+$('personas').addEventListener('click',e=>{const b=e.target.closest('.persona');if(!b)return;pSel=+b.dataset.i;renderPer()});
+renderPer();
+
+/* latency */
+const STG=[
+ {k:"net",n:"Network and telephony",c:"#6B7A8F",max:600},
+ {k:"ep",n:"Endpointing (turn end)",c:"#C2650F",max:1200},
+ {k:"stt",n:"STT finalize",c:"#3A8C6E",max:600},
+ {k:"tool",n:"Tool call (blocking)",c:"#B23A2F",max:1500},
+ {k:"llm",n:"LLM first token",c:"#2343C4",max:2000},
+ {k:"tts",n:"TTS first audio",c:"#7A4FB8",max:800}
+];
+const LP={seq:{net:150,ep:650,stt:150,tool:450,llm:870,tts:200},par:{net:150,ep:400,stt:150,tool:0,llm:600,tts:180},fd:{net:120,ep:150,stt:0,tool:0,llm:450,tts:0}};
+let LV={...LP.seq};
+$('lat-ctrls').innerHTML=STG.map(s=>`<div class="ctrl"><label for="l-${s.k}"><span><i class="sw" style="background:${s.c};border-radius:3px;width:10px;height:10px;margin-right:6px"></i>${s.n}</span><output id="lo-${s.k}"></output></label><input type="range" id="l-${s.k}" min="0" max="${s.max}" step="10"></div>`).join('');
+function renderLat(){
+  const tot=STG.reduce((a,s)=>a+LV[s.k],0);const scale=Math.max(3200,tot);
+  $('lat-total').textContent=(tot/1000).toFixed(2)+' s';
+  $('lat-bar').innerHTML=STG.filter(s=>LV[s.k]>0).map(s=>`<div style="width:${LV[s.k]/scale*100}%;background:${s.c}" title="${s.n}: ${LV[s.k]} ms">${LV[s.k]>=250?LV[s.k]:''}</div>`).join('');
+  $('lat-scale').innerHTML=`<div class="band" style="left:${1270/scale*100}%;width:${(3080-1270)/scale*100}%"></div>
+   <div class="m" style="left:${200/scale*100}%"><span>human gap ~0.2 s</span></div>
+   <div class="m" style="left:${2000/scale*100}%"><span>measured platforms 1.27 to 3.08 s</span></div>`;
+  STG.forEach(s=>{$('l-'+s.k).value=LV[s.k];$('lo-'+s.k).textContent=LV[s.k]+' ms'});
+}
+$('lat-ctrls').addEventListener('input',e=>{const k=e.target.id.slice(2);LV[k]=+e.target.value;document.querySelectorAll('[data-lp]').forEach(b=>b.setAttribute('aria-pressed','false'));renderLat()});
+seg(document.querySelector('#t-latency .seg'),b=>{LV={...LP[b.dataset.lp]};renderLat()});
+renderLat();
+
+/* pass^k */
+function renderPK(){
+  const p=+$('pk-p').value/100;$('o-pk').textContent=(p*100).toFixed(1)+'%';
+  $('pk').innerHTML=[1,2,3,4,5].map(k=>{const v=Math.pow(p,k);return `<div class="col"><span class="v">${(v*100).toFixed(1)}%</span><div class="bar" style="height:${v*120}px"></div><span class="k">pass^${k}</span></div>`}).join('');
+  $('pk-note').innerHTML=`At ${(p*100).toFixed(1)}% per call, only ${(Math.pow(p,3)*100).toFixed(1)}% of scenarios would pass three for three, assuming independent runs. Across 30,000 calls a month, that per-call rate still means about ${Math.round((1-p)*30000).toLocaleString()} failed calls.`;
+}
+$('pk-p').addEventListener('input',renderPK);renderPK();
+/* after-pilot */
+const AFTER={
+ scale:{h:"Gates met: scale in waves",c:[
+  ["Months 4 to 6","Widen",["Add two or three call types and one more market at a time, each through the same pass^3 gate","Retrain the router on pilot transcripts; you now have real labeled intents","Outbound only where consent is on file"]],
+  ["Months 7 to 12","Own",["Move routing and evaluation in-house; keep vendors on the responder and voice stack","Renegotiate on price per resolved call, with log and routing export rights","Start the limited-memory training program on one knowledge domain"]],
+  ["Ongoing","Govern",["Monthly review of misroutes, wrong actions and complaints","Change control: re-run the full suite before any model or prompt change","Report resolved calls, abandonment and satisfaction to the board quarterly"]]]},
+ adjust:{h:"Some gates missed: fix, then re-run",c:[
+  ["Weeks 1 to 4","Diagnose",["Rank failures from the logs; most trace to audio, identity or integration, not the model","Narrow scope to the call types that passed"]],
+  ["Weeks 5 to 8","Fix",["Swap the weak component (speech-to-text, turn detection, router thresholds) rather than the whole platform","Add every failure to the test suite"]],
+  ["Weeks 9 to 20","Re-run",["Repeat the 90-day pilot on the narrowed scope with the same gates","Scale only after a clean pass"]]]},
+ stop:{h:"Kill criterion hit: stop and keep the learning",c:[
+  ["Immediately","Contain",["Turn the agent off for affected call types; route to people","Notify compliance and run an incident review"]],
+  ["Next 30 days","Learn",["Write a blameless post-mortem: what failed, why the gates did not catch it earlier","Keep the test suite, logs and recordings"]],
+  ["Next edition","Revisit",["Re-evaluate when the failing capability improves; benchmarks move every quarter","Continue building the governed fact store; it pays off regardless"]]]}
+};
+const afterHTML=k=>{const a=AFTER[k];return `<p style="font-weight:600;margin-top:4px">${a.h}</p><div class="roadmap">${a.c.map(c=>`<div class="rm"><span class="w">${c[0]}</span><span class="t">${c[1]}</span><ul>${c[2].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>`};
+seg($('after-mode'),b=>{$('after').innerHTML=afterHTML(b.dataset.o)});
+$('after').innerHTML=afterHTML('scale');
+$('after-print').innerHTML=['scale','adjust','stop'].map(afterHTML).join('');
+
+/* print-only expansions */
+$('opt-print').innerHTML=OPT.map(o=>`<div class="panel" style="margin-top:10px"><p style="font-weight:600">${o.t}${o.rec?' (recommended)':''} <span class="note">${o.s}</span></p><div class="cols2" style="margin-top:6px"><div><span class="lbl">Pros</span><ul class="tight">${o.pros.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><span class="lbl">Cons</span><ul class="tight">${o.cons.map(x=>`<li>${x}</li>`).join('')}</ul></div></div><p class="note" style="margin-top:6px">ROI logic: ${o.roi} Verdict: ${o.verdict}</p></div>`).join('');
+$('per-print').innerHTML=PER.map(p=>`<div class="panel persona-print" style="margin-top:10px"><p style="font-weight:600">${p.n}</p><p style="margin-top:4px">${p.p}</p><p class="note" style="margin-top:4px">Evidence: ${p.e} Concern: ${p.c} Would change their mind: ${p.m}</p></div>`).join('');
+$('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Reported outcome</th><th>Example vendors</th></tr></thead><tbody>${UC.map(u=>`<tr><td>${u.n}</td><td>${{'z-go':'Start here','z-next':'Next wave','z-sup':'Supervised only','z-no':'Not yet'}[zone(u.m,u.r)]}</td><td>${u.o}</td><td>${u.v}</td></tr>`).join('')}</tbody></table>`;
+
+/* PDF export */
+(function(){
+ const root=document.documentElement,dlg=$('pdf-dlg');let prev=null,last=null;
+ const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+ const current=()=>root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+ $('pdf-open').addEventListener('click',()=>{last=document.activeElement;$('pdf-'+current()).checked=true;$('pdf-frame').hidden=!inFrame;$('pdf-go').hidden=inFrame;dlg.hidden=false;(inFrame?$('pdf-cancel'):$('pdf-go')).focus()});
+ const close=()=>{dlg.hidden=true;last&&last.focus()};
+ $('pdf-cancel').addEventListener('click',close);
+ dlg.addEventListener('click',e=>{if(e.target===dlg)close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dlg.hidden)close()});
+ const restore=()=>{if(prev===null)return;if(prev==='')root.removeAttribute('data-theme');else root.setAttribute('data-theme',prev);prev=null};
+ window.addEventListener('afterprint',restore);
+ $('pdf-go').addEventListener('click',()=>{
+  const t=document.querySelector('input[name="pdf-theme"]:checked').value;
+  prev=root.getAttribute('data-theme')||'';root.setAttribute('data-theme',t);dlg.hidden=true;
+  setTimeout(()=>{try{window.print()}catch(e){} setTimeout(restore,500)},80);
+ });
+})();
+})();
+</script>
+
+</body>
+</html>
