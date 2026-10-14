@@ -49,3 +49,38 @@ The root `index.html` always holds the latest edition. Each month's edition is a
 Part of [sbmadhav.com](https://sbmadhav.com/) and styled with its design system. By Madhav Srinivasan. Written in a personal capacity; not affiliated with any organization or vendor named. Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
 
 Corrections and source suggestions are welcome as GitHub issues.
+
+## How it is served
+
+GitHub Pages publishes this repo (branch `main`) as a project site, and the custom domain of [sbmadhav/sbmadhav.github.io](https://github.com/sbmadhav/sbmadhav.github.io) puts it at `/state-of-voice-agents/`. The page is plain HTML with no build step. A `.nojekyll` file tells Pages to publish every file as is, so everything committed here is public.
+
+The Explore menu, analytics and fonts come from the main site (`/assets/`) by absolute URL, and the styling follows the sbmadhav.com design system ([sbmadhav/design-system](https://github.com/sbmadhav/design-system)). `CLAUDE.md` lists what every page must keep.
+
+## Run locally
+
+To see the page with the site chrome, serve it from a checkout of the main site:
+
+```sh
+git clone https://github.com/sbmadhav/sbmadhav.github.io.git
+cd sbmadhav.github.io
+ln -s ../state-of-voice-agents state-of-voice-agents   # do not commit this link
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000/state-of-voice-agents/.
+
+## Checks
+
+There is no automated build or CI. Before publishing, check every changed number against its source, test light and dark themes, a phone-width screen and Download PDF, and for a new edition follow [UPDATING.md](UPDATING.md).
+
+## Contributing
+
+`main` is protected: every change from someone else arrives as a pull request, needs the owner's review, and nothing merges without approval. Corrections, sources and page fixes are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose a change, and [SECURITY.md](SECURITY.md) to report a security problem privately.
+
+## License
+
+[MIT](LICENSE). Linked sources, quoted figures and vendor names belong to their owners.
+
+## Thank you, Claude
+
+Built with Claude: much of this report and its interactive tools were researched, designed and written together with Claude, Anthropic's AI assistant, through Claude Code. Thank you, Claude.
