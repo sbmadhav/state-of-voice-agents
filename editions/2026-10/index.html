@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="State of conversational voice agents, October 2026 edition: reliability, economics, a thinker-responder architecture and governed memory for regulated contact centers, healthcare first.">
 <meta name="author" content="Madhav Srinivasan">
-<meta name="theme-color" content="#FFF8EE">
+<meta name="theme-color" content="#F6F7F9">
 <link rel="canonical" href="https://sbmadhav.com/state-of-voice-agents/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Voice Agents at the Front Door · October 2026">
@@ -20,7 +20,7 @@
 <script>/* Same saved color mode as every sbmadhav.com page, applied before paint */try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='14' width='48' height='40' rx='14' fill='%231FA39A'/%3E%3Ccircle cx='24' cy='34' r='7' fill='white'/%3E%3Ccircle cx='40' cy='34' r='7' fill='white'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='41' cy='35' r='3' fill='%231C2541'/%3E%3Ccircle cx='32' cy='7' r='5' fill='%23FF6B5B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='14' width='48' height='40' rx='14' fill='%234FB3A6'/%3E%3Ccircle cx='24' cy='34' r='7' fill='white'/%3E%3Ccircle cx='40' cy='34' r='7' fill='white'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%23151B2B'/%3E%3Ccircle cx='41' cy='35' r='3' fill='%23151B2B'/%3E%3Ccircle cx='32' cy='7' r='5' fill='%23EE7A63'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="https://sbmadhav.com/assets/icons/apple-touch-icon.png">
 <style>
 /* Layout: one long brief. Part I is an executive story with live tools; Part II is a dense technical appendix. Sticky jump nav.
@@ -28,28 +28,28 @@
    strong shades for text and marks, fills only with on-accent text, so every pairing meets WCAG 2.1 AA in both modes. Display face is the system's
    Space Grotesk in both schemes, for a calmer executive register. */
 :root{
-  --bg:#FFF8EE; --surface:#FFFFFF; --sunk:#FDF0DC; --ink:#1C2541; --muted:#5B6479; --line:#EADFCC;
-  --accent:#2F5BBE; --accent-soft:#E8EFFD; --signal:#B83A2B; --signal-soft:#FFEAE8;
-  --good:#0F6E68; --good-soft:#E0F2F1; --warn:#7A5600; --warn-soft:#FFF7E4; --bad:#B83A2B; --bad-soft:#FFEAE8;
-  --plum-strong:#6646B8; --plum-soft:#F3EFFC;
-  --sky:#5B8DEF; --coral:#FF6B5B; --teal:#1FA39A; --sun:#FFC53D; --plum:#A88EEA; --on-accent:#1C2541; --edge:#1C2541;
+  --bg:#F6F7F9; --surface:#FFFFFF; --sunk:#ECEFF3; --ink:#151B2B; --muted:#525C6E; --line:#DCE1E8;
+  --accent:#0E6B63; --accent-soft:#EAF5F3; --signal:#B1432C; --signal-soft:#FDEFEC;
+  --good:#0E6B63; --good-soft:#CDEBE6; --warn:#7C5300; --warn-soft:#FDF6E4; --bad:#B1432C; --bad-soft:#FDEFEC;
+  --plum-strong:#B1432C; --plum-soft:#FDEFEC;
+  --sky:#4FB3A6; --coral:#EE7A63; --teal:#4FB3A6; --sun:#F2B544; --plum:#EE7A63; --on-accent:#151B2B; --edge:#151B2B;
   --display:"Space Grotesk", "Nunito Sans", system-ui, sans-serif;
   --body:"Nunito Sans", system-ui, sans-serif;
   --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --r:16px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0A0B18; --surface:#171A31; --sunk:#11132A; --ink:#EDEEFA; --muted:#A9AECB; --line:#2A2E4A;
-  --accent:#73BCFF; --accent-soft:#263452; --signal:#FF8F87; --signal-soft:#3C2D3F;
-  --good:#45D9C3; --good-soft:#1E3948; --warn:#D6F075; --warn-soft:#363C3C; --bad:#FF8F87; --bad-soft:#3C2D3F;
-  --plum-strong:#B6A4F7; --plum-soft:#303051;
-  --sky:#73BCFF; --coral:#FF8F87; --teal:#45D9C3; --sun:#D6F075; --plum:#B6A4F7; --on-accent:#0A0B18; --edge:#7C86C4; color-scheme:dark}}
+  --bg:#0F1218; --surface:#1A1F29; --sunk:#151A22; --ink:#E9EDF3; --muted:#A2ACBC; --line:#2A313D;
+  --accent:#6ED3C4; --accent-soft:#1A2B2D; --signal:#F59A86; --signal-soft:#3C2A2B;
+  --good:#6ED3C4; --good-soft:#1A4541; --warn:#F2C062; --warn-soft:#383125; --bad:#F59A86; --bad-soft:#3C2A2B;
+  --plum-strong:#F59A86; --plum-soft:#3C2A2B;
+  --sky:#5CC7B8; --coral:#F08C77; --teal:#5CC7B8; --sun:#F2C062; --plum:#F08C77; --on-accent:#0F1218; --edge:#7D889B; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0A0B18; --surface:#171A31; --sunk:#11132A; --ink:#EDEEFA; --muted:#A9AECB; --line:#2A2E4A;
-  --accent:#73BCFF; --accent-soft:#263452; --signal:#FF8F87; --signal-soft:#3C2D3F;
-  --good:#45D9C3; --good-soft:#1E3948; --warn:#D6F075; --warn-soft:#363C3C; --bad:#FF8F87; --bad-soft:#3C2D3F;
-  --plum-strong:#B6A4F7; --plum-soft:#303051;
-  --sky:#73BCFF; --coral:#FF8F87; --teal:#45D9C3; --sun:#D6F075; --plum:#B6A4F7; --on-accent:#0A0B18; --edge:#7C86C4; color-scheme:dark}
+  --bg:#0F1218; --surface:#1A1F29; --sunk:#151A22; --ink:#E9EDF3; --muted:#A2ACBC; --line:#2A313D;
+  --accent:#6ED3C4; --accent-soft:#1A2B2D; --signal:#F59A86; --signal-soft:#3C2A2B;
+  --good:#6ED3C4; --good-soft:#1A4541; --warn:#F2C062; --warn-soft:#383125; --bad:#F59A86; --bad-soft:#3C2A2B;
+  --plum-strong:#F59A86; --plum-soft:#3C2A2B;
+  --sky:#5CC7B8; --coral:#F08C77; --teal:#5CC7B8; --sun:#F2C062; --plum:#F08C77; --on-accent:#0F1218; --edge:#7D889B; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -426,15 +426,15 @@ ol.src li:target{background:var(--accent-soft)}
 .edition{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;padding:3px 9px;border-radius:99px;background:var(--signal-soft);color:var(--signal)}
 @media print{
   @page{size:letter;margin:14mm 12mm;
-    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
-    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
-    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}
-    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#5B6479}}
-  @page dark{background:#0A0B18;
-    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}
-    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}
-    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}
-    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#EDEEFA}}
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#525C6E}
+    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#525C6E}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#525C6E}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#525C6E}}
+  @page dark{background:#0F1218;
+    @top-left{content:"Voice Agents at the Front Door \00B7  October 2026 edition";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#E9EDF3}
+    @top-right{content:"sbmadhav.com/state-of-voice-agents";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#E9EDF3}
+    @bottom-left{content:"By Madhav Srinivasan";font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#E9EDF3}
+    @bottom-right{content:"Page " counter(page) " of " counter(pages);font-family:"JetBrains Mono",monospace;font-size:7.5pt;color:#E9EDF3}}
   html[data-theme="dark"] body{page:dark}
   html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:var(--bg)!important}
   body{font-size:10.5pt}
@@ -472,10 +472,10 @@ ol.src li:target{background:var(--accent-soft)}
 .about-links{display:flex;flex-wrap:wrap;gap:10px}
 .about-links .btn{text-decoration:none;color:var(--ink);font-weight:600}
 .about-links .btn.primary{color:var(--bg)}
-.bolt-launch{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;padding:6px 16px 6px 8px;border-radius:999px;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 12px 30px -14px rgba(28,37,65,.45);font-weight:700;font-size:.92rem}
+.bolt-launch{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;padding:6px 16px 6px 8px;border-radius:999px;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 12px 30px -14px rgba(21,27,43,.45);font-weight:700;font-size:.92rem}
 .bolt-launch:hover{border-color:var(--accent)}
 .bolt-launch .bolt-ico svg{width:30px;height:32px;display:block}
-.bolt-panel{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;width:min(420px,calc(100vw - 32px));height:min(640px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 24px 60px -20px rgba(7,6,26,.5);overflow:hidden}
+.bolt-panel{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;width:min(420px,calc(100vw - 32px));height:min(640px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 24px 60px -20px rgba(10,12,17,.5);overflow:hidden}
 .bolt-panel[hidden]{display:none!important}
 .bolt-head{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--sunk)}
 .bolt-head .bolt-ico svg{width:32px;height:34px;display:block}
@@ -508,7 +508,7 @@ ol.src li:target{background:var(--accent-soft)}
 <nav class="nav" aria-label="Sections">
   <div class="wrap">
     <div class="navlinks">
-    <a class="brand" href="https://sbmadhav.com/" title="Back to sbmadhav.com"><span class="brand-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#1FA39A" stroke="#1C2541" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#1C2541"/><circle cx="41" cy="35" r="3" fill="#1C2541"/><path d="M32 14V9" stroke="#1C2541" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#FF6B5B" stroke="#1C2541" stroke-width="3"/></svg></span><span>State of Voice Agents</span></a>
+    <a class="brand" href="https://sbmadhav.com/" title="Back to sbmadhav.com"><span class="brand-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#4FB3A6" stroke="#151B2B" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#151B2B"/><circle cx="41" cy="35" r="3" fill="#151B2B"/><path d="M32 14V9" stroke="#151B2B" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#EE7A63" stroke="#151B2B" stroke-width="3"/></svg></span><span>State of Voice Agents</span></a>
     <span class="part">Part I</span>
     <a href="#brief">Bottom line</a>
     <a href="#summary">Summary</a>
@@ -1471,7 +1471,7 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
       <div class="panel stack author">
         <span class="lbl">The author</span>
-        <div class="author-row"><span class="author-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#1FA39A" stroke="#1C2541" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#1C2541"/><circle cx="41" cy="35" r="3" fill="#1C2541"/><path d="M32 14V9" stroke="#1C2541" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#FF6B5B" stroke="#1C2541" stroke-width="3"/></svg></span><div><p style="font-weight:700">Madhav Srinivasan</p><p class="note">Engineering leader who builds AI agents and platforms.</p></div></div>
+        <div class="author-row"><span class="author-ico"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="14" width="48" height="40" rx="14" fill="#4FB3A6" stroke="#151B2B" stroke-width="3"/><circle cx="24" cy="34" r="7" fill="#fff"/><circle cx="40" cy="34" r="7" fill="#fff"/><circle cx="25" cy="35" r="3" fill="#151B2B"/><circle cx="41" cy="35" r="3" fill="#151B2B"/><path d="M32 14V9" stroke="#151B2B" stroke-width="3"/><circle cx="32" cy="7" r="5" fill="#EE7A63" stroke="#151B2B" stroke-width="3"/></svg></span><div><p style="font-weight:700">Madhav Srinivasan</p><p class="note">Engineering leader who builds AI agents and platforms.</p></div></div>
         <p class="note">Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.</p>
         <div class="about-links"><a class="btn primary" href="https://sbmadhav.com/">Back to sbmadhav.com</a><a class="btn" href="https://www.linkedin.com/in/sbmadhav/" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
       </div>
@@ -1484,10 +1484,10 @@ ol.src li:target{background:var(--accent-soft)}
 </footer>
 </main>
 
-<button type="button" class="bolt-launch" id="bolt-open" aria-haspopup="dialog" aria-controls="bolt-panel"><span class="bolt-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span><span>Ask Bolt</span></button>
+<button type="button" class="bolt-launch" id="bolt-open" aria-haspopup="dialog" aria-controls="bolt-panel"><span class="bolt-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#151B2B" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#EE7A63" stroke="#151B2B" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#4FB3A6" stroke="#151B2B" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#4FB3A6" stroke="#151B2B" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#4FB3A6" stroke="#151B2B" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#151B2B" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#151B2B" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#151B2B" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#151B2B"/> <circle cx="98" cy="72" r="5.5" fill="#151B2B"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#151B2B" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#EE7A63" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#EE7A63" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#F2B544" stroke="#151B2B" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#151B2B" stroke-width="3"/> </svg></span><span>Ask Bolt</span></button>
 <div class="bolt-panel" id="bolt-panel" role="dialog" aria-modal="false" aria-labelledby="bolt-title" hidden>
   <header class="bolt-head">
-    <span class="bolt-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#1C2541" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#FF6B5B" stroke="#1C2541" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#5B8DEF" stroke="#1C2541" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#1FA39A" stroke="#1C2541" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#1C2541" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#1C2541" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#1C2541"/> <circle cx="98" cy="72" r="5.5" fill="#1C2541"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#1C2541" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#FF6B5B" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#FFC53D" stroke="#1C2541" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#1C2541" stroke-width="3"/> </svg></span>
+    <span class="bolt-ico"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170"> <line x1="80" y1="34" x2="80" y2="14" stroke="#151B2B" stroke-width="5"/> <circle cx="80" cy="12" r="9" fill="#EE7A63" stroke="#151B2B" stroke-width="4"/> <rect x="16" y="66" width="14" height="30" rx="7" fill="#4FB3A6" stroke="#151B2B" stroke-width="4"/> <rect x="130" y="66" width="14" height="30" rx="7" fill="#4FB3A6" stroke="#151B2B" stroke-width="4"/> <rect x="26" y="34" width="108" height="88" rx="30" fill="#4FB3A6" stroke="#151B2B" stroke-width="5"/> <rect x="38" y="48" width="84" height="56" rx="20" fill="#E9FBF8" stroke="#151B2B" stroke-width="4"/> <circle cx="62" cy="72" r="12" fill="#fff" stroke="#151B2B" stroke-width="3"/> <circle cx="98" cy="72" r="12" fill="#fff" stroke="#151B2B" stroke-width="3"/> <circle cx="62" cy="72" r="5.5" fill="#151B2B"/> <circle cx="98" cy="72" r="5.5" fill="#151B2B"/> <path d="M68 92 q12 9 24 0" fill="none" stroke="#151B2B" stroke-width="4" stroke-linecap="round"/> <circle cx="48" cy="90" r="5" fill="#EE7A63" opacity=".5"/> <circle cx="112" cy="90" r="5" fill="#EE7A63" opacity=".5"/> <rect x="50" y="122" width="60" height="36" rx="14" fill="#F2B544" stroke="#151B2B" stroke-width="4"/> <circle cx="80" cy="140" r="7" fill="#fff" stroke="#151B2B" stroke-width="3"/> </svg></span>
     <div style="min-width:0"><p id="bolt-title" style="font-weight:700">Ask Bolt</p><p class="note">Questions about this report, with optional web research</p></div>
     <button type="button" class="bolt-x" id="bolt-close" aria-label="Close Bolt">×</button>
   </header>
@@ -1896,8 +1896,8 @@ const STG=[
  {k:"ep",n:"Endpointing (turn end)",c:"var(--coral)",max:1200},
  {k:"stt",n:"STT finalize",c:"var(--teal)",max:600},
  {k:"tool",n:"Tool call (blocking)",c:"var(--sun)",max:1500},
- {k:"llm",n:"LLM first token",c:"var(--sky)",max:2000},
- {k:"tts",n:"TTS first audio",c:"var(--plum)",max:800}
+ {k:"llm",n:"LLM first token",c:"color-mix(in srgb, var(--teal) 50%, white)",max:2000},
+ {k:"tts",n:"TTS first audio",c:"color-mix(in srgb, var(--coral) 50%, white)",max:800}
 ];
 const LP={seq:{net:150,ep:650,stt:150,tool:450,llm:870,tts:200},par:{net:150,ep:400,stt:150,tool:0,llm:600,tts:180},fd:{net:120,ep:150,stt:0,tool:0,llm:450,tts:0}};
 let LV={...LP.seq};
