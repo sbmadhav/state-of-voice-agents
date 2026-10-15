@@ -79,7 +79,7 @@ There is no automated build or CI. Before publishing, check every changed number
 
 ## License
 
-[MIT](LICENSE). Linked sources, quoted figures and vendor names belong to their owners.
+The code (page scripts, interactive tools, `worker/`) is [MIT](LICENSE). The report itself is licensed under CC BY 4.0: share and adapt it with credit to Madhav Srinivasan. Linked sources, quoted figures and vendor names belong to their owners. Details are in [LICENSE-CONTENT.md](LICENSE-CONTENT.md).
 
 ## Thank you, Claude
 
