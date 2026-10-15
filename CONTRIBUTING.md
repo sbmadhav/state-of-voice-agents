@@ -42,12 +42,19 @@ Then open http://localhost:8000/state-of-voice-agents/. Do not commit the link.
 
 ## Checks
 
-There is no automated build. Before opening a pull request:
+There is no build. Before opening a pull request:
 
 - Every changed number matches its source, and the evidence labels (vendor-reported, customer-reported) are still accurate.
 - Light and dark themes, a 390px wide phone, and Download PDF in both themes all look right.
 - The Explore menu button and the `/assets/explore.js` and `/assets/analytics.js` scripts are still on every page (see `CLAUDE.md`).
 - For a new edition, follow [UPDATING.md](UPDATING.md).
+- The end-to-end tests pass: `cd e2e && npm ci && npx playwright test`.
+
+## Tests
+
+Every change that affects behavior updates or adds the matching Playwright test in `e2e/` in the same commit. Run `cd e2e && npx playwright test` before pushing (first time: `npx playwright install chromium webkit`).
+
+The tests run against the live https://sbmadhav.com/state-of-voice-agents/ by default. Set `BASE_URL` to test another host, such as the local server above. Never send Ask Bolt a question from a test: it calls a paid API. Stub it with `page.route`.
 
 ## Style rules
 
@@ -58,7 +65,7 @@ There is no automated build. Before opening a pull request:
 
 ## Published files
 
-This repo has a `.nojekyll` file, so GitHub Pages publishes every file in it as is, including these docs. Do not commit secrets, notes or drafts.
+This repo has a `.nojekyll` file, so GitHub Pages publishes every file in it as is, including these docs and the test code in `e2e/`. Do not commit secrets, notes or drafts.
 
 ## Security problems
 
