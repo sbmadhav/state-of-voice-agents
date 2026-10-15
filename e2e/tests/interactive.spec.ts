@@ -14,11 +14,11 @@ test('theme switch sets data-theme, recolors the page and persists across reload
   const html = page.locator('html');
   const bg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   await expect(page.locator('#theme button[aria-pressed="true"]')).toHaveAttribute('data-t', 'system');
-  expect(await bg()).toBe('rgb(255, 248, 238)');
+  expect(await bg()).toBe('rgb(246, 247, 249)');
 
   await page.locator('#theme button[data-t="dark"]').click();
   await expect(html).toHaveAttribute('data-theme', 'dark');
-  expect(await bg()).toBe('rgb(10, 11, 24)');
+  expect(await bg()).toBe('rgb(15, 18, 24)');
   await page.reload();
   await expect(html).toHaveAttribute('data-theme', 'dark');
   await expect(page.locator('#theme button[aria-pressed="true"]')).toHaveAttribute('data-t', 'dark');
@@ -26,11 +26,11 @@ test('theme switch sets data-theme, recolors the page and persists across reload
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.locator('#theme button[data-t="light"]').click();
   await expect(html).toHaveAttribute('data-theme', 'light');
-  expect(await bg()).toBe('rgb(255, 248, 238)');
+  expect(await bg()).toBe('rgb(246, 247, 249)');
 
   await page.locator('#theme button[data-t="system"]').click();
   await expect(html).not.toHaveAttribute('data-theme', /.+/);
-  expect(await bg()).toBe('rgb(10, 11, 24)');
+  expect(await bg()).toBe('rgb(15, 18, 24)');
   await page.reload();
   await expect(html).not.toHaveAttribute('data-theme', /.+/);
   expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('');
