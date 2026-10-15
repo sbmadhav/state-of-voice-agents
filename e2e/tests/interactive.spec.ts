@@ -80,13 +80,23 @@ test('a citation jumps to its numbered source', async ({ page }) => {
 });
 
 test('every citation is visible and tappable, including inside tables', async ({ page }) => {
-  // On phones the tables stack: each td becomes display:grid, so a citation at the end of a cell
-  // becomes its own grid item; with a.c{line-height:0} it is blockified to a zero-height box.
+  // On phones the tables stack into label and value columns. Citations stay inline after their text
+  // (a grid used to make each one its own zero-height grid item in the label column), and every
+  // citation gets at least a 24x24 px tap target (WCAG 2.2 target size). Desktop keeps the small superscript.
   await page.goto(PAGE);
-  const collapsed = await page.locator('main a.c').evaluateAll(as => as
-    .filter(a => { const b = a.getBoundingClientRect(); return b.width === 0 || b.height === 0; })
-    .map(a => `${a.closest('section')?.id}: ${a.textContent} (${(a as HTMLElement).dataset.s})`));
-  expect(collapsed, `${collapsed.length} citations render with zero size`).toEqual([]);
+  const phone = (page.viewportSize()?.width ?? 1280) <= 760;
+  const min = phone ? 24 : 1;
+  const small = await page.locator('main a.c').evaluateAll((as, min) => as
+    .filter(a => { const b = a.getBoundingClientRect(); return b.width < min || b.height < min; })
+    .map(a => `${a.closest('section')?.id}: ${a.textContent} (${(a as HTMLElement).dataset.s})`), min);
+  expect(small, `${small.length} citations are smaller than ${min}x${min} px`).toEqual([]);
+  if (phone) {
+    // A table citation sits in the value column, to the right of the label, not under it
+    const misplaced = await page.locator('.tbl td a.c').evaluateAll(as => as
+      .filter(a => { const td = a.closest('td')!; const label = parseFloat(getComputedStyle(td).paddingLeft); return a.getBoundingClientRect().right < td.getBoundingClientRect().left + label; })
+      .map(a => a.textContent));
+    expect(misplaced, 'citations in the label column').toEqual([]);
+  }
 });
 
 test('Download PDF: dialog opens, closes (Cancel, Esc, backdrop) and prints in the chosen theme', async ({ page }) => {

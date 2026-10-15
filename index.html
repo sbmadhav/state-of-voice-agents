@@ -122,6 +122,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* citations */
 a.c{font-family:var(--mono);font-size:.68em;vertical-align:super;line-height:0;text-decoration:none;margin-left:1px;color:var(--accent)}
+/* Phones: a 24x24 px tap target (WCAG 2.2 target size). Padding grows the hit area; matching negative margins keep the text where it was. */
+@media (max-width:760px){a.c{padding:8px 5px;margin:0 -5px 0 -4px}}
 a.c:hover{text-decoration:underline}
 
 /* segmented controls */
@@ -284,8 +286,11 @@ table.t-router td.n .chip{white-space:normal;margin-top:4px}
   .tbl table,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%!important}
   .tbl tr{padding:10px 12px;border-bottom:1px solid var(--line)}
   .tbl tr:last-child{border-bottom:0}
-  .tbl td{border:0;padding:3px 0;display:grid;grid-template-columns:minmax(84px,32%) minmax(0,1fr);gap:10px}
-  .tbl td::before{content:attr(data-label);font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px}
+  /* Label column on the left, the cell's own content in normal inline flow on the right (a grid would
+     split text, citations and chips into separate grid items) */
+  .tbl tr{container-type:inline-size}
+  .tbl td{border:0;display:flow-root;padding:3px 0 3px calc(max(84px,32cqw) + 10px)}
+  .tbl td::before{content:attr(data-label);float:left;width:max(84px,32cqw);margin:0 10px 0 calc(-1 * (max(84px,32cqw) + 10px));font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px}
   .tbl td:first-child{font-weight:700}
   .tbl colgroup{display:none}
 }
