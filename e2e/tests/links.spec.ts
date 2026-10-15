@@ -33,7 +33,9 @@ async function check(url: string): Promise<Check> {
       const code = e?.cause?.code || e?.name || String(e);
       last = { url, status: code };
       if (method === 'GET') {
-        if (/Timeout|Abort|ECONNRESET|UND_ERR_SOCKET|UND_ERR_CONNECT_TIMEOUT/i.test(code)) return { ...last, soft: `network: ${code}` };
+        // EAI_AGAIN is a temporary DNS failure on the runner; UND_ERR_HEADERS_OVERFLOW means the site's
+        // headers are bigger than Node's fetch accepts (Yahoo), not that the page is gone. ENOTFOUND stays hard.
+        if (/Timeout|Abort|ECONNRESET|UND_ERR_SOCKET|UND_ERR_CONNECT_TIMEOUT|EAI_AGAIN|UND_ERR_HEADERS_OVERFLOW/i.test(code)) return { ...last, soft: `network: ${code}` };
         return last;
       }
     }
