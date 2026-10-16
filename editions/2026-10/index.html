@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Content-Security-Policy: only the origins this page uses (Google Fonts, utterances comments, GoatCounter beacons; sbmadhav.com for the absolute icon URL).
+     A new origin (for example the Ask Bolt worker in BOLT_ENDPOINT) must be added here, in every edition, or the browser blocks it. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://utteranc.es; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://sbmadhav.com https://sbmadhav.goatcounter.com; connect-src 'self' https://sbmadhav.goatcounter.com; frame-src https://utteranc.es; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="State of conversational voice agents, October 2026 edition: reliability, economics, a thinker-responder architecture and governed memory for regulated contact centers, healthcare first.">
 <meta name="author" content="Madhav Srinivasan">
@@ -1977,7 +1981,7 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
 (function(){
  const BOLT_ENABLED = false; // Paused until the thinker-responder version is ready; see worker/README.md
  if(!BOLT_ENABLED){$('bolt-open').hidden=true;$('bolt-panel').hidden=true;return;}
- const BOLT_ENDPOINT = ''; // Set to the deployed Cloudflare Worker URL, e.g. https://bolt-voice.<you>.workers.dev
+ const BOLT_ENDPOINT = ''; // Set to the deployed Cloudflare Worker URL, e.g. https://bolt-voice.<you>.workers.dev, and add its origin to connect-src in the Content-Security-Policy <meta> at the top
  const PAGE_URL = 'https://sbmadhav.com/state-of-voice-agents/';
  const panel=$('bolt-panel'),log=$('bolt-log'),q=$('bolt-q'),launch=$('bolt-open');
  const SUGG=['What should a health system pilot first?','Explain the thinker-responder model in two sentences','Where do limited-memory models stand today?','What has changed in voice AI since this edition?'];
