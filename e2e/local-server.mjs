@@ -4,7 +4,8 @@
 //   node e2e/local-server.mjs [port]   (default 8126)
 //   BASE_URL=http://localhost:8126 npx playwright test
 import http from 'node:http';
-import { readFile, realpath, stat } from 'node:fs/promises';
+import { open, realpath, stat } from 'node:fs/promises';
+import { constants } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -29,6 +30,15 @@ async function proxy(req, res) {
   res.end(Buffer.from(await r.arrayBuffer()));
 }
 
+async function readChecked(p) {
+  const fh = await open(p, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const [held, again] = await Promise.all([fh.stat(), realpath(p).then(q => (q === p ? stat(q) : null))]);
+    if (!again || !held.isFile() || held.dev !== again.dev || held.ino !== again.ino) return null;
+    return await fh.readFile();
+  } finally { await fh.close(); }
+}
+
 http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://x');
@@ -46,7 +56,10 @@ http.createServer(async (req, res) => {
     if (!p) { res.writeHead(404); return res.end('Not found'); }
     if (!inside(p, root)) { res.writeHead(403); return res.end(); }
     if (BLOCKED.test(path.relative(root, p).split(path.sep).join('/'))) { res.writeHead(404); return res.end('Not found'); }
-    const body = await readFile(p).catch(() => null);
+    // Read through the descriptor that was checked: open the canonical path without following a final
+    // symlink, then confirm the open file is still the one realpath resolved inside the root (same device
+    // and inode), so a file swapped in between the check and the read is refused rather than served.
+    const body = await readChecked(p).catch(() => null);
     if (!body) { res.writeHead(404); return res.end('Not found'); }
     res.writeHead(200, { 'content-type': TYPES[path.extname(p)] || 'application/octet-stream', 'cache-control': 'no-cache' });
     res.end(body);

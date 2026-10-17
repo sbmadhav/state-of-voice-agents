@@ -78,9 +78,20 @@ def fetch(url):
     try:
         with urllib.request.urlopen(url, timeout=20) as r:
             return r.read()
+    except urllib.error.HTTPError:
+        raise  # the server answered (404, 410...): the caller reports it as a real problem
     except urllib.error.URLError:
         # python.org builds on macOS often lack CA certificates; curl uses the system store
-        return subprocess.run(["curl", "-fsSL", "--max-time", "20", url], capture_output=True, check=True).stdout
+        import tempfile
+        with tempfile.NamedTemporaryFile() as out:
+            r = subprocess.run(["curl", "-sSL", "--max-time", "20", "-o", out.name, "-w", "%{http_code}", url],
+                               capture_output=True, text=True)
+            if r.returncode != 0:
+                raise urllib.error.URLError(r.stderr.strip() or f"curl exit {r.returncode}")
+            code = int(r.stdout or 0)
+            if code >= 400:
+                raise urllib.error.HTTPError(url, code, "HTTP error", None, None)
+            return pathlib.Path(out.name).read_bytes()
 
 
 def upstream():
@@ -88,6 +99,10 @@ def upstream():
     for name in VENDORED:
         try:
             live = fetch(PUBLISHED + name)
+        except urllib.error.HTTPError as e:
+            # The server answered: a missing versioned file is a real problem, not a network failure
+            diff.append(f"{PUBLISHED}{name} returned HTTP {e.code} (is {VERSION} published, with {name}?)")
+            continue
         except Exception as e:
             unfetched.append(f"{PUBLISHED}{name}: {e}")
             continue
