@@ -1,6 +1,6 @@
 import { test, expect, type Page } from './fixtures';
 
-/* The report's interactive pieces: theme switch, source and claim filters, citations, the
+/* The report's interactive pieces: the header theme button, source and claim filters, citations, the
    Download PDF dialog, the charts and tools tagged "Interactive", Ask Bolt and comments. */
 
 const PAGE = '/state-of-voice-agents/';
@@ -8,32 +8,31 @@ const PAGE = '/state-of-voice-agents/';
 const vis = (page: Page, sel: string) =>
   page.locator(sel).evaluateAll(els => els.filter(e => !(e as HTMLElement).hidden).map(e => (e as HTMLElement).dataset.v ?? (e as HTMLElement).dataset.t));
 
-test('theme switch sets data-theme, recolors the page and persists across reload', async ({ page }) => {
+test('the header theme button switches scheme, saves only a choice that differs from the system, and persists', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto(PAGE);
-  const html = page.locator('html');
+  const html = page.locator('html'), btn = page.locator('.md-header #themeBtn');
   const bg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  await expect(page.locator('#theme button[aria-pressed="true"]')).toHaveAttribute('data-t', 'system');
+  await expect(html).not.toHaveAttribute('data-theme', /.+/);
   expect(await bg()).toBe('rgb(246, 247, 249)');
+  await expect(btn).toHaveAttribute('aria-label', 'Switch to Deep Space (dark) scheme');
 
-  await page.locator('#theme button[data-t="dark"]').click();
+  await btn.click();
   await expect(html).toHaveAttribute('data-theme', 'dark');
   expect(await bg()).toBe('rgb(15, 18, 24)');
+  expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('dark');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', /#0F1218/i);
   await page.reload();
   await expect(html).toHaveAttribute('data-theme', 'dark');
-  await expect(page.locator('#theme button[aria-pressed="true"]')).toHaveAttribute('data-t', 'dark');
+  await expect(btn).toHaveAttribute('aria-label', 'Switch to Daybreak (light) scheme');
 
-  await page.emulateMedia({ colorScheme: 'dark' });
-  await page.locator('#theme button[data-t="light"]').click();
-  await expect(html).toHaveAttribute('data-theme', 'light');
+  // Back to the system scheme: nothing saved, the page follows the system again
+  await btn.click();
+  await expect(html).not.toHaveAttribute('data-theme', /.+/);
   expect(await bg()).toBe('rgb(246, 247, 249)');
-
-  await page.locator('#theme button[data-t="system"]').click();
-  await expect(html).not.toHaveAttribute('data-theme', /.+/);
-  expect(await bg()).toBe('rgb(15, 18, 24)');
-  await page.reload();
-  await expect(html).not.toHaveAttribute('data-theme', /.+/);
   expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  expect(await bg()).toBe('rgb(15, 18, 24)');
 });
 
 test('sources filter shows independent or vendor sources only', async ({ page }) => {

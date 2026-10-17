@@ -33,7 +33,7 @@ Every figure links to its source. Vendor-reported numbers are labeled as such.
 
 - Interactive charts and tools, each tagged "Interactive".
 - **Ask Bolt:** a Q&A assistant grounded in the report, with optional web research. See [worker/README.md](worker/README.md) to switch on live answers.
-- System, light and dark themes. The page follows the reader's device setting by default.
+- Daybreak (light) and Deep Space (dark) schemes. The page follows the reader's device setting by default; the sun/moon button in the site header switches it, like on every sbmadhav.com page.
 - **Download PDF** reformats the page for letter-size pages in the theme the reader chooses: tabs and filters are expanded and controls are hidden.
 
 ## Editions
@@ -54,24 +54,21 @@ Corrections and source suggestions are welcome as GitHub issues.
 
 GitHub Pages publishes this repo (branch `main`) as a project site, and the custom domain of [sbmadhav/sbmadhav.github.io](https://github.com/sbmadhav/sbmadhav.github.io) puts it at `/state-of-voice-agents/`. The page is plain HTML with no build step. A `.nojekyll` file tells Pages to publish every file as is, so everything committed here is public.
 
-The Explore menu, analytics and fonts come from the main site (`/assets/`) by absolute URL, and the styling follows the sbmadhav.com design system ([sbmadhav/design-system](https://github.com/sbmadhav/design-system)). `CLAUDE.md` lists what every page must keep.
+The Explore menu, analytics and fonts come from the main site (`/assets/`) by absolute URL. The styling, the type scale and the site header come from a pinned version of the sbmadhav.com design system ([sbmadhav/design-system](https://github.com/sbmadhav/design-system)), `/design-system/v/2.1.0/`; the header is composed into each page with the design system's `compose.py` and committed (see `CLAUDE.md`, which also lists what every page must keep).
 
 ## Run locally
 
-To see the page with the site chrome, serve it from a checkout of the main site:
+To see the page with the site chrome, serve this checkout with the rest of the site proxied from sbmadhav.com:
 
 ```sh
-git clone https://github.com/sbmadhav/sbmadhav.github.io.git
-cd sbmadhav.github.io
-ln -s ../state-of-voice-agents state-of-voice-agents   # do not commit this link
-python3 -m http.server 8000
+node e2e/local-server.mjs 8126
 ```
 
-Then open http://localhost:8000/state-of-voice-agents/.
+Then open http://localhost:8126/state-of-voice-agents/.
 
 ## Checks
 
-There is no automated build or CI. Before publishing, check every changed number against its source, test light and dark themes, a phone-width screen and Download PDF, and for a new edition follow [UPDATING.md](UPDATING.md).
+There is no build. `.github/workflows/design-system.yml` checks that every page's header matches the pinned design-system header and loads the pinned files, and `.github/workflows/e2e.yml` runs the Playwright tests. Before publishing, check every changed number against its source, test light and dark themes, a phone-width screen and Download PDF, and for a new edition follow [UPDATING.md](UPDATING.md).
 
 ## Contributing
 

@@ -28,17 +28,15 @@ Every pull request needs an approving review from the owner (@sbmadhav, the code
 
 ## Local setup
 
-The report is a single static page. It loads the Explore menu, analytics and fonts from the rest of sbmadhav.com by absolute URL, so for the full look serve it from a checkout of the main site:
+The report is a single static page. It loads the design system, the Explore menu, analytics and fonts from the rest of sbmadhav.com by absolute URL, so for the full look serve your checkout with the rest of the site proxied from sbmadhav.com:
 
 ```sh
-git clone https://github.com/sbmadhav/sbmadhav.github.io.git
 git clone https://github.com/<you>/state-of-voice-agents.git
-cd sbmadhav.github.io
-ln -s ../state-of-voice-agents state-of-voice-agents
-python3 -m http.server 8000
+cd state-of-voice-agents
+node e2e/local-server.mjs 8126
 ```
 
-Then open http://localhost:8000/state-of-voice-agents/. Do not commit the link.
+Then open http://localhost:8126/state-of-voice-agents/.
 
 ## Checks
 
