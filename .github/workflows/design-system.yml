@@ -1,0 +1,46 @@
+name: Design system
+
+# The pages pin sbmadhav.com design system 2.1.0 and hold the shared header, composed in from the
+# vendored header.html with compose.py (there is no build here, so the composed header is committed).
+# Fails if a page's header is out of step with the pinned partial, if a page does not load the pinned
+# files with matching Subresource Integrity hashes, or if a vendored copy differs from the published,
+# immutable /design-system/v/<version>/ file (a fetch failure only warns).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  header:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      DS: vendor/design-system-2.1.0
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Every page's header matches the pinned header.html
+        run: python3 "$DS/compose.py" --check "$DS/header.html" index.html editions/*/index.html
+
+      # Reads the actual <link>/<script> tags with an HTML parser: each page loads tokens.css, components.css and
+      # header.js once from /design-system/v/2.1.0/ with an integrity hash that matches the vendored copy, and no
+      # Google Fonts
+      - name: Every page loads the pinned files with matching integrity hashes
+        run: python3 vendor/check-design-system.py
+
+      # The versioned files are immutable: a difference from the published file fails; a fetch failure only warns
+      - name: Vendored copies match the published design system
+        run: |
+          set +e
+          python3 vendor/check-design-system.py --upstream
+          code=$?
+          if [ "$code" = 3 ]; then echo "::warning::could not fetch the published design system; the comparison was skipped"; exit 0; fi
+          exit $code
