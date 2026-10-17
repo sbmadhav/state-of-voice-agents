@@ -34,8 +34,23 @@ for (const url of PAGES) {
       expect.stringMatching(/\/design-system\/v\/2\.1\.0\/tokens\.css$/),
       expect.stringMatching(/\/design-system\/v\/2\.1\.0\/components\.css$/),
     ]));
-    await page.evaluate(() => document.fonts.ready);
-    expect(await page.evaluate(() => document.fonts.check('16px "Nunito Sans"'))).toBe(true);
+    // Subresource Integrity on the pinned files (a wrong hash would block them, and the sheets above would be missing)
+    const pinned = await page.evaluate(() => [...document.querySelectorAll('link[href*="/design-system/v/"], script[src*="/design-system/v/"]')]
+      .map(e => [e.getAttribute('integrity')?.slice(0, 7), e.getAttribute('crossorigin')]));
+    expect(pinned).toEqual([['sha384-', 'anonymous'], ['sha384-', 'anonymous'], ['sha384-', 'anonymous']]);
+    expect(await page.evaluate(() => typeof (window as any).siteTheme?.get)).toBe('function'); // header.js ran
+    // The self-hosted face is registered (tokens.css) and actually loads: fonts.check() alone is true when no face matches
+    const nunito = await page.evaluate(async () => {
+      const loaded = await document.fonts.load('16px "Nunito Sans"');
+      await document.fonts.ready;
+      const faces = [...document.fonts].filter(f => f.family.replace(/"/g, '') === 'Nunito Sans');
+      return { loaded: loaded.map(f => f.family.replace(/"/g, '')), faces: faces.map(f => f.status) };
+    });
+    expect(nunito.loaded).toEqual(['Nunito Sans']);
+    expect(nunito.faces).toEqual(['loaded']);
+    // And it came from this site, not a third party
+    const fontFiles = await page.evaluate(() => performance.getEntriesByType('resource').map(r => r.name).filter(n => /\.woff2(\?|$)/.test(n)));
+    expect(fontFiles).toEqual(expect.arrayContaining([expect.stringMatching(/\/assets\/fonts\/nunito-sans-latin-wght-normal\.woff2$/)]));
   });
 }
 

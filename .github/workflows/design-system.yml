@@ -2,8 +2,9 @@ name: Design system
 
 # The pages pin sbmadhav.com design system 2.1.0 and hold the shared header, composed in from the
 # vendored header.html with compose.py (there is no build here, so the composed header is committed).
-# Fails if a page's header is out of step with the pinned partial; warns if the vendored copies
-# differ from the published, immutable /design-system/v/<version>/ files.
+# Fails if a page's header is out of step with the pinned partial, if a page does not load the pinned
+# files with matching Subresource Integrity hashes, or if a vendored copy differs from the published,
+# immutable /design-system/v/<version>/ file (a fetch failure only warns).
 
 on:
   push:
@@ -21,7 +22,6 @@ jobs:
     timeout-minutes: 5
     env:
       DS: vendor/design-system-2.1.0
-      DS_URL: https://sbmadhav.com/design-system/v/2.1.0
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
@@ -30,19 +30,17 @@ jobs:
       - name: Every page's header matches the pinned header.html
         run: python3 "$DS/compose.py" --check "$DS/header.html" index.html editions/*/index.html
 
-      - name: Every page links the same pinned version, and no Google Fonts
-        run: |
-          set -e
-          for f in index.html editions/*/index.html; do
-            for asset in tokens.css components.css header.js; do
-              grep -q "/design-system/v/2.1.0/$asset" "$f" || { echo "::error file=$f::does not load /design-system/v/2.1.0/$asset"; exit 1; }
-            done
-            if grep -q 'fonts.googleapis.com\|fonts.gstatic.com' "$f"; then echo "::error file=$f::loads Google Fonts; use the self-hosted /assets/fonts/ from tokens.css"; exit 1; fi
-          done
+      # Reads the actual <link>/<script> tags with an HTML parser: each page loads tokens.css, components.css and
+      # header.js once from /design-system/v/2.1.0/ with an integrity hash that matches the vendored copy, and no
+      # Google Fonts
+      - name: Every page loads the pinned files with matching integrity hashes
+        run: python3 vendor/check-design-system.py
 
-      # Warns, never fails: the published versioned files are immutable, so a difference means the vendored copy was edited
+      # The versioned files are immutable: a difference from the published file fails; a fetch failure only warns
       - name: Vendored copies match the published design system
         run: |
-          for f in header.html compose.py; do
-            curl -fsSL "$DS_URL/$f" -o "/tmp/$f" && cmp -s "/tmp/$f" "$DS/$f" || echo "::warning file=$DS/$f::differs from $DS_URL/$f (or could not be fetched)"
-          done
+          set +e
+          python3 vendor/check-design-system.py --upstream
+          code=$?
+          if [ "$code" = 3 ]; then echo "::warning::could not fetch the published design system; the comparison was skipped"; exit 0; fi
+          exit $code
