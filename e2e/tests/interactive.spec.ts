@@ -139,8 +139,8 @@ test('Download PDF: dialog opens, closes (Cancel, Esc, backdrop) and prints in t
 test('reliability chart: sort and select a platform', async ({ page }) => {
   await page.goto(PAGE);
   const rows = page.locator('#db .db-row');
-  await expect(rows).toHaveCount(7);
-  await expect(rows.first()).toContainText('Retell'); // highest pass^3
+  await expect(rows).toHaveCount(10);
+  await expect(rows.first()).toContainText('PolyAI'); // highest pass^3
   await page.locator('#gap .seg button[data-sort="lat"]').click();
   await expect(rows.first()).toContainText('ElevenLabs'); // fastest turn time
   await page.locator('#db .db-row', { hasText: 'Gemini Live' }).click();

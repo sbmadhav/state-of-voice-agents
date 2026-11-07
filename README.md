@@ -40,6 +40,7 @@ Every figure links to its source. Vendor-reported numbers are labeled as such.
 
 | Edition | Link | Notes |
 |---|---|---|
+| November 2026 | [editions/2026-11](https://sbmadhav.com/state-of-voice-agents/editions/2026-11/) | Background speech highlight, Decisions API GA, ten-platform reliability data, new US rules |
 | October 2026 | [editions/2026-10](https://sbmadhav.com/state-of-voice-agents/editions/2026-10/) | First edition |
 
 The root `index.html` always holds the latest edition. Each month's edition is also archived under `editions/YYYY-MM/`. See [UPDATING.md](UPDATING.md) for the monthly checklist and [CHANGELOG.md](CHANGELOG.md) for what changed.

@@ -1,5 +1,19 @@
 # Changelog
 
+## November 2026, research cutoff November 6, 2026
+
+- Reliability: Cekura Bench now lists ten configurations (updated Nov 3, 2026). PolyAI leads at 87.8% pass^3 (about 79% to 93%), overlapping Retell at 75.6%; Telnyx and Smallest AI added; GPT Realtime's 64.6% is now on the hub and marked verified. Headline stats, thesis and pilot bar updated.
+- New highlight in failure modes: the TV in the room. Veris vendor research (task completion 38.7% to 8.6% across 14 systems with a TV playing) and VoxLock, an open Apache-2.0 caller-voice isolation model, with controls.
+- Architecture: ElevenLabs Eleven Realtime (independent Artificial Analysis scores), ConvFill, Block Dessa, Fish Audio claims checked, Pipecat LLMWithBackend, Deepgram's planned acquisition of Daily.
+- Latency and measurement: Regal's October 15 run (GPT-6 Sol leads; newer reasoning models miss the 1,300 ms bar); Sierra's six-language voice results.
+- System-1 routing: OpenAI Decisions API generally available (Oct 22, 2026) with native GPT-Live integration; Zoom Decisions and LiveKit DecisionModel added; third-party Jev latency; why decision models do not fit in edge functions.
+- Deployment: open speech models (NVIDIA Nemotron 3.5 Transcribe, Gradium Phonon) and Apple's Siri AI developer preview.
+- Published results: first bank and credit union figures (Southern Cross Credit Union, NatWest) and a telecom outbound program.
+- Fraud: deepfake detectors lose accuracy over real phone calls (RealComm).
+- Regulation: FCC 26-67 TCPA opt-out rules (effective Nov 25, 2026), FCC 24-84 status, California AB 1979, Colorado SB 26-189 confirmed.
+- Claim check: Decisions API GA now verified; ten new or revised claims, including Chatbase Voice, Fish Audio, Launa-Omni, Nemotron and Jev at the edge.
+- Bolt context, Open Graph image and the comments thread name moved to the November edition.
+
 ## October 2026 (first edition), published October 12, 2026
 
 - Theses: reliability gap, thinker-responder agents, and investing in limited-memory model training.

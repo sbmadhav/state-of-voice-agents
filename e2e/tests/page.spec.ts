@@ -45,8 +45,30 @@ test('title, description, canonical and Open Graph tags', async ({ page, request
 
 test('edition badge and research cutoff are shown', async ({ page }) => {
   await page.goto('/state-of-voice-agents/');
-  await expect(page.locator('footer')).toContainText(/October 2026 edition/);
+  await expect(page.locator('footer')).toContainText(/November 2026 edition/);
   await expect(page.locator('footer')).toContainText(/Research cutoff/);
+});
+
+test('November additions: TV-in-the-room highlight, updated claim check, pre-rendered sources', async ({ page }) => {
+  await page.goto('/state-of-voice-agents/');
+  const tv = page.locator('#tv-in-room');
+  await expect(tv).toContainText('38.7%');
+  await expect(tv.locator('tbody tr')).toHaveCount(5);
+  const ga = page.locator('#claims tr', { hasText: 'OpenAI Decisions API is generally available' });
+  await expect(ga).toHaveAttribute('data-v', 'v');
+  // Every citation resolves to a numbered source in the list
+  const keys = await page.locator('a.c').evaluateAll(as => [...new Set(as.map(a => (a as HTMLElement).dataset.s))]);
+  for (const k of keys) await expect(page.locator(`#src-${k}`)).toHaveCount(1);
+});
+
+test('citations and sources are in the HTML without JavaScript', async ({ browser }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const page = await ctx.newPage();
+  await page.goto('/state-of-voice-agents/');
+  await expect(page.locator('#src li').first()).toBeAttached();
+  await expect(page.locator('#claims tr', { hasText: 'Chatbase' })).toHaveCount(1);
+  await expect(page.locator('#tv-in-room a.c').first()).toHaveText(/^\[\d+\]$/);
+  await ctx.close();
 });
 
 for (const ed of EDITIONS) {
