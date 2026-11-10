@@ -1,18 +1,502 @@
-Voice Agents at the Front Door, November 2026 edition, by Madhav Srinivasan.
+Voice Agents at the Front Door, November 2026 update, by Madhav Srinivasan.
 URL: https://sbmadhav.com/state-of-voice-agents/
+This file has two parts. Part 1 is the November 2026 update: only what changed since October, with a financial services focus. Part 2 is the October 2026 baseline report, which still holds for everything Part 1 does not change. Where they differ, Part 1 is current. Bracketed numbers refer to the Sources list at the end of each part; the numbering restarts in Part 2.
+
+=== PART 1: NOVEMBER 2026 UPDATE ===
+
+STATE OF CONVERSATIONAL VOICE AGENTS · MONTHLY UPDATE · FINANCIAL SERVICES FOCUS, WITH HEALTH CARE NOTES
+
+November 2026 edition Builds on the October 2026 baseline. Only what changed is here.
+
+Banks and credit unions reach the front door
+
+The first published bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all vendor- or company-reported. Reliability scores rose, OpenAI's decision API left beta, and US rules for opt-outs and AI in health care tightened. The new risk is ordinary: a TV playing in the room broke most voice agents in one test.
+
+BEST REPEAT RELIABILITY
+Oct: 75.6% · 7 platforms
+87.8%
+
+PolyAI now leads a ten-configuration benchmark; its interval (about 79% to 93%) overlaps the runner-up's [1]
+
+vendor-reported
+CREDIT UNION CALLS FULLY HANDLED
+Oct: none published
+37 to 66%
+
+At two US credit unions, on balance, loan-payment and branch-hours calls [2][3]
+
+vendor-reported
+TASK COMPLETION, TV ON
+Clean calls: 38.7%
+8.6%
+
+Across 14 voice systems on simulated calls with a TV playing in the room [4]
+
+vendor research
+OPENAI DECISIONS API
+Oct: public beta
+GA
+
+Generally available since Oct 22, 2026, and wired into GPT-Live [5]
+
+vendor
+UNCHANGED SINCE OCTOBER
+
+The three theses stand: reliability is the gap, think silently, then respond, and invest in governed memory. So do the economics model, the 90-day pilot and the router comparison. Everything not listed below is indexed at the end with a link to its October section.
+
+How to read this update: method, limits and disclosure
+
+1 · AT A GLANCE
+
+October versus November
+
+Each row is a finding that moved. Rows link to the detail below.
+
+AREA	OCTOBER 2026	NOVEMBER 2026	WHAT IT MEANS
+Repeat reliability	Retell led at 75.6% of 82 scenarios passed three times in a row; 7 platforms	PolyAI leads at 87.8%; 10 configurations; the 7 October results are unchanged[1]	Leaders change monthly; your own golden test set stays the gate
+Financial services results	None published; the report expected balances and payments first	Credit unions report 37% to 90% of calls contained; CIBC reports more than 16M voice-assistant calls[2][3][6]	The expected pattern held: routine servicing first; all figures are self-reported
+Background speech	Background speech raised transcription errors to 22% to 31%[7]	With a TV on, task completion fell from 38.7% to 8.6%; an open model isolates the caller[4][8]	Now the failure mode to test first
+Financial regulation	GLBA, PCI DSS and UDAAP named but not reviewed	Mapped below, with new federal model-risk and third-party guidance and the FCC opt-out order[9][10][11]	Generative voice agents sit under general governance, not model-risk rules
+Identity checks	Voiceprint plus liveness, then a one-time code, for high-risk calls	Treat voice as a signal, not a factor; detectors lose accuracy over real phone lines[12][13]	High-risk steps move to app push or other phishing-resistant checks
+System-1 decisions	OpenAI Decisions API in public beta; Jev measured at p50 175 ms, p95 270 ms	Decisions API GA on GPT-6 Luna; a second Jev test measured p50 151 ms, p95 247 ms; no self-hosted Jev[5][14]	A hosted decision layer is production-grade; contract and BAA terms decide
+Open speech models	Open models fit only small routers	Open transcription, speech output and voice isolation now credible[15][16][8]	More of the audio path can stay on your own infrastructure
+Health care	Disclosure rules in California, Texas and Utah	California AB 1979 adds a licensed-judgment rule and covers health care chatbots under its medical privacy law[17]	Scheduling and routine messages stay exempt
+
+2 · FINANCIAL SERVICES
+
+Where voice agents are working in banking
+
+New this month. Every result below is reported by the institution or its vendor, with no control group. Expect regression at scale, as with the health care results.
+
+INSTITUTION	VENDOR	CALLS HANDLED	REPORTED RESULT
+Service 1st Federal Credit Union (US)	Glia	Inbound servicing	37% of calls fully handled; abandonment down 96%, wait down 91% (first half of 2025)[2] vendor-reported
+WEOKIE Federal Credit Union (US)	interface.ai	Balances, loan payments, branch hours	Wait time down 50% (Mar 2025)[18]; 66% of calls automated per the vendor's case study[3] vendor-reported
+Six more US credit unions	interface.ai	Inbound servicing	Containment from 46% to 90%; undated case studies[3] vendor-reported
+Southern Cross Credit Union (Australia)	Salesforce Agentforce Voice	Balance enquiries after verification	7% of all calls; balances given to 95% of verified callers who choose that option; built in six weeks[19][20] company-reported
+CIBC (Canada)	In-house	Voice assistant for clients	More than 16 million calls since its 2025 launch[6] company-reported
+Klarna (US)	ElevenLabs	Payment status and next steps	"Up to 10x faster", with no baseline given[21] vendor-reported
+Unnamed North American lender	Synthflow	Outbound collections	Four-week trial: right-party contact 4.9% vs 3.5% for people; 49% of conversations ended in a promise to pay; no sample size[22] vendor-reported
+NatWest (UK)	NVIDIA	In-app voice questions, not the contact center	20% fewer misheard words after tuning to UK regional accents[23] company-reported
+Commonwealth Bank (Australia)	In-house voice bot	Inbound	Cut 45 roles citing lower call volumes, then reversed the cuts after its union disputed the claim (Aug 2025)[24] independent
+
+No voice-agent metrics were found for the largest US banks. Telecom for comparison: an outbound program of about 2,300 calls cut early cancellations to under half the usual rate[25]. vendor-reported
+
+READINESS BY FINANCIAL CALL TYPE
+CALL TYPE	READINESS	WHY	MUST-HAVE CONTROLS
+Balance, transaction and payment status; branch hours; routing	deploy	Where every published result sits[2][19]	Caller verification before account data; a fast route to a person
+Loan or card payment by phone	pilot	Reported at credit unions[18]; money moves, so errors cost	Read back amount and account; keep card numbers out of the voice path (keypad entry with tones masked)[26][27]
+Card activation, lock and travel notices	pilot	No published results found	Step-up check for unlock or replacement
+Payment reminders and collections (outbound)	pilot	One vendor trial[22]; consent and opt-out rules apply[11]	Consent on file; opt-out recognized in natural language; reassigned-number check
+Dispute and error intake	pilot with care	Regulators expect disputes to be recognized however they are phrased[28]	Log every possible dispute as one; hand off with the transcript; start the clock at the call author's view
+Fraud claims, hardship, complaints, advice	people	Customers want a person here[29]; outcomes are high-stakes	Detect and transfer by rule, never by a confidence threshold
+
+author's view Tiers are a starting point for operations and compliance teams. The health care version is in October, section 7.
+
+DO CUSTOMERS WANT IT?
+81% of 2,500+ consumers want some human involvement when they call their bank.[30] company-reported
+About 30% accept AI for routine tasks such as balance checks; 55% want a person for suspected fraud and for debt collection.[29] vendor-reported
+In a survey of 18,028 customers, satisfaction with banks' virtual assistants dropped sharply on disputes and fraud, where limited escalation trapped people in self-service loops.[31] independent
+
+3 · NEW FAILURE MODE
+
+The TV in the room
+
+October listed background chatter as one failure among many (T4). New evidence puts it first.
+
+The noise that hurts most is not traffic or wind. It is another voice. Veris called 14 voice systems as a simulated utility-billing customer, 100 tasks run three times each, with street, café and TV audio mixed in at equal loudness. With the TV on, task completion fell from 38.7% (372 of 961 calls) to 8.6% (81 of 945). Nine of the 14 systems fell below 5%; only GPT-Live 1 (36.1%) and Grok Voice (33.8%) stayed above 20%. Caller verification fell from 81.3% to 52.5%, and 90% of TV calls carried 10 or more words the caller never said, against 2% of clean calls.[4] vendor research Vendors' noise options were left off and the calls were simulated, so treat the levels as directional.
+
+In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech. Caller-voice isolation does.
+
+CALLER-VOICE ISOLATION ON KRISP'S BENCHMARK OF 265 REAL RECORDINGS
+TOOL	ERROR RATE (WER)	LEAKED WORDS A MINUTE
+No processing	23.21%	66.48
+VoxLock (open, Apache-2.0, 27M parameters)	4.95%	0.11
+Krisp VI 2.5	5.30%	1.52
+ai-coustics Voice Focus 2.2 L	6.84%	0.66
+Sanas SE 1.0	9.38%	13.76
+
+author-reported VoxLock learns the caller's voice from the first 3 to 15 seconds with no enrollment, adds 24 ms of delay and keeps up on one CPU core. The comparison is the author's own, scored with one speech-to-text model; on meeting audio, ai-coustics leaked fewer words.[8]
+
+CONTROLS
+Isolate the caller's voice before speech-to-text and turn detection.
+Let a voice interrupt the agent only when it matches the caller.
+Read back identity details, amounts and account numbers before any write; re-verify if a different voice answers a security question.
+Add TV, café and second-speaker audio to the golden test set and block releases on it.
+
+4 · RELIABILITY
+
+Three more platforms, a new leader
+
+Cekura's benchmark (82 appointment and Medicare scenarios, each run three times) is a frozen release, so October's seven results stand; see October, section 1. Only the additions and status changes are here.[1]
+
+PLATFORM	PASSED ALL 3 TRIES	SINGLE RUN	CHANGE SINCE OCTOBER
+PolyAI	87.8%	98.8%	New; now first. Repetition and call-ending checks were not scored
+Telnyx	68.3%	97.6%	New; fifth
+Smallest AI	56.1%	94.3%	New; its tool check was modified, and it scores 45.1% under the standard check
+Retell	75.6%	93.9%	Unchanged; first to second
+GPT Realtime	64.6%	92.7%	Unverified in October; now listed, so verified
+
+With 82 scenarios each score carries about plus or minus 7 to 10 points: PolyAI's interval (about 79% to 93%) overlaps Retell's (about 65% to 84%). author's arithmetic Single-run scores beat repeat reliability on all ten configurations, by 18 points or more on nine. Language matters too: in Sierra's six-language voice test, Spanish trailed English by 2.4 points, so bilingual banks should test both.[32] vendor-reported
+
+5 · REGULATION
+
+Financial services rules, mapped to a voice agent
+
+New this month: October named these regimes but did not review them. US focus; orientation only, not legal advice. Health care rules are in October, T9, with one addition below.
+
+RULE	WHAT IT MEANS FOR A VOICE AGENT	STATUS
+GLBA Safeguards Rule (FTC) and bank security guidelines	A written security program, encryption and oversight of service providers, including the voice-AI vendor. Nonbank lenders report breaches of unencrypted data affecting 500+ consumers to the FTC within 30 days	Breach notice in force since May 13, 2024[33]
+PCI DSS v4.0.1, requirement 3.3.1	Card security codes must not survive in recordings or transcripts after authorization, even encrypted. Speech-to-text output is in scope. Suppress or redact audio, or keep card data out of the voice path	FAQ updated June 2025[26][27]
+CFPB chatbot expectations; Regulation E and Z	Chatbots must comply with consumer financial law; failing to recognize a dispute, inaccurate answers and doom loops with no human path are named risks. A dispute raised to an agent is likely notice that starts error-resolution duties author's view	Issue spotlight June 2023; CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation; the regulations are unchanged[28][34]
+Model risk guidance (replaces SR 11-7)	Excludes generative and agentic AI by footnote, so LLM voice agents fall under general governance; vendor models stay in scope	Issued Apr 17, 2026[9]
+Third-party risk management (OCC, Fed, FDIC, NCUA)	Oversee the voice-AI vendor across the relationship; a proposal would move to a lighter, harm-based approach	Proposed Sept 11, 2026; comments due Nov 16, 2026[10]
+FFIEC authentication guidance; NYDFS AI guidance	Risk-assess call-center authentication and layer controls. New York advises against SMS, voice or video as authentication factors and asks for deepfakes in risk assessments	FFIEC Aug 2021; NYDFS letter Oct 2024; customer MFA required from Nov 1, 2025[35][12]
+FinCEN deepfake alert	Red flags and the SAR key term FIN-2024-DEEPFAKEFRAUD; voice clones named in family-emergency scams	Nov 13, 2024; cited again in a Sept 2026 alert[36]
+TCPA opt-out rules, FCC 26-67	One designated opt-out method, honored within 10 business days; opt-outs can be limited to the message category. Fraud alerts get more latitude: up to 3 messages per event over 3 days	Effective Nov 25, 2026[11][37]
+FCC AI call disclosure proposal (FCC 24-84)	Would require AI disclosure at consent and on the call	Proposed Aug 2024; not adopted as of Oct 2026[38]
+Colorado SB 26-189	Notice before automated tools materially influence financial or lending decisions; explanation and human review after an adverse outcome; fraud and AML tools carved out	Signed May 14, 2026; effective Jan 1, 2027, if rulemaking is done; October listed it as unverified[39]
+Utah AI Policy Act	Disclose AI when asked; regulated occupations disclose up front in high-risk interactions, including financial advice and collecting sensitive data	Effective May 7, 2025; sunsets July 1, 2027[40]
+
+6 · FRAUD AND IDENTITY
+
+Voice is a signal, not a factor
+
+October's tiers (T8) put voiceprint plus liveness at the top. Two findings change that.
+
+WHAT CHANGED
+Deepfake detectors degrade after audio passes through a real phone call: one detector's equal error rate was 37.9%, falling to 22.4% only after training on call audio.[13] independent
+New York's regulator advises against voice as an authentication factor and asks for liveness checks or phishing-resistant methods.[12]
+Revised tier: for payments, payee changes and limit increases, use an app push or another phishing-resistant check; keep voiceprint and liveness as risk signals that can block, never as the only factor that approves. author's view
+FINANCIAL FRAUD DATA
+Synthetic-voice attacks rose 149% at banks and 475% at insurers in 2024, across 1.2 billion calls analyzed.[41] vendor-reported
+One credit union's deepfake detection avoided $2.57M of fraud exposure in about 13 months.[42] vendor-reported
+US consumers reported $3.5B lost to impostor scams in 2025; bank impersonators were the largest category, at nearly $1B.[43] independent
+Generative AI could push US fraud losses from $12.3B in 2023 to $40B by 2027.[44] projection
+
+7 · MODELS, PLATFORMS AND ROUTING
+
+What shipped, and what it changes
+
+Only releases that change a recommendation. The architecture and routing analysis is in October, T1 and T5.
+
+SYSTEM-1 DECISIONS
+OpenAI Decisions API: beta to GA (Oct 22) on GPT-6 Luna, up to 400 questions a request, $0.10 per million input tokens. GPT-Live sends turns to it while the caller is still speaking. Sierra reports p95 under 280 ms.[5][45] vendor-reported
+New options: Zoom Decisions ($0.042 and $0.10 per million input tokens; 81.3% and 83.9% on five text benchmarks)[46] vendor-reported; LiveKit's DecisionModel runs named decisions beside the call.[47]
+Jev: October p50 175 ms, p95 270 ms; a second test measured p50 151 ms, p95 247 ms. No self-hosted version exists.[48][14]
+Edge: open Laya needs about 1 GB (0.85 GB ONNX at fp16); a Cloudflare Worker gets 128 MB. Run decision models in containers or on your own servers.[49][50]
+SPEECH AND CONVERSATION
+ElevenLabs Eleven Realtime: 99% on Big Bench Audio with 0.57 s to first audio in independent tests, against 470 ms claimed; speaks the OpenAI Realtime protocol; HIPAA and retention terms not yet documented.[51][52]
+Latency is regressing in new models: in Regal's Oct 15 run, GPT-6.1 Sol (1,711 ms) and Gemini 3.8 Flash (2,516 ms) miss its 1,300 ms bar for live voice; GPT-6 Sol leads at 786 of 1,000.[53] vendor-reported
+Open speech: NVIDIA Nemotron 3.5 Transcribe (4.71% English WER, commercial license, no streaming)[15][54]; Gradium Phonon speech output on a CPU in about 43 ms.[16] vendor-reported
+Frameworks: Pipecat ships a fast front-end model paired with a slower back-end model; Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source.[55][56]
+Research, not yet deployable: ConvFill (a small talker covering a frontier model's delay; answers sometimes contradicted the frontier model)[57]; Block's Dessa (full-duplex, trained only on audio, no benchmarks).[58]
+
+8 · HEALTH CARE NOTES
+
+What changed for health systems
+
+October's health care analysis stands: published results, readiness by call type and regulation.
+
+California AB 1979 (effective Jan 1, 2027): a licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt.[17]
+Clinic results: about 50% of calls handled end to end in a vendor's most recently onboarded pilot clinics.[59] vendor-reported
+Clinical speech: Nemotron 3.5 Transcribe's error rate on accented clinical speech fell from 30.8% to 11.8% after fine-tuning, a reminder to test on your own patients' audio.[15] vendor-reported
+The TV-in-the-room finding applies equally to patients calling from home or a waiting room.
+
+9 · CLAIM CHECK
+
+New and revised claims
+
+Claims that are new this month or whose verdict changed. The other October claims stand: October, T10.
+
+Interactive · filter by verdict
+All
+Verified
+Partly or vendor-only
+Unverified or wrong
+CLAIM	VERDICT	WHAT THE EVIDENCE SHOWS
+OpenAI Decisions API is generally available	verified	Was unverified (public beta) in October; GA Oct 22, 2026, on GPT-6 Luna[5]
+GPT Realtime 64.63% pass^3	verified	Was unverified in October; now listed on the benchmark hub[1]
+Colorado's replacement AI law takes effect Jan 1, 2027	verified	Was unverified in October; signed May 14, 2026, effective Jan 1, 2027 if rulemaking is complete[39]
+PolyAI leads Cekura Bench at 87.8% pass^3	partial or vendor	On the hub, but two checks were not scored for PolyAI and its interval overlaps the runner-up's[1]
+Jev latency 70 to 150 ms	unverified or wrong	Unchanged verdict; a second test measured p50 151 ms and p95 247 ms[14]
+Jev can run locally or at the edge	unverified or wrong	No weights or self-hosted build; open Laya needs about 1 GB, beyond a Cloudflare Worker's 128 MB[14]
+Banks are replacing contact-center staff with voice bots	unverified or wrong	Commonwealth Bank cut 45 roles citing a voice bot, then reversed the cuts; no large US bank publishes voice-agent metrics[24]
+Voice biometrics is enough for high-risk banking calls	unverified or wrong	New York's regulator advises against voice as an authentication factor; detectors degrade over phone lines[12]
+Customers do not want AI on bank calls	partial or vendor	About 30% accept it for routine tasks; most want a person for fraud and collections[29]
+A TV in the room breaks most voice agents	partial or vendor	Vendor research on simulated calls: task completion fell from 38.7% to 8.6% across 14 systems; noise options were off[4]
+An open model removes background voices better than commercial tools	partial or vendor	VoxLock 4.95% WER vs 5.30% to 9.38% for three commercial tools, in its author's own test[8]
+Open-source speech recognition has caught up	partial or vendor	Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models[54]
+Eleven Realtime starts speaking in 470 ms	partial or vendor	Reasoning claims match independent tests; measured first audio was 0.57 s and 0.62 s[51]
+Salesforce Launa-Omni matches the leading voice models	partial or vendor	Second on Scale's Audio MultiChallenge (59.69 vs 60.40, within error); its tau-cubed voice score uses Salesforce's own harness[60]
+Chatbase Voice gives speech-to-speech agents chat-grade control	unverified or wrong	Chatbase names no model or architecture and publishes no tests[61]
+Fish Audio understands conversations, not just text	unverified or wrong	Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call[62]
+Block's Dessa is a usable full-duplex voice model	unverified or wrong	Research preview with a waitlist; no size, benchmarks or tool use published[58]
+
+UNCHANGED SINCE OCTOBER
+
+Read these in the October baseline
+
+No new evidence moved these sections, so they are not repeated here.
+
+SECTION	WHAT IT COVERS
+Executive summary	The nine-point argument, still current except where this update says otherwise
+The economics model	Cost per resolved call; break-even near 40% resolution under default assumptions
+The thinker-responder model	Silent System-1 decisions beside a conversational LLM, with a live demo
+What separates a good agent	The golden test set, hearing the right caller, emotion and persona
+Governed memory	Fact stores now, limited-memory models later; no new research this month
+Options, 90-day pilot, debate	Strategic paths, pilot gates and the seven-seat debate
+Latency budget, pass^k, LMLM detail	Technical appendix sections with no new data
+Deployment and data posture	Private endpoints under contract; open speech models above add options
+Tooling and implementation	What to borrow and what to avoid
+
+SOURCES
+
+Sources for this update
+
+Numbered in order of first use. October's sources are in the October baseline.
+
+Interactive · filter by source type
+All
+Independent
+Vendor
+[1]
+Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026) vendor
+https://benchmarks.cekura.ai/voice-agent-workflows
+[2]
+Glia: Service 1st Federal Credit Union case study (data from first half of 2025) vendor
+https://www.glia.com/case-study/service-1st
+[3]
+interface.ai: credit union case studies (undated) vendor
+https://interface.ai/case-studies
+[4]
+Veris: Vamos Pro findings, a TV in the room (Joshua Meyer, Oct 12, 2026) vendor
+https://veris.ai/blog/vamos-pro-findings-tv-in-the-room
+[5]
+OpenAI: API changelog (Decisions API GA Oct 22, 2026; GPT-Live integration Oct 15, 2026) vendor
+https://developers.openai.com/api/docs/changelog
+[6]
+CIBC: CIBC launches new AI-powered platform for advisors, voice assistant call volumes (Jul 31, 2026) vendor
+https://cibc.mediaroom.com/2026-07-31-CIBC-launches-new-AI-powered-platform-to-help-advisors-spend-more-time-with-clients
+[7]
+ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026) vendor
+https://ai-coustics.com/blog/voice-focus-2.0-deepdive
+[8]
+VoxLock: caller-voice isolation model card and paper (arXiv 2610.40727), Apache-2.0 (Oct 2026) independent
+https://huggingface.co/arbazsiddiqui/voxlock
+[9]
+Orrick: Agencies overhaul model risk management guidance for banks (Apr 2026) independent
+https://www.orrick.com/en/Insights/2026/04/Agencies-Overhaul-Model-Risk-Management-Guidance-for-Banks-Heres-What-Changed
+[10]
+Davis Wright Tremaine: Banking agencies and NCUA propose new third-party risk guidance (Sept 24, 2026) independent
+https://www.dwt.com/blogs/financial-services-law-advisor/2026/09/banking-agencies-ncua-tprm-guidance
+[11]
+Federal Register: FCC 26-67, Enhancing the ability of consumers to control the robocalls (Oct 26, 2026) independent
+https://www.federalregister.gov/documents/2026/10/26/2026-21821/enhancing-the-ability-of-consumers-to-control-the-robocalls
+[12]
+Alston & Bird: NYDFS guidance on AI-related cybersecurity risks (Oct 24, 2024) independent
+https://www.alston.com/en/insights/publications/2024/10/nydfs-guidance-on-ai-related-cybersecurity-risks
+[13]
+RealComm: Benchmarking and adapting audio deepfake detection over real communication channels (arXiv 2610.27459, Oct 20, 2026) independent
+https://arxiv.org/abs/2610.27459
+[14]
+OrcaRouter: Is there an open-source Jev? Measured latency and look-alikes (Sep 30, 2026) independent
+https://www.orcarouter.ai/blog/jev-open-source
+[15]
+NVIDIA: Nemotron 3.5 Transcribe model card, OpenMDW-1.1 (Oct 28, 2026) vendor
+https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B
+[16]
+Gradium: Phonon, open-source on-device text-to-speech (Oct 21, 2026) vendor
+https://gradium.ai/blog/gradium-releases-phonon
+[17]
+California Health Care Foundation: Newsom approves 3 health care AI bills, vetoes 2 (Oct 8, 2026) independent
+https://www.chcf.org/blog/2026/10/08/newsom-approves-3-health-care-ai-bills-vetoes-2/
+[18]
+Banking Dive (press release): How WEOKIE Federal Credit Union cut call wait times (Mar 16, 2025) vendor
+https://www.bankingdive.com/press-release/20250316-ai-powered-customer-service-how-weokie-federal-credit-union-cut-call-wait/
+[19]
+Salesforce: Southern Cross Credit Union and Agentforce Voice (Oct 27, 2026) vendor
+https://www.salesforce.com/au/news/stories/southern-cross-credit-union-agentforce-voice-anz/
+[20]
+iTnews: Southern Cross Credit Union asks AI agent to handle account balance requests (Oct 27, 2026) independent
+https://www.itnews.com.au/news/southern-cross-credit-union-asks-ai-agent-to-handle-account-balance-requests-629940
+[21]
+Call Centre Helper: Klarna and ElevenLabs case study (Jun 11, 2026) vendor
+https://www.callcentrehelper.com/case-study-klarna-elevenlabs-274709.htm
+[22]
+VentureBeat: Synthflow launches Vector, a long-horizon AI agent for lenders (Oct 28, 2026) independent
+https://venturebeat.com/business/synthflow-launches-vector-a-long-horizon-ai-agent-for-lenders-that-doesnt-stop-when-the-call-ends
+[23]
+NatWest Group: NatWest improves AI speech recognition for UK banking customers (Oct 14, 2026) vendor
+https://www.natwestgroup.com/news-and-insights/news-room/press-releases/2026/natwest-improves-ai-speech-recognition-for-uk-banking-customers-.html
+[24]
+FStech: CommBank backtracks on plans to replace customer service roles with AI (Aug 22, 2025) independent
+https://fstech.co.uk/fst/CommBank_Backtracks_On_Plans_To_Replace_Customer_Service_Roles_With_AI.php
+[25]
+ElevenLabs: TELUS Digital cuts early cancellations with an outbound voice agent (Oct 30, 2026) vendor
+https://elevenlabs.io/blog/telus-digital-early-cancellations
+[26]
+PCI SSC: FAQ 1210, sensitive authentication data in call recordings (updated Jun 2025) independent
+https://www.pcisecuritystandards.org/faqs/1210/
+[27]
+PCI SSC: Protecting telephone-based payment card data (information supplement, Nov 2018) independent
+https://listings.pcisecuritystandards.org/documents/Protecting_Telephone_Based_Payment_Card_Data_v3-0_nov_2018.pdf
+[28]
+CFPB: Chatbots in consumer finance, issue spotlight (Jun 6, 2023) independent
+https://files.consumerfinance.gov/f/documents/cfpb_chatbot-issue-spotlight_2023-06.pdf
+[29]
+Answering Service Care / Censuswide: Should this call be AI or human? (Jul 2026) vendor
+https://answeringservicecare.com/insights/should-this-call-be-ai-or-human/
+[30]
+CX Dive: Bank customers embrace AI, but want human customer service (TD Bank survey, Mar 31, 2026) vendor
+https://www.customerexperiencedive.com/news/bank-customers-embrace-ai-human-customer-service/816132/
+[31]
+J.D. Power: 2026 U.S. Digital Banking and Credit Card Mobile App Satisfaction Studies (May 28, 2026) independent
+https://resolve.jdpower.com/business/press-releases/2026-us-digital-banking-and-credit-card-mobile-app-satisfaction-studies
+[32]
+Sierra: tau-i18n, evaluation across languages and beyond task completion (Oct 21, 2026) vendor
+https://sierra.ai/blog/tau-i18n
+[33]
+Federal Register: FTC Standards for Safeguarding Customer Information, breach notification amendment (Nov 13, 2023) independent
+https://www.federalregister.gov/documents/2023/11/13/2023-24412/standards-for-safeguarding-customer-information
+[34]
+Holland & Knight: CFPB rescinds 67 guidance documents (May 12, 2025) independent
+https://www.hklaw.com/en/insights/publications/2025/05/cfpb-rescinds-67-guidance-documents
+[35]
+OCC Bulletin 2021-36: FFIEC guidance on authentication and access (Aug 11, 2021) independent
+https://www.occ.gov/news-issuances/bulletins/2021/bulletin-2021-36.html
+[36]
+FinCEN: Alert on fraud schemes involving deepfake media, FIN-2024-Alert004 (Nov 13, 2024) independent
+https://www.fincen.gov/system/files/shared/FinCEN-Alert-DeepFakes-Alert508FINAL.pdf
+[37]
+Womble Bond Dickinson: FCC revises TCPA revocation rules, fraud alert changes (Oct 28, 2026) independent
+https://www.womblebonddickinson.com/us/node/21530
+[38]
+eConsent: AI voice agents and the TCPA, what is required in October 2026 (Oct 16, 2026) independent
+https://econsent.org/posts/ai-voice-agents-tcpa-rules-october-2026/
+[39]
+Skadden: Colorado repeals and replaces its AI Act (Jun 2026) independent
+https://www.skadden.com/insights/publications/2026/06/colorado-repeals-and-replaces-its-ai-act
+[40]
+Perkins Coie: New Utah AI laws change disclosure requirements (2025) independent
+https://www.ashurstperkinscoie.com/en/insights/new-utah-ai-laws-change-disclosure-requirements-and-identity-protections-target-mental-health-chatbo/
+[41]
+CIO Influence: Pindrop 2025 Voice Intelligence and Security Report (Jun 12, 2025) vendor
+https://cioinfluence.com/security/pindrops-2025-voice-intelligence-security-report-reveals-1300-surge-in-deepfake-fraud/
+[42]
+American Banker: Michigan credit union blocks fraud with deepfake detection (Dec 23, 2025) independent
+https://www.americanbanker.com/creditunions/news/michigan-credit-union-blocks-fraud-with-deepfake-detection
+[43]
+Techlicious: Imposter scam losses hit $3.5 billion in 2025, FTC data (Jun 15, 2026) independent
+https://www.techlicious.com/blog/imposter-scam-losses-3-billion-2025-ftc/
+[44]
+Deloitte Insights: Deepfake banking fraud risk on the rise (May 29, 2024) independent
+https://www.deloitte.com/us/en/insights/industry/financial-services/deepfake-banking-fraud-risk-on-the-rise.html
+[45]
+Unite.AI: OpenAI makes Decisions API generally available with GPT-6 Luna (Oct 22, 2026) independent
+https://www.unite.ai/openai-makes-decisions-api-generally-available-with-gpt-6-luna/
+[46]
+Zoom AI Research: Introducing Zoom Decisions APIs (Oct 19, 2026) vendor
+https://www.zoom.com/en/ai-research/introducing-zoom-decisions-apis-accurate-speech-reliable-action/
+[47]
+LiveKit Agents 1.8.9 release notes: DecisionModel backends (Oct 24, 2026) vendor
+https://github.com/livekit/agents/releases/tag/livekit-agents%401.8.9
+[48]
+OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026) vendor
+https://openrouter.ai/blog/insights/jev-vs-claude-opus-5-classification
+[49]
+Hugging Face onnx-community: Laya ONNX weights independent
+https://huggingface.co/onnx-community/laya-ONNX
+[50]
+Cloudflare: Workers platform limits (updated Oct 29, 2026) vendor
+https://developers.cloudflare.com/workers/platform/limits
+[51]
+Artificial Analysis: speech-to-speech models leaderboard (read Nov 6, 2026) independent
+https://artificialanalysis.ai/models/speech-to-speech
+[52]
+JDN: ElevenLabs unveils faster, more accurate speech-to-speech models (Oct 20, 2026) independent
+https://www.journaldunet.com/en/1556895-elevenlabs-unveils-faster-more-accurate-speech-to-speech-models/
+[53]
+Regal: Best LLMs for voice AI agents, October 2026 benchmark (Oct 15, 2026) vendor
+https://www.regal.ai/blog/voice-cx-benchmark-new-llms-october-2026
+[54]
+eesel: Nemotron 3.5 Transcribe against closed models (Oct 29, 2026) independent
+https://www.eesel.ai/blog/nemotron-3-5-transcribe
+[55]
+Pipecat v1.13.0 release notes: LLMWithBackend (Oct 19, 2026) vendor
+https://github.com/pipecat-ai/pipecat/releases/tag/v1.13.0
+[56]
+Deepgram: Deepgram is acquiring Daily, makers of Pipecat (Oct 29, 2026) vendor
+https://deepgram.com/blog/daily-pipecat-deepgram
+[57]
+Srinivas et al. (University of Washington): ConvFill, conversational infill (arXiv 2511.07397) independent
+https://arxiv.org/abs/2511.07397
+[58]
+Voice AI Space: Block launches Dessa, a full-duplex speech model trained only on audio (Oct 24, 2026) independent
+https://www.voiceaispace.com/articles/block-launches-dessa-a-full-duplex-speech-model-trained-only-on-audio
+[59]
+Newswire: MEDFAR acquires AlloMia (Oct 14, 2026) vendor
+https://www.newswire.ca/news-releases/medfar-acquires-allomia-advancing-myle-as-a-system-of-intelligence-for-clinics-860139604.html
+[60]
+Scale AI: Audio MultiChallenge leaderboard (read Nov 6, 2026) independent
+https://labs.scale.com/leaderboard/audiomc
+[61]
+Chatbase: Voice product page (read Nov 6, 2026) vendor
+https://www.chatbase.co/voice
+[62]
+eesel: Fish Audio Drama 3 tested, citing Artificial Analysis (Oct 2026) independent
+https://www.eesel.ai/de/blog/fish-audio-drama-3-test
+
+DISCUSSION
+
+Questions and comments
+
+Corrections, counterpoints and field experience are welcome. Comments are public and stored as GitHub issues on this report's repository through utterances, which is free and open source, with no ads or tracking. Sign in with GitHub to post.
+
+Comments appear here when the page runs scripts. You can also read and post them on GitHub.
+
+Read comments on GitHub
+Post on GitHub
+
+ABOUT
+
+About this report
+THE REPORT
+
+A vendor-neutral view of conversational voice agents for leaders in regulated contact centers, published as a monthly edition. Every figure links to its source, and vendor-reported numbers are labeled as such.
+
+Corrections and source suggestions are welcome as issues on GitHub, which also keeps past editions.
+
+THE AUTHOR
+
+Madhav Srinivasan
+
+Engineering leader who builds AI agents and platforms.
+
+Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.
+
+Back to sbmadhav.com
+Connect on LinkedIn
+By Madhav Srinivasan · November 2026 edition · Research cutoff November 6, 2026
+Bracketed numbers in the text link to the numbered sources above. Past editions: github.com/sbmadhav/state-of-voice-agents.
+Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
+
+=== PART 2: OCTOBER 2026 BASELINE (still current where Part 1 does not change it) ===
+
+Voice Agents at the Front Door, October 2026 edition, by Madhav Srinivasan.
+URL: https://sbmadhav.com/state-of-voice-agents/editions/2026-10/
 Bracketed numbers like [12] refer to the numbered Sources list at the end.
 
 STATE OF CONVERSATIONAL VOICE AGENTS · HEALTHCARE FIRST, WITH NOTES FOR FINANCIAL SERVICES
 
-November 2026 edition
+October 2026 edition
 
 Voice agents at the front door
 
-Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in eight test scenarios when each was run three times, and in another, a TV playing in the room broke most agents.#
+Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in four test scenarios when each was run three times.#
 
 THE ONE-MINUTE READ
 
-What we know. The best platform passed 87.8% of test scenarios on all three tries, and its lead over the runner-up is within the margin of error. Background speech is the failure most teams miss: with a TV on, task completion fell from 39% to 9% across 14 systems in one test. Every published deployment result is administrative and self-reported.
+What we know. The best platform passed 75.6% of test scenarios on all three tries; the top three are within the margin of error. Every published deployment result is administrative and self-reported.
 
 What to watch. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that any model bet goes stale in a quarter.
 
@@ -23,9 +507,9 @@ What to do. Build a golden test set from your own calls and gate every change on
 Lower call abandonment at a large health system within two weeks of go-live [1]
 
 self-reported
-87.8%
+75.6%
 
-Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 79% to 93% at 95% confidence) [2]
+Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 65% to 84% at 95% confidence) [2]
 
 vendor-reported
 5%
@@ -41,7 +525,7 @@ vendor-reported
 Thesis 1
 Reliability is the gap
 
-In one benchmark, single-run scores beat repeat reliability on all ten configurations tested, by 18 points or more on nine. Test repeatability on your own calls.
+In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms. Test repeatability on your own calls.
 
 Thesis 2
 A thinker-responder agent
@@ -59,7 +543,6 @@ vendor or self-reported
 unverified
 author's view, arithmetic or illustration
 Charts and tools you can use carry
-interactive
 How to read this report: method, limits and disclosure
 
 EXECUTIVE SUMMARY · ABOUT TEN MINUTES
@@ -71,7 +554,7 @@ Voice agents can now take routine calls in regulated contact centers. What separ
 1
 Ready for routine calls, not for unsupervised high-risk ones
 
-Agents now handle scheduling, billing questions and status checks well. In one public benchmark, the best platform completed 98.8% of scenarios on a single try, but passed 87.8% when each scenario had to succeed three times in a row; the runner-up fell from 93.9% to 75.6%.[2] The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44% of repetitive calls automated, but every published result is administrative and self-reported.[5][6]
+Agents now handle scheduling, billing questions and status checks well. In one public benchmark, the best platform completed over 90% of scenarios on a single try, but passed only 75.6% when each scenario had to succeed three times in a row.[2] The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44% of repetitive calls automated, but every published result is administrative and self-reported.[5][6]
 
 Reliability and results
 2
@@ -91,25 +574,25 @@ The thinker-responder model
 4
 Hear the right caller
 
-Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to 22% to 31%, and isolating the main speaker cut them by up to 43%.[9] In another, a TV playing in the room cut task completion across 14 voice systems from 38.7% to 8.6%, and nine of them fell below 5%.[10] Diarization separates the voices, so the agent locks onto the caller and checks identity again if a different voice takes over before a sensitive step. Test with noise and side conversations, not clean demo audio.
+Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to 22% to 31%, and isolating the main speaker cut them by up to 43%.[9] Diarization separates the voices, so the agent locks onto the caller and checks identity again if a different voice takes over before a sensitive step. Test with noise and side conversations, not clean demo audio.
 
 Noise and diarization
 5
 Emotion and persona: worth piloting, not yet proven
 
-Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice: offer callers a choice, then keep each caller's preferred voice consistent. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used,[11] so run both as experiments behind the golden test set.
+Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice: offer callers a choice, then keep each caller's preferred voice consistent. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used,[10] so run both as experiments behind the golden test set.
 
 Emotion and persona
 6
 Build governed memory now; train limited-memory models later
 
-Turn plans, policies, fees and provider details into a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Limited-memory models go further: they are trained to look facts up in that store instead of memorizing them. In research, a 382M-parameter model approached a 7B model on factual precision, and deleting a row made the model forget the fact.[12] That research is early (Wikipedia facts, small models, no voice or production use), so trial it on one domain once the store is ready, and scale only if it beats retrieval. Live data such as balances and appointment slots always comes from your systems through tools.
+Turn plans, policies, fees and provider details into a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Limited-memory models go further: they are trained to look facts up in that store instead of memorizing them. In research, a 382M-parameter model approached a 7B model on factual precision, and deleting a row made the model forget the fact.[11] That research is early (Wikipedia facts, small models, no voice or production use), so trial it on one domain once the store is ready, and scale only if it beats retrieval. Live data such as balances and appointment slots always comes from your systems through tools.
 
 Governed memory
 7
 A voice is no longer proof of identity
 
-Over half of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice.[4] Match the check to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness detection for irreversible actions, and always a person as the fallback. Card numbers should never reach the agent at all. For outbound calls, consent belongs to the current subscriber, so check lists against the FCC's Reassigned Numbers Database.[13]
+Over half of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice.[4] Match the check to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness detection for irreversible actions, and always a person as the fallback. Card numbers should never reach the agent at all. For outbound calls, consent belongs to the current subscriber, so check lists against the FCC's Reassigned Numbers Database.[12]
 
 Trust and identity
 8
@@ -129,15 +612,13 @@ The pilot playbook
 
 A demo call is not a production call
 
-The same test agent was run on ten voice platform configurations: 82 realistic caller scenarios (appointments and Medicare), three repeats each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly. PolyAI joined in late October and now leads. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.[2][14]
+The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.[2][13]
 
-Sort by repeat reliability
-By demo gap
-By speed
-Interactive · sort, then tap a platform
-PolyAI
-Provider-chosen stack (not published)
-87.8 / 98.8
+0%
+25%
+50%
+75%
+100%
 Retell
 Retell STT · GPT-5.5 · Eleven Flash v2
 75.6 / 93.9
@@ -147,9 +628,6 @@ Nova-3 · GPT-4.1 · Sonic-3
 ElevenLabs
 Scribe RT · Qwen3.5-397B · Flash v2
 69.5 / 91.5
-Telnyx
-Provider-chosen stack (not published)
-68.3 / 97.6
 GPT Realtime
 gpt-realtime-2.1 (native)
 64.6 / 92.7
@@ -159,9 +637,6 @@ Nova-3 · GPT-4.1 · Sonic-3.5
 Vapi
 Provider-chosen stack
 59.8 / 97.6
-Smallest AI
-Atoms, electron model; modified tool check
-56.1 / 94.3
 Gemini Live
 Native speech-to-speech
 30.5 / 87.8
@@ -169,16 +644,16 @@ Passed all 3 tries (pass^3)
 Single-run task completion
 The demo gap
 DEMO GAP
-11.0 pts
+18.3 pts
 MEAN TURN TIME
-2.46 s
+2.21 s
 CLEAN CALLS
-99.2%
+98.4%
 FIGURES
-partly scored
-PolyAI: of 82 scenarios, about 72 passed all three tries. Single runs succeeded 98.8% of the time, so a one-call demo overstates readiness by 11 points. Each provider chose its own model stack.
+verified
+Retell: of 82 scenarios, about 62 passed all three tries. Single runs succeeded 93.9% of the time, so a one-call demo overstates readiness by 18 points. Each provider chose its own model stack.
 
-Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.[7] A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect; the benchmark does not break failures down by type. With 82 scenarios, each score carries a margin of about plus or minus 7 to 10 points: PolyAI's 87.8% (about 79% to 93%) leads, but its interval overlaps Retell's (about 65% to 84%), so treat the order below the top as a tie. PolyAI's repetition and call-ending checks were not scored. Smallest AI's tools could not take list parameters, so its tool check was modified; under the standard check it scores 45.1%. Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.
+Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.[7] A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect; the benchmark does not break failures down by type. With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.
 
 2 · PUBLISHED RESULTS
 
@@ -222,9 +697,7 @@ self-reported
 
 For financial services, I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. author's view CX, IT and operations leaders report the same gap: 98% have deployed AI in the customer journey, but only 5% can quantify its impact on business outcomes.[3] vendor-reported
 
-First published bank and credit union figures. Southern Cross Credit Union's voice agent takes 7% of all calls and gives balances to 95% of verified callers who choose that option.[15] NatWest tuned speech recognition to UK regional accents on about 3,000 recorded banking questions and cut misheard words by 20%.[16] In a telecom outbound program of about 2,300 calls, early cancellations ran at under half the rate of comparable new customers.[17] All three are administrative, as expected. vendor-reported
-
-Enterprise agent platforms are moving into healthcare too. Sierra says it serves most Fortune 50 healthcare companies, and announced new voice models at Sierra Summit 2026. No healthcare outcome figures have been published yet.[18] vendor-reported
+Enterprise agent platforms are moving into healthcare too. Sierra says it serves most Fortune 50 healthcare companies, and announced new voice models at Sierra Summit 2026. No healthcare outcome figures have been published yet.[14] vendor-reported
 
 3 · PACE OF CHANGE
 
@@ -233,59 +706,34 @@ Enterprise agent platforms are moving into healthcare too. Sierra says it serves
 On Sierra's voice benchmark, the best score rose from 30% to 67% in eight months.[7] Lock in your data and evaluations, not a model.
 
 Feb 4, 2026
-ElevenLabs raises $500M at an $11B valuation[19]
+ElevenLabs raises $500M at an $11B valuation[15]
 Feb 26, 2026
 Deepfake detection vendor expands into healthcare contact centers[4]
 May 1, 2026
 Sierra publishes tau-voice: best voice score 67%, up from 30%[7]
 Jul 8, 2026
-GPT-Live begins rolling out in ChatGPT Voice[20]
+GPT-Live begins rolling out in ChatGPT Voice[16]
 Jul 8, 2026
-Co-LMLM extends limited-memory models beyond triples[21]
+Co-LMLM extends limited-memory models beyond triples[17]
 Sep 10 to 14, 2026
-GPT-Live 1 and gpt-realtime-2.1 released[22]
+GPT-Live 1 and gpt-realtime-2.1 released[18]
 Sep 15, 2026
-TypeSafe Jev early access; Gemini 3.8 Live launches[23]
+TypeSafe Jev early access; Gemini 3.8 Live launches[19]
 Sep 18 to 20, 2026
-Open-source Laya decision model released[24]
+Open-source Laya decision model released[20]
 Sep 29, 2026
-OpenAI DevDay: Decisions API announced[25]
+OpenAI DevDay: Decisions API announced[21]
 Oct 6, 2026
-Decisions API public beta; Sierra Tandem Voice[26]
+Decisions API public beta; Sierra Tandem Voice[22]
 Oct 9, 2026
-Field analysis of where voice agents break[27]
-Oct 12, 2026
-A TV in the room cuts task completion from 39% to 9% across 14 voice systems[10]
-Oct 15, 2026
-GPT-Live sends turns to the Decisions API natively[28]
-Oct 19, 2026
-Pipecat adds a fast front-end model paired with a slower back-end model[29]
-Oct 19 to 20, 2026
-ElevenLabs releases Eleven Realtime speech-to-speech models[30]
-Oct 21, 2026
-Gradium releases Phonon, open-source speech output that runs on a CPU[31]
-Oct 21, 2026
-Sierra publishes a six-language voice benchmark[32]
-Oct 22, 2026
-OpenAI Decisions API generally available[28]
-Oct 23, 2026
-Block previews Dessa, a full-duplex model trained only on audio[33]
-Oct 28, 2026
-NVIDIA releases open-weight Nemotron 3.5 Transcribe[34]
-Oct 29, 2026
-Deepgram agrees to acquire Daily, the maker of Pipecat[35]
-Oct 29, 2026
-VoxLock, an open model that keeps only the caller's voice[36]
-Nov 3, 2026
-Cekura Bench adds PolyAI, now ten configurations[2]
+Field analysis of where voice agents break[23]
 
 4 · ECONOMICS
 
 The lever is resolution rate, not token price
 
-Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person, and those tend to be the longer, harder ones. Some calls the agent closes come back as repeat calls. Defaults use published per-minute pricing[37] and a fully loaded human cost per call[38]. Platform, integration and team costs are a fixed annual line.
+Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person, and those tend to be the longer, harder ones. Some calls the agent closes come back as repeat calls. Defaults use published per-minute pricing[24] and a fully loaded human cost per call[25]. Platform, integration and team costs are a fixed annual line.
 
-Interactive · drag sliders or pick a preset
 Daily inbound calls, all queues
 15,000
 Share in scope for the agent
@@ -310,10 +758,6 @@ Agent-closed calls that come back
 Repeat calls go to a person
 Fixed annual cost: platform, integration, team
 $1.50M
-Cautious
-Default
-Strong peer result
-Updates live · chart dot follows the resolution slider
 HUMAN ONLY, MONTHLY
 $810K
 AI + HUMAN FALLBACK
@@ -351,18 +795,15 @@ $11K
 
 Each 5 points of resolution is worth about $48K a month here, 4.4 times the $11K a month that one widely shared token-only model projected.
 
-author's arithmetic Illustrative only. The escalation and repeat-call defaults are assumptions, not sourced figures; use your own. Worst case: resolution 15 points lower, escalations 15 points costlier, 5 points more repeat calls. Best case: resolution 10 points higher, escalations 10 points cheaper, 3 points fewer repeat calls. A published comparison found the pricier stack with higher resolution ($0.14/min, 70% resolved) costs less per 1,000 calls than the cheaper one ($0.09/min, 55%).[37] Cost models that count only LLM token savings miss most of the money.
+author's arithmetic Illustrative only. The escalation and repeat-call defaults are assumptions, not sourced figures; use your own. Worst case: resolution 15 points lower, escalations 15 points costlier, 5 points more repeat calls. Best case: resolution 10 points higher, escalations 10 points cheaper, 3 points fewer repeat calls. A published comparison found the pricier stack with higher resolution ($0.14/min, 70% resolved) costs less per 1,000 calls than the cheaper one ($0.09/min, 55%).[24] Cost models that count only LLM token savings miss most of the money.
 
 5 · THINK SILENTLY, THEN RESPOND
 
 A thinker-responder model for conversational agents
 
-People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the thinker, making typed decisions silently, and a conversational LLM is the responder, turning those decisions into a natural reply.[26][24][23]
+People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the thinker, making typed decisions silently, and a conversational LLM is the responder, turning those decisions into a natural reply.[22][20][19]
 
 ONE CALLER TURN, TWO WAYS
-Interactive · switch modes
-Thinker-responder
-Thinks out loud
 Caller: "I got charged twice for my visit last month."
 THINKER · SILENT
 intent = billing (0.91)
@@ -386,12 +827,11 @@ Confidence: a probability on each, so low-confidence turns hand off instead of g
 WHY IT WORKS
 Faster: decisions take tens to hundreds of milliseconds, so the responder starts with data already fetched.
 Cheaper: the expensive model only writes the reply, not the routing.
-Safer: the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.[27]
-A deliberate difference: OpenAI and Sierra put the fast model on the talking side and a slower reasoner behind it.[39][18] This design puts the fast model on the deciding side. The two combine: a fast talker, a fast silent decider, and a slower reasoner when needed.
+Safer: the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.[23]
+A deliberate difference: OpenAI and Sierra put the fast model on the talking side and a slower reasoner behind it.[26][14] This design puts the fast model on the deciding side. The two combine: a fast talker, a fast silent decider, and a slower reasoner when needed.
 Works with any voice stack: the thinker does not need a speech-to-text pipeline. Beside a speech-to-speech or full-duplex model it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. Because a full-duplex model starts speaking within a few hundred milliseconds, the thinker also needs a stop control: when it flags risk mid-turn, it cuts the audio output at once, before protected data or advice reaches the caller.
 Limit: the thinker handles bounded choices. Open-ended reasoning still needs a deeper planner the responder can call.
 PICK A CALLER TURN
-Interactive · tap a turn, then move the threshold
 HEALTHCARE BILLING
 "I got charged twice for my visit last month."
 MULTI-INTENT
@@ -439,7 +879,7 @@ FOUNDATION · A GOLDEN TEST SET AND AN EVALUATION FRAMEWORK
 
 The most valuable asset a team builds. Hundreds of real, de-identified call scenarios, each with a known right answer, run three times on every change to models, prompts, tools or personas.
 
-Common guidance: 200+ scenarios before production, 500+ for multilingual enterprise use, [40] vendor-reported To detect a 5-point change in a pass rate near 80%, plan for several hundred runs per version, not the 100 sometimes quoted. author's arithmetic
+Common guidance: 200+ scenarios before production, 500+ for multilingual enterprise use, [27] vendor-reported To detect a 5-point change in a pass rate near 80%, plan for several hundred runs per version, not the 100 sometimes quoted. author's arithmetic
 Mix happy paths with edge cases, errors, adversarial callers and noisy audio, and add every production failure as a new case.
 Block a release when a score drops, the same way failing tests block code.
 FOUNDATION · HEARING THE RIGHT CALLER
@@ -447,23 +887,21 @@ FOUNDATION · HEARING THE RIGHT CALLER
 Real callers phone from cars, kitchens and waiting rooms, with a TV on or someone talking beside them. How the agent performs there matters more than how it performs in a quiet demo.
 
 Background speech pushed streaming speech-to-text error rates to 22% to 31%; isolating the main speaker cut errors by up to 43%.[9] vendor-reported
-A TV is the worst case. In a vendor test of 14 voice systems on simulated calls, task completion fell from 38.7% on clean calls to 8.6% with a TV playing, and caller verification fell from 81% to 53%.[10] vendor research
-Open tools now exist for this: VoxLock (Apache-2.0, 27M parameters) learns the caller's voice in the first seconds and removes the rest, cutting transcription errors from 23% to 5% in its author's tests.[36] author-reported
-Separate the voices (diarization), lock onto the caller, and re-verify identity if a different voice takes over before a sensitive step.[41]
+Separate the voices (diarization), lock onto the caller, and re-verify identity if a different voice takes over before a sensitive step.[28]
 Test at several noise levels and with side conversations, not just clean audio.
 EXPERIMENT · EMOTION IN REAL TIME, SENTIMENT ON EVERY CALL
 
 During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.
 
 Treat emotion scores as a signal for routing and review, not a judgment of the caller. Accuracy varies, so check that they work equally across accents and age groups.
-In the EU, people must be told when an emotion recognition system is used.[11]
+In the EU, people must be told when an emotion recognition system is used.[10]
 EXPERIMENT · PERSONA IS THE BRAND
 
 Callers judge the organization by how its agent sounds. Voice, pace, warmth and word choice deserve the same care as a brand guide.
 
-One subscription business reported resolution rates up more than 50% after tuning its voice persona.[18] vendor-reported
+One subscription business reported resolution rates up more than 50% after tuning its voice persona.[14] vendor-reported
 Offer callers a choice of a few personas, then keep each caller's preferred voice consistent on every call. author's view
-Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.[42]
+Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.[29]
 
 author's view The experiments have little evidence so far: mostly vendor case studies, and none yet shows emotion detection or personas improving AI-agent outcomes at scale.
 
@@ -473,7 +911,6 @@ Readiness against risk, by call type
 
 Healthcare shown, because that is where results are published. Green is the pilot zone. Red stays human until there is independent safety evidence.
 
-Interactive · tap a call type for details
 MATURITY
 LOW RISK
 MEDIUM RISK
@@ -494,18 +931,16 @@ Start here
 Next wave
 Clinically supervised only
 Not yet
-START HERE
-Confirm, cancel, reschedule
-
-Abandonment down 56%, appointments up 21% at Tampa General
-
-EXAMPLE VENDORS
-
-Hyro, Assort, Hello Patient, Zocdoc Zo
-
-EXAMPLE DEPLOYMENTS
-
-Tampa General and others
+CALL TYPE	ZONE	REPORTED OUTCOME	EXAMPLE VENDORS
+Confirm, cancel, reschedule	Start here	Abandonment down 56%, appointments up 21% at Tampa General	Hyro, Assort, Hello Patient, Zocdoc Zo
+Routing and FAQ, portal help	Start here	44% of repetitive calls automated, abandonment down 85% at Intermountain	Hyro, Talkdesk, Sierra
+Ambient documentation	Next wave	Adjacent category, widely piloted for clinical notes and handoffs	Abridge, Microsoft/Nuance, Commure
+Refill status	Next wave	Included in Tampa General scope; no isolated metric found	Hyro, Assort
+Billing and revenue cycle	Next wave	Billing agent live in 40 days at one urgent care network (vendor-reported)	Hello Patient, Infinitus, Prosper
+Prior auth and payer calls	Next wave	Positioned by vendors; no outcome metric found	Infinitus, Prosper, Sierra
+Post-discharge follow-up	Supervised only	9.0/10 patient rating reported by vendor; heavy clinical supervision	Hippocratic AI
+Screening outreach (outbound)	Supervised only	Higher kit requests among Spanish-speaking patients (vendor-reported); consent rules apply	Hippocratic AI
+Nurse triage lines	Not yet	No validated autonomous deployment found; vendors exclude diagnosis	None recommended
 
 8 · TRUST AND IDENTITY
 
@@ -515,24 +950,21 @@ of fraud attempts at healthcare contact centers now involve AI-generated element
 
 A voice is no longer proof of identity
 
-This is a brand question as much as a security one. Customers will be targeted by callers pretending to be you, and your agent will hear callers pretending to be customers.[43]
+This is a brand question as much as a security one. Customers will be targeted by callers pretending to be you, and your agent will hear callers pretending to be customers.[30]
 
 Liveness and deepfake detection in the contact center platform, before any protected data.
 Step-up verification (one-time code to the number on file), not birth date or security questions alone.
-For payments, prescription changes and other authorizations, add voiceprint verification with liveness detection; a voiceprint alone can be fooled by a clone.[44]
+For payments, prescription changes and other authorizations, add voiceprint verification with liveness detection; a voiceprint alone can be fooled by a clone.[31]
 Match the friction to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness only for irreversible actions. Liveness checks over phone-quality audio reject some genuine callers, and texted codes lose some older or distressed callers, so always offer a person as the fallback. author's view
 A published "we will never ask you for" policy, owned by marketing.
-In the US, outbound AI-voice calls count as artificial-voice calls under the TCPA since the FCC's 2024 ruling, so they generally need prior express consent; healthcare exemptions are narrow, so check reminder programs with counsel.[45] Consent belongs to the current subscriber, so check outbound lists against the FCC Reassigned Numbers Database before every campaign.[13]
+In the US, outbound AI-voice calls count as artificial-voice calls under the TCPA since the FCC's 2024 ruling, so they generally need prior express consent; healthcare exemptions are narrow, so check reminder programs with counsel.[32] Consent belongs to the current subscriber, so check outbound lists against the FCC Reassigned Numbers Database before every campaign.[12]
 
 9 · WHAT COMES NEXT
 
 Models that look facts up instead of memorizing them
 
-A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete.[12] It suits slow-changing knowledge such as benefits, policies and fees; live data such as balances, claims and appointment slots stays on tool and MCP calls.
+A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete.[11] It suits slow-changing knowledge such as benefits, policies and fees; live data such as balances, claims and appointment slots stays on tool and MCP calls.
 
-Interactive · switch models, then delete the record
-Standard model
-Limited-memory model
 Customer asks to be forgotten: delete record
 CALLER ASKS
 "What's the coverage limit on my plan, member 4471?"
@@ -554,14 +986,14 @@ $1,500
 
 Every value is a logged lookup with access control and an audit trail.
 
-illustrative The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model.[12] Logs, transcripts, caches and backups still need their own deletion.
+illustrative The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model.[11] Logs, transcripts, caches and backups still need their own deletion.
 
 WHY A GOVERNED FACT STORE FITS REGULATED CONVERSATIONS
 Facts become governed data. Each one is a row with access control, versioning and change review.
-Deletion from the model is real. Removing rows forgets them without retraining.[12] Copies in logs, transcripts and backups need their own retention rules.
-Less sensitive data in weights. Researchers have extracted names, phone numbers and emails from model weights, even from data seen once.[46][47]
+Deletion from the model is real. Removing rows forgets them without retraining.[11] Copies in logs, transcripts and backups need their own retention rules.
+Less sensitive data in weights. Researchers have extracted names, phone numbers and emails from model weights, even from data seen once.[33][34]
 Every answer has provenance. Each lookup is a logged call with the value it returned.
-Room to shrink the model. In research, a 382M limited-memory model came close to a 7B model on factual precision; details are in the technical appendix (T6).[12]
+Room to shrink the model. In research, a 382M limited-memory model came close to a 7B model on factual precision; details are in the technical appendix (T6).[11]
 MY VIEW: BUILD THE FACT STORE NOW, AND TREAT LIMITED-MEMORY TRAINING AS A GATED BET
 
 Retrieval on a frontier model is the safe default today, and the evidence for limited-memory models is still research-stage: Wikipedia facts, models under 400M parameters, no dialog, voice or production use. A governed fact store pays off either way. Training is a bet to stage behind gates, not a commitment.
@@ -574,30 +1006,49 @@ Turn plans, policies, products, providers and fees into versioned rows with owne
 When the store is ready · trial
 Trial a small model on one domain
 
-Start from the open LMLM code (MIT) on one de-identified domain, such as benefits or product FAQs. Go further only if it beats retrieval on factual precision, deletion, latency and total cost.[48]
+Start from the open LMLM code (MIT) on one de-identified domain, such as benefits or product FAQs. Go further only if it beats retrieval on factual precision, deletion, latency and total cost.[35]
 
 Only if it wins · scale
 Put it behind the responder
 
 Expand domains for static knowledge. Live balances, claims and appointment slots always stay on tools.
 
-Compute is not the hard part: the paper trained each model in at most 8 H100-days[12], roughly $400 to $500 at $2 to $2.69 an hour for rented H100s[49]. author's arithmetic Budget for data engineering, store quality and evaluation instead.
+Compute is not the hard part: the paper trained each model in at most 8 H100-days[11], roughly $400 to $500 at $2 to $2.69 an hour for rented H100s[36]. author's arithmetic Budget for data engineering, store quality and evaluation instead.
 
 What the research does and does not show yet, claim by claim, is in the technical appendix (T6).
 
 10 · THE DECISION
 
 Four ways to play the next 12 months
-Interactive · tap an option
-Buy a platform or vertical vendor
-Sierra, Hyro, Hippocratic AI
-Build on a platform
-Retell, LiveKit, Pipecat
-RECOMMENDED
-Hybrid
-Buy now, own the router and evals
-Wait
-Revisit in 2027
+
+Buy a platform or vertical vendor Sierra, Hyro, Hippocratic AI
+
+PROS
+Fastest time to value
+Integrations and compliance contracts are standard
+Vendor carries tuning, safety layers and ops
+CONS
+Opaque pricing
+Less control over evaluation, routing and data
+Lock-in at the integration layer
+
+ROI logic: Abandonment and scheduling lift convert to revenue; labor avoided on in-scope queues. Verdict: Strong for the pilot itself.
+
+Build on a platform Retell, LiveKit, Pipecat
+
+PROS
+Full transparency and model choice
+Lowest per-minute cost
+Own every trace and the router
+CONS
+Needs a dedicated team
+You own integration and safety
+Slower first launch
+
+ROI logic: About $0.08 to $0.14 a minute against roughly $6 a human call; break-even depends on resolution rate. Verdict: Right later, not first.
+
+Hybrid (recommended) Buy now, own the router and evals
+
 PROS
 Quick wins from a vertical vendor
 You build the test suite, routing layer, logs and governed fact store in parallel
@@ -606,13 +1057,20 @@ Keeps the exit door open
 CONS
 Two workstreams to govern
 Needs contract terms for log and eval export
-ROI LOGIC
 
-Captures near-term savings while building leverage for the next contract cycle.
+ROI logic: Captures near-term savings while building leverage for the next contract cycle. Verdict: Recommended.
 
-VERDICT
+Wait Revisit in 2027
 
-Recommended.
+PROS
+No execution risk
+Models and benchmarks keep improving
+CONS
+Peers compound gains
+IVR frustration persists
+No internal evaluation muscle
+
+ROI logic: Negative: forgone abandonment and scheduling gains. Verdict: Not recommended.
 
 11 · A PILOT PLAYBOOK
 
@@ -654,13 +1112,9 @@ Any advice beyond approved content: clinical guidance, or a financial recommenda
 Wrong-action rate above 0.5% of tool calls on audit
 A vendor refuses to export logs or evaluation data
 
-author's view Starting points tied to the published results above, not an industry standard. The pre-launch bar is a risk-management choice, not a benchmark-derived number: a narrow golden set of two or three call types is easier than a broad generic benchmark, so it can sit above the best public score (87.8%), and the bar rises with the harm a failure can do. A high overall pass rate never offsets a critical failure, such as protected data given to the wrong caller or a wrong payment; one of those blocks launch. With 200 scenarios, a measured 90% carries a margin of about plus or minus 4 points. 30% lower abandonment is about half what peers report (56% to 85%). 50% resolution is in the range of reported automation (44% at one health system). Tighten the bar for higher-risk call types, and lower the resolution target for complex queues.
+author's view Starting points tied to the published results above, not an industry standard. The pre-launch bar is a risk-management choice, not a benchmark-derived number: a narrow golden set of two or three call types is easier than a broad generic benchmark, so it can sit above the best public score (75.6%), and the bar rises with the harm a failure can do. A high overall pass rate never offsets a critical failure, such as protected data given to the wrong caller or a wrong payment; one of those blocks launch. With 200 scenarios, a measured 90% carries a margin of about plus or minus 4 points. 30% lower abandonment is about half what peers report (56% to 85%). 50% resolution is in the range of reported automation (44% at one health system). Tighten the bar for higher-risk call types, and lower the resolution target for complex queues.
 
 AFTER DAY 90: WHAT TO DO NEXT
-Interactive · pick a pilot outcome
-Gates met
-Some gates missed
-Kill criterion hit
 
 Gates met: scale in waves
 
@@ -682,6 +1136,36 @@ Grow the golden set every week from real failures
 Score sentiment on every call and review the angriest calls weekly
 Report resolved calls, abandonment and satisfaction to the board quarterly
 
+Some gates missed: fix, then re-run
+
+Weeks 1 to 4
+Diagnose
+Rank failures from the logs; most trace to audio, identity or integration, not the model
+Narrow scope to the call types that passed
+Weeks 5 to 8
+Fix
+Swap the weak component (speech-to-text, turn detection, router thresholds) rather than the whole platform
+Add every failure to the test suite
+Weeks 9 to 20
+Re-run
+Repeat the 90-day pilot on the narrowed scope with the same gates
+Scale only after a clean pass
+
+Kill criterion hit: stop and keep the learning
+
+Immediately
+Contain
+Turn the agent off for affected call types; route to people
+Notify compliance and run an incident review
+Next 30 days
+Learn
+Write a blameless post-mortem: what failed, why the gates did not catch it earlier
+Keep the test suite, logs and recordings
+Next edition
+Revisit
+Re-evaluate when the failing capability improves; benchmarks move every quarter
+Continue building the governed fact store; it pays off regardless
+
 author's view Whatever the outcome, keep the test suite, routing logs and call recordings. They are the most valuable thing the pilot produces.
 
 That is the executive read. The think tank and the technical appendix that follow are for readers who want the debate and the detail. Keep reading · About this report
@@ -692,28 +1176,47 @@ Seven seats at the table
 
 A structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models? The seven seats are synthetic perspectives written to stress-test the argument, not a survey of real people.
 
-Interactive · tap a seat to hear that view
 Chief Digital & CX Officer
-CFO
-CISO & Privacy Officer
-Contact Center Operations
-Clinical & Risk Safety Lead
-AI Platform Architect
-Skeptic / red team
 
 Expand in phases. Voice is the front door, and it is now also a brand-trust channel.
 
-STRONGEST EVIDENCE
+Evidence: A large health system cut abandonment 56% and scheduled 21% more appointments in two weeks. Concern: One bad call becomes the story. Scammers posing as your brand erode trust in every legitimate call. Would change their mind: Pilot satisfaction falling below the human baseline.
 
-A large health system cut abandonment 56% and scheduled 21% more appointments in two weeks.
+CFO
 
-KEY CONCERN
+Fund a pilot, not a platform. Pay for resolved calls.
 
-One bad call becomes the story. Scammers posing as your brand erode trust in every legitimate call.
+Evidence: The higher-resolution stack is cheaper per 1,000 calls despite a higher per-minute rate. A decision-first cascade cut classification cost about 72% in one test. Concern: Vertical vendors rarely publish pricing. Early-access model prices may be subsidized. Would change their mind: Verified cost per resolved call below half the human cost at day 90.
 
-WHAT WOULD CHANGE THEIR MIND
+CISO & Privacy Officer
 
-Pilot satisfaction falling below the human baseline.
+Hosted APIs only under contract. Self-host the small models. Prefer facts in governed stores.
+
+Evidence: Hosted decision APIs need a BAA or equivalent; self-hosted encoders avoid the question. Extraction attacks have pulled personal data from model weights. Concern: Voice cloning, prompt injection, retention terms that change. Would change their mind: A signed contract and SOC 2 Type II from every layer, testing vendor included.
+
+Contact Center Operations
+
+Start with scheduling, billing and status checks; warm transfer with full context.
+
+Evidence: Intermountain: 44% of repetitive calls automated and 85% lower abandonment. Concern: Wrong write-backs, misroutes, authentication failures, staff morale. Would change their mind: Misroute or wrong-action rate above 0.5% on audit.
+
+Clinical & Risk Safety Lead
+
+Administrative only. No triage, no advice. Escalation by rule, not by threshold.
+
+Evidence: No validated autonomous triage deployment found. Best models reach only about 53% on multi-intent benchmarks. Concern: Missed red flags, older and non-English callers, regulatory exposure. Would change their mind: An independent safety evaluation with prospective outcomes.
+
+AI Platform Architect
+
+Thinker-responder: tiered router in front, narrowed tools per sub-agent, and a governed fact store, with a limited-memory trial for static knowledge once it beats retrieval. On a managed platform such as Sierra, insist on exporting routing decisions and logs.
+
+Evidence: A 0.1B fine-tuned classifier hits 93.5% on Banking77 in 22 ms. Tool retrieval more than tripled selection accuracy. A 382M LMLM approached a 7B model on factual precision. Concern: Lock-in at orchestration and integration layers; model churn every few weeks. Would change their mind: A vendor refusing to export logs or routing decisions.
+
+Skeptic / red team
+
+Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers.
+
+Evidence: Jev's Banking77 score varies 10.7 points by lab. Benign context flipped 61% of correct decisions. LMLM is untested above 400M parameters or on dialog. Sierra publishes single-run voice scores, not repeat reliability. Concern: Every outcome figure here is customer- or vendor-reported, with no control group. Would change their mind: 90%+ pass^3 on your own scenarios, audited by an independent party.
 
 WHERE THE PERSPECTIVES CONVERGE
 Start with inbound administrative calls and warm human transfer.
@@ -736,24 +1239,19 @@ T1 · ARCHITECTURE
 
 Three generations, converging on "talk fast, think slow"
 
-OpenAI's GPT-Live removes the separate turn detector and delegates search and reasoning to a frontier model behind an asynchronous boundary, so a slow tool call cannot stall audio.[39][50] Sierra's Tandem Voice pairs a real-time conversation layer with a reasoning layer.[18] Gemini 3.8 Live calls tools in the background.[51] Open-source Pipecat now ships the same split, a fast front-end model paired with a slower back-end model.[29] A typed System-1 router fits beside any of these as the dispatch layer.
+OpenAI's GPT-Live removes the separate turn detector and delegates search and reasoning to a frontier model behind an asynchronous boundary, so a slow tool call cannot stall audio.[26][37] Sierra's Tandem Voice pairs a real-time conversation layer with a reasoning layer.[14] Gemini 3.8 Live calls tools in the background.[38] A typed System-1 router fits beside any of these as the dispatch layer.
 
 DIMENSION	CASCADED (STT, LLM, TTS)	NATIVE SPEECH-TO-SPEECH	CONTINUOUS FULL-DUPLEX
-Examples	Pipecat (being acquired by Deepgram; stays open source[35]), LiveKit, Retell; Agentforce Voice[52]	gpt-realtime-2.1; Gemini Live API; ElevenLabs Eleven Realtime[30]	OpenAI GPT-Live; Gemini 3.8 Live; Sierra Tandem Voice; Block Dessa (research preview)[33]
+Examples	Pipecat, LiveKit, Retell; Agentforce Voice[39]	gpt-realtime-2.1; Gemini Live API	OpenAI GPT-Live; Gemini 3.8 Live; Sierra Tandem Voice
 Turn-taking	VAD plus turn detector	Turn detector still decides when to start	Model controls turns, can backchannel
 Tone and prosody	Lost in transcription	Kept	Kept
 Tools and reasoning	Inside the LLM step, blocking	In-model or blocking	Async delegation to a frontier model
 Audit trail	Native text at every step	Transcripts available	Transcripts derived after the fact
 Control and vendor choice	Highest	Medium	Lowest today (single vendor)
-Fit for regulated work	Per-step audit and per-component contracts	Simpler flows with one covered vendor	Watch closely; GPT-Live API announced as upcoming[39]
+Fit for regulated work	Per-step audit and per-component contracts	Simpler flows with one covered vendor	Watch closely; GPT-Live API announced as upcoming[26]
 
 Production reality: calls arrive over SIP trunks as compressed 8 kHz audio, with jitter and packet loss, so test on that audio rather than clean recordings. Integrations with scheduling, CRM and EHR systems are usually the slowest and most brittle part of a launch; budget for them first. author's view
 
-NEW THIS MONTH, CHECKED
-ElevenLabs Eleven Realtime (Oct 2026). Max scored 99% on Big Bench Audio reasoning with 0.57 s to first audio in Artificial Analysis testing, the fastest such pairing measured; GPT-Realtime-2 (high) scored 97% at 1.14 s.[53] independent ElevenLabs reports 470 ms, so expect a gap between vendor and measured latency.[54] It speaks the OpenAI Realtime protocol, so switching between the two is mostly an endpoint change. ElevenLabs manages the speech-to-text, LLM and speech settings inside it, so it behaves like a packaged pipeline rather than one native model. HIPAA and retention terms for it are not yet documented.
-Talk fast, think slow, in research. ConvFill, from the University of Washington, lets a sub-1B on-device model start speaking within a second while a frontier model works in the background. Its answers trailed the frontier model alone and sometimes contradicted it, so in regulated flows the fast model should never state facts on its own.[55] independent
-Block Dessa (Oct 2026). A full-duplex model trained only on conversation audio, with no text. Block has published no size, benchmarks, tool use or general access: a research signal, not an option for regulated calls yet.[33]
-Fish Audio, "understands conversations, not just text." In practice it generates expressive multi-speaker dialogue from tagged scripts (open weights; Drama 3 is free only below $500K annual revenue). Nothing published shows it reasoning over a live call. In third-party scoring it ranks first on pronunciation but tenth on listener preference.[56] Treat the tagline as marketing.
 REFERENCE FLOW (CASCADED, WITH A SYSTEM-1 ROUTER)
 AUDIO IN
 Caller (phone, 8 kHz)
@@ -788,14 +1286,10 @@ T2 · LATENCY BUDGET
 
 Where the seconds go in a turn
 
-Human turn gaps across ten languages cluster around a quarter second.[57] Measured platform turns in the benchmark averaged 1.27 s to 3.08 s.[2] Adjust the stages, or pick a preset.
+Human turn gaps across ten languages cluster around a quarter second.[40] Measured platform turns in the benchmark averaged 1.27 s to 3.08 s.[2] Adjust the stages, or pick a preset.
 
 Be candid about the trade-off: a cascade (speech-to-text, LLM, text-to-speech) takes turns like a walkie-talkie. Even with a fast router and prefetch it lands near 1.5 s a turn, and cutting endpointing further clips callers mid-sentence. If turns under 800 ms are a hard requirement, use a speech-to-speech or full-duplex model and accept a coarser, after-the-fact audit trail. The thinker fits beside either.
 
-Cascaded, sequential tool
-Cascaded, router + prefetch
-Full-duplex
-Interactive · presets and sliders
 2.47 s
 650
 450
@@ -815,13 +1309,11 @@ LLM first token
 TTS first audio
 200 ms
 
-illustrative Sourced anchors: fixed silence endpointing of 500 to 800 ms is still common[27]; the fastest LLM first-token time in Regal's 27-model test was 584 ms[58]; a self-hosted router costs 20 to 50 ms. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn. Commit a route only on the finished turn, and route again when the caller corrects themselves ("cancel... no, just move it"); any prefetch is speculative and dropped on a re-route.
+illustrative Sourced anchors: fixed silence endpointing of 500 to 800 ms is still common[23]; the fastest LLM first-token time in Regal's 27-model test was 584 ms[41]; a self-hosted router costs 20 to 50 ms. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn. Commit a route only on the finished turn, and route again when the caller corrects themselves ("cancel... no, just move it"); any prefetch is speculative and dropped on a re-route.
 
 CALLER EXPERIENCE BEATS RAW MODEL QUALITY
 
-In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression.[58] vendor-reported
-
-Its October 15 run makes the same point with newer models. GPT-6 Sol leads at 786, with an 870 ms first token. GPT-6.1 Sol scores about the same but takes 1,711 ms at its lowest setting, and Gemini 3.8 Flash takes 2,516 ms, both well over Regal's 1,300 ms limit for live voice. Models tuned for coding and agentic work are losing the low-latency settings voice needs.[59] vendor-reported
+In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression.[41] vendor-reported
 
 T3 · MEASURING RELIABILITY
 
@@ -829,9 +1321,6 @@ pass^k: why single-run numbers flatter every vendor
 
 pass^k counts a scenario only when all k runs succeed. It came from Sierra's tau-bench and now appears in Cekura Bench and tau2-bench voice mode. Even assuming independent runs, small per-call error rates compound quickly.
 
-Language is a second axis. Sierra's six-language voice test (2,700 calls) found Spanish, Hindi and Portuguese trailing English by 2.4, 3.8 and 6.4 points on average, so run the golden set in every language you serve.[32] vendor-reported
-
-Interactive · drag the slider
 Per-call success probability
 94.0%
 94.0%
@@ -849,19 +1338,19 @@ At 94.0% per call, only 83.1% of scenarios would pass three for three, assuming 
 
 SAME MODEL, DIFFERENT HARNESS
 
-In Cekura's speech-to-speech benchmark (11 models, 2,952 calls), GPT Realtime 2.1 alone reached 79.3% pass^3, while its mini sibling scored 50.0% and saved all fields correctly on only 64.5% of data-saving calls versus 92.0%.[60]
+In Cekura's speech-to-speech benchmark (11 models, 2,952 calls), GPT Realtime 2.1 alone reached 79.3% pass^3, while its mini sibling scored 50.0% and saved all fields correctly on only 64.5% of data-saving calls versus 92.0%.[42]
 
 RECOVERY IS ITS OWN AXIS
 
-A 2026 interruption benchmark found task completion and recovery quality only partly related.[61] Test barge-in and correction separately from happy paths.
+A 2026 interruption benchmark found task completion and recovery quality only partly related.[43] Test barge-in and correction separately from happy paths.
 
 RELEASE SCORECARD
 Perception: word error rate on phone-grade audio, by accent and language, and on noisy, multi-speaker recordings (TV, car, a family member talking); entity accuracy for names, dates, phone and account numbers.
 Routing: intent accuracy, out-of-scope recall, misroute rate (transfers after routing), calibration error.
 Turn-taking: false and missed barge-ins, backchannel handling.
 Latency: P95 turn time, not mean; dead air over 10 s.
-Action correctness: exact argument match on every tool call. This is the hard gate.[27]
-Repeatability: pass^3 on a golden set of 200+ scenarios; every production failure becomes a regression case; block a release if task completion drops more than 3 points or latency rises more than 10%.[40]
+Action correctness: exact argument match on every tool call. This is the hard gate.[23]
+Repeatability: pass^3 on a golden set of 200+ scenarios; every production failure becomes a regression case; block a release if task completion drops more than 3 points or latency rises more than 10%.[27]
 Emotion: frustration and confusion caught in real time on labeled calls, checked across accents and age groups; sentiment scored on every call after it ends.
 Persona: each persona passes the same golden set; tone may differ, facts and policies may not.
 
@@ -869,40 +1358,18 @@ T4 · FAILURE MODES
 
 Agents mostly break on audio, identity and integration
 FAILURE	MECHANISM	EVIDENCE	MITIGATION
-Someone else talking in the room	A TV, radio or second person is transcribed as the caller. Their words reach tool calls, interrupt the agent and slip into identity checks	With a TV playing, task completion across 14 systems fell from 38.7% to 8.6%; verification fell from 81.3% to 52.5%; 90% of TV calls had 10 or more words the caller never said[10] vendor research	Isolate the caller's voice before speech-to-text; let only the caller's voice interrupt; read back identity, amounts and accounts before acting
-Background noise and chatter	TV, traffic or other people in the room get transcribed as the caller, causing inserted words, false turns and false barge-ins	Background speech pushed streaming STT error rates to 22% to 31%; isolating the main speaker cut them by up to 43%, mostly by removing inserted words[9] vendor-reported	Isolate the caller's voice before STT and VAD; avoid generic noise suppression, which can distort the caller's speech and raise errors[62]
-Wrong speaker answered	A caregiver or bystander answers a verification question, or the agent follows the wrong voice	Speaker-conditioned VAD detects the target speaker frame by frame and ignores others[41][63]	Diarize, lock onto the caller's voice in the first seconds, and re-verify if the voice changes before any sensitive step
-Self-reply to echo	Agent's own speech leaks back, is transcribed as the caller, and gets answered	Seen in a public WebRTC test; rates varied widely by client[64]	Strong echo cancellation; compare input against agent playback
-False barge-in	Echo treated as interruption; agent stops mid-word	A turn model marked echo "complete" at p=0.954[64]	Speaker or echo attribution before turn detection
-VAD threshold trade-off	Lower thresholds speed replies but admit short echo bursts	500 → 384 ms saved 116 ms, added 3 failures[64]	Tune per channel; validate on real devices
-Misroute	Router picks the wrong sub-agent, or one intent of two	Best models reach only 53.4% on a multi-intent benchmark[65]	Multi-label output, thresholds, frontier fallback
-Context-flipped decision	Extra benign text changes a correct routing decision	61.4% of correct decisions flipped[66]	Route on the caller's turn only, not retrieved or third-party text
-Entity drift	Transcript correct, different value reaches the tool	Observed phone number mismatch[67]	Read-back confirmation; server-side validation
-Wrong saved data	Fields written incorrectly	64.5% vs 92.0% all-correct by model[60]	Exact-match audits on write-backs
-Dead air	10+ s silence from stalled provider or reasoning	3.3% to 5.3% of calls by model[60]	Async tools; filler speech; timeouts with handoff
+Background noise and chatter	TV, traffic or other people in the room get transcribed as the caller, causing inserted words, false turns and false barge-ins	Background speech pushed streaming STT error rates to 22% to 31%; isolating the main speaker cut them by up to 43%, mostly by removing inserted words[9] vendor-reported	Isolate the caller's voice before STT and VAD; avoid generic noise suppression, which can distort the caller's speech and raise errors[44]
+Wrong speaker answered	A caregiver or bystander answers a verification question, or the agent follows the wrong voice	Speaker-conditioned VAD detects the target speaker frame by frame and ignores others[28][45]	Diarize, lock onto the caller's voice in the first seconds, and re-verify if the voice changes before any sensitive step
+Self-reply to echo	Agent's own speech leaks back, is transcribed as the caller, and gets answered	Seen in a public WebRTC test; rates varied widely by client[46]	Strong echo cancellation; compare input against agent playback
+False barge-in	Echo treated as interruption; agent stops mid-word	A turn model marked echo "complete" at p=0.954[46]	Speaker or echo attribution before turn detection
+VAD threshold trade-off	Lower thresholds speed replies but admit short echo bursts	500 → 384 ms saved 116 ms, added 3 failures[46]	Tune per channel; validate on real devices
+Misroute	Router picks the wrong sub-agent, or one intent of two	Best models reach only 53.4% on a multi-intent benchmark[47]	Multi-label output, thresholds, frontier fallback
+Context-flipped decision	Extra benign text changes a correct routing decision	61.4% of correct decisions flipped[48]	Route on the caller's turn only, not retrieved or third-party text
+Entity drift	Transcript correct, different value reaches the tool	Observed phone number mismatch[49]	Read-back confirmation; server-side validation
+Wrong saved data	Fields written incorrectly	64.5% vs 92.0% all-correct by model[42]	Exact-match audits on write-backs
+Dead air	10+ s silence from stalled provider or reasoning	3.3% to 5.3% of calls by model[42]	Async tools; filler speech; timeouts with handoff
 Connection failures	Call never completes cleanly	Clean calls as low as 72.4%[2]	Telephony redundancy; count against reliability
-Misheard identity details	Names, emails, IDs garbled; verification fails and cascades	Context-aware ASR cut major errors up to 15%[68]	Bias recognition with the record on file; spell-back
-HIGHLIGHT · THE TV IN THE ROOM
-
-The noise that hurts most is not traffic or wind. It is another voice. Veris called 14 voice systems as a simulated utility-billing customer, 100 tasks run three times each, with street, café and TV audio mixed in at equal loudness. With the TV on, task completion fell from 38.7% (372 of 961 calls) to 8.6% (81 of 945). Nine of the 14 systems fell below 5%; only GPT-Live 1 (36.1%) and Grok Voice (33.8%) stayed above 20%. Caller verification fell from 81.3% to 52.5%, and 90% of TV calls carried 10 or more words the caller never said, against 2% of clean calls.[10] vendor research Veris tested with each vendor's noise options left off, and the calls were simulated, so treat the levels as directional. The direction is not in doubt.
-
-For a regulated contact center, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech. Caller-voice isolation does.
-
-CALLER-VOICE ISOLATION ON KRISP'S BENCHMARK OF 265 REAL RECORDINGS
-TOOL	ERROR RATE (WER)	LEAKED WORDS A MINUTE
-No processing	23.21%	66.48
-VoxLock (open, Apache-2.0, 27M parameters)	4.95%	0.11
-Krisp VI 2.5	5.30%	1.52
-ai-coustics Voice Focus 2.2 L	6.84%	0.66
-Sanas SE 1.0	9.38%	13.76
-
-author-reported VoxLock learns the caller's voice from the first 3 to 15 seconds with no enrollment, adds 24 ms of delay and keeps up on one CPU core. The comparison is the author's own, scored with one speech-to-text model; on meeting audio, ai-coustics leaked fewer words.[36]
-
-CONTROLS
-Isolate the caller's voice before speech-to-text and turn detection, on the telephony edge or in the agent's audio pipeline.
-Let a voice interrupt the agent only when it matches the caller.
-Read back identity details, amounts and account numbers before any write, and re-verify if a different voice answers a security question.
-Add TV, café and second-speaker audio to the golden test set, and block releases on it like any other regression.
+Misheard identity details	Names, emails, IDs garbled; verification fails and cascades	Context-aware ASR cut major errors up to 15%[50]	Bias recognition with the record on file; spell-back
 
 T5 · SYSTEM-1 ROUTING
 
@@ -911,16 +1378,14 @@ Typed decision models and routers, compared
 A System-1 model returns typed answers (choice, score, yes/no) with probabilities in one pass and never writes prose. Three families now compete for the routing job: hosted decision APIs, open decision models, and plain fine-tuned classifiers.
 
 OPTION	TYPE	OUTPUT	LATENCY	COST	EVIDENCE
-OpenAI Decisions API	Closed, hosted; generally available since Oct 22, 2026, on GPT-6 Luna	Predicate, choice, score + probabilities; up to 400 questions a request	~10x faster than Responses; Sierra reports p95 under 280 ms vendor-reported	$0.10/M in; $0.01/M cached; output free	Text and images; GPT-Live sends turns to it natively, while the caller is still speaking; HIPAA for eligible customers with a BAA[28][26][69]
-TypeSafe Jev	Closed, hosted	Choice, Score, Noul (a 0 to 1 "is this true?" answer) + probabilities	p50 151 to 175 ms; p95 247 to 270 ms	$0.042/M in; ~$0.11 per 1k calls	Banking77 81.0% vs frontier 84.4%; no public BAA; no self-hosted version[8][70][23]
-Laya (Convai)	Open, Apache-2.0; 421M and 322M multilingual	Same typed interface	33 to 40 ms (T4); CPU OK	Self-host	Routed base checkpoint 42.5% on Banking77; 76.6% on its own typed-decisions benchmark after fine-tuning on that benchmark's training split[24]
-Zoom Decisions and Decisions Pro	Closed, hosted; Oct 19, 2026	Typed decisions	Not published	$0.042 and $0.10/M in	81.3% and 83.9% average across five text benchmarks[71] vendor-reported
-LiveKit DecisionModel	Open framework hook; hosted backends behind a feature flag	Named background decisions, such as "does the caller want a person?"	Backend-dependent	Backend pricing	Runs decisions beside the conversation; backends include OpenAI Decisions[72]
-Arch-Router-1.5B (Katanemo)	Open weights	Route name	51 ms (L40S)	Self-host	93.2% routing accuracy vs 92.8% for a frontier model[73]
-Fine-tuned ModernBERT-base	Open, 0.1B	Intent label	22.5 ms (T4)	Self-host	Banking77 93.5%[74]
-semantic-router (Aurelio)	Open, MIT	Route or none	One embedding call	Embedding cost	Returns "none" below threshold; good for out-of-scope[75]
-Sierra Curie	Closed, inside the Sierra platform	Orchestration across Sierra's model "constellation"	Not published	In platform pricing	Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers[18] vendor-reported
-RouteLLM	Open	Strong vs weak model	n/a	n/a	Cuts cost "over 2x" without quality loss (model routing, not intent)[76]
+OpenAI Decisions API	Closed, hosted; beta since Oct 6, 2026	Predicate, choice, score + probabilities	~10x faster than Responses vendor-reported	$0.10/M in; output free	Text and images; HIPAA for eligible customers with a BAA[22]
+TypeSafe Jev	Closed, hosted	Choice, Score, Noul (a 0 to 1 "is this true?" answer) + probabilities	p50 175 ms; p95 270 ms	$0.042/M in; ~$0.11 per 1k calls	Banking77 81.0% vs frontier 84.4%; no public BAA[8][19]
+Laya (Convai)	Open, Apache-2.0; 421M and 322M multilingual	Same typed interface	33 to 40 ms (T4); CPU OK	Self-host	Routed base checkpoint 42.5% on Banking77; 76.6% on its own typed-decisions benchmark after fine-tuning on that benchmark's training split[20]
+Arch-Router-1.5B (Katanemo)	Open weights	Route name	51 ms (L40S)	Self-host	93.2% routing accuracy vs 92.8% for a frontier model[51]
+Fine-tuned ModernBERT-base	Open, 0.1B	Intent label	22.5 ms (T4)	Self-host	Banking77 93.5%[52]
+semantic-router (Aurelio)	Open, MIT	Route or none	One embedding call	Embedding cost	Returns "none" below threshold; good for out-of-scope[53]
+Sierra Curie	Closed, inside the Sierra platform	Orchestration across Sierra's model "constellation"	Not published	In platform pricing	Announced Oct 2026; Sierra also runs Fleming to detect bot and agent callers[14] vendor-reported
+RouteLLM	Open	Strong vs weak model	n/a	n/a	Cuts cost "over 2x" without quality loss (model routing, not intent)[54]
 BANKING77 INTENT ACCURACY (77 BANKING INTENTS)
 ModernBERT 0.1B, fine-tuned
 93.5
@@ -933,17 +1398,13 @@ Jev, zero-shot
 Laya base, routed
 42.5
 
-Different labs and setups; directional. Jev's own score ranges from 76.3% to 87.0% depending on who measured it.[74][77][8][24]
+Different labs and setups; directional. Jev's own score ranges from 76.3% to 87.0% depending on who measured it.[52][55][8][20]
 
 WHEN A CLASSIFIER WINS, AND WHEN AN LLM WINS
-Fine-tuned RoBERTa beat a small LLM on ATIS (95.9% vs 84.1%) and tied on CLINC150, at roughly three orders of magnitude lower cost and latency.[78]
-The LLM won on out-of-scope recall (85.6% vs 58.1%) and on very noisy speech (92.5% vs 80.0%).[78]
-A classifier trained on one app's intents scored 0% on a new app's; a schema-prompted model served both at about 94%.[78]
+Fine-tuned RoBERTa beat a small LLM on ATIS (95.9% vs 84.1%) and tied on CLINC150, at roughly three orders of magnitude lower cost and latency.[56]
+The LLM won on out-of-scope recall (85.6% vs 58.1%) and on very noisy speech (92.5% vs 80.0%).[56]
+A classifier trained on one app's intents scored 0% on a new app's; a schema-prompted model served both at about 94%.[56]
 Implication: classifier for stable, high-volume intents; decision API or LLM for new, rare or out-of-scope ones.
-CAN A DECISION MODEL RUN LOCALLY, OR AT THE EDGE?
-
-Not Jev: TypeSafe offers no weights or self-hosted build, and "RSI-Jev" is an unaffiliated look-alike.[70] The open option, Laya (421M parameters), needs about 1 GB of memory; its ONNX files are 0.85 GB at fp16.[79] Edge functions are too small: a Cloudflare Worker gets 128 MB of memory.[80] Run small decision models in a container or on your own CPU or GPU servers, next to the telephony edge, and keep edge functions for auth, caching and request shaping. A fine-tuned 0.1B encoder (about 0.2 GB at fp16) is the smallest path to a local router. author's view
-
 TIME TO ROUTE ONE DECISION, AGAINST AN 800 MS TURN BUDGET
 Fine-tuned encoder (0.1B)
 23 ms
@@ -959,7 +1420,7 @@ Frontier LLM p50
 2.27 s
 Dashed line: 800 ms end-to-end turn target
 
-Static chart. Measured by different labs on different hardware; directional. Sierra does not publish standalone latency for its orchestration model. Frontier figure is a large model classifying Banking77 intents.[8][74][24][73][81]
+Static chart. Measured by different labs on different hardware; directional. Sierra does not publish standalone latency for its orchestration model. Frontier figure is a large model classifying Banking77 intents.[8][52][20][51][57]
 
 WHAT A CASCADE BUYS
 
@@ -976,17 +1437,17 @@ THE THINKER-RESPONDER THESIS, CHECKED
 HOLDS
 Routing a call to a sub-agent or toolset is closed-set classification. Small decision models do it in roughly 20 to 250 ms for fractions of a cent, versus about 2 s for a frontier LLM.[8]
 HOLDS
-Narrowing tools first helps. Retrieving the right tools before selection lifted selection accuracy from 13.6% to 43.1% and cut prompt tokens by more than half in one study; Anthropic reports similar gains once agents have 10 or more tools.[82][83]
+Narrowing tools first helps. Retrieving the right tools before selection lifted selection accuracy from 13.6% to 43.1% and cut prompt tokens by more than half in one study; Anthropic reports similar gains once agents have 10 or more tools.[58][59]
 QUALIFY
-For a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.[74][78]
+For a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.[52][56]
 QUALIFY
-Decision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61% of correct decisions in one study.[77][66]
+Decision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61% of correct decisions in one study.[55][48]
 GUARDRAIL
-Fraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output.[65]
+Fraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output.[47]
 ROUTING TO TOOLS AND MCP SERVERS
-MCP-Zero selected from about 2,800 tools across 308 servers with 98% fewer tokens on one benchmark.[84]
-Anthropic reports 58 tools across 5 servers consume about 55K tokens before a conversation starts; tool search lifted accuracy from 49% to 74% on one model.[83]
-With 4,027 tools, the right tool reached the top results only 56% to 64% of the time, so retrieval recall becomes the new bottleneck.[85]
+MCP-Zero selected from about 2,800 tools across 308 servers with 98% fewer tokens on one benchmark.[60]
+Anthropic reports 58 tools across 5 servers consume about 55K tokens before a conversation starts; tool search lifted accuracy from 49% to 74% on one model.[59]
+With 4,027 tools, the right tool reached the top results only 56% to 64% of the time, so retrieval recall becomes the new bottleneck.[61]
 RECOMMENDED ROUTER DESIGN
 Tier 0: fine-tuned encoder or self-hosted decision model, multi-label (per-intent sigmoid), so "billing and complaint" returns both. In bilingual markets, start from a multilingual encoder such as XLM-R and test turns that mix languages; English-only encoders misroute them.
 Stop control: when the thinker flags risk while the agent is already speaking, it can flush and mute the audio output immediately, then hand off.
@@ -994,7 +1455,7 @@ Calibrate with temperature scaling on your own data; set per-intent thresholds o
 Gate: below threshold, out of scope, or two high-stakes intents goes to a frontier model with the full schema, or to a person.
 Hard rules: fraud, clinical concern, complaints and vulnerable-customer signals always escalate.
 Narrow tools: each sub-agent exposes only its own MCP servers, with a broader-tools fallback when retrieval scores are low.
-Injection hygiene: classify the caller's turn only, without retrieved or third-party text in context.[66]
+Injection hygiene: classify the caller's turn only, without retrieved or third-party text in context.[48]
 Who owns state: one call-state object per call, held by the orchestrator. The thinker runs on every finished turn and writes typed fields (intent, risk, speaker, emotion, confidence). The responder owns the conversation, slot filling and clarifying questions ("does Dr. Smith work Fridays?"), and reads the thinker's fields before it speaks. A new intent, topic shift or correction triggers a re-route; slots already filled carry over.
 Audit: log input hash, label, probabilities, threshold, model version and final disposition; re-run evals on every model change.
 Compliance: hosted decision APIs need a BAA or equivalent for protected data; self-hosted encoders avoid the question.
@@ -1003,7 +1464,7 @@ T6 · LIMITED MEMORY LANGUAGE MODELS
 
 How LMLM works, and what it has shown
 
-Zhao et al., "Pre-training Limited Memory Language Models with Internal and External Knowledge," ICLR 2026. Code and 176M and 382M checkpoints are public under MIT.[12][48]
+Zhao et al., "Pre-training Limited Memory Language Models with Internal and External Knowledge," ICLR 2026. Code and 176M and 382M checkpoints are public under MIT.[11][35]
 
 MECHANISM
 Training text is annotated with inline lookups: entity, relation, then the retrieved value.
@@ -1014,7 +1475,7 @@ Budget: about 3B tokens, 8 epochs, at most 8 H100-days per model.
 FOLLOW-UP: CO-LMLM (JULY 2026)
 Replaces relational triples with vector keys and free-text values, so knowledge is no longer limited to entity attributes.
 About 2.2 ms per retrieval versus 28.6 ms for a question-generating lookup, which fits inside a voice turn.
-Reports that lookup timing is imperfect: forcing lookups added 5.9 points on SimpleQA.[21]
+Reports that lookup timing is imperfect: forcing lookups added 5.9 points on SimpleQA.[17]
 MODEL	PARAMS	FACTSCORE	T-REX EM	POPQA
 LLaMA2 standard	382M	14.0	52.0	22.7
 LLaMA2 LMLM	382M	31.9	58.1	50.8
@@ -1022,7 +1483,7 @@ LLaMA2 LMLM, store off	382M	12.8	38.5	n/a
 LLaMA2	7B	34.0	60.5	29.2
 LLaMA3.1	8B	40.3	67.3	29.4
 
-Source: Zhao et al.[12] A 355M RAG baseline scored higher on T-REx than the same-size LMLM (75.8 vs 58.7) but lower on FactScore and PopQA, so retrieval-augmented frontier models remain the practical benchmark to beat.
+Source: Zhao et al.[11] A 355M RAG baseline scored higher on T-REx than the same-size LMLM (75.8 vs 58.7) but lower on FactScore and PopQA, so retrieval-augmented frontier models remain the practical benchmark to beat.
 
 HOW MUCH OF A MODEL IS FACT STORAGE?
 LMLM 382M ≈ LLaMA2-7B
@@ -1032,54 +1493,52 @@ RETRO 7.5B ≈ GPT-3 175B
 Atlas 11B > 540B on NQ
 50x
 
-Parameter reduction at comparable performance on knowledge-heavy tasks.[12][86][87] Models store about 2 bits of knowledge per parameter, falling toward 1 bit for rarely seen facts.[88] Question-answering accuracy tracks how often a fact appears in training data.[89] None of these measure the share of a frontier model's weights spent on facts; reasoning, code and multilingual skill need parameters too.
+Parameter reduction at comparable performance on knowledge-heavy tasks.[11][62][63] Models store about 2 bits of knowledge per parameter, falling toward 1 bit for rarely seen facts.[64] Question-answering accuracy tracks how often a fact appears in training data.[65] None of these measure the share of a frontier model's weights spent on facts; reasoning, code and multilingual skill need parameters too.
 
 CLAIM OFTEN MADE	VERDICT	DEFENSIBLE VERSION
 Every fact it shares is correct; it cannot hallucinate	OVERSTATED	It cuts hallucination sharply and makes each fact traceable; errors from wrong lookups, missing rows and extraction remain.
 It keeps non-repeating data out of the model	PARTLY	It offloads factual attributes by type, common and rare alike; rare facts are where models learn worst.
 Fact storage is ~99% of model bloat	UNSUPPORTED	Retrieval models match models 18 to 50 times larger on knowledge tasks; the exact share is unmeasured.
 It makes training cheap	PARTLY	It still trains on the full corpus and adds lookup and store-building cost; the saving is fewer parameters for a given factual accuracy, which lowers serving cost.
-It keeps sensitive data out of weights	PLAUSIBLE, UNTESTED	Designed to, and extraction attacks show why it matters, but no privacy-attack evaluation has been published.[46][47]
+It keeps sensitive data out of weights	PLAUSIBLE, UNTESTED	Designed to, and extraction attacks show why it matters, but no privacy-attack evaluation has been published.[33][34]
 WHAT HAS TO BE TRUE FOR REGULATED CONTACT CENTERS
 Extraction quality: turning CRM, EHR and policy text into rows relies on LLM annotators; their errors become confident wrong answers.
 Beyond entity facts: contact center knowledge is often procedural ("if the plan is X and the claim is Y"). Free-text values help, unproven here.
 Reliable lookups: the model must know when to look up and must not fall back on weights.
 Live data still needs tools: balances and appointments change by the minute; LMLM covers static knowledge, not transactions.
 Total cost versus RAG: pre-training a private small model plus building and refreshing the store must beat retrieval on a frontier API.
-Evidence at scale: nothing yet on dialog, speech, models above about 400M, or enterprise data. A 2026 position paper argues for this direction but reports no deployments.[90]
+Evidence at scale: nothing yet on dialog, speech, models above about 400M, or enterprise data. A 2026 position paper argues for this direction but reports no deployments.[66]
 
 T7 · DEPLOYMENT AND DATA POSTURE
 
 "Sovereign" in practice means private endpoints under contract
 
-The case for keeping protected data and conversation logs under your control is strong. The case for running live conversational voice on your own GPUs is weak for 2026 to 2027. The exceptions are growing: small routers, speech output, and transcription of recorded calls now have credible open models.
+The case for keeping protected data and conversation logs under your control is strong. The case for running voice inference on your own GPUs is weak for 2026 to 2027, except for small models such as routers.
 
 POSTURE	STATUS IN 2026	PROS	CONS
-Model API under a BAA or equivalent, modified or zero retention	OpenAI covers the Realtime API with modified retention[91]; Bedrock stores no prompts by default[92]; Anthropic covers its HIPAA-ready API[93]	Fastest; frontier quality; vendor carries ops	Terms can change; contracts needed for every component
-Dedicated cloud tenancy over private network	Stanford runs Secure GPT this way on Azure[94]	No public internet path; enterprise audit	More integration work; not every voice model offered
-Managed enterprise agent platform	Sierra runs the full voice stack (Tandem Voice, Curie, Fleming) and prices on outcomes[18]	Fastest to production; vendor owns tuning and safety layers	Least control over models, routing and logs; negotiate export rights
-Self-hosted small models (routers, classifiers)	Encoders run in tens of ms on one GPU or CPU[74][24]	Cheap; no data leaves; no contract question	You own training, calibration and monitoring
-Self-hosted open speech models	NVIDIA Nemotron 3.5 Transcribe (commercial license, 40 languages) reports 4.71% English WER and runs on one H100; it does not stream, has no 8 kHz phone-audio results, and closed models still lead independent rankings[34][95]. Gradium Phonon (Apache-2.0, 31M parameters) speaks from a CPU in about 43 ms[31] vendor-reported	Recorded-call transcription and speech output with no audio leaving your site	Not yet a full live stack; you own accuracy testing on your own phone audio
-On-device assistants	Apple opened Siri AI to all developers in preview (Nov 3, 2026); Apple says requests run on the device or on its Private Cloud Compute without keeping personal data, but not which speech steps run where; not available in the EU on iOS[96]	A privacy-first channel for app-based self-service	Consumer assistant, not contact-center infrastructure; no telephony
-Self-hosted large open-weight models	No named US health system found doing this for patient-facing voice	Full control	Beat the cheapest API in only 24% of 900 modeled scenarios[97]
+Model API under a BAA or equivalent, modified or zero retention	OpenAI covers the Realtime API with modified retention[67]; Bedrock stores no prompts by default[68]; Anthropic covers its HIPAA-ready API[69]	Fastest; frontier quality; vendor carries ops	Terms can change; contracts needed for every component
+Dedicated cloud tenancy over private network	Stanford runs Secure GPT this way on Azure[70]	No public internet path; enterprise audit	More integration work; not every voice model offered
+Managed enterprise agent platform	Sierra runs the full voice stack (Tandem Voice, Curie, Fleming) and prices on outcomes[14]	Fastest to production; vendor owns tuning and safety layers	Least control over models, routing and logs; negotiate export rights
+Self-hosted small models (routers, classifiers)	Encoders run in tens of ms on one GPU or CPU[52][20]	Cheap; no data leaves; no contract question	You own training, calibration and monitoring
+Self-hosted large open-weight models	No named US health system found doing this for patient-facing voice	Full control	Beat the cheapest API in only 24% of 900 modeled scenarios[71]
 OPEN VERSUS CLOSED MODELS
 
-Enterprise surveys put open-source models near 11% of LLM API share.[98][99] Open models win on cheap, high-volume work, which is exactly the router's job.
+Enterprise surveys put open-source models near 11% of LLM API share.[72][73] Open models win on cheap, high-volume work, which is exactly the router's job.
 
 T8 · FRAUD AND IDENTITY CONTROLS
 
 Design identity in from day one
 RISK	CONTROL	RUNS IN	EVIDENCE
-Cloned customer voice requesting protected data	Liveness detection plus passive voice, device and behavior signals	Contact center platform	Embedded in NICE CXone and Zoom Contact Center[100][101]
+Cloned customer voice requesting protected data	Liveness detection plus passive voice, device and behavior signals	Contact center platform	Embedded in NICE CXone and Zoom Contact Center[74][75]
 Knowledge-based answers stolen in breaches	Step-up verification to the number on file or app push	Agent workflow, deterministic	In one payer case, knowledge-based checks missed a fraud pattern across 1,200 targeted accounts[4] vendor-reported
-Misheard identity details, wrong-account match	Recognition biased with the record on file; spell-back	STT layer	Up to 15% fewer major transcription errors[68] vendor-reported
+Misheard identity details, wrong-account match	Recognition biased with the record on file; spell-back	STT layer	Up to 15% fewer major transcription errors[50] vendor-reported
 Fraud intent buried in a routine call	Router hard rule: any fraud signal escalates regardless of confidence	System-1 router	author's view
-Critical transactions and authorizations	Voiceprint match plus liveness and deepfake detection, then a one-time code for anything irreversible	Contact center platform + agent workflow	A reporter passed a bank's voice ID with an AI clone of his own voice in 2023[44]; liveness is now offered alongside voiceprints[4]; deepfake detectors lose accuracy after real phone transmission (equal error rate 37.9% before adapting on call audio, 22.4% after)[102]
-Card numbers spoken on the call	Pause recording and transcription, or take the card by keypad with the tones masked, so the agent never hears the number	Telephony and payment provider	PCI guidance on telephone payments[103]
+Critical transactions and authorizations	Voiceprint match plus liveness and deepfake detection, then a one-time code for anything irreversible	Contact center platform + agent workflow	A reporter passed a bank's voice ID with an AI clone of his own voice in 2023[31]; liveness is now offered alongside voiceprints[4]
+Card numbers spoken on the call	Pause recording and transcription, or take the card by keypad with the tones masked, so the agent never hears the number	Telephony and payment provider	PCI guidance on telephone payments[76]
 Personal data in transcripts and logs	Redact names, account and ID numbers from the transcript stream before storage; keep raw audio only where retention rules allow	Speech-to-text and logging layer	author's view
-Bots or AI agents calling in at scale	Detect machine callers before the agent engages	Agent platform	Sierra Fleming, announced Oct 2026[18] vendor-reported
-Outbound AI calls without consent (US)	Prior express consent, identification, opt-out	Dialer policy	FCC 24-17, February 2024[45]
-Scammers posing as your organization	Published callback and "we never ask" policy; customer education	Marketing and communications	Family-impersonation clone scams documented[43]
+Bots or AI agents calling in at scale	Detect machine callers before the agent engages	Agent platform	Sierra Fleming, announced Oct 2026[14] vendor-reported
+Outbound AI calls without consent (US)	Prior express consent, identification, opt-out	Dialer policy	FCC 24-17, February 2024[32]
+Scammers posing as your organization	Published callback and "we never ask" policy; customer education	Marketing and communications	Family-impersonation clone scams documented[30]
 RISK TIER	EXAMPLES	CHECKS	FRICTION TO PLAN FOR
 Low	Hours, directions, appointment or card status	Passive voice, device and behavior signals; caller ID match	None for the caller
 Medium	Address change, refill request, payment date	Passive signals plus a one-time code to the number on file, or an app push	Some older or distressed callers drop; offer a person
@@ -1094,19 +1553,16 @@ Mostly disclosure and consent, and tightening
 A summary of selected US rules for orientation, not legal advice and not a complete list. US healthcare focus; financial services adds its own regimes (GLBA, PCI DSS, UDAAP) not reviewed here. Items marked unverified come from secondary sources and need confirmation against the enacted text and by counsel.
 
 RULE	WHAT IT REQUIRES	STATUS
-TCPA, FCC 24-17	AI voices count as "artificial"; outbound calls generally need prior express consent, with narrow healthcare exemptions; consent belongs to the current subscriber, so check the Reassigned Numbers Database[13]; $500 to $1,500 per violation	In force since Feb 8, 2024[45][104]
-TCPA opt-out rules, FCC 26-67	Callers may designate one exclusive opt-out method (a voice or keypress option on the call, a reply text, or a website or number) and must disclose it; opt-outs honored within 10 business days; informational opt-outs can be limited to their category. Test that the agent recognizes natural opt-out phrasing	Effective Nov 25, 2026; replaces the delayed revoke-all rule; further comments due Nov 25[105][106]
-FCC AI call disclosure proposal (FCC 24-84)	Would define AI-generated calls and require AI disclosure at consent and on the call	Proposed Aug 2024; not adopted as of Oct 2026[107]
-Call recording consent (state wiretap laws)	Some states, including California, Florida, Maryland and Pennsylvania, require every party's consent to record; announce recording and transcription at the start of the call	In force; varies by state; check with counsel[108]
-HIPAA BAAs	Every layer that touches PHI: model, router, STT, TTS, orchestration, telephony, testing	Available from major model providers with retention options[91][93]
-California AB 3030	Disclaimer and a route to a human on generative AI clinical messages, unless clinician-reviewed	Effective Jan 1, 2025[42]
-California AB 489	AI may not imply it holds a health care license	Effective Jan 1, 2026[42]
-California AB 1979	A licensed provider exercises independent judgment when AI output informs care; AI may not perform reserved clinical functions; scheduling and routine messages are exempt; health care chatbot operators are treated as providers under the state's medical confidentiality law (CMIA)	Signed Oct 2026; effective Jan 1, 2027[109]
-California AB 1609	Large businesses disclose chatbots and offer a human within set times	Reported signed Sept 28, 2026 unverified[110]
-Texas TRAIGA (HB 149)	Health care providers disclose AI use to patients	Effective Jan 1, 2026[111]
-Utah AI Policy Act	Proactive disclosure in high-risk interactions by regulated occupations	In force[110]
-Colorado SB 26-189	Replaces the 2024 AI Act, which never took effect; covers automated decisions in consequential areas such as credit, employment and housing, with no general chatbot disclosure duty	Signed May 14, 2026; effective Jan 1, 2027 if the attorney general completes rulemaking[112]
-Right to deletion (state privacy laws, GDPR)	Erase personal data on request	Easier to honor in the model when facts live in a store, not weights[12]; logs, transcripts and backups still need their own deletion
+TCPA, FCC 24-17	AI voices count as "artificial"; outbound calls generally need prior express consent, with narrow healthcare exemptions; consent belongs to the current subscriber, so check the Reassigned Numbers Database[12]; $500 to $1,500 per violation	In force since Feb 8, 2024[32][77]
+Call recording consent (state wiretap laws)	Some states, including California, Florida, Maryland and Pennsylvania, require every party's consent to record; announce recording and transcription at the start of the call	In force; varies by state; check with counsel[78]
+HIPAA BAAs	Every layer that touches PHI: model, router, STT, TTS, orchestration, telephony, testing	Available from major model providers with retention options[67][69]
+California AB 3030	Disclaimer and a route to a human on generative AI clinical messages, unless clinician-reviewed	Effective Jan 1, 2025[29]
+California AB 489	AI may not imply it holds a health care license	Effective Jan 1, 2026[29]
+California AB 1609	Large businesses disclose chatbots and offer a human within set times	Reported signed Sept 28, 2026 unverified[79]
+Texas TRAIGA (HB 149)	Health care providers disclose AI use to patients	Effective Jan 1, 2026[80]
+Utah AI Policy Act	Proactive disclosure in high-risk interactions by regulated occupations	In force[79]
+Colorado SB 26-189	Replaces the 2024 AI Act, which never took effect; covers automated decisions in consequential areas such as credit, employment and housing, with no general chatbot disclosure duty	Reported effective Jan 1, 2027 unverified[79]
+Right to deletion (state privacy laws, GDPR)	Erase personal data on request	Easier to honor in the model when facts live in a store, not weights[11]; logs, transcripts and backups still need their own deletion
 
 T10 · CLAIM CHECK
 
@@ -1114,54 +1570,39 @@ Claims circulating about voice AI, checked
 
 Benchmark figures, vendor claims and one widely shared decision-offload cost model, each traced to a source. Filter by verdict.
 
-Interactive · filter by verdict
-All
-Verified
-Partly or vendor-only
-Unverified or wrong
 CLAIM	VERDICT	WHAT THE EVIDENCE SHOWS
-Cekura Bench: 82 scenarios, 3 repeats, 246 calls per configuration	verified	Confirmed; the hub now lists 10 configurations (updated Nov 3, 2026)[2]
-PolyAI now leads Cekura Bench at 87.8% pass^3	partial or vendor	On the hub, but repetition and call-ending checks were not scored for PolyAI, and its interval overlaps the runner-up's[2]
+Cekura Bench: 7 configurations, 82 scenarios, 3 repeats, 246 calls each	partial or vendor	Design confirmed; the live hub now lists 8 platforms[13]
 pass^3 is the primary metric	verified	Share of scenarios where all three retained calls pass[2]
-Retell, ElevenLabs, Vapi and Gemini Live figures	verified	Exact match on all four reported metrics[67]
+Retell, ElevenLabs, Vapi and Gemini Live figures	verified	Exact match on all four reported metrics[49]
 LiveKit 70.73% and Pipecat 63.41% pass^3	verified	pass^3 confirmed; other metrics not seen[2]
-GPT Realtime 64.63% pass^3	verified	Now listed on the hub (64.6%); the separate speech-to-speech benchmark shows 79.3% for the model alone[2]
+GPT Realtime 64.63% pass^3	unverified or wrong	Not found; the separate speech-to-speech benchmark shows 79.3%[42]
 Per-platform model stacks	unverified or wrong	Providers chose their own stacks; not independently confirmed[2]
-Entity drift between transcript and tool call	verified	Documented instance with a phone number[67]
-TypeSafe Jev exists, built by an ex-OpenAI researcher	verified	Released Sep 15, 2026[113]
-Jev latency 70 to 150 ms	unverified or wrong	Vendor quotes 70 to 500 ms; measured p50 151 to 175 ms and p95 247 to 270 ms in two third-party tests[70]
-Jev can run locally or at the edge	unverified or wrong	No weights or self-hosted build; open Laya needs about 1 GB, beyond a Cloudflare Worker's 128 MB[70]
-Jev $0.042 per million input tokens, free output	partial or vendor	Matches early-access vendor pricing[23]
-Jev is calibrated and cannot hallucinate	partial or vendor	Output is always schema-valid; calibration weaker than claimed in independent tests[114]
+Entity drift between transcript and tool call	verified	Documented instance with a phone number[49]
+TypeSafe Jev exists, built by an ex-OpenAI researcher	verified	Released Sep 15, 2026[81]
+Jev latency 70 to 150 ms	unverified or wrong	Vendor quotes 70 to 500 ms; one test measured p50 175 ms, p95 270 ms[8]
+Jev $0.042 per million input tokens, free output	partial or vendor	Matches early-access vendor pricing[19]
+Jev is calibrated and cannot hallucinate	partial or vendor	Output is always schema-valid; calibration weaker than claimed in independent tests[82]
 Decision models are 400x cheaper than LLMs	unverified or wrong	Not in primary sources; real savings in one cascade test were about 72%[8]
-OpenAI Decisions API is generally available	verified	GA Oct 22, 2026, on GPT-6 Luna, with native GPT-Live integration since Oct 15[28]
-Open-source Laya is a drop-in router	unverified or wrong	Routed base checkpoint scores 42.5% on Banking77; fine-tuning required[24]
-Open models hit 78.4% of AI Gateway token volume	verified	Exact post; one-day record on a developer-heavy gateway[115]
-Regulated enterprises are moving inference off public APIs	partial or vendor	Private cloud endpoints common; no named US on-prem voice deployment[94]
+OpenAI Decisions API is generally available	unverified or wrong	Public beta since Oct 6, 2026[22]
+Open-source Laya is a drop-in router	unverified or wrong	Routed base checkpoint scores 42.5% on Banking77; fine-tuning required[20]
+Open models hit 78.4% of AI Gateway token volume	verified	Exact post; one-day record on a developer-heavy gateway[83]
+Regulated enterprises are moving inference off public APIs	partial or vendor	Private cloud endpoints common; no named US on-prem voice deployment[70]
 Decision-offload simulator: about 730 ms vs 1,900 ms turns	unverified or wrong	Simulated, not measured[2]
-Decision-offload simulator: $11,017 a month saved	partial or vendor	Plausible arithmetic, but about 6% of run rate with no infrastructure modeled[37]
-Sierra serves 80% of Fortune 50 healthcare companies	partial or vendor	Vendor claim from Sierra Summit 2026; not independently verified[18]
-Limited-memory models cannot hallucinate	unverified or wrong	Authors: does not guarantee perfect factuality[12]
-Fact storage is about 99% of model size	unverified or wrong	No study measures it; retrieval models match 18x to 50x larger models on knowledge tasks[86]
-A TV in the room breaks most voice agents	partial or vendor	Vendor research on simulated calls: task completion fell from 38.7% to 8.6% across 14 systems; noise options were off[10]
-An open model removes background voices better than commercial tools	partial or vendor	VoxLock: 4.95% WER vs 5.30% to 9.38% for three commercial tools, in its author's own test; ai-coustics leaked less on meeting audio[36]
-Open-source speech recognition has caught up	partial or vendor	Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models[95]
-Eleven Realtime starts speaking in 470 ms	partial or vendor	Reasoning claims match independent tests (99% and 76%); measured first audio was 0.57 s and 0.62 s[53]
-Salesforce Launa-Omni matches the leading voice models	partial or vendor	Second on Scale's Audio MultiChallenge (59.69 vs 60.40, within error); its 72.9% on tau-cubed voice uses Salesforce's own harness; no weights or size published[116]
-Chatbase Voice gives speech-to-speech agents chat-grade control	unverified or wrong	Chatbase names no model or architecture and publishes no tests; press describes a multi-model pipeline[117]
-Fish Audio understands conversations, not just text	unverified or wrong	Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call[56]
-Block's Dessa is a usable full-duplex voice model	unverified or wrong	Research preview with a waitlist; no size, benchmarks or tool use published[33]
+Decision-offload simulator: $11,017 a month saved	partial or vendor	Plausible arithmetic, but about 6% of run rate with no infrastructure modeled[24]
+Sierra serves 80% of Fortune 50 healthcare companies	partial or vendor	Vendor claim from Sierra Summit 2026; not independently verified[14]
+Limited-memory models cannot hallucinate	unverified or wrong	Authors: does not guarantee perfect factuality[11]
+Fact storage is about 99% of model size	unverified or wrong	No study measures it; retrieval models match 18x to 50x larger models on knowledge tasks[62]
 
 T11 · TOOLING AND IMPLEMENTATION
 
 What to borrow, what to avoid
 FRONTEND AND DEVELOPER TOOLING
 
-Vercel's AI Voice Elements give React components for persona, mic capture, transcript and playback; useful for web prototypes, irrelevant to telephony.[118]
+Vercel's AI Voice Elements give React components for persona, mic capture, transcript and playback; useful for web prototypes, irrelevant to telephony.[84]
 
 WHY IMPLEMENTATIONS FAIL
 
-Abstract goals instead of concrete use cases, bots isolated from scheduling and CRM systems, no handoff path, messy knowledge, and no measurement after launch.[119] vendor-reported OpenAI's own rebuild relied on a silent production test to find failures synthetic load tests missed.[50][120]
+Abstract goals instead of concrete use cases, bots isolated from scheduling and CRM systems, no handoff path, messy knowledge, and no measurement after launch.[85] vendor-reported OpenAI's own rebuild relied on a silent production test to find failures synthetic load tests missed.[37][86]
 
 SOURCES
 
@@ -1169,16 +1610,12 @@ Every number traces back here
 
 Numbered in order of first use.
 
-Interactive · filter by source type
-All
-Independent
-Vendor
 [1]
 Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout independent
 https://www.beckershospitalreview.com/healthcare-information-technology/ai/tampa-general-cuts-call-wait-times-58-with-ai-rollout/
 [2]
-Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026) vendor
-https://benchmarks.cekura.ai/voice-agent-workflows
+Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026) vendor
+https://benchmarks.cekura.ai/
 [3]
 Talkdesk / NewtonX: The State of Agentic Automation in CX (Aug 25, 2026) vendor
 https://www.globenewswire.com/news-release/2026/08/25/3350556/0/en/companies-are-deploying-ai-in-customer-experience-faster-than-they-can-make-it-work.html
@@ -1201,336 +1638,234 @@ https://openrouter.ai/blog/insights/jev-vs-claude-opus-5-classification
 ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026) vendor
 https://ai-coustics.com/blog/voice-focus-2.0-deepdive
 [10]
-Veris: Vamos Pro findings, a TV in the room (Joshua Meyer, Oct 12, 2026) vendor
-https://veris.ai/blog/vamos-pro-findings-tv-in-the-room
-[11]
 EU AI Act, Article 50: transparency obligations, including emotion recognition independent
 https://artificialintelligenceact.eu/article/50/
-[12]
+[11]
 Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026) independent
 https://arxiv.org/abs/2505.15962
-[13]
+[12]
 FCC: Reassigned Numbers Database independent
 https://www.fcc.gov/reassigned-numbers-database
-[14]
+[13]
 Cekura: Booking and reservation flow testing for voice agents vendor
 https://www.cekura.ai/discover/booking-reservation-flow-testing-voice-agents
-[15]
-Salesforce: Southern Cross Credit Union and Agentforce Voice (Oct 27, 2026) vendor
-https://www.salesforce.com/au/news/stories/southern-cross-credit-union-agentforce-voice-anz/
-[16]
-NatWest Group: NatWest improves AI speech recognition for UK banking customers (Oct 14, 2026) vendor
-https://www.natwestgroup.com/news-and-insights/news-room/press-releases/2026/natwest-improves-ai-speech-recognition-for-uk-banking-customers-.html
-[17]
-ElevenLabs: TELUS Digital cuts early cancellations with an outbound voice agent (Oct 30, 2026) vendor
-https://elevenlabs.io/blog/telus-digital-early-cancellations
-[18]
+[14]
 Sierra: Summit 2026 recap (Oct 2026) vendor
 https://sierra.ai/blog/summit-recap-2026
-[19]
+[15]
 TechCrunch: ElevenLabs raises $500M at $11B valuation (Feb 4, 2026) independent
 https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/
-[20]
+[16]
 Flowith: GPT-Live in ChatGPT Voice guide independent
 https://flowith.io/blog/gpt-live-chatgpt-voice-full-duplex-guide/
-[21]
+[17]
 Feldman, Zhao et al., Co-LMLM: Continuous-Query Limited Memory Language Models (arXiv 2607.07707) independent
 https://arxiv.org/abs/2607.07707
-[22]
+[18]
 RuntimeWire: DevDay 2026 live updates independent
 https://runtimewire.com/article/devday-2026-live-updates
-[23]
+[19]
 TypeSafe AI: Introducing System One models and Jev (Sep 15, 2026) vendor
 https://typesafe.ai/blog/introducing-system-one-models-and-jev
-[24]
+[20]
 Convai Innovations: Laya model card, Apache-2.0 (Sep 2026) vendor
 https://huggingface.co/convaiinnovations/laya
-[25]
+[21]
 InfoQ: OpenAI DevDay 2026 independent
 https://www.infoq.com/news/2026/10/openai-devday-2026/
-[26]
-OpenAI: Decisions API guide vendor
+[22]
+OpenAI: Decisions API guide and changelog (public beta Oct 6, 2026) vendor
 https://developers.openai.com/api/docs/guides/decisions
-[27]
+[23]
 The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026) independent
 https://thenuancedperspective.substack.com/p/where-voice-agents-actually-break
-[28]
-OpenAI: API changelog (Decisions API GA Oct 22, 2026; GPT-Live integration Oct 15, 2026) vendor
-https://developers.openai.com/api/docs/changelog
-[29]
-Pipecat v1.13.0 release notes: LLMWithBackend (Oct 19, 2026) vendor
-https://github.com/pipecat-ai/pipecat/releases/tag/v1.13.0
-[30]
-ElevenLabs: changelog, Eleven Realtime Mini and Max (Oct 19, 2026) vendor
-https://elevenlabs.io/docs/changelog/2026/10/19
-[31]
-Gradium: Phonon, open-source on-device text-to-speech (Oct 21, 2026) vendor
-https://gradium.ai/blog/gradium-releases-phonon
-[32]
-Sierra: tau-i18n, evaluation across languages and beyond task completion (Oct 21, 2026) vendor
-https://sierra.ai/blog/tau-i18n
-[33]
-Voice AI Space: Block launches Dessa, a full-duplex speech model trained only on audio (Oct 24, 2026) independent
-https://www.voiceaispace.com/articles/block-launches-dessa-a-full-duplex-speech-model-trained-only-on-audio
-[34]
-NVIDIA: Nemotron 3.5 Transcribe model card, OpenMDW-1.1 (Oct 28, 2026) vendor
-https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B
-[35]
-Deepgram: Deepgram is acquiring Daily, makers of Pipecat (Oct 29, 2026) vendor
-https://deepgram.com/blog/daily-pipecat-deepgram
-[36]
-VoxLock: caller-voice isolation model card and paper (arXiv 2610.40727), Apache-2.0 (Oct 2026) independent
-https://huggingface.co/arbazsiddiqui/voxlock
-[37]
+[24]
 beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026) independent
 https://www.beri.net/article/voice-ai-per-minute-pricing-vapi-retell-elevenlabs-bland-cost-per-resolved-call
-[38]
+[25]
 Helpware: Healthcare call center costs (2026) vendor
 https://helpware.com/blog/healthcare-call-center
-[39]
+[26]
 OpenAI: Continuous voice interaction with GPT-Live (Aug 3, 2026) vendor
 https://openai.com/index/continuous-voice-interaction-with-gpt-live/
-[40]
+[27]
 Hamming: How to evaluate voice agents, framework, metrics and checklists (Jan 2026) vendor
 https://hamming.ai/blog/how-to-evaluate-voice-agents
-[41]
+[28]
 Ding et al. (Google): Personal VAD, speaker-conditioned voice activity detection (2020) independent
 https://arxiv.org/abs/1908.04284
-[42]
+[29]
 Clunic: California AI health care laws independent
 https://clunic.com/regulations/california-ai-healthcare-laws
-[43]
+[30]
 TechCrunch: After a deepfake voice fooled her grandfather, this founder sprang into action (Sep 28, 2026) independent
 https://techcrunch.com/2026/09/28/after-a-deepfake-voice-fooled-her-grandfather-this-founder-sprang-into-action/
-[44]
+[31]
 AI Incident Database #485: reporter accesses own bank account with AI-cloned voice (2023) independent
 https://incidentdatabase.ai/cite/485/
-[45]
+[32]
 FCC: AI-generated voices in robocalls are illegal without consent (Feb 8, 2024) independent
 https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal
-[46]
+[33]
 Carlini et al., Extracting Training Data from Large Language Models (USENIX Security 2021) independent
 https://arxiv.org/abs/2012.07805
-[47]
+[34]
 Nasr et al., Scalable Extraction of Training Data from Production Language Models (2023) independent
 https://arxiv.org/abs/2311.17035
-[48]
+[35]
 kilian-group/LMLM code and checkpoints (GitHub, MIT) independent
 https://github.com/kilian-group/LMLM
-[49]
+[36]
 IntuitionLabs: Hosted AI API vs self-hosted LLM cost (H100 rental rates) independent
 https://intuitionlabs.ai/articles/hosted-ai-api-vs-self-hosted-llm-cost
-[50]
+[37]
 InfoQ: OpenAI details GPT-Live's architecture (Sep 2, 2026) independent
 https://www.infoq.com/news/2026/09/openai-gpt-live/
-[51]
+[38]
 MarkTechPost: Google releases Gemini 3.8 Live (Sep 15, 2026) independent
 https://www.marktechpost.com/2026/09/15/google-releases-gemini-3-8-live-and-3-8-live-extended-thinking-for-production-grade-voice-agents/
-[52]
+[39]
 Salesforce Developers: Agentforce Voice for Agent Script (Oct 1, 2026) vendor
 https://developer.salesforce.com/blogs/2026/10/agentforce-voice-for-agent-script-voice-enabling-best-practices
-[53]
-Artificial Analysis: speech-to-speech models leaderboard (read Nov 6, 2026) independent
-https://artificialanalysis.ai/models/speech-to-speech
-[54]
-JDN: ElevenLabs unveils faster, more accurate speech-to-speech models (Oct 20, 2026) independent
-https://www.journaldunet.com/en/1556895-elevenlabs-unveils-faster-more-accurate-speech-to-speech-models/
-[55]
-Srinivas et al. (University of Washington): ConvFill, conversational infill (arXiv 2511.07397) independent
-https://arxiv.org/abs/2511.07397
-[56]
-eesel: Fish Audio Drama 3 tested, citing Artificial Analysis (Oct 2026) independent
-https://www.eesel.ai/de/blog/fish-audio-drama-3-test
-[57]
+[40]
 Stivers et al., Universals and cultural variation in turn-taking, PNAS 2009 independent
 https://pubmed.ncbi.nlm.nih.gov/19553212/
-[58]
+[41]
 Regal: Best LLMs for voice AI agents, Voice CX Benchmark (Oct 6, 2026) vendor
 https://www.regal.ai/listicles/best-llms-for-voice-ai-agents
-[59]
-Regal: Best LLMs for voice AI agents, October 2026 benchmark (Oct 15, 2026) vendor
-https://www.regal.ai/blog/voice-cx-benchmark-new-llms-october-2026
-[60]
+[42]
 Cekura: Speech-to-speech benchmark vendor
 https://benchmarks.cekura.ai/speech-to-speech
-[61]
+[43]
 IHBench: interruption handling benchmark (arXiv 2606.19595) independent
 https://arxiv.org/pdf/2606.19595
-[62]
+[44]
 Sanas: ASR-optimized noise cancellation for agentic AI (Dec 12, 2025) vendor
 https://www.sanas.ai/science/inside-sanas-asr-optimized-noise-cancellation-for-agentic-ai
-[63]
+[45]
 Online target-speaker voice activity detection for speaker diarization (arXiv 2207.05920) independent
 https://arxiv.org/abs/2207.05920
-[64]
+[46]
 webrtcHacks: Voice agents get confused by echo too (Oct 8, 2026) independent
 https://webrtchacks.com/voice-agents-get-confused-by-echo-too/
-[65]
+[47]
 Multi-intent spoken language understanding with LLMs (arXiv 2403.04481) independent
 https://arxiv.org/abs/2403.04481
-[66]
+[48]
 JevOut: Natural context can flip decision models (arXiv 2609.30243) independent
 https://arxiv.org/abs/2609.30243
-[67]
+[49]
 Retell AI: Retell vs Bland vs Vapi vs ElevenLabs (cites Cekura Bench) vendor
 https://www.retellai.com/blog/retell-vs-bland-vs-vapi-vs-elevenlabs
-[68]
+[50]
 Sierra: Voice AI is only as good as what it hears (May 18, 2026) vendor
 https://sierra.ai/blog/voice-ai-is-only-as-good-as-what-it-hears
-[69]
-Unite.AI: OpenAI makes Decisions API generally available with GPT-6 Luna (Oct 22, 2026) independent
-https://www.unite.ai/openai-makes-decisions-api-generally-available-with-gpt-6-luna/
-[70]
-OrcaRouter: Is there an open-source Jev? Measured latency and look-alikes (Sep 30, 2026) independent
-https://www.orcarouter.ai/blog/jev-open-source
-[71]
-Zoom AI Research: Introducing Zoom Decisions APIs (Oct 19, 2026) vendor
-https://www.zoom.com/en/ai-research/introducing-zoom-decisions-apis-accurate-speech-reliable-action/
-[72]
-LiveKit Agents 1.8.9 release notes: DecisionModel backends (Oct 24, 2026) vendor
-https://github.com/livekit/agents/releases/tag/livekit-agents%401.8.9
-[73]
+[51]
 Katanemo: Arch-Router, preference-aligned routing (arXiv 2506.16655) vendor
 https://arxiv.org/abs/2506.16655
-[74]
+[52]
 sift-banking77-modernbert model card (Hugging Face) independent
 https://huggingface.co/DarioFrK/sift-banking77-modernbert
-[75]
+[53]
 Aurelio Labs: semantic-router (GitHub, MIT) vendor
 https://github.com/aurelio-labs/semantic-router
-[76]
+[54]
 LMSYS: RouteLLM, learning to route LLMs with preference data (arXiv 2406.18665) independent
 https://arxiv.org/abs/2406.18665
-[77]
+[55]
 CreativeAINews: Open Jev clones and benchmark disagreement (Sep 2026) independent
 https://creativeainews.com/articles/open-jev-clones-benchmark-disagreement-2026
-[78]
+[56]
 Rodrigues and Vas: classifiers vs LLMs for intent detection (arXiv 2608.20371) independent
 https://arxiv.org/abs/2608.20371
-[79]
-Hugging Face onnx-community: Laya ONNX weights independent
-https://huggingface.co/onnx-community/laya-ONNX
-[80]
-Cloudflare: Workers platform limits (updated Oct 29, 2026) vendor
-https://developers.cloudflare.com/workers/platform/limits
-[81]
+[57]
 Hamming: Voice AI latency, what's fast and what's slow (Jan 12, 2026) vendor
 https://hamming.ai/blog/voice-ai-latency-whats-fast-whats-slow-how-to-fix-it
-[82]
+[58]
 Gan and Sun: RAG-MCP, mitigating prompt bloat in tool selection (arXiv 2505.03275) independent
 https://arxiv.org/abs/2505.03275
-[83]
+[59]
 Anthropic Engineering: Advanced tool use (Nov 24, 2025) vendor
 https://www.anthropic.com/engineering/advanced-tool-use
-[84]
+[60]
 Fei et al., MCP-Zero: proactive toolchain construction (arXiv 2506.01056) independent
 https://arxiv.org/abs/2506.01056
-[85]
+[61]
 Arcade: Testing tool search with 4,000 tools (Dec 3, 2025) vendor
 https://arcade.dev/blog/anthropic-tool-search-4000-tools-test
-[86]
+[62]
 Borgeaud et al. (DeepMind), RETRO: Improving language models by retrieving from trillions of tokens independent
 https://arxiv.org/abs/2112.04426
-[87]
+[63]
 Izacard et al. (Meta), Atlas: Few-shot learning with retrieval augmented language models independent
 https://arxiv.org/abs/2208.03299
-[88]
+[64]
 Allen-Zhu and Li, Physics of Language Models 3.3: Knowledge Capacity Scaling Laws (ICLR 2025) independent
 https://arxiv.org/abs/2404.05405
-[89]
+[65]
 Kandpal et al., Large Language Models Struggle to Learn Long-Tail Knowledge (ICML 2023) independent
 https://arxiv.org/abs/2211.08411
-[90]
+[66]
 Singh, Bastos, Mulang: Position, avoid overstretching LLMs for every enterprise task (arXiv 2605.09365) independent
 https://arxiv.org/abs/2605.09365
-[91]
+[67]
 OpenAI Help Center: HIPAA-eligible products and functionality (Oct 2026) vendor
 https://help.openai.com/en/articles/20001069-hipaa-eligible-products-and-functionality
-[92]
+[68]
 AWS: Amazon Nova 2 Sonic service card vendor
 https://docs.aws.amazon.com/ai/responsible-ai/nova-2-sonic/overview.html
-[93]
+[69]
 Anthropic: Covered models under a BAA vendor
 https://support.claude.com/en/articles/15455031-covered-models-under-a-business-associate-agreement-baa
-[94]
+[70]
 PMC: Stanford Secure GPT deployment (2025) independent
 https://pmc.ncbi.nlm.nih.gov/articles/PMC11833461/
-[95]
-eesel: Nemotron 3.5 Transcribe against closed models (Oct 29, 2026) independent
-https://www.eesel.ai/blog/nemotron-3-5-transcribe
-[96]
-Apple Developer News: Siri AI is now open to all developers (Nov 3, 2026) vendor
-https://developer.apple.com/news/?id=gdk2umrf
-[97]
+[71]
 navyaai: Self-host LLM vs API cost (Sep 2026) independent
 https://www.navyaai.com/guides/self-host-llm-vs-api-cost
-[98]
+[72]
 OfficeChai: Share of closed models has fallen on Vercel data (Sep 2026) independent
 https://officechai.com/ai/share-of-closed-models-has-fallen-from-around-70-to-21-in-the-last-3-months-vercel-data/
-[99]
+[73]
 Menlo Ventures: 2025, the state of generative AI in the enterprise vendor
 https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/
-[100]
+[74]
 CX Today: Pindrop and NICE CXone integration independent
 https://www.cxtoday.com/contact-center/pindrop-nice-integration-deepfake-detection-cxone/
-[101]
+[75]
 Biometric Update: Zoom expands Pindrop deepfake detection (Mar 2026) independent
 https://www.biometricupdate.com/202603/zoom-expands-pindrop-deepfake-detection-to-customer-service
-[102]
-RealComm: Benchmarking and adapting audio deepfake detection over real communication channels (arXiv 2610.27459, Oct 20, 2026) independent
-https://arxiv.org/abs/2610.27459
-[103]
+[76]
 PCI SSC: Protecting telephone-based payment card data (information supplement, Nov 2018) independent
 https://listings.pcisecuritystandards.org/documents/Protecting_Telephone_Based_Payment_Card_Data_v3-0_nov_2018.pdf
-[104]
+[77]
 Wiley Rein: FCC TCPA restrictions cover AI-generated voices independent
 https://www.wiley.law/alert-FCC-Extends-Regulatory-Reach-Over-AI-Announces-TCPA-Restrictions-Cover-AI-Generated-Voices-in-Outbound-Calls
-[105]
-Federal Register: FCC 26-67, Enhancing the ability of consumers to control the robocalls (Oct 26, 2026) independent
-https://www.federalregister.gov/documents/2026/10/26/2026-21821/enhancing-the-ability-of-consumers-to-control-the-robocalls
-[106]
-AI Policy Desk: TCPA revocation rule takes effect Nov 25 for AI calls and texts (Oct 27, 2026) independent
-https://www.aipolicydesk.com/blog/fcc-tcpa-revocation-rule-ai-voice-agents-november-2026
-[107]
-eConsent: AI voice agents and the TCPA, what is required in October 2026 (Oct 16, 2026) independent
-https://econsent.org/posts/ai-voice-agents-tcpa-rules-october-2026/
-[108]
+[78]
 Justia: Recording phone calls and conversations, 50-state survey independent
 https://www.justia.com/50-state-surveys/recording-phone-calls-and-conversations/
-[109]
-California Health Care Foundation: Newsom approves 3 health care AI bills, vetoes 2 (Oct 8, 2026) independent
-https://www.chcf.org/blog/2026/10/08/newsom-approves-3-health-care-ai-bills-vetoes-2/
-[110]
+[79]
 Conferbot: AI chatbot disclosure laws guide vendor
 https://www.conferbot.com/blog/ai-chatbot-disclosure-laws-compliance-guide
-[111]
+[80]
 Wisconsin Legislative Council: US state AI laws overview (Aug 13, 2026) independent
 https://docs.legis.wisconsin.gov/misc/lc/study/2026/3042/090_august_13_2026_meeting_10_00_a_m_room_411_south_state_capitol/003_us_state_ai_laws_an_overview_final
-[112]
-Skadden: Colorado repeals and replaces its AI Act (Jun 2026) independent
-https://www.skadden.com/insights/publications/2026/06/colorado-repeals-and-replaces-its-ai-act
-[113]
+[81]
 InfoQ: TypeSafe AI releases Jev (Oct 1, 2026) independent
 https://www.infoq.com/news/2026/10/typesafe-ai-jev-released/
-[114]
+[82]
 beri.net: Jev calibration, decomposition and shadow eval independent
 https://www.beri.net/article/typesafe-jev-typed-decision-model-calibration-decomposition-shadow-eval
-[115]
+[83]
 Guillermo Rauch on X: open models share of AI Gateway tokens (Sep 2026) vendor
 https://x.com/rauchg/status/2101186741042663579
-[116]
-Scale AI: Audio MultiChallenge leaderboard (read Nov 6, 2026) independent
-https://labs.scale.com/leaderboard/audiomc
-[117]
-Chatbase: Voice product page (read Nov 6, 2026) vendor
-https://www.chatbase.co/voice
-[118]
+[84]
 Vercel changelog: AI Voice Elements (Jan 14, 2026) vendor
 https://vercel.com/changelog/ai-voice-elements
-[119]
+[85]
 Netguru: Why most chatbot implementations fail (Jul 2026) vendor
 https://www.netguru.com/blog/why-most-chatbot-implementations-fail
-[120]
+[86]
 ByteByteGo: How OpenAI delivers low-latency voice AI (Jul 1, 2026) independent
 https://blog.bytebytego.com/p/how-openai-delivers-low-latency-voice
 
@@ -1564,6 +1899,6 @@ Written in a personal capacity; the views are my own, not any employer's. No com
 
 Back to sbmadhav.com
 Connect on LinkedIn
-By Madhav Srinivasan · November 2026 edition · Research cutoff November 6, 2026
+By Madhav Srinivasan · October 2026 edition · Research cutoff October 12, 2026
 Bracketed numbers in the text link to the numbered sources above. Past editions: github.com/sbmadhav/state-of-voice-agents.
 Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.

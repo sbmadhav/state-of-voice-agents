@@ -1,18 +1,22 @@
 # Changelog
 
-## November 2026, research cutoff November 6, 2026
+## November 2026 update, research cutoff November 6, 2026
 
-- Reliability: Cekura Bench now lists ten configurations (updated Nov 3, 2026). PolyAI leads at 87.8% pass^3 (about 79% to 93%), overlapping Retell at 75.6%; Telnyx and Smallest AI added; GPT Realtime's 64.6% is now on the hub and marked verified. Headline stats, thesis and pilot bar updated.
-- New highlight in failure modes: the TV in the room. Veris vendor research (task completion 38.7% to 8.6% across 14 systems with a TV playing) and VoxLock, an open Apache-2.0 caller-voice isolation model, with controls.
-- Architecture: ElevenLabs Eleven Realtime (independent Artificial Analysis scores), ConvFill, Block Dessa, Fish Audio claims checked, Pipecat LLMWithBackend, Deepgram's planned acquisition of Daily.
-- Latency and measurement: Regal's October 15 run (GPT-6 Sol leads; newer reasoning models miss the 1,300 ms bar); Sierra's six-language voice results.
-- System-1 routing: OpenAI Decisions API generally available (Oct 22, 2026) with native GPT-Live integration; Zoom Decisions and LiveKit DecisionModel added; third-party Jev latency; why decision models do not fit in edge functions.
-- Deployment: open speech models (NVIDIA Nemotron 3.5 Transcribe, Gradium Phonon) and Apple's Siri AI developer preview.
-- Published results: first bank and credit union figures (Southern Cross Credit Union, NatWest) and a telecom outbound program.
-- Fraud: deepfake detectors lose accuracy over real phone calls (RealComm).
-- Regulation: FCC 26-67 TCPA opt-out rules (effective Nov 25, 2026), FCC 24-84 status, California AB 1979, Colorado SB 26-189 confirmed.
-- Claim check: Decisions API GA now verified; ten new or revised claims, including Chatbase Voice, Fish Audio, Launa-Omni, Nemotron and Jev at the edge.
-- Bolt context, Open Graph image and the comments thread name moved to the November edition.
+The first monthly update. From this edition on, the root page carries only what changed since the previous edition and links back for everything else; the October 2026 edition is the full baseline report.
+
+- Focus: financial services, with health care notes.
+- Headline and four comparison tiles (October value next to the new one): best repeat reliability 75.6% to 87.8%, credit union calls fully handled (none published to 37% to 66%), task completion with a TV on (38.7% to 8.6%), OpenAI Decisions API (beta to GA).
+- October versus November table: eight findings that moved.
+- Financial services: published bank and credit union voice-agent results (all vendor- or company-reported), a readiness map for financial call types, and customer acceptance data.
+- New failure mode: the TV in the room (Veris vendor research), with VoxLock caller-voice isolation results and controls.
+- Reliability: only the three new Cekura configurations and status changes; October's seven results are unchanged.
+- Regulation: financial services rules mapped (GLBA, PCI DSS 3.3.1, CFPB and Regulation E and Z, model risk and third-party guidance, FFIEC and NYDFS, FinCEN, FCC 26-67, FCC 24-84, Colorado, Utah).
+- Fraud: voice is a signal, not a factor; revised high-risk tier; financial fraud data.
+- Models and routing: Decisions API GA, Zoom and LiveKit decision models, Jev latency and edge limits, Eleven Realtime, Regal's Oct 15 run, open speech models, Pipecat and Deepgram, ConvFill and Dessa.
+- Health care notes: California AB 1979, clinic results, clinical speech recognition.
+- Claim check: 17 new or revised claims only.
+- "Unchanged since October" index linking to each October section; the interactive tools stay in the October edition.
+- Bolt answers from the November update plus the October baseline. New Open Graph image and comments thread name.
 
 ## October 2026 (first edition), published October 12, 2026
 

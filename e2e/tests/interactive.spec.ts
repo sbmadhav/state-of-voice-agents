@@ -4,6 +4,9 @@ import { test, expect, type Page } from './fixtures';
    Download PDF dialog, the charts and tools tagged "Interactive", Ask Bolt and comments. */
 
 const PAGE = '/state-of-voice-agents/';
+// The interactive tools (charts, calculator, demos) live in the full October 2026 baseline;
+// monthly updates since then carry only what changed and link back to it.
+const BASE = '/state-of-voice-agents/editions/2026-10/';
 
 const vis = (page: Page, sel: string) =>
   page.locator(sel).evaluateAll(els => els.filter(e => !(e as HTMLElement).hidden).map(e => (e as HTMLElement).dataset.v ?? (e as HTMLElement).dataset.t));
@@ -137,10 +140,10 @@ test('Download PDF: dialog opens, closes (Cancel, Esc, backdrop) and prints in t
 });
 
 test('reliability chart: sort and select a platform', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   const rows = page.locator('#db .db-row');
-  await expect(rows).toHaveCount(10);
-  await expect(rows.first()).toContainText('PolyAI'); // highest pass^3
+  await expect(rows).toHaveCount(7);
+  await expect(rows.first()).toContainText('Retell'); // highest pass^3
   await page.locator('#gap .seg button[data-sort="lat"]').click();
   await expect(rows.first()).toContainText('ElevenLabs'); // fastest turn time
   await page.locator('#db .db-row', { hasText: 'Gemini Live' }).click();
@@ -149,7 +152,7 @@ test('reliability chart: sort and select a platform', async ({ page }) => {
 });
 
 test('economics calculator: presets and sliders update the outputs', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   const save = page.locator('#t-save');
   const base = await save.textContent();
   await page.locator('#calc-ctrls [data-preset="cons"]').click();
@@ -163,7 +166,7 @@ test('economics calculator: presets and sliders update the outputs', async ({ pa
 });
 
 test('router demo: utterances and threshold change the verdict', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   const verdict = page.locator('#rverdict .verdict');
   // Default: the multi-intent example at threshold 0.75; neither intent clears it, so hand off
   await expect(page.locator('#o-th')).toHaveText('0.75');
@@ -183,7 +186,7 @@ test('router demo: utterances and threshold change the verdict', async ({ page }
 });
 
 test('thinker-responder, memory, options, personas, use cases, pilot and latency tools respond', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   // Thinker-responder vs one LLM
   const other = page.locator('#tr-mode button:not([aria-pressed="true"])').first();
   await other.click();

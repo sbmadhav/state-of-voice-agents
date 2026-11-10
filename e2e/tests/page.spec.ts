@@ -49,25 +49,33 @@ test('edition badge and research cutoff are shown', async ({ page }) => {
   await expect(page.locator('footer')).toContainText(/Research cutoff/);
 });
 
-test('November additions: TV-in-the-room highlight, updated claim check, pre-rendered sources', async ({ page }) => {
+test('November update: delta-only, financial services focus, links back to the October baseline', async ({ page }) => {
   await page.goto('/state-of-voice-agents/');
-  const tv = page.locator('#tv-in-room');
-  await expect(tv).toContainText('38.7%');
-  await expect(tv.locator('tbody tr')).toHaveCount(5);
-  const ga = page.locator('#claims tr', { hasText: 'OpenAI Decisions API is generally available' });
-  await expect(ga).toHaveAttribute('data-v', 'v');
-  // Every citation resolves to a numbered source in the list
-  const keys = await page.locator('a.c').evaluateAll(as => [...new Set(as.map(a => (a as HTMLElement).dataset.s))]);
-  for (const k of keys) await expect(page.locator(`#src-${k}`)).toHaveCount(1);
+  await expect(page.locator('h1')).toContainText('Banks and credit unions');
+  // Every changed headline figure shows its October value
+  await expect(page.locator('.delta-stats .stat')).toHaveCount(4);
+  await expect(page.locator('.delta-stats .stat .was')).toHaveCount(4);
+  await expect(page.locator('#delta tbody tr')).toHaveCount(8);
+  await expect(page.locator('#tv-in-room tbody tr')).toHaveCount(5);
+  await expect(page.locator('#claims tr', { hasText: 'OpenAI Decisions API is generally available' })).toHaveAttribute('data-v', 'v');
+  // Unchanged material is not repeated: it links to October sections that exist
+  for (const id of ['calc', 'router', 'gap', 'pilot']) await expect(page.locator(`#${id}`)).toHaveCount(0);
+  const back = await page.locator('main a[href^="/state-of-voice-agents/editions/2026-10/#"]').evaluateAll(as => [...new Set(as.map(a => (a as HTMLAnchorElement).hash.slice(1)))]);
+  expect(back.length).toBeGreaterThan(10);
+  await page.goto('/state-of-voice-agents/editions/2026-10/');
+  for (const id of back) await expect(page.locator(`[id="${id}"]`), `October has #${id}`).toHaveCount(1);
 });
 
-test('citations and sources are in the HTML without JavaScript', async ({ browser }) => {
-  const ctx = await browser.newContext({ javaScriptEnabled: false });
-  const page = await ctx.newPage();
+test('citations resolve to numbered sources, also without JavaScript', async ({ page, browser }) => {
   await page.goto('/state-of-voice-agents/');
-  await expect(page.locator('#src li').first()).toBeAttached();
-  await expect(page.locator('#claims tr', { hasText: 'Chatbase' })).toHaveCount(1);
-  await expect(page.locator('#tv-in-room a.c').first()).toHaveText(/^\[\d+\]$/);
+  const keys = await page.locator('a.c').evaluateAll(as => [...new Set(as.map(a => (a as HTMLElement).dataset.s))]);
+  for (const k of keys) await expect(page.locator(`#src-${k}`)).toHaveCount(1);
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const nojs = await ctx.newPage();
+  await nojs.goto('/state-of-voice-agents/');
+  await expect(nojs.locator('#src li').first()).toBeAttached();
+  await expect(nojs.locator('#claims tr', { hasText: 'Chatbase' })).toHaveCount(1);
+  await expect(nojs.locator('#tv-in-room a.c').first()).toHaveText(/^\[\d+\]$/);
   await ctx.close();
 });
 
