@@ -1,0 +1,124 @@
+name: Voice-over
+
+# AI narration of the report with ElevenLabs. tools/narration.py turns each section of index.html into a script
+# (audio/<edition>/<section>.txt, committed: they are also the transcripts), and tools/voiceover.py generates MP3s
+# only for scripts whose SHA-256 differs from audio/<edition>/manifest.json.
+#
+# Needs the repository secret ELEVENLABS_API_KEY (Settings > Secrets and variables > Actions). Optional repository
+# variables: ELEVENLABS_VOICE_ID (default WQP7cQUF5aAS6Axh5yaa, "Elara - Crisp Pro Narrator") and
+# ELEVENLABS_MODEL_ID (default eleven_v4). Without the secret, the audio job skips with a notice.
+#
+# Never pushes to main. workflow_dispatch and pushes to main commit the audio to a new branch and open a pull
+# request; pull_request runs commit to the PR's own branch, and only when that branch is in this repository.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [index.html, tools/narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
+  pull_request:
+    branches: [main]
+    paths: [index.html, tools/narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voiceover-${{ github.head_ref || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  narration:
+    name: Narration text is current
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      # The scripts and the read time are derived from index.html; a stale copy would narrate an old page
+      - name: Scripts and read time match index.html
+        run: |
+          if ! python3 tools/narration.py --check; then
+            echo "::error::Narration text or read time is out of date. Run python3 tools/narration.py and commit the result."
+            exit 1
+          fi
+
+  audio:
+    name: Generate audio
+    needs: narration
+    # Fork pull requests get neither the secret nor a token that can push, so they skip
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write        # commit the MP3s and manifest to a branch (never main)
+      pull-requests: write   # open the pull request on workflow_dispatch and push
+    steps:
+      - name: Check for the ElevenLabs key
+        id: key
+        env:
+          HAS_KEY: ${{ secrets.ELEVENLABS_API_KEY != '' }}
+        run: |
+          if [ "$HAS_KEY" = "true" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Voice-over skipped::No ELEVENLABS_API_KEY secret. Add it in Settings > Secrets and variables > Actions, then run the Voice-over workflow."
+          fi
+
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        if: steps.key.outputs.present == 'true'
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || '' }}
+          persist-credentials: false
+
+      - name: Find the edition
+        if: steps.key.outputs.present == 'true'
+        id: ed
+        run: |
+          ed=$(python3 -c "import re;print(re.search(r'data-audio-base=\"/state-of-voice-agents/audio/(\d{4}-\d{2})/\"',open('index.html').read()).group(1))")
+          echo "edition=$ed" >> "$GITHUB_OUTPUT"
+          python3 tools/voiceover.py "audio/$ed" --dry-run
+
+      # The key reaches only this step, as an environment variable; the script never prints or stores it
+      - name: Generate changed sections
+        if: steps.key.outputs.present == 'true'
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ vars.ELEVENLABS_VOICE_ID }}
+          ELEVENLABS_MODEL_ID: ${{ vars.ELEVENLABS_MODEL_ID }}
+          EDITION: ${{ steps.ed.outputs.edition }}
+        run: python3 tools/voiceover.py "audio/$EDITION"
+
+      - name: Commit the audio
+        if: steps.key.outputs.present == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION: ${{ steps.ed.outputs.edition }}
+          EVENT: ${{ github.event_name }}
+          HEAD_REF: ${{ github.head_ref }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          git add "audio/$EDITION"
+          if git diff --cached --quiet; then
+            echo "No narration changed; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Voice-over: generate audio for the $EDITION edition"
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          if [ "$EVENT" = "pull_request" ]; then
+            git push -q "$remote" "HEAD:refs/heads/$HEAD_REF"
+            echo "::notice::Committed the audio to $HEAD_REF"
+          else
+            branch="voiceover/$EDITION-$RUN_ID"
+            git push -q "$remote" "HEAD:refs/heads/$branch"
+            body="Generated by the Voice-over workflow (run $RUN_ID). MP3s and manifest for audio/$EDITION; see the run log for the characters sent to ElevenLabs."
+            if ! gh pr create --repo "$REPO" --base main --head "$branch" --title "Voice-over audio for the $EDITION edition" --body "$body"; then
+              echo "::warning::Pushed $branch but could not open a pull request (allow GitHub Actions to create pull requests in Settings > Actions > General). Open it from https://github.com/$REPO/compare/main...$branch"
+            fi
+          fi
