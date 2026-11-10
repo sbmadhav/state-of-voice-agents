@@ -1,20 +1,22 @@
 # Changelog
 
-## November 2026 update, research cutoff November 6, 2026
+## November 2026 update, research cutoff November 9, 2026
 
 The first monthly update. From this edition on, the root page carries only what changed since the previous edition and links back for everything else; the October 2026 edition is the full baseline report.
 
 - Focus: financial services, with health care notes.
-- Headline and four comparison tiles (October value next to the new one): best repeat reliability 75.6% to 87.8%, credit union calls fully handled (none published to 37% to 66%), task completion with a TV on (38.7% to 8.6%), OpenAI Decisions API (beta to GA).
+- Headline and four comparison tiles (October value next to the new one): best repeat reliability 75.6% to 87.8%, credit union calls handled by AI (not reviewed to 37% to 90%), task completion with a TV on (38.7% to 8.6%), and the FCC opt-out rules taking effect Nov 25.
+- Items published after October 12 are tagged "new"; older financial services material is labeled as reviewed for the first time.
 - October versus November table: eight findings that moved.
 - Financial services: published bank and credit union voice-agent results (all vendor- or company-reported), a readiness map for financial call types, and customer acceptance data.
 - New failure mode: the TV in the room (Veris vendor research), with VoxLock caller-voice isolation results and controls.
 - Reliability: only the three new Cekura configurations and status changes; October's seven results are unchanged.
-- Regulation: financial services rules mapped (GLBA, PCI DSS 3.3.1, CFPB and Regulation E and Z, model risk and third-party guidance, FFIEC and NYDFS, FinCEN, FCC 26-67, FCC 24-84, Colorado, Utah).
-- Fraud: voice is a signal, not a factor; revised high-risk tier; financial fraud data.
-- Models and routing: Decisions API GA, Zoom and LiveKit decision models, Jev latency and edge limits, Eleven Realtime, Regal's Oct 15 run, open speech models, Pipecat and Deepgram, ConvFill and Dessa.
+- Regulation: financial services rules mapped (Regulation E and Z, UDAAP, FDCPA and Regulation F, fair lending, accessibility, GLBA, bank incident notification, PCI DSS 3.3.1, model risk and third-party guidance, FFIEC and NYDFS, FinCEN, FCC 26-67, FCC 24-84, Colorado, Utah).
+- Fraud: a correction to October (voice is a signal, not a factor, per 2024 NYDFS guidance), a revised high-risk tier and financial fraud data.
+- Models and routing: Decisions API GA, Zoom and LiveKit decision models, Jev latency and edge limits, ElevenLabs (Eleven Realtime, transcript redaction, contact center integrations), Deepgram Think-Live and Flux TTS, GPT-Live SIP, Regal's Oct 15 run, open speech models, and market consolidation (Salesforce and Cresta, Five9 and Level AI). Also shipped: Claude Fable 5.2, Phonic-1, NVIDIA NemotronLabs VoiceChat, Meta Muse voice, Pipecat, ConvFill, Dessa.
+- Reviewed by an independent critical pass before publishing; fixes include the direction of the FCC opt-out change, credit union figures, evidence labels and the regulation map.
 - Health care notes: California AB 1979, clinic results, clinical speech recognition.
-- Claim check: 17 new or revised claims only.
+- Claim check: 16 new or revised claims only.
 - "Unchanged since October" index linking to each October section; the interactive tools stay in the October edition.
 - Bolt answers from the November update plus the October baseline. New Open Graph image and comments thread name.
 
