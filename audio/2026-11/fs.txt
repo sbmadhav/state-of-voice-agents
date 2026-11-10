@@ -1,0 +1,61 @@
+Section 2: Financial services.
+
+Where voice agents are working in banking.
+
+October did not review financial services, so most results below predate it; those published since October 12 are tagged "new". Every result is reported by the institution or its vendor, with no control group. Expect regression at scale, as with the health care results.
+
+Service 1st Federal Credit Union (US), with Glia. Calls handled: Inbound servicing. Reported result: 37 percent of calls fully handled; abandonment down 96 percent, wait down 91 percent (undated), vendor-reported.
+
+WEOKIE Federal Credit Union (US), with interface.ai. Calls handled: Balances, loan payments, branch hours. Reported result: Wait time down 50 percent (March 2025); 66 percent of calls automated per the vendor's case study, vendor-reported.
+
+Other US credit unions, with interface.ai. Calls handled: Inbound servicing, some with chat. Reported result: Calls automated from 40 percent to 90 percent; undated case studies, vendor-reported.
+
+Southern Cross Credit Union (Australia), new this month, with Salesforce Agentforce Voice. Calls handled: Balance enquiries after verification. Reported result: 7 percent of all calls; balances given to 95 percent of verified callers who choose that option, vendor-reported.
+
+CIBC (Canada), with Proprietary platform. Calls handled: Voice assistant for clients. Reported result: More than 16 million calls, including calls it routed to people; first launched in late 2024 and expanded in 2025, company-reported.
+
+Klarna, with ElevenLabs. Calls handled: Payment status and next steps. Reported result: "Up to 10 times faster", with no baseline given, vendor-reported.
+
+Unnamed North American lender, new this month, with Synthflow. Calls handled: Outbound collections. Reported result: Four-week trial: right-party contact 4.9 percent versus a 3.5 percent benchmark; 49 percent of conversations ended in a promise to pay; no sample size or kept-promise rate, vendor-reported.
+
+NatWest (UK), new this month, with NVIDIA. Calls handled: In-app voice questions, not the contact center. Reported result: 20 percent fewer misheard words after tuning to UK regional accents, company-reported.
+
+Commonwealth Bank (Australia), with In-house voice bot. Calls handled: Inbound. Reported result: Cut 45 roles citing lower call volumes, then reversed the cuts after its union disputed the claim (August 2025), independent.
+
+No voice-agent metrics were found for the largest US banks.
+
+Readiness by financial call type.
+
+Balance, transaction and payment status; branch hours; routing: deploy. Why: Where most published results sit. Must-have controls: Caller verification before account data; a fast route to a person.
+
+Loan or card payment by phone: pilot. Why: Reported at credit unions; money moves, so errors cost. Must-have controls: Read back amount and account; keep card numbers out of the voice path (keypad entry with tones masked).
+
+Card activation, lock and travel notices: pilot. Why: No published results found. Must-have controls: Step-up check for unlock or replacement.
+
+Payment reminders and collections (outbound): pilot. Why: One vendor trial; consent, call-frequency and third-party disclosure rules apply. Must-have controls: Consent on file; natural-language opt-out; no account details to a wrong party; frequency caps.
+
+Dispute and error intake: pilot with care. Why: The CFPB named failing to recognize disputes as a chatbot risk. Must-have controls: Log every possible dispute as one; for card billing errors, tell the caller how to give written notice; hand off with the transcript, author's view.
+
+Fraud claims, hardship, complaints, advice: people. Why: Customers want a person here; outcomes are high-stakes. Must-have controls: Detect and transfer by rule, never by a confidence threshold.
+
+New controls on the market: ElevenLabs added real-time transcript redaction for personal, health and card data (November 2), and Telnyx's Pay over Voice gives the agent the payment result, never the card number, inside a PCI DSS v4.0.1 assessment (November 6). Vendor-reported.
+
+Author's view. Tiers are a starting point for operations and compliance teams. The health care version is in October, section 7.
+
+Do customers want it?
+
+81 percent of more than 2,500 consumers want some human involvement when they call their bank. Company-reported.
+
+About 30 percent accept AI for routine tasks such as balance checks; 55 percent want a person for suspected fraud and for debt collection. Vendor-reported.
+
+In a survey of 18,028 customers, satisfaction with banks' in-app virtual assistants dropped sharply on disputes and fraud, where limited escalation trapped people in self-service loops. Independent.
+
+Using the October tools in a bank.
+
+The economics model and 90-day pilot apply as written; judge the pilot on cost per resolved call and zero wrong-account actions.
+
+Read "EHR and scheduling" as your core banking and card systems; integration is still the slowest part of a launch.
+
+Read "BAA" as GLBA vendor terms, PCI scope and incident-notice clauses (section 5).
+
+Swap the health care call types for the financial readiness map above. Author's view.

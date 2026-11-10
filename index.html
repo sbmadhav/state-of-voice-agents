@@ -498,6 +498,22 @@ ol.src li:target{background:var(--accent-soft)}
 .exec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}.exec-grid .ex{display:flex;flex-direction:column;gap:var(--space-2-5)}.exec-grid .ex:last-child{grid-column:1/-1}.exec-grid h3{font-size:var(--text-card-title-size);line-height:var(--text-card-title-leading)}.exec-grid p{color:var(--ink)}.exn{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--accent);font-weight:var(--text-code-weight)}.exlink{margin-top:auto;font-size:var(--text-label-size);font-weight:var(--text-nav-weight)}.exlink::after{content:" \2192"}@media (max-width:760px){.exec-grid{grid-template-columns:1fr}}.stophere{margin:0 auto;padding:var(--space-3-5) var(--space-4-5);border:1px dashed var(--line);border-radius:var(--radius-md);color:var(--ink-muted);text-align:center}.vd{display:inline-block;font-family:var(--font-mono);font-size:var(--text-kicker-size);font-weight:var(--text-code-weight);letter-spacing:var(--text-kicker-tracking);text-transform:uppercase;border:1px solid var(--line);border-radius:var(--radius-pill);padding:1px var(--space-2);color:var(--ink);white-space:nowrap;max-width:100%}
 @media (max-width:420px){.vd{white-space:normal}}.cmt-off p{margin:0 0 var(--space-3)}.cmt-btns{display:flex;flex-wrap:wrap;gap:var(--space-2)}.cmt-btns .btn{text-decoration:none;font-weight:var(--text-nav-weight)}.cmt-btns .btn:not(.primary){color:var(--ink)}#cmt .utterances{max-width:100%}
 @media print{.bolt-launch,.bolt-panel,.about-links,#comments{display:none!important}}
+
+/* Voice-overs: AI narration of each section, from /state-of-voice-agents/audio/<edition>/ (same origin).
+   Controls stay hidden until the edition's manifest lists audio for that section. */
+.hero-audio{display:grid;gap:var(--space-2);margin-top:var(--space-3)}
+.readtime{font-family:var(--font-mono);font-size:var(--text-kicker-size);letter-spacing:var(--text-kicker-tracking);color:var(--ink-muted)}
+.listen-all{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2) var(--space-3)}
+.listen{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2) var(--space-3)}
+.listen .md-btn,.listen-all .md-btn{box-shadow:none}
+.listen .md-btn svg,.listen-all .md-btn svg{width:14px;height:14px}
+.listen-dur{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--ink-muted);font-weight:var(--text-body-weight)}
+.listen-panel{flex:1 0 100%;display:grid;gap:var(--space-1-5)}
+.listen-panel>*{max-width:36rem}
+.listen-panel audio{width:100%;min-width:0}
+.listen-links{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+.listen-next{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;font-size:inherit}
+@media print{.listen,.listen-all,#listen-min{display:none!important}}
 </style>
 
 </head>
@@ -535,11 +551,23 @@ ol.src li:target{background:var(--accent-soft)}
 </nav>
 </div>
 
-<main id="main" tabindex="-1">
+<main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-11/">
 <header class="hero" id="brief">
   <div class="wrap">
     <p class="eyebrow">State of conversational voice agents · Monthly update · Financial services focus, with health care notes</p>
     <p style="margin-top:var(--space-2)"><span class="edition">November 2026 edition</span> <span class="note" style="margin-left:var(--space-2)">Builds on the <a href="/state-of-voice-agents/editions/2026-10/#brief">October 2026 baseline</a>. Only what changed, or is reviewed for the first time, is here.</span></p>
+    <div class="hero-audio" data-narrate-skip>
+      <p class="readtime"><span id="read-min">About 23 min read</span><span id="listen-min" hidden></span></p>
+      <div class="listen-all" id="listen-all" hidden>
+        <button type="button" class="md-btn md-btn--sm" id="listen-all-btn" aria-expanded="false" aria-controls="listen-all-panel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Listen to the whole update</button>
+        <span class="note">AI voice by ElevenLabs</span>
+        <div class="listen-panel" id="listen-all-panel" hidden>
+          <p class="note" id="listen-now" aria-live="polite"></p>
+          <audio id="listen-all-audio" controls preload="none" aria-label="Whole update, AI narration"></audio>
+          <p class="note listen-links"><button type="button" class="listen-next" id="listen-next">Next section</button> <a id="listen-all-tx" href="#">Transcript</a></p>
+        </div>
+      </div>
+    </div>
     <h1 style="margin-top:var(--space-3)">Banks and credit unions reach the front door</h1>
     <p class="say" style="margin-top:var(--space-4);max-width:62ch">Reviewed for the first time, bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all reported by the institution or its vendor. A new entrant topped the reliability benchmark, OpenAI's decision API left beta, the FCC gave callers more flexibility on opt-outs, and California tightened rules on AI in health care. The new risk is ordinary: <b>a TV playing in the room broke most voice agents in one test</b>.</p>
 
@@ -558,7 +586,7 @@ ol.src li:target{background:var(--accent-soft)}
       <summary>How to read this update: method, labels and disclosure</summary>
       <div class="howto-body">
         <ul class="tight">
-          <li><strong>Delta only.</strong> Findings published between October 12 and November 9, 2026 carry a <span class="vd">new</span> tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.</li>
+          <li><strong>Delta only.</strong> Findings published between October 12 and November 9, 2026 carry a <span class="vd" data-say="&quot;new&quot;">new</span> tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.</li>
           <li><strong>Labels.</strong> <span class="chip k-ind">independent</span> <span class="chip k-ven">vendor-reported</span> <span class="chip k-ven">company-reported</span> <span class="chip k-our">author's view</span>. Every figure links to its source.</li>
           <li><strong>Method.</strong> A review of public sources up to the research cutoff. I did not run my own tests.</li>
           <li><strong>Terms.</strong> "Repeat reliability" (pass^3) is the share of test scenarios passed on all three tries. WER is the share of words transcribed wrongly. Full-duplex models listen and talk at the same time. A System-1 model makes fast typed decisions (route, risk, done talking) without writing prose.</li>
@@ -573,7 +601,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">1 · At a glance</p><h2>October versus November</h2>
       <p class="lede">Each row is a finding that moved. Rows link to the detail below.</p></div>
-    <div class="tbl"><table>
+    <div class="tbl"><table data-narrate="{0}. In October: {1}. In November: {2}. What it means: {3}.">
       <thead><tr><th>Area</th><th>October 2026</th><th>November 2026</th><th>What it means</th></tr></thead>
       <tbody>
         <tr><td><a href="#reliability">Repeat reliability</a></td><td>Retell led at 75.6% of 82 scenarios passed three times in a row; 7 platforms</td><td>PolyAI, newly tested, leads at 87.8%; 10 configurations; the 7 October results are unchanged<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026)">[1]</a></td><td>Leaders change monthly; your own golden test set stays the gate</td></tr>
@@ -592,8 +620,8 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="fs">
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">2 · Financial services</p><h2>Where voice agents are working in banking</h2>
-      <p class="lede">October did not review financial services, so most results below predate it; those published since October 12 are tagged <span class="vd">new</span>. Every result is reported by the institution or its vendor, with no control group. Expect regression at scale, as with the <a href="/state-of-voice-agents/editions/2026-10/#peers">health care results</a>.</p></div>
-    <div class="tbl"><table>
+      <p class="lede">October did not review financial services, so most results below predate it; those published since October 12 are tagged <span class="vd" data-say="&quot;new&quot;">new</span>. Every result is reported by the institution or its vendor, with no control group. Expect regression at scale, as with the <a href="/state-of-voice-agents/editions/2026-10/#peers">health care results</a>.</p></div>
+    <div class="tbl"><table data-narrate="{0}, with {1}. Calls handled: {2}. Reported result: {3}.">
       <thead><tr><th>Institution</th><th>Vendor</th><th>Calls handled</th><th>Reported result</th></tr></thead>
       <tbody>
         <tr><td>Service 1st Federal Credit Union (US)</td><td>Glia</td><td>Inbound servicing</td><td>37% of calls fully handled; abandonment down 96%, wait down 91% (undated)<a class="c" data-s="glia1st" href="#src-glia1st" title="Glia: Service 1st Federal Credit Union case study (undated)">[19]</a> <span class="chip k-ven">vendor-reported</span></td></tr>
@@ -610,7 +638,7 @@ ol.src li:target{background:var(--accent-soft)}
 
     <div class="panel stack">
       <span class="lbl">Readiness by financial call type</span>
-      <div class="tbl"><table>
+      <div class="tbl"><table data-narrate="{0}: {1}. Why: {2}. Must-have controls: {3}.">
         <thead><tr><th>Call type</th><th>Readiness</th><th>Why</th><th>Must-have controls</th></tr></thead>
         <tbody>
           <tr><td>Balance, transaction and payment status; branch hours; routing</td><td><span class="vd rd-go">deploy</span></td><td>Where most published results sit<a class="c" data-s="glia1st" href="#src-glia1st" title="Glia: Service 1st Federal Credit Union case study (undated)">[19]</a><a class="c" data-s="southernCross" href="#src-southernCross" title="Salesforce: Southern Cross Credit Union and Agentforce Voice (Oct 27, 2026)">[2]</a></td><td>Caller verification before account data; a fast route to a person</td></tr>
@@ -655,7 +683,7 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
       <p>In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech; caller-voice isolation does. <span class="chip k-our">author's view</span></p>
       <span class="lbl">Caller-voice isolation on Krisp's benchmark of 265 real recordings</span>
-      <div class="tbl"><table>
+      <div class="tbl"><table data-narrate="{0}: word error rate {1}, and {2} leaked words a minute.">
         <thead><tr><th>Tool</th><th>Error rate (WER)</th><th>Leaked words a minute</th></tr></thead>
         <tbody>
           <tr><td>No processing</td><td class="n">23.21%</td><td class="n">66.48</td></tr>
@@ -680,7 +708,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">4 · Reliability</p><h2>Three more platforms, a new leader</h2>
       <p class="lede">Cekura's benchmark (82 appointment and Medicare scenarios, each run three times) is a frozen release, so October's seven results stand; see <a href="/state-of-voice-agents/editions/2026-10/#gap">October, section 1</a>. Only the additions and status changes are here.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026)">[1]</a></p></div>
-    <div class="tbl"><table>
+    <div class="tbl"><table data-narrate="{0}: passed all three tries, {1}; single run, {2}. Change since October: {3}.">
       <thead><tr><th>Platform</th><th>Passed all 3 tries</th><th>Single run</th><th>Change since October</th></tr></thead>
       <tbody>
         <tr><td>PolyAI</td><td class="n">87.8%</td><td class="n">98.8%</td><td>New; now first. Repetition and call-ending checks were not scored</td></tr>
@@ -696,8 +724,8 @@ ol.src li:target{background:var(--accent-soft)}
 <section id="rules">
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">5 · Regulation</p><h2>Financial services rules, mapped to a voice agent</h2>
-      <p class="lede">October named these regimes but did not review them, so most rows are reviewed for the first time; changes since October 12 are tagged <span class="vd">new</span>. US focus; orientation only, not legal advice. Health care rules are in <a href="/state-of-voice-agents/editions/2026-10/#t-reg">October, T9</a>, with one addition <a href="#hc">below</a>; recording-consent rules are there too.</p></div>
-    <div class="tbl"><table>
+      <p class="lede">October named these regimes but did not review them, so most rows are reviewed for the first time; changes since October 12 are tagged <span class="vd" data-say="&quot;new&quot;">new</span>. US focus; orientation only, not legal advice. Health care rules are in <a href="/state-of-voice-agents/editions/2026-10/#t-reg">October, T9</a>, with one addition <a href="#hc">below</a>; recording-consent rules are there too.</p></div>
+    <div class="tbl"><table data-narrate="{0}. For the agent: {1}. Status: {2}.">
       <thead><tr><th>Rule</th><th>For the agent</th><th>Status</th></tr></thead>
       <tbody>
         <tr><td>Regulation E (electronic transfers)</td><td>An oral notice of an error can start investigation duties, so a dispute raised to the agent likely counts; log it and hand off <span class="chip k-our">author's view</span></td><td>In force<a class="c" data-s="regE" href="#src-regE" title="CFPB: Regulation E, 12 CFR 1005.11, procedures for resolving errors">[37]</a></td></tr>
@@ -805,7 +833,7 @@ ol.src li:target{background:var(--accent-soft)}
       <button type="button" data-f="p" aria-pressed="false">Partly or vendor-only</button>
       <button type="button" data-f="u" aria-pressed="false">Unverified or wrong</button>
     </div>
-    <div class="tbl"><table>
+    <div class="tbl"><table data-narrate="Claim: {0}. Verdict: {1}. Evidence: {2}.">
       <thead><tr><th>Claim</th><th>Verdict</th><th>Evidence</th></tr></thead>
       <tbody id="claims"><tr data-v="v"><td data-label="Claim">OpenAI Decisions API is generally available</td><td data-label="Verdict"><span class="chip k-ind">verified</span></td><td data-label="Evidence">Was unverified (public beta) in October; GA Oct 22, 2026, on GPT-6 Luna<a class="c" data-s="openaiChangelog" href="#src-openaiChangelog" title="OpenAI: API changelog (Decisions API GA Oct 22, 2026; GPT-Live integration Oct 15, 2026)">[15]</a></td></tr><tr data-v="v"><td data-label="Claim">GPT Realtime 64.63% pass^3</td><td data-label="Verdict"><span class="chip k-ind">verified</span></td><td data-label="Evidence">Was unverified in October; now listed on the benchmark hub<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026)">[1]</a></td></tr><tr data-v="v"><td data-label="Claim">California AB 1609 (customer service chatbots) was signed</td><td data-label="Verdict"><span class="chip k-ind">verified</span></td><td data-label="Evidence">Was unverified in October; signed Sept 28, 2026 as Chapter 733, effective Jan 1, 2027<a class="c" data-s="ab1609" href="#src-ab1609" title="Regulations.ai: California AB 1609, customer service chatbots, Chapter 733 of 2026 (Oct 20, 2026)">[12]</a></td></tr><tr data-v="v"><td data-label="Claim">Colorado's replacement AI law takes effect Jan 1, 2027</td><td data-label="Verdict"><span class="chip k-ind">verified</span></td><td data-label="Evidence">Was unverified in October; signed May 14, 2026, effective Jan 1, 2027 if rulemaking is complete<a class="c" data-s="skadden" href="#src-skadden" title="Skadden: Colorado repeals and replaces its AI Act (Jun 2026)">[50]</a></td></tr><tr data-v="p"><td data-label="Claim">PolyAI leads Cekura Bench at 87.8% pass^3</td><td data-label="Verdict"><span class="chip k-ven">partial or vendor</span></td><td data-label="Evidence">On the hub, but two checks were not scored for PolyAI and its range overlaps the runner-up's<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026)">[1]</a></td></tr><tr data-v="u"><td data-label="Claim">Jev can run locally or at the edge</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">No weights or self-hosted build; open Laya needs about 1 GB, beyond a Cloudflare Worker's 128 MB<a class="c" data-s="orcaJev" href="#src-orcaJev" title="OrcaRouter: Is there an open-source Jev? Measured latency and look-alikes (Sep 30, 2026)">[60]</a></td></tr><tr data-v="u"><td data-label="Claim">Banks are replacing contact-center staff with voice bots</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">Commonwealth Bank cut 45 roles citing a voice bot, then reversed the cuts; no large US bank publishes voice-agent metrics<a class="c" data-s="cbaBacktrack" href="#src-cbaBacktrack" title="FStech: CommBank backtracks on plans to replace customer service roles with AI (Aug 22, 2025)">[26]</a></td></tr><tr data-v="u"><td data-label="Claim">Voice biometrics is enough for high-risk banking calls</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">New York's regulator advises against voice as an authentication factor; detectors miss more over phone lines<a class="c" data-s="nydfs" href="#src-nydfs" title="Alston &amp; Bird: NYDFS guidance on AI-related cybersecurity risks (Oct 24, 2024)">[13]</a></td></tr><tr data-v="p"><td data-label="Claim">Customers do not want AI on bank calls</td><td data-label="Verdict"><span class="chip k-ven">partial or vendor</span></td><td data-label="Evidence">About 30% accept it for routine tasks; most want a person for fraud and collections<a class="c" data-s="censuswide" href="#src-censuswide" title="Answering Service Care / Censuswide: Should this call be AI or human? (Jul 2026)">[30]</a></td></tr><tr data-v="p"><td data-label="Claim">A TV in the room breaks most voice agents</td><td data-label="Verdict"><span class="chip k-ven">partial or vendor</span></td><td data-label="Evidence">Vendor research on simulated calls: task completion fell from 38.7% to 8.6% across 14 systems; noise options were off<a class="c" data-s="veris" href="#src-veris" title="Veris: Vamos Pro findings, a TV in the room (Joshua Meyer, Oct 12, 2026)">[4]</a></td></tr><tr data-v="p"><td data-label="Claim">An open model removes background voices better than commercial tools</td><td data-label="Verdict"><span class="chip k-ven">partial or vendor</span></td><td data-label="Evidence">VoxLock 4.95% WER vs 5.30% to 9.38% for three commercial tools, in its author's own test<a class="c" data-s="voxlock" href="#src-voxlock" title="VoxLock: caller-voice isolation model card and paper (arXiv 2610.40727), Apache-2.0 (Oct 2026)">[9]</a></td></tr><tr data-v="p"><td data-label="Claim">Open-source speech recognition has caught up</td><td data-label="Verdict"><span class="chip k-ven">partial or vendor</span></td><td data-label="Evidence">Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models<a class="c" data-s="eeselNemotron" href="#src-eeselNemotron" title="eesel: Nemotron 3.5 Transcribe against closed models (Oct 29, 2026)">[69]</a></td></tr><tr data-v="u"><td data-label="Claim">Eleven Realtime starts speaking in 470 ms</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">Independent tests measured 0.57 s (Max) and 0.62 s (Mini); its reasoning scores did match<a class="c" data-s="aaS2S" href="#src-aaS2S" title="Artificial Analysis: speech-to-speech models leaderboard (read Nov 6, 2026)">[63]</a></td></tr><tr data-v="p"><td data-label="Claim">Salesforce Launa-Omni matches the leading voice models</td><td data-label="Verdict"><span class="chip k-ven">partial or vendor</span></td><td data-label="Evidence">Second on Scale's Audio MultiChallenge (59.69 vs 60.40, within error); its tau-cubed voice score is self-reported<a class="c" data-s="scaleAMC" href="#src-scaleAMC" title="Scale AI: Audio MultiChallenge leaderboard (read Nov 6, 2026)">[84]</a></td></tr><tr data-v="u"><td data-label="Claim">Chatbase Voice gives speech-to-speech agents chat-grade control</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">Chatbase names no model or architecture and publishes no tests<a class="c" data-s="chatbaseVoice" href="#src-chatbaseVoice" title="Chatbase: Voice product page (read Nov 6, 2026)">[85]</a></td></tr><tr data-v="u"><td data-label="Claim">Fish Audio understands conversations, not just text</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call<a class="c" data-s="fishDrama" href="#src-fishDrama" title="eesel: Fish Audio Drama 3 tested, citing Artificial Analysis (Oct 2026)">[86]</a></td></tr><tr data-v="u"><td data-label="Claim">Block's Dessa is a usable full-duplex voice model</td><td data-label="Verdict"><span class="chip k-unv">unverified or wrong</span></td><td data-label="Evidence">Research preview with a waitlist; no size, benchmarks or tool use published<a class="c" data-s="dessa" href="#src-dessa" title="Voice AI Space: Block launches Dessa, a full-duplex speech model trained only on audio (Oct 24, 2026)">[81]</a></td></tr></tbody></table></div>
   </div>
@@ -815,7 +843,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap stack">
     <div class="head"><p class="eyebrow">Unchanged since October</p><h2>Read these in the October baseline</h2>
       <p class="lede">No new evidence moved these sections, so they are not repeated here. Sections updated in part above (T1 architecture, T4 failure modes, T5 routing, T8 fraud, T9 regulation) still hold where this update does not change them.</p></div>
-    <div class="tbl"><table>
+    <div class="tbl"><table data-narrate="{0}: {1}.">
       <thead><tr><th>Section</th><th>What it covers</th></tr></thead>
       <tbody>
         <tr><td><a href="/state-of-voice-agents/editions/2026-10/#summary">Executive summary</a></td><td>The nine-point argument, still current except where this update says otherwise</td></tr>
@@ -1105,6 +1133,46 @@ document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childL
   finally{$('bolt-send').disabled=false}
  }
 })();
+/* Voice-overs: one Listen control per narrated section and a playlist in the hero, from the edition's
+   manifest (written by .github/workflows/voiceover.yml). No autoplay; only one player sounds at a time. */
+(function(){
+ const main=$('main'),base=main&&main.dataset.audioBase;if(!base||!window.fetch)return;
+ const fmt=s=>{s=Math.max(0,Math.round(s));const m=Math.floor(s/60),r=s%60;return m+':'+String(r).padStart(2,'0')};
+ const spoken=s=>{s=Math.max(1,Math.round(s));const m=Math.floor(s/60),r=s%60;return (m?m+' minute'+(m>1?'s':''):'')+(m&&r?' ':'')+(r?r+' second'+(r>1?'s':''):'')};
+ const icon='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
+ const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const titleOf=sec=>{const h=sec.querySelector('h1,h2');return h?h.textContent.trim():sec.id};
+ // One player at a time: starting any audio pauses the others
+ document.addEventListener('play',e=>{document.querySelectorAll('main audio').forEach(a=>{if(a!==e.target&&!a.paused)a.pause()})},true);
+ fetch(base+'manifest.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{
+  const files=(m&&m.sections)||{};
+  const secs=[...main.querySelectorAll(':scope > section[id], :scope > header.hero[id]')].filter(sec=>files[sec.id]&&files[sec.id].file);
+  if(!secs.length)return;
+  secs.forEach(sec=>{
+   const f=files[sec.id],id=sec.id,title=titleOf(sec);
+   const box=document.createElement('div');box.className='listen';box.setAttribute('data-narrate-skip','');
+   box.innerHTML=`<button type="button" class="md-btn md-btn--sm" aria-expanded="false" aria-controls="listen-${id}-panel">${icon}Listen<span class="md-sr-only"> to ${esc(title)}, ${spoken(f.duration||0)}</span> <span class="listen-dur" aria-hidden="true">${fmt(f.duration||0)}</span></button>`+
+    `<div class="listen-panel" id="listen-${id}-panel" hidden><audio controls preload="none"></audio><p class="note listen-links"><a href="${base}${id}.txt">Transcript<span class="md-sr-only"> of ${esc(title)}</span></a><span>AI voice by ElevenLabs</span></p></div>`;
+   const btn=box.querySelector('button'),panel=box.querySelector('.listen-panel'),au=box.querySelector('audio');
+   au.src=base+f.file;au.setAttribute('aria-label','Narration: '+title+', '+spoken(f.duration||0));
+   btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
+   if(sec.classList.contains('hero')){const h=sec.querySelector('h1');h.insertAdjacentElement('afterend',box);box.style.marginTop='var(--space-3)'}
+   else{const head=sec.querySelector('.head');(head||sec.querySelector('.wrap')||sec).appendChild(box)}
+  });
+  // Listening time, and the whole update as a playlist, in section order
+  const total=secs.reduce((t,sec)=>t+(+files[sec.id].duration||0),0);
+  if(total>0){const lm=$('listen-min');lm.textContent=' · '+Math.max(1,Math.round(total/60))+' min listen';lm.hidden=false}
+  const all=$('listen-all'),btn=$('listen-all-btn'),panel=$('listen-all-panel'),au=$('listen-all-audio'),now=$('listen-now'),tx=$('listen-all-tx'),next=$('listen-next');
+  let i=0;
+  const load=k=>{i=k;const sec=secs[i];au.src=base+files[sec.id].file;tx.href=base+sec.id+'.txt';
+   now.textContent='Now playing '+(i+1)+' of '+secs.length+': '+titleOf(sec);next.hidden=i>=secs.length-1};
+  load(0);
+  au.addEventListener('ended',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});
+  next.addEventListener('click',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});
+  btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
+  all.hidden=false;
+ }).catch(()=>{});
+})();
 /* Comments: utterances (GitHub issues, free, no ads). Loads on the published site only; inside an embed the GitHub links are shown instead. */
 (function(){
  const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
@@ -1133,6 +1201,8 @@ document.addEventListener('click', function (e) {
   if (!window.siteTrack || !e.target.closest) return;
   if (e.target.closest('#pdf-open')) siteTrack('voice/pdf', 'Opened Download PDF');
   else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
+  else if (e.target.closest('#listen-all-btn')) siteTrack('voice/listen-all', 'Opened Listen to the whole update');
+  else if (e.target.closest('.listen > button')) siteTrack('voice/listen', 'Opened a section voice-over');
 }, true);
 </script>
 

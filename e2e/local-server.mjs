@@ -17,7 +17,7 @@ if (!inside(root, repo)) throw new Error('the folder to serve must be inside the
 const port = +(process.argv[2] || process.env.PORT || 8126);
 const LIVE = 'https://sbmadhav.com';
 const PREFIX = '/state-of-voice-agents/';
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.txt': 'text/plain', '.m4a': 'audio/mp4', '.md': 'text/markdown; charset=utf-8' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8', '.m4a': 'audio/mp4', '.mp3': 'audio/mpeg', '.md': 'text/markdown; charset=utf-8' };
 // .nojekyll publishes the whole branch; never serve dependencies or anything with a dot path part (.git, .github, .env)
 const BLOCKED = /(^|\/)(node_modules|\.[^/]*)(\/|$)/;
 

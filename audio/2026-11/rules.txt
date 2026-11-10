@@ -1,0 +1,43 @@
+Section 5: Regulation.
+
+Financial services rules, mapped to a voice agent.
+
+October named these regimes but did not review them, so most rows are reviewed for the first time; changes since October 12 are tagged "new". US focus; orientation only, not legal advice. Health care rules are in October, T9, with one addition below; recording-consent rules are there too.
+
+Regulation E (electronic transfers). For the agent: An oral notice of an error can start investigation duties, so a dispute raised to the agent likely counts; log it and hand off, author's view. Status: In force.
+
+Regulation Z (card billing errors). For the agent: Billing-error notices must be written, so the agent should tell the caller how to give written notice rather than treat the call as notice, author's view. Status: In force.
+
+UDAAP and CFPB chatbot expectations. For the agent: Inaccurate answers, unrecognized disputes and loops with no path to a person are named risks. Status: Issue spotlight June 2023; the CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation; the statutes and regulations are unchanged.
+
+Debt collection (FDCPA, Regulation F). For the agent: For collectors covered by Regulation F: more than 7 calls in 7 days is presumed harassment, and nothing about the debt may be disclosed to a wrong party who answers. First-party lenders face UDAAP and state law instead. Status: In force.
+
+Fair lending and equal service. For the agent: Speech recognition that works worse for some accents can mean unequal service or collections outcomes; test accuracy by accent and language, author's view. Status: Ongoing.
+
+Accessibility. For the agent: Keep a route for callers with speech disabilities and relay services; never trap them in the agent, author's view. Status: Ongoing.
+
+California AB 1609 (customer service chatbots), new this month. For the agent: At businesses with more than 500 million dollars in revenue, by phone and online: a bot may not pose as human; a caller who asks for a person gets a good-faith connection within 15 minutes or a specific appointment within one business day; phone holds are capped. Up to 5,000 dollars per first violation and 10,000 dollars after, enforced by public prosecutors. Status: Signed September 28, 2026; effective January 1, 2027; October listed it as unverified.
+
+California wiretap suits against AI call vendors (CIPA), new this month. For the agent: Plaintiffs argue that a vendor whose AI listens to calls is an eavesdropping third party. U.S. Bank callers sued Pegasystems on October 2, 2026, alleging its voice AI analyzed their calls without consent (allegations only; up to 5,000 dollars per violation under California law). A similar suit over Google's contact-center AI survived dismissal in 2025, then was dismissed with leave to amend on October 22, 2026. Disclose AI and third-party processing at the start of each call, and limit vendor use of call data in the contract. Status: Pending.
+
+GLBA Safeguards Rule (FTC) and bank security guidelines. For the agent: A written security program, encryption and oversight of service providers, including the voice-AI vendor. Nonbank lenders report breaches of unencrypted data affecting more than 500 consumers to the FTC within 30 days. Status: Breach notice in force since May 13, 2024.
+
+Incident notification (banks and credit unions). For the agent: Banks notify their regulator within 36 hours of a significant computer-security incident, and service providers must tell the bank. Federally insured credit unions notify the NCUA within 72 hours of a reportable cyber incident, including one at a third-party vendor. Cover the voice-AI vendor in the contract. Status: Banks since 2022; NCUA since September 1, 2023.
+
+PCI DSS v4.0.1, requirement 3.3.1. For the agent: Card security codes must not survive in recordings or transcripts after authorization, even encrypted. Speech-to-text output is in scope. Status: FAQ updated June 2025.
+
+Model risk guidance (replaces SR 11-7). For the agent: Excludes generative and agentic AI by footnote, so LLM voice agents fall under general governance; vendor models stay in scope. Mainly aimed at banks over 30 billion dollars in assets (up from 1 billion dollars), and the agencies say non-compliance alone will not draw supervisory criticism. Status: Issued April 17, 2026.
+
+Third-party risk management (OCC, Fed, FDIC, NCUA). For the agent: Oversee the voice-AI vendor across the relationship; a proposal would move to a lighter, harm-based approach. Status: Proposed September 11, 2026; comments due November 16, 2026.
+
+FFIEC authentication guidance; NYDFS AI guidance. For the agent: Risk-assess call-center authentication and layer controls. New York advises against SMS, voice or video as authentication factors and asks for deepfakes in risk assessments. Status: FFIEC August 2021; NYDFS letter October 2024; customer MFA required from November 1, 2025.
+
+FinCEN deepfake alert. For the agent: Red flags and a suspicious activity report key term for deepfake fraud; voice clones named in family-emergency scams. Status: November 13, 2024; cited again in a September 2026 alert.
+
+TCPA opt-out rules, FCC 26-67, new this month. For the agent: Callers may designate one or more approved methods as the exclusive way to opt out, and must disclose them; opt-outs can be limited to a message category (the 10-business-day deadline is unchanged). Wireless numbers from a spouse, a call-in or another institution's records now qualify for exempt fraud alerts. Status: Published October 26; effective November 25, 2026.
+
+FCC AI call disclosure proposal (FCC 24-84). For the agent: Would require AI disclosure at consent and on the call. Status: Proposed August 2024; not adopted as of October 2026.
+
+Colorado SB 26-189. For the agent: Notice before automated tools materially influence financial or lending decisions; explanation and human review after an adverse outcome; fraud and AML tools carved out. Status: Signed May 14, 2026; effective January 1, 2027, if rulemaking is done; October listed it as unverified.
+
+Utah AI Policy Act. For the agent: Disclose AI when asked; regulated occupations disclose up front in high-risk interactions, including financial advice and collecting sensitive data. Status: Effective May 7, 2025; sunsets July 1, 2027.

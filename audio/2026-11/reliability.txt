@@ -1,0 +1,17 @@
+Section 4: Reliability.
+
+Three more platforms, a new leader.
+
+Cekura's benchmark (82 appointment and Medicare scenarios, each run three times) is a frozen release, so October's seven results stand; see October, section 1. Only the additions and status changes are here.
+
+PolyAI: passed all three tries, 87.8 percent; single run, 98.8 percent. Change since October: New; now first. Repetition and call-ending checks were not scored.
+
+Telnyx: passed all three tries, 68.3 percent; single run, 97.6 percent. Change since October: New; fifth.
+
+Smallest AI: passed all three tries, 45.1 percent; single run, Not published. Change since October: New; under a modified tool check (its tools could not take list inputs) it scores 56.1 percent and 94.3 percent single-run.
+
+Retell: passed all three tries, 75.6 percent; single run, 93.9 percent. Change since October: Unchanged; first to second.
+
+GPT Realtime: passed all three tries, 64.6 percent; single run, 92.7 percent. Change since October: Unverified in October; now listed, so verified.
+
+Vendor-reported. With 82 scenarios each score carries about plus or minus 7 to 10 points: PolyAI's range (about 79 percent to 93 percent) overlaps Retell's (about 65 percent to 84 percent). Single-run scores beat repeat reliability on all ten configurations, by 18 points or more on nine. Retell, which sells a voice platform, published a second benchmark from its production calls (27 models, 3,589 hallucination and tool-calling cases); GPT-5.5 led at 84.8 percent free of hallucination with reasoning off. New this month. In Sierra's six-language voice test, Spanish trailed English by 2.4 points, so bilingual banks should test both. New this month.

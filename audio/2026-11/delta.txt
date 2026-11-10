@@ -1,0 +1,23 @@
+Section 1: At a glance.
+
+October versus November.
+
+Each row is a finding that moved. Rows link to the detail below.
+
+Repeat reliability. In October: Retell led at 75.6 percent of 82 scenarios passed three times in a row; 7 platforms. In November: PolyAI, newly tested, leads at 87.8 percent; 10 configurations; the 7 October results are unchanged. What it means: Leaders change monthly; your own golden test set stays the gate.
+
+Financial services results. In October: Not reviewed; the report expected balances and payments first. In November: One dated result: 7 percent of all calls at an Australian credit union; undated US case studies claim 37 percent to 90 percent; CIBC reports more than 16 million voice-assistant calls. What it means: The expected pattern held: routine servicing first; all figures are self-reported.
+
+Background speech. In October: Background speech raised transcription errors to 22 percent to 31 percent. In November: With a TV on, task completion fell from 38.7 percent to 8.6 percent; an open model isolates the caller. What it means: The failure mode to test first.
+
+Financial regulation. In October: GLBA, PCI DSS and UDAAP named but not reviewed. In November: Mapped below, including Regulation E and Z, debt collection rules, new model-risk guidance and the FCC opt-out order. What it means: The new model-risk guidance excludes generative AI, so voice agents fall under general governance.
+
+California chatbot law. In October: AB 1609 reported as signed, unverified. In November: Confirmed: signed September 28, 2026, effective January 1, 2027; covers phone and online customer service at businesses over 500 million dollars revenue. What it means: Large banks need a human within 15 minutes, or a booked appointment, when a caller asks.
+
+Identity checks. In October: Voiceprint plus liveness, then a one-time code, for high-risk calls. In November: Corrected: treat voice as a signal, not a factor; detectors also miss more over real phone lines. What it means: High-risk steps move to app push or other phishing-resistant checks.
+
+System-1 decisions. In October: OpenAI Decisions API in public beta. In November: Decisions API generally available, with native GPT-Live integration. What it means: Now a contract question: data use, third-party risk and, in health care, a BAA.
+
+Open speech models. In October: Open models fit only small routers. In November: Open models now cover recorded-call transcription, speech output and voice isolation. What it means: More of the audio path can stay on your own infrastructure; live transcription still needs streaming models.
+
+Health care. In October: Disclosure rules in California, Texas and Utah. In November: California AB 1979 adds a licensed-judgment rule and covers health care chatbots under its medical privacy law. What it means: Scheduling and routine messages stay exempt.

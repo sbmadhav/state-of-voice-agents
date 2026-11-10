@@ -1,0 +1,15 @@
+About this report.
+
+The report.
+
+A vendor-neutral view of conversational voice agents for leaders in regulated contact centers, published as a monthly edition. Every figure links to its source, and vendor-reported numbers are labeled as such.
+
+Corrections and source suggestions are welcome as issues on GitHub, which also keeps past editions.
+
+The author.
+
+Madhav Srinivasan.
+
+Engineering leader who builds AI agents and platforms.
+
+Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.

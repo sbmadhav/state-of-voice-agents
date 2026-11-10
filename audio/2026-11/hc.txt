@@ -1,0 +1,15 @@
+Section 8: Health care notes.
+
+What changed for health systems.
+
+October's health care analysis stands: published results, readiness by call type and regulation.
+
+California AB 1979 (signed October 2026, effective January 1, 2027): a licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt. New this month. Independent.
+
+Payer and administrator calls: a health plan administrator is putting voice agents on inbound provider calls about eligibility, benefits, balances and claims status, handing off to people in its existing contact center (November 4). New this month. Vendor-reported.
+
+Clinic results: about 50 percent of calls handled end to end in a vendor's most recently onboarded pilot clinics. New this month. Vendor-reported.
+
+Clinical speech: Nemotron 3.5 Transcribe's error rate on accented clinical speech fell from 30.8 percent to 23.8 percent with prompting alone, and to 11.8 percent after fine-tuning; test on your own patients' audio. New this month. Vendor-reported.
+
+The TV-in-the-room finding applies equally to patients calling from home or a waiting room. Author's view.

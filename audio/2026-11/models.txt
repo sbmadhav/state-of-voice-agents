@@ -1,0 +1,43 @@
+Section 7: Models, platforms and routing.
+
+What shipped, and what it changes.
+
+Releases that change a recommendation, then a short list of everything else. The architecture and routing analysis is in October, T1 and T5.
+
+Fast decision models (System 1).
+
+OpenAI Decisions API: beta to generally available (October 22) on GPT-6 Luna, up to 400 questions a request, 10 cents per million input tokens. GPT-Live sends turns to it while the caller is still speaking. Sierra, a customer, reported 95th percentile under 280 milliseconds in launch coverage. New this month. Vendor-reported.
+
+New options: Zoom Decisions (4.2 cents and 10 cents per million input tokens; 81.3 percent and 83.9 percent on five text benchmarks); LiveKit's DecisionModel runs named decisions beside the call. New this month. Vendor-reported.
+
+Jev: October median 175 milliseconds, 95th percentile 270 milliseconds; a second test measured median 151 milliseconds, 95th percentile 247 milliseconds. No self-hosted version exists. Independent.
+
+Edge: open Laya needs about 1 gigabyte (0.85 gigabytes ONNX at 16-bit); a Cloudflare Worker gets 128 megabytes. Run decision models in containers or on your own servers. Author's view.
+
+Speech, telephony and contact center.
+
+ElevenLabs: Eleven Realtime Max scored 98.8 percent on Big Bench Audio reasoning and 87.1 percent on tool-use task success in independent tests, with 0.57 seconds to first audio, slower than the 470 milliseconds claimed; it opened to all workspaces on November 2. Independent. Its agents now plug natively into NiCE CXone, Genesys Cloud, Amazon Connect and Five9, so a pilot can sit inside an existing contact center. New this month. Vendor-reported. HIPAA and retention terms for Realtime are not yet documented.
+
+Deepgram: Think-Live, which decides when the agent should listen, wait or respond, is generally available, and Flux TTS is generally available in nine languages (October 29). No benchmarks published. New this month. Vendor-reported.
+
+OpenAI: GPT-Live connects directly to phone lines over SIP (the standard for business telephony), inbound and outbound, with call transfer. Vendor-reported.
+
+Two new models are too slow for live voice: in Regal's October 15 run, GPT-6.1 Sol (1,711 milliseconds) and Gemini 3.8 Flash (2,516 milliseconds) miss its 1,300 milliseconds bar; GPT-6 Sol leads at 786 of 1,000. New this month. Vendor-reported.
+
+Open speech: NVIDIA Nemotron 3.5 Transcribe (4.71 percent English word error rate, commercial license) is for recorded calls; it does not stream. Gradium Phonon produces speech in about 43 milliseconds on a server CPU and about 7 milliseconds on a laptop CPU; only its 31-million-parameter English model is Apache-2.0, while the 40-million-parameter and multilingual models are non-commercial. New this month. Vendor-reported.
+
+Market: Salesforce agreed to acquire Cresta (November 2) and Five9 to acquire Level AI for about 325 million dollars (November 5); check data-export and exit terms in any new contract. New this month. Company-reported.
+
+Also shipped, no change to recommendations.
+
+Anthropic Claude Fable 5.2 (November 9): a text model, usable as the reasoner behind a voice layer; 8 dollars and 40 dollars per million input and output tokens, up to 30 percent faster than 5.1; no audio and no voice-agent benchmarks yet. New this month. Vendor-reported.
+
+Phonic-1 (October 29): a speech-to-speech model claiming 83.2 on tau-cubed voice (Sierra's benchmark of voice agents completing customer-service tasks) against 79.9 for GPT-Live 1. New this month. Vendor-reported.
+
+NVIDIA NemotronLabs VoiceChat (September 2026): an open full-duplex model that calls tools while it talks; 33.0 percent pass at one on tool use against 54.0 percent for Gemini 3.1 Live. Vendor-reported.
+
+Meta: voice conversations in its consumer Muse app (US, November 5); no developer API or enterprise voice model. New this month. Vendor-reported.
+
+Frameworks: Pipecat pairs a fast front-end model with a slower back-end model; Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source. New this month. Vendor-reported.
+
+Research: ConvFill (a small talker covering a frontier model's delay; a later paper notes it does not measure the risk of the filler contradicting the final answer), independent; Block's Dessa (full-duplex, trained only on audio, no benchmarks). New this month.
