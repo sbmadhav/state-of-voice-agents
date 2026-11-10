@@ -38,7 +38,7 @@ test('the header theme button switches scheme, saves only a choice that differs 
   expect(await bg()).toBe('rgb(15, 18, 24)');
 });
 
-test('sources filter shows independent or vendor sources only', async ({ page }) => {
+test('sources filter shows independent, or vendor and company, sources only', async ({ page }) => {
   await page.goto(PAGE);
   const total = await page.locator('#src li').count();
   expect(total).toBeGreaterThan(50);
@@ -48,7 +48,8 @@ test('sources filter shows independent or vendor sources only', async ({ page })
     const shown = await vis(page, '#src li');
     expect(shown.length).toBeGreaterThan(0);
     expect(shown.length).toBeLessThan(total);
-    expect(new Set(shown)).toEqual(new Set([f]));
+    // The vendor filter also shows company-reported sources (data-t="co")
+    for (const t of shown) expect(f === 'ind' ? [t] : [['ven', 'co'].includes(t!) ? 'ven' : t]).toEqual([f]);
   }
   await page.locator('#sf button[data-f="all"]').click();
   expect((await vis(page, '#src li')).length).toBe(total);
@@ -62,7 +63,8 @@ test('claim check filter shows one verdict at a time', async ({ page }) => {
     await page.locator(`#vf button[data-f="${f}"]`).click();
     const shown = await vis(page, '#claims tr');
     expect(shown.length, `verdict ${f}`).toBeGreaterThan(0);
-    expect(new Set(shown)).toEqual(new Set([f]));
+    // The vendor filter also shows company-reported sources (data-t="co")
+    for (const t of shown) expect(f === 'ind' ? [t] : [['ven', 'co'].includes(t!) ? 'ven' : t]).toEqual([f]);
     await expect(page.locator('#claims tr:not([hidden])').first()).toBeVisible();
   }
   await page.locator('#vf button[data-f="all"]').click();

@@ -55,7 +55,7 @@ test('November update: delta-only, financial services focus, links back to the O
   // Every changed headline figure shows its October value
   await expect(page.locator('.delta-stats .stat')).toHaveCount(4);
   await expect(page.locator('.delta-stats .stat .was')).toHaveCount(4);
-  await expect(page.locator('#delta tbody tr')).toHaveCount(8);
+  await expect(page.locator('#delta tbody tr')).toHaveCount(9);
   await expect(page.locator('#tv-in-room tbody tr')).toHaveCount(5);
   await expect(page.locator('#claims tr', { hasText: 'OpenAI Decisions API is generally available' })).toHaveAttribute('data-v', 'v');
   // Unchanged material is not repeated: it links to October sections that exist
