@@ -23,7 +23,7 @@ test.describe('accessibility', () => {
   test.describe.configure({ timeout: 90_000 });
 
   for (const scheme of ['light', 'dark'] as const) {
-    for (const url of ['/state-of-voice-agents/', '/state-of-voice-agents/editions/2026-10/']) {
+    for (const url of ['/state-of-voice-agents/', '/state-of-voice-agents/editions/2026-10/', '/state-of-voice-agents/editions/2026-11/']) {
       test(`${url} has no serious or critical axe violations (${scheme})`, async ({ page }) => {
         await page.emulateMedia({ colorScheme: scheme });
         await page.goto(url);

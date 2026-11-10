@@ -42,7 +42,8 @@ for (const url of PAGES) {
 test.describe('Pause motion', () => {
   test.use({ reducedMotion: 'no-preference' });
   test('the Explore menu switch stops the waveform, and it stays stopped after a reload', async ({ page }) => {
-    await page.goto('/state-of-voice-agents/', { waitUntil: 'load' });
+    // The animated waveform is in the October baseline; monthly updates have no looping animation
+    await page.goto('/state-of-voice-agents/editions/2026-10/', { waitUntil: 'load' });
     await expect.poll(() => looping(page)).toBeGreaterThan(0);
     const dlg = await openExplore(page);
     await dlg.locator('#xpMotion').click();

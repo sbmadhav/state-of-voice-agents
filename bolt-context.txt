@@ -1,5 +1,597 @@
-Voice Agents at the Front Door, October 2026 edition, by Madhav Srinivasan.
+Voice Agents at the Front Door, November 2026 update, by Madhav Srinivasan.
 URL: https://sbmadhav.com/state-of-voice-agents/
+This file has two parts. Part 1 is the November 2026 update: what changed since October, with a financial services focus. Part 2 is the October 2026 baseline report, which still holds for everything Part 1 does not change. Where they differ, Part 1 is current. Bracketed numbers refer to the Sources list at the end of each part; the numbering restarts in Part 2.
+
+=== PART 1: NOVEMBER 2026 UPDATE ===
+
+STATE OF CONVERSATIONAL VOICE AGENTS · MONTHLY UPDATE · FINANCIAL SERVICES FOCUS, WITH HEALTH CARE NOTES
+
+November 2026 edition Builds on the October 2026 baseline. Only what changed, or is reviewed for the first time, is here.
+
+Banks and credit unions reach the front door
+
+Reviewed for the first time, bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all reported by the institution or its vendor. A new entrant topped the reliability benchmark, OpenAI's decision API left beta, the FCC gave callers more flexibility on opt-outs, and California tightened rules on AI in health care. The new risk is ordinary: a TV playing in the room broke most voice agents in one test.
+
+BEST REPEAT RELIABILITY
+October: 75.6%, 7 platforms
+87.8%
+
+A new entrant, PolyAI, leads ten configurations; its range (about 79% to 93%) overlaps the runner-up's [1]
+
+vendor-reported
+SHARE OF ALL CALLS, DATED BANK RESULT
+October: not reviewed
+7%
+
+Southern Cross Credit Union's voice agent takes 7% of all calls, mostly balances (Oct 27). Undated vendor case studies claim 37% to 90% [2][3]
+
+vendor-reported
+TASK COMPLETION, TV ON
+Same test, clean calls: 38.7%
+8.6%
+
+Across 14 voice systems on simulated calls with a TV playing in the room [4]
+
+vendor-reported
+TCPA OPT-OUT RULES
+October: not reviewed
+Nov 25
+
+FCC 26-67 takes effect: one or more approved opt-out methods, disclosed on the call; category-limited opt-outs; a wider fraud-alert exemption [5][6]
+
+independent
+UNCHANGED SINCE OCTOBER
+
+The three theses stand: reliability is the gap, think silently, then respond, and invest in governed memory. So do the economics model, the 90-day pilot and the router comparison. Everything else is indexed at the end with a link to its October section.
+
+How to read this update: method, labels and disclosure
+
+1 · AT A GLANCE
+
+October versus November
+
+Each row is a finding that moved. Rows link to the detail below.
+
+AREA	OCTOBER 2026	NOVEMBER 2026	WHAT IT MEANS
+Repeat reliability	Retell led at 75.6% of 82 scenarios passed three times in a row; 7 platforms	PolyAI, newly tested, leads at 87.8%; 10 configurations; the 7 October results are unchanged[1]	Leaders change monthly; your own golden test set stays the gate
+Financial services results	Not reviewed; the report expected balances and payments first	One dated result: 7% of all calls at an Australian credit union; undated US case studies claim 37% to 90%; CIBC reports more than 16M voice-assistant calls[2][3][7]	The expected pattern held: routine servicing first; all figures are self-reported
+Background speech	Background speech raised transcription errors to 22% to 31%[8]	With a TV on, task completion fell from 38.7% to 8.6%; an open model isolates the caller[4][9]	The failure mode to test first
+Financial regulation	GLBA, PCI DSS and UDAAP named but not reviewed	Mapped below, including Regulation E and Z, debt collection rules, new model-risk guidance and the FCC opt-out order[10][11][5]	The new model-risk guidance excludes generative AI, so voice agents fall under general governance
+California chatbot law	AB 1609 reported as signed, unverified	Confirmed: signed Sept 28, 2026, effective Jan 1, 2027; covers phone and online customer service at businesses over $500M revenue[12]	Large banks need a human within 15 minutes, or a booked appointment, when a caller asks
+Identity checks	Voiceprint plus liveness, then a one-time code, for high-risk calls	Corrected: treat voice as a signal, not a factor; detectors also miss more over real phone lines[13][14]	High-risk steps move to app push or other phishing-resistant checks
+System-1 decisions	OpenAI Decisions API in public beta	Decisions API generally available, with native GPT-Live integration[15]	Now a contract question: data use, third-party risk and, in health care, a BAA
+Open speech models	Open models fit only small routers	Open models now cover recorded-call transcription, speech output and voice isolation[16][17][9]	More of the audio path can stay on your own infrastructure; live transcription still needs streaming models
+Health care	Disclosure rules in California, Texas and Utah	California AB 1979 adds a licensed-judgment rule and covers health care chatbots under its medical privacy law[18]	Scheduling and routine messages stay exempt
+
+2 · FINANCIAL SERVICES
+
+Where voice agents are working in banking
+
+October did not review financial services, so most results below predate it; those published since October 12 are tagged NEW. Every result is reported by the institution or its vendor, with no control group. Expect regression at scale, as with the health care results.
+
+INSTITUTION	VENDOR	CALLS HANDLED	REPORTED RESULT
+Service 1st Federal Credit Union (US)	Glia	Inbound servicing	37% of calls fully handled; abandonment down 96%, wait down 91% (undated)[19] vendor-reported
+WEOKIE Federal Credit Union (US)	interface.ai	Balances, loan payments, branch hours	Wait time down 50% (Mar 2025)[20]; 66% of calls automated per the vendor's case study[3] vendor-reported
+Other US credit unions	interface.ai	Inbound servicing, some with chat	Calls automated from 40% to 90%; undated case studies[3] vendor-reported
+Southern Cross Credit Union (Australia) NEW	Salesforce Agentforce Voice	Balance enquiries after verification	7% of all calls; balances given to 95% of verified callers who choose that option[2][21] vendor-reported
+CIBC (Canada)	Proprietary platform	Voice assistant for clients	More than 16 million calls, including calls it routed to people; first launched in late 2024 and expanded in 2025[7][22] company-reported
+Klarna	ElevenLabs	Payment status and next steps	"Up to 10x faster", with no baseline given[23] vendor-reported
+Unnamed North American lender NEW	Synthflow	Outbound collections	Four-week trial: right-party contact 4.9% vs a 3.5% benchmark; 49% of conversations ended in a promise to pay; no sample size or kept-promise rate[24] vendor-reported
+NatWest (UK) NEW	NVIDIA	In-app voice questions, not the contact center	20% fewer misheard words after tuning to UK regional accents[25] company-reported
+Commonwealth Bank (Australia)	In-house voice bot	Inbound	Cut 45 roles citing lower call volumes, then reversed the cuts after its union disputed the claim (Aug 2025)[26] independent
+
+No voice-agent metrics were found for the largest US banks.
+
+READINESS BY FINANCIAL CALL TYPE
+CALL TYPE	READINESS	WHY	MUST-HAVE CONTROLS
+Balance, transaction and payment status; branch hours; routing	DEPLOY	Where most published results sit[19][2]	Caller verification before account data; a fast route to a person
+Loan or card payment by phone	PILOT	Reported at credit unions[20]; money moves, so errors cost	Read back amount and account; keep card numbers out of the voice path (keypad entry with tones masked)[27][28]
+Card activation, lock and travel notices	PILOT	No published results found	Step-up check for unlock or replacement
+Payment reminders and collections (outbound)	PILOT	One vendor trial[24]; consent, call-frequency and third-party disclosure rules apply[5][11]	Consent on file; natural-language opt-out; no account details to a wrong party; frequency caps
+Dispute and error intake	PILOT WITH CARE	The CFPB named failing to recognize disputes as a chatbot risk[29]	Log every possible dispute as one; for card billing errors, tell the caller how to give written notice; hand off with the transcript author's view
+Fraud claims, hardship, complaints, advice	PEOPLE	Customers want a person here[30]; outcomes are high-stakes	Detect and transfer by rule, never by a confidence threshold
+
+New controls on the market: ElevenLabs added real-time transcript redaction for personal, health and card data (Nov 2), and Telnyx's Pay over Voice gives the agent the payment result, never the card number, inside a PCI DSS v4.0.1 assessment (Nov 6).[31][32] vendor-reported
+
+author's view Tiers are a starting point for operations and compliance teams. The health care version is in October, section 7.
+
+DO CUSTOMERS WANT IT?
+81% of 2,500+ consumers want some human involvement when they call their bank.[33] company-reported
+About 30% accept AI for routine tasks such as balance checks; 55% want a person for suspected fraud and for debt collection.[30] vendor-reported
+In a survey of 18,028 customers, satisfaction with banks' in-app virtual assistants dropped sharply on disputes and fraud, where limited escalation trapped people in self-service loops.[34] independent
+USING THE OCTOBER TOOLS IN A BANK
+The economics model and 90-day pilot apply as written; judge the pilot on cost per resolved call and zero wrong-account actions.
+Read "EHR and scheduling" as your core banking and card systems; integration is still the slowest part of a launch.
+Read "BAA" as GLBA vendor terms, PCI scope and incident-notice clauses (section 5).
+Swap the health care call types for the financial readiness map above. author's view
+
+3 · NEW FAILURE MODE
+
+The TV in the room
+
+October listed background chatter as one failure among many (T4). New evidence puts it first.
+
+The noise that hurts most is not traffic or wind. It is another voice. Veris called 14 voice systems as a simulated utility-billing customer, 100 tasks run three times each (1,906 calls scored), with street, café and TV audio mixed in at equal loudness. With the TV on, task completion fell from 38.7% (372 of 961 calls) to 8.6% (81 of 945). Nine of the 14 systems fell below 5%; only GPT-Live 1 (36.1%) and Grok Voice (33.8%) stayed above 20%. Caller verification fell from 81.3% to 52.5%, and 90% of TV calls carried 10 or more words the caller never said, against 2% of clean calls.[4] NEW vendor-reported Vendors' noise options were left off and the calls were simulated, so treat the levels as directional.
+
+Task completion, clean
+38.7%
+Task completion, TV on
+8.6%
+Verification, clean
+81.3%
+Verification, TV on
+52.5%
+
+In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech; caller-voice isolation does. author's view
+
+CALLER-VOICE ISOLATION ON KRISP'S BENCHMARK OF 265 REAL RECORDINGS
+TOOL	ERROR RATE (WER)	LEAKED WORDS A MINUTE
+No processing	23.21%	66.48
+VoxLock (open, Apache-2.0, 27M parameters)	4.95%	0.11
+Krisp VI 2.5	5.30%	1.52
+ai-coustics Voice Focus 2.2 L	6.84%	0.66
+Sanas SE 1.0	9.38%	13.76
+
+vendor-reported The VoxLock developer's own comparison, scored with one speech-to-text model; on meeting audio, ai-coustics leaked fewer words. VoxLock learns the caller's voice from the first 3 to 15 seconds with no enrollment, adds 24 ms of delay and keeps up on one CPU core.[9] NEW Because it learns from the opening seconds, test calls where another voice is louder at the start. author's view
+
+CONTROLS
+Isolate the caller's voice before speech-to-text and turn detection.
+Let a voice interrupt the agent only when it matches the caller.
+Read back identity details, amounts and account numbers before any write; re-verify if a different voice answers a security question.
+Add TV, café and second-speaker audio to the golden test set and block releases on it.
+
+4 · RELIABILITY
+
+Three more platforms, a new leader
+
+Cekura's benchmark (82 appointment and Medicare scenarios, each run three times) is a frozen release, so October's seven results stand; see October, section 1. Only the additions and status changes are here.[1]
+
+PLATFORM	PASSED ALL 3 TRIES	SINGLE RUN	CHANGE SINCE OCTOBER
+PolyAI	87.8%	98.8%	New; now first. Repetition and call-ending checks were not scored
+Telnyx	68.3%	97.6%	New; fifth
+Smallest AI	45.1%	Not published	New; under a modified tool check (its tools could not take list inputs) it scores 56.1% and 94.3% single-run
+Retell	75.6%	93.9%	Unchanged; first to second
+GPT Realtime	64.6%	92.7%	Unverified in October; now listed, so verified
+
+vendor-reported With 82 scenarios each score carries about plus or minus 7 to 10 points: PolyAI's range (about 79% to 93%) overlaps Retell's (about 65% to 84%). Single-run scores beat repeat reliability on all ten configurations, by 18 points or more on nine. Retell, which sells a voice platform, published a second benchmark from its production calls (27 models, 3,589 hallucination and tool-calling cases); GPT-5.5 led at 84.8% free of hallucination with reasoning off.[35] NEW In Sierra's six-language voice test, Spanish trailed English by 2.4 points, so bilingual banks should test both.[36] NEW
+
+5 · REGULATION
+
+Financial services rules, mapped to a voice agent
+
+October named these regimes but did not review them, so most rows are reviewed for the first time; changes since October 12 are tagged NEW. US focus; orientation only, not legal advice. Health care rules are in October, T9, with one addition below; recording-consent rules are there too.
+
+RULE	FOR THE AGENT	STATUS
+Regulation E (electronic transfers)	An oral notice of an error can start investigation duties, so a dispute raised to the agent likely counts; log it and hand off author's view	In force[37]
+Regulation Z (card billing errors)	Billing-error notices must be written, so the agent should tell the caller how to give written notice rather than treat the call as notice author's view	In force[38]
+UDAAP and CFPB chatbot expectations	Inaccurate answers, unrecognized disputes and loops with no path to a person are named risks	Issue spotlight June 2023; the CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation; the statutes and regulations are unchanged[29][39]
+Debt collection (FDCPA, Regulation F)	For collectors covered by Regulation F: more than 7 calls in 7 days is presumed harassment, and nothing about the debt may be disclosed to a wrong party who answers. First-party lenders face UDAAP and state law instead	In force[11][40]
+Fair lending and equal service	Speech recognition that works worse for some accents can mean unequal service or collections outcomes; test accuracy by accent and language[25] author's view	Ongoing
+Accessibility	Keep a route for callers with speech disabilities and relay services; never trap them in the agent author's view	Ongoing
+California AB 1609 (customer service chatbots) NEW	At businesses with more than $500M in revenue, by phone and online: a bot may not pose as human; a caller who asks for a person gets a good-faith connection within 15 minutes or a specific appointment within one business day; phone holds are capped. Up to $5,000 per first violation and $10,000 after, enforced by public prosecutors	Signed Sept 28, 2026; effective Jan 1, 2027; October listed it as unverified[12]
+California wiretap suits against AI call vendors (CIPA) NEW	Plaintiffs argue that a vendor whose AI listens to calls is an eavesdropping third party. U.S. Bank callers sued Pegasystems on Oct 2, 2026, alleging its voice AI analyzed their calls without consent (allegations only; up to $5,000 per violation under California law). A similar suit over Google's contact-center AI survived dismissal in 2025, then was dismissed with leave to amend on Oct 22, 2026. Disclose AI and third-party processing at the start of each call, and limit vendor use of call data in the contract	Pending[41][42]
+GLBA Safeguards Rule (FTC) and bank security guidelines	A written security program, encryption and oversight of service providers, including the voice-AI vendor. Nonbank lenders report breaches of unencrypted data affecting 500+ consumers to the FTC within 30 days	Breach notice in force since May 13, 2024[43]
+Incident notification (banks and credit unions)	Banks notify their regulator within 36 hours of a significant computer-security incident, and service providers must tell the bank. Federally insured credit unions notify the NCUA within 72 hours of a reportable cyber incident, including one at a third-party vendor. Cover the voice-AI vendor in the contract	Banks since 2022; NCUA since Sept 1, 2023[44][45]
+PCI DSS v4.0.1, requirement 3.3.1	Card security codes must not survive in recordings or transcripts after authorization, even encrypted. Speech-to-text output is in scope	FAQ updated June 2025[27][28]
+Model risk guidance (replaces SR 11-7)	Excludes generative and agentic AI by footnote, so LLM voice agents fall under general governance; vendor models stay in scope. Mainly aimed at banks over $30B in assets (up from $1B), and the agencies say non-compliance alone will not draw supervisory criticism	Issued Apr 17, 2026[10]
+Third-party risk management (OCC, Fed, FDIC, NCUA)	Oversee the voice-AI vendor across the relationship; a proposal would move to a lighter, harm-based approach	Proposed Sept 11, 2026; comments due Nov 16, 2026[46]
+FFIEC authentication guidance; NYDFS AI guidance	Risk-assess call-center authentication and layer controls. New York advises against SMS, voice or video as authentication factors and asks for deepfakes in risk assessments	FFIEC Aug 2021; NYDFS letter Oct 2024; customer MFA required from Nov 1, 2025[47][13]
+FinCEN deepfake alert	Red flags and a suspicious activity report key term for deepfake fraud; voice clones named in family-emergency scams	Nov 13, 2024; cited again in a Sept 2026 alert[48]
+TCPA opt-out rules, FCC 26-67 NEW	Callers may designate one or more approved methods as the exclusive way to opt out, and must disclose them; opt-outs can be limited to a message category (the 10-business-day deadline is unchanged). Wireless numbers from a spouse, a call-in or another institution's records now qualify for exempt fraud alerts	Published Oct 26; effective Nov 25, 2026[5][6]
+FCC AI call disclosure proposal (FCC 24-84)	Would require AI disclosure at consent and on the call	Proposed Aug 2024; not adopted as of Oct 2026[49]
+Colorado SB 26-189	Notice before automated tools materially influence financial or lending decisions; explanation and human review after an adverse outcome; fraud and AML tools carved out	Signed May 14, 2026; effective Jan 1, 2027, if rulemaking is done; October listed it as unverified[50]
+Utah AI Policy Act	Disclose AI when asked; regulated occupations disclose up front in high-risk interactions, including financial advice and collecting sensitive data	Effective May 7, 2025; sunsets July 1, 2027[51]
+
+6 · FRAUD AND IDENTITY
+
+Correction: voice is a signal, not a factor
+
+October's tiers (T8) put voiceprint plus liveness at the top. That missed guidance already in place, and new research reinforces the change.
+
+WHAT CHANGED
+Correction: New York's financial regulator advised in October 2024 against voice as an authentication factor, preferring liveness checks or phishing-resistant methods.[13] independent
+New: deepfake detectors degrade substantially after the audio crosses a real phone line. On call audio, one detector's equal error rate (where missed fakes equal false alarms) was 37.9%, and 22.4% after retraining on call audio.[14] NEW independent
+Revised tier: for payments, payee changes and limit increases, use an app push or another phishing-resistant check; keep voiceprint and liveness as risk signals that can block, never as the only factor that approves. author's view
+FINANCIAL FRAUD DATA
+Synthetic-voice attacks rose 149% at banks and 475% at insurers in 2024, across 1.2 billion calls analyzed.[52] vendor-reported
+One credit union's deepfake detection avoided $2.57M of fraud exposure in about 13 months.[53] vendor-reported
+US consumers reported $3.5B lost to impostor scams in 2025; bank impersonators accounted for nearly $1B, more than government impersonators.[54] independent
+Generative AI could push US fraud losses from $12.3B in 2023 to $40B by 2027 (a projection).[55] independent
+
+7 · MODELS, PLATFORMS AND ROUTING
+
+What shipped, and what it changes
+
+Releases that change a recommendation, then a short list of everything else. The architecture and routing analysis is in October, T1 and T5.
+
+FAST DECISION MODELS (SYSTEM 1)
+OpenAI Decisions API: beta to generally available (Oct 22) on GPT-6 Luna, up to 400 questions a request, $0.10 per million input tokens. GPT-Live sends turns to it while the caller is still speaking. Sierra, a customer, reported p95 under 280 ms in launch coverage.[15][56] NEW vendor-reported
+New options: Zoom Decisions ($0.042 and $0.10 per million input tokens; 81.3% and 83.9% on five text benchmarks)[57]; LiveKit's DecisionModel runs named decisions beside the call.[58] NEW vendor-reported
+Jev: October p50 175 ms, p95 270 ms; a second test measured p50 151 ms, p95 247 ms. No self-hosted version exists.[59][60] independent
+Edge: open Laya needs about 1 GB (0.85 GB ONNX at fp16); a Cloudflare Worker gets 128 MB. Run decision models in containers or on your own servers.[61][62] author's view
+SPEECH, TELEPHONY AND CONTACT CENTER
+ElevenLabs: Eleven Realtime Max scored 98.8% on Big Bench Audio reasoning and 87.1% on tool-use task success in independent tests, with 0.57 s to first audio, slower than the 470 ms claimed; it opened to all workspaces on Nov 2.[63][64][31] independent Its agents now plug natively into NiCE CXone, Genesys Cloud, Amazon Connect and Five9, so a pilot can sit inside an existing contact center.[65] NEW vendor-reported HIPAA and retention terms for Realtime are not yet documented.
+Deepgram: Think-Live, which decides when the agent should listen, wait or respond, is generally available, and Flux TTS is GA in nine languages (Oct 29). No benchmarks published.[66] NEW vendor-reported
+OpenAI: GPT-Live connects directly to phone lines over SIP (the standard for business telephony), inbound and outbound, with call transfer.[67] vendor-reported
+Two new models are too slow for live voice: in Regal's Oct 15 run, GPT-6.1 Sol (1,711 ms) and Gemini 3.8 Flash (2,516 ms) miss its 1,300 ms bar; GPT-6 Sol leads at 786 of 1,000.[68] NEW vendor-reported
+Open speech: NVIDIA Nemotron 3.5 Transcribe (4.71% English WER, commercial license) is for recorded calls; it does not stream.[16][69] Gradium Phonon produces speech in about 43 ms on a server CPU and about 7 ms on a laptop CPU; only its 31M English model is Apache-2.0, while the 40M and multilingual models are non-commercial.[17][70] NEW vendor-reported
+Market: Salesforce agreed to acquire Cresta (Nov 2) and Five9 to acquire Level AI for about $325M (Nov 5); check data-export and exit terms in any new contract.[71][72] NEW company-reported
+ALSO SHIPPED, NO CHANGE TO RECOMMENDATIONS
+Anthropic Claude Fable 5.2 (Nov 9): a text model, usable as the reasoner behind a voice layer; $8 and $40 per million input and output tokens, up to 30% faster than 5.1; no audio and no voice-agent benchmarks yet.[73] NEW vendor-reported
+Phonic-1 (Oct 29): a speech-to-speech model claiming 83.2 on tau-cubed voice (Sierra's benchmark of voice agents completing customer-service tasks) against 79.9 for GPT-Live 1.[74] NEW vendor-reported
+NVIDIA NemotronLabs VoiceChat (Sept 2026): an open full-duplex model that calls tools while it talks; 33.0% pass@1 on tool use against 54.0% for Gemini 3.1 Live.[75] vendor-reported
+Meta: voice conversations in its consumer Muse app (US, Nov 5); no developer API or enterprise voice model.[76] NEW vendor-reported
+Frameworks: Pipecat pairs a fast front-end model with a slower back-end model; Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source.[77][78] NEW vendor-reported
+Research: ConvFill (a small talker covering a frontier model's delay; a later paper notes it does not measure the risk of the filler contradicting the final answer)[79][80] independent; Block's Dessa (full-duplex, trained only on audio, no benchmarks).[81] NEW
+
+8 · HEALTH CARE NOTES
+
+What changed for health systems
+
+October's health care analysis stands: published results, readiness by call type and regulation.
+
+California AB 1979 (signed Oct 2026, effective Jan 1, 2027): a licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt.[18] NEW independent
+Payer and administrator calls: a health plan administrator is putting voice agents on inbound provider calls about eligibility, benefits, balances and claims status, handing off to people in its existing contact center (Nov 4).[82] NEW vendor-reported
+Clinic results: about 50% of calls handled end to end in a vendor's most recently onboarded pilot clinics.[83] NEW vendor-reported
+Clinical speech: Nemotron 3.5 Transcribe's error rate on accented clinical speech fell from 30.8% to 23.8% with prompting alone, and to 11.8% after fine-tuning; test on your own patients' audio.[16] NEW vendor-reported
+The TV-in-the-room finding applies equally to patients calling from home or a waiting room. author's view
+
+9 · CLAIM CHECK
+
+New and revised claims
+
+Claims checked for the first time this month, or whose verdict changed. The other October claims stand: October, T10.
+
+Interactive · filter by verdict
+All
+Verified
+Partly or vendor-only
+Unverified or wrong
+CLAIM	VERDICT	EVIDENCE
+OpenAI Decisions API is generally available	verified	Was unverified (public beta) in October; GA Oct 22, 2026, on GPT-6 Luna[15]
+GPT Realtime 64.63% pass^3	verified	Was unverified in October; now listed on the benchmark hub[1]
+California AB 1609 (customer service chatbots) was signed	verified	Was unverified in October; signed Sept 28, 2026 as Chapter 733, effective Jan 1, 2027[12]
+Colorado's replacement AI law takes effect Jan 1, 2027	verified	Was unverified in October; signed May 14, 2026, effective Jan 1, 2027 if rulemaking is complete[50]
+PolyAI leads Cekura Bench at 87.8% pass^3	partial or vendor	On the hub, but two checks were not scored for PolyAI and its range overlaps the runner-up's[1]
+Jev can run locally or at the edge	unverified or wrong	No weights or self-hosted build; open Laya needs about 1 GB, beyond a Cloudflare Worker's 128 MB[60]
+Banks are replacing contact-center staff with voice bots	unverified or wrong	Commonwealth Bank cut 45 roles citing a voice bot, then reversed the cuts; no large US bank publishes voice-agent metrics[26]
+Voice biometrics is enough for high-risk banking calls	unverified or wrong	New York's regulator advises against voice as an authentication factor; detectors miss more over phone lines[13]
+Customers do not want AI on bank calls	partial or vendor	About 30% accept it for routine tasks; most want a person for fraud and collections[30]
+A TV in the room breaks most voice agents	partial or vendor	Vendor research on simulated calls: task completion fell from 38.7% to 8.6% across 14 systems; noise options were off[4]
+An open model removes background voices better than commercial tools	partial or vendor	VoxLock 4.95% WER vs 5.30% to 9.38% for three commercial tools, in its author's own test[9]
+Open-source speech recognition has caught up	partial or vendor	Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models[69]
+Eleven Realtime starts speaking in 470 ms	unverified or wrong	Independent tests measured 0.57 s (Max) and 0.62 s (Mini); its reasoning scores did match[63]
+Salesforce Launa-Omni matches the leading voice models	partial or vendor	Second on Scale's Audio MultiChallenge (59.69 vs 60.40, within error); its tau-cubed voice score is self-reported[84]
+Chatbase Voice gives speech-to-speech agents chat-grade control	unverified or wrong	Chatbase names no model or architecture and publishes no tests[85]
+Fish Audio understands conversations, not just text	unverified or wrong	Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call[86]
+Block's Dessa is a usable full-duplex voice model	unverified or wrong	Research preview with a waitlist; no size, benchmarks or tool use published[81]
+
+UNCHANGED SINCE OCTOBER
+
+Read these in the October baseline
+
+No new evidence moved these sections, so they are not repeated here. Sections updated in part above (T1 architecture, T4 failure modes, T5 routing, T8 fraud, T9 regulation) still hold where this update does not change them.
+
+SECTION	WHAT IT COVERS
+Executive summary	The nine-point argument, still current except where this update says otherwise
+Published health care results, pace of change	Health system outcomes and the 2026 timeline to October
+The economics model	Cost per resolved call; break-even near 40% resolution under default assumptions
+The thinker-responder model	Silent System-1 decisions beside a conversational LLM, with a live demo
+What separates a good agent	The golden test set, hearing the right caller, emotion and persona
+Readiness by call type, health care	The health care version of the readiness map above
+Governed memory	Fact stores now, limited-memory models later; no new research this month
+Options, 90-day pilot, debate	Strategic paths, pilot gates and the seven-seat debate
+Latency budget, pass^k, LMLM detail	Technical appendix sections with no new data
+Deployment and data posture	Private endpoints under contract; the open speech models above add options
+Tooling and implementation	What to borrow and what to avoid
+
+SOURCES
+
+Sources for this update
+
+Numbered in order of first use. October's sources are in the October baseline.
+
+Interactive · filter by source type
+All
+Independent
+Vendor or company
+[1]
+Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026) vendor
+https://benchmarks.cekura.ai/voice-agent-workflows
+[2]
+Salesforce: Southern Cross Credit Union and Agentforce Voice (Oct 27, 2026) vendor
+https://www.salesforce.com/au/news/stories/southern-cross-credit-union-agentforce-voice-anz/
+[3]
+interface.ai: credit union case studies (undated) vendor
+https://interface.ai/case-studies
+[4]
+Veris: Vamos Pro findings, a TV in the room (Joshua Meyer, Oct 12, 2026) vendor
+https://veris.ai/blog/vamos-pro-findings-tv-in-the-room
+[5]
+Federal Register: FCC 26-67, Enhancing the ability of consumers to control the robocalls (Oct 26, 2026) independent
+https://www.federalregister.gov/documents/2026/10/26/2026-21821/enhancing-the-ability-of-consumers-to-control-the-robocalls
+[6]
+Womble Bond Dickinson: FCC revises TCPA revocation rules, fraud alert changes (Oct 28, 2026) independent
+https://www.womblebonddickinson.com/us/node/21530
+[7]
+CIBC: CIBC launches new AI-powered platform for advisors, voice assistant call volumes (Jul 31, 2026) company
+https://cibc.mediaroom.com/2026-07-31-CIBC-launches-new-AI-powered-platform-to-help-advisors-spend-more-time-with-clients
+[8]
+ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026) vendor
+https://ai-coustics.com/blog/voice-focus-2.0-deepdive
+[9]
+VoxLock: caller-voice isolation model card and paper (arXiv 2610.40727), Apache-2.0 (Oct 2026) vendor
+https://huggingface.co/arbazsiddiqui/voxlock
+[10]
+Orrick: Agencies overhaul model risk management guidance for banks (Apr 2026) independent
+https://www.orrick.com/en/Insights/2026/04/Agencies-Overhaul-Model-Risk-Management-Guidance-for-Banks-Heres-What-Changed
+[11]
+CFPB: Regulation F, 12 CFR 1006.14, harassing, oppressive or abusive conduct independent
+https://www.consumerfinance.gov/rules-policy/regulations/1006/14/
+[12]
+Regulations.ai: California AB 1609, customer service chatbots, Chapter 733 of 2026 (Oct 20, 2026) independent
+https://regulations.ai/regulations/RAI-US-CA-AB16090-2026
+[13]
+Alston & Bird: NYDFS guidance on AI-related cybersecurity risks (Oct 24, 2024) independent
+https://www.alston.com/en/insights/publications/2024/10/nydfs-guidance-on-ai-related-cybersecurity-risks
+[14]
+RealComm: Benchmarking and adapting audio deepfake detection over real communication channels (arXiv 2610.27459, Oct 20, 2026) independent
+https://arxiv.org/abs/2610.27459
+[15]
+OpenAI: API changelog (Decisions API GA Oct 22, 2026; GPT-Live integration Oct 15, 2026) vendor
+https://developers.openai.com/api/docs/changelog
+[16]
+NVIDIA: Nemotron 3.5 Transcribe model card, OpenMDW-1.1 (Oct 28, 2026) vendor
+https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B
+[17]
+Gradium: Phonon, open-source on-device text-to-speech (Oct 21, 2026) vendor
+https://gradium.ai/blog/gradium-releases-phonon
+[18]
+California Health Care Foundation: Newsom approves 3 health care AI bills, vetoes 2 (Oct 8, 2026) independent
+https://www.chcf.org/blog/2026/10/08/newsom-approves-3-health-care-ai-bills-vetoes-2/
+[19]
+Glia: Service 1st Federal Credit Union case study (undated) vendor
+https://www.glia.com/case-study/service-1st
+[20]
+Banking Dive (press release): How WEOKIE Federal Credit Union cut call wait times (Mar 16, 2025) vendor
+https://www.bankingdive.com/press-release/20250316-ai-powered-customer-service-how-weokie-federal-credit-union-cut-call-wait/
+[21]
+iTnews: Southern Cross Credit Union asks AI agent to handle account balance requests (Oct 27, 2026) independent
+https://www.itnews.com.au/news/southern-cross-credit-union-asks-ai-agent-to-handle-account-balance-requests-629940
+[22]
+CIBC: AI use case examples, AI Voice Assistant first launched in Q4 fiscal 2024 (undated) company
+https://www.cibc.com/content/dam/about_cibc/pdfs/cibc-use-case-examples-2-en.pdf
+[23]
+Call Centre Helper: Klarna and ElevenLabs case study (Jun 11, 2026) vendor
+https://www.callcentrehelper.com/case-study-klarna-elevenlabs-274709.htm
+[24]
+VentureBeat (Synthflow announcement): Synthflow launches Vector, a long-horizon AI agent for lenders (Oct 28, 2026) vendor
+https://venturebeat.com/business/synthflow-launches-vector-a-long-horizon-ai-agent-for-lenders-that-doesnt-stop-when-the-call-ends
+[25]
+NatWest Group: NatWest improves AI speech recognition for UK banking customers (Oct 14, 2026) company
+https://www.natwestgroup.com/news-and-insights/news-room/press-releases/2026/natwest-improves-ai-speech-recognition-for-uk-banking-customers-.html
+[26]
+FStech: CommBank backtracks on plans to replace customer service roles with AI (Aug 22, 2025) independent
+https://fstech.co.uk/fst/CommBank_Backtracks_On_Plans_To_Replace_Customer_Service_Roles_With_AI.php
+[27]
+PCI SSC: FAQ 1210, sensitive authentication data in call recordings (updated Jun 2025) independent
+https://www.pcisecuritystandards.org/faqs/1210/
+[28]
+PCI SSC: Protecting telephone-based payment card data (information supplement, Nov 2018) independent
+https://listings.pcisecuritystandards.org/documents/Protecting_Telephone_Based_Payment_Card_Data_v3-0_nov_2018.pdf
+[29]
+CFPB: Chatbots in consumer finance, issue spotlight (Jun 6, 2023) independent
+https://files.consumerfinance.gov/f/documents/cfpb_chatbot-issue-spotlight_2023-06.pdf
+[30]
+Answering Service Care / Censuswide: Should this call be AI or human? (Jul 2026) vendor
+https://answeringservicecare.com/insights/should-this-call-be-ai-or-human/
+[31]
+ElevenLabs: changelog, realtime transcript redaction and Eleven Realtime for all workspaces (Nov 2, 2026) vendor
+https://elevenlabs.io/docs/changelog/2026/11/2
+[32]
+Telnyx: Pay over Voice, PCI-compliant payments for voice AI agents (updated Nov 6, 2026) vendor
+https://telnyx.com/voice-ai-agents/pci-compliant-payments
+[33]
+CX Dive: Bank customers embrace AI, but want human customer service (TD Bank survey, Mar 31, 2026) company
+https://www.customerexperiencedive.com/news/bank-customers-embrace-ai-human-customer-service/816132/
+[34]
+J.D. Power: 2026 U.S. Digital Banking and Credit Card Mobile App Satisfaction Studies (May 28, 2026) independent
+https://resolve.jdpower.com/business/press-releases/2026-us-digital-banking-and-credit-card-mobile-app-satisfaction-studies
+[35]
+Retell AI: vCX-Hard benchmark (Nov 1, 2026) vendor
+https://www.retellai.com/blog/vcx-hard-benchmark
+[36]
+Sierra: tau-i18n, evaluation across languages and beyond task completion (Oct 21, 2026) vendor
+https://sierra.ai/blog/tau-i18n
+[37]
+CFPB: Regulation E, 12 CFR 1005.11, procedures for resolving errors independent
+https://www.consumerfinance.gov/rules-policy/regulations/1005/11/
+[38]
+CFPB: Regulation Z, 12 CFR 1026.13, billing error resolution independent
+https://www.consumerfinance.gov/rules-policy/regulations/1026/13/
+[39]
+Holland & Knight: CFPB rescinds 67 guidance documents (May 12, 2025) independent
+https://www.hklaw.com/en/insights/publications/2025/05/cfpb-rescinds-67-guidance-documents
+[40]
+CFPB: Regulation F, 12 CFR 1006.6, communications with third parties independent
+https://www.consumerfinance.gov/rules-policy/regulations/1006/6/
+[41]
+Open Class Actions: U.S. Bank callers sue Pegasystems over AI that listened to their calls (Juarez v. Pegasystems, D. Mass., filed Oct 2, 2026) independent
+https://openclassactions.com/lawsuits/privacy/pegasystems-us-bank-voice-ai-call-wiretap-class-action-lawsuit.php
+[42]
+Open Class Actions: Google Contact Center AI wiretap case dismissed with leave to amend (Oct 24, 2026) independent
+https://openclassactions.com/news/google-contact-center-ai-wiretap-lawsuit-dismissed.php
+[43]
+Federal Register: FTC Standards for Safeguarding Customer Information, breach notification amendment (Nov 13, 2023) independent
+https://www.federalregister.gov/documents/2023/11/13/2023-24412/standards-for-safeguarding-customer-information
+[44]
+Federal Register: Computer-security incident notification requirements for banking organizations and their bank service providers (Nov 23, 2021) independent
+https://www.federalregister.gov/documents/2021/11/23/2021-25510/computer-security-incident-notification-requirements-for-banking-organizations-and-their-bank
+[45]
+Federal Register: NCUA cyber incident notification requirements, 12 CFR Part 748 (Mar 1, 2023) independent
+https://www.govinfo.gov/content/pkg/FR-2023-03-01/html/2023-03682.htm
+[46]
+Davis Wright Tremaine: Banking agencies and NCUA propose new third-party risk guidance (Sept 24, 2026) independent
+https://www.dwt.com/blogs/financial-services-law-advisor/2026/09/banking-agencies-ncua-tprm-guidance
+[47]
+OCC Bulletin 2021-36: FFIEC guidance on authentication and access (Aug 11, 2021) independent
+https://www.occ.gov/news-issuances/bulletins/2021/bulletin-2021-36.html
+[48]
+FinCEN: Alert on fraud schemes involving deepfake media, FIN-2024-Alert004 (Nov 13, 2024) independent
+https://www.fincen.gov/system/files/shared/FinCEN-Alert-DeepFakes-Alert508FINAL.pdf
+[49]
+eConsent: AI voice agents and the TCPA, what is required in October 2026 (Oct 16, 2026) independent
+https://econsent.org/posts/ai-voice-agents-tcpa-rules-october-2026/
+[50]
+Skadden: Colorado repeals and replaces its AI Act (Jun 2026) independent
+https://www.skadden.com/insights/publications/2026/06/colorado-repeals-and-replaces-its-ai-act
+[51]
+Perkins Coie: New Utah AI laws change disclosure requirements (2025) independent
+https://www.ashurstperkinscoie.com/en/insights/new-utah-ai-laws-change-disclosure-requirements-and-identity-protections-target-mental-health-chatbo/
+[52]
+CIO Influence: Pindrop 2025 Voice Intelligence and Security Report (Jun 12, 2025) vendor
+https://cioinfluence.com/security/pindrops-2025-voice-intelligence-security-report-reveals-1300-surge-in-deepfake-fraud/
+[53]
+American Banker: Michigan credit union blocks fraud with deepfake detection (Dec 23, 2025) vendor
+https://www.americanbanker.com/creditunions/news/michigan-credit-union-blocks-fraud-with-deepfake-detection
+[54]
+Techlicious: Imposter scam losses hit $3.5 billion in 2025, FTC data (Jun 15, 2026) independent
+https://www.techlicious.com/blog/imposter-scam-losses-3-billion-2025-ftc/
+[55]
+Deloitte Insights: Deepfake banking fraud risk on the rise (May 29, 2024) independent
+https://www.deloitte.com/us/en/insights/industry/financial-services/deepfake-banking-fraud-risk-on-the-rise.html
+[56]
+Unite.AI: OpenAI makes Decisions API generally available with GPT-6 Luna (Oct 22, 2026) vendor
+https://www.unite.ai/openai-makes-decisions-api-generally-available-with-gpt-6-luna/
+[57]
+Zoom AI Research: Introducing Zoom Decisions APIs (Oct 19, 2026) vendor
+https://www.zoom.com/en/ai-research/introducing-zoom-decisions-apis-accurate-speech-reliable-action/
+[58]
+LiveKit Agents 1.8.9 release notes: DecisionModel backends (Oct 24, 2026) vendor
+https://github.com/livekit/agents/releases/tag/livekit-agents%401.8.9
+[59]
+OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026) vendor
+https://openrouter.ai/blog/insights/jev-vs-claude-opus-5-classification
+[60]
+OrcaRouter: Is there an open-source Jev? Measured latency and look-alikes (Sep 30, 2026) independent
+https://www.orcarouter.ai/blog/jev-open-source
+[61]
+Hugging Face onnx-community: Laya ONNX weights independent
+https://huggingface.co/onnx-community/laya-ONNX
+[62]
+Cloudflare: Workers platform limits (updated Oct 29, 2026) vendor
+https://developers.cloudflare.com/workers/platform/limits
+[63]
+Artificial Analysis: speech-to-speech models leaderboard (read Nov 6, 2026) independent
+https://artificialanalysis.ai/models/speech-to-speech
+[64]
+JDN: ElevenLabs unveils faster, more accurate speech-to-speech models (Oct 20, 2026) independent
+https://www.journaldunet.com/en/1556895-elevenlabs-unveils-faster-more-accurate-speech-to-speech-models/
+[65]
+ElevenLabs: ElevenAgents contact center integrations (Nov 4, 2026) vendor
+https://elevenlabs.io/blog/elevenagents-contact-center-integrations
+[66]
+Deepgram: Voice agents that keep the thread, Think-Live and Flux TTS (Oct 29, 2026) vendor
+https://deepgram.com/blog/voice-agents-that-keep-the-thread
+[67]
+OpenAI: GPT-Live SIP guide vendor
+https://developers.openai.com/api/docs/guides/voice-sip
+[68]
+Regal: Best LLMs for voice AI agents, October 2026 benchmark (Oct 15, 2026) vendor
+https://www.regal.ai/blog/voice-cx-benchmark-new-llms-october-2026
+[69]
+eesel: Nemotron 3.5 Transcribe against closed models (Oct 29, 2026) independent
+https://www.eesel.ai/blog/nemotron-3-5-transcribe
+[70]
+Gradium: Phonon open weights, laptop and Raspberry Pi latency, licenses (Oct 20, 2026) vendor
+https://gradium.ai/blog/release-phonon-open-weight
+[71]
+Salesforce: Salesforce signs definitive agreement to acquire Cresta (Nov 2, 2026) company
+https://www.salesforce.com/news/stories/salesforce-signs-definitive-agreement-to-acquire-cresta/
+[72]
+Five9: agreement to acquire Level AI, SEC Form 8-K exhibit (Nov 5, 2026) company
+https://www.sec.gov/Archives/edgar/data/0001288847/000128884726000141/projectlanderpressreleas.htm
+[73]
+Anthropic: Claude Fable 5.2 and Mythos 5.2 (Nov 9, 2026) vendor
+https://www.anthropic.com/claude-fable-and-mythos-5-2
+[74]
+Phonic: Introducing Phonic-1 (Oct 29, 2026) vendor
+https://phonic.ai/blog/phonic-1
+[75]
+NVIDIA: NemotronLabs VoiceChat, an open full-duplex speech-to-speech model with tool calling (arXiv 2609.21967, Sept 2026) vendor
+https://arxiv.org/abs/2609.21967
+[76]
+Meta: Introducing Muse AI voice and expressive avatars (Nov 5, 2026) vendor
+https://about.fb.com/news/2026/11/introducing-muse-ai-voice-expressive-avatars/
+[77]
+Pipecat v1.13.0 release notes: LLMWithBackend (Oct 19, 2026) vendor
+https://github.com/pipecat-ai/pipecat/releases/tag/v1.13.0
+[78]
+Deepgram: Deepgram is acquiring Daily, makers of Pipecat (Oct 29, 2026) vendor
+https://deepgram.com/blog/daily-pipecat-deepgram
+[79]
+Srinivas et al. (University of Washington): ConvFill, conversational infill (arXiv 2511.07397) independent
+https://arxiv.org/abs/2511.07397
+[80]
+Huang, Tan et al.: PACE, a playback-aligned context engine for full-duplex voice dialogue (arXiv 2609.10372) independent
+https://arxiv.org/abs/2609.10372
+[81]
+Voice AI Space: Block launches Dessa, a full-duplex speech model trained only on audio (Oct 24, 2026) independent
+https://www.voiceaispace.com/articles/block-launches-dessa-a-full-duplex-speech-model-trained-only-on-audio
+[82]
+PR Newswire: WellNet Healthcare selects EHVAhealth voice AI for provider calls (Nov 4, 2026) vendor
+https://www.prnewswire.com/news-releases/tpa-wellnet-healthcare-selects-ehvahealth-voice-ai-to-automate-health-plan-provider-calls-302928436.html
+[83]
+Newswire: MEDFAR acquires AlloMia (Oct 14, 2026) vendor
+https://www.newswire.ca/news-releases/medfar-acquires-allomia-advancing-myle-as-a-system-of-intelligence-for-clinics-860139604.html
+[84]
+Scale AI: Audio MultiChallenge leaderboard (read Nov 6, 2026) independent
+https://labs.scale.com/leaderboard/audiomc
+[85]
+Chatbase: Voice product page (read Nov 6, 2026) vendor
+https://www.chatbase.co/voice
+[86]
+eesel: Fish Audio Drama 3 tested, citing Artificial Analysis (Oct 2026) independent
+https://www.eesel.ai/de/blog/fish-audio-drama-3-test
+
+DISCUSSION
+
+Questions and comments
+
+Corrections, counterpoints and field experience are welcome. Comments are public and stored as GitHub issues on this report's repository through utterances, which is free and open source, with no ads or tracking. Sign in with GitHub to post.
+
+Comments appear here when the page runs scripts. You can also read and post them on GitHub.
+
+Read comments on GitHub
+Post on GitHub
+
+ABOUT
+
+About this report
+THE REPORT
+
+A vendor-neutral view of conversational voice agents for leaders in regulated contact centers, published as a monthly edition. Every figure links to its source, and vendor-reported numbers are labeled as such.
+
+Corrections and source suggestions are welcome as issues on GitHub, which also keeps past editions.
+
+THE AUTHOR
+
+Madhav Srinivasan
+
+Engineering leader who builds AI agents and platforms.
+
+Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.
+
+Back to sbmadhav.com
+Connect on LinkedIn
+By Madhav Srinivasan · November 2026 edition · Research cutoff November 9, 2026
+Bracketed numbers in the text link to the numbered sources above. Past editions: github.com/sbmadhav/state-of-voice-agents.
+Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
+
+=== PART 2: OCTOBER 2026 BASELINE (still current where Part 1 does not change it) ===
+
+Voice Agents at the Front Door, October 2026 edition, by Madhav Srinivasan.
+URL: https://sbmadhav.com/state-of-voice-agents/editions/2026-10/
 Bracketed numbers like [12] refer to the numbered Sources list at the end.
 
 STATE OF CONVERSATIONAL VOICE AGENTS · HEALTHCARE FIRST, WITH NOTES FOR FINANCIAL SERVICES

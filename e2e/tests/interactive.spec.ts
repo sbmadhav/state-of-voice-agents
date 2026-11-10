@@ -4,6 +4,9 @@ import { test, expect, type Page } from './fixtures';
    Download PDF dialog, the charts and tools tagged "Interactive", Ask Bolt and comments. */
 
 const PAGE = '/state-of-voice-agents/';
+// The interactive tools (charts, calculator, demos) live in the full October 2026 baseline;
+// monthly updates since then carry only what changed and link back to it.
+const BASE = '/state-of-voice-agents/editions/2026-10/';
 
 const vis = (page: Page, sel: string) =>
   page.locator(sel).evaluateAll(els => els.filter(e => !(e as HTMLElement).hidden).map(e => (e as HTMLElement).dataset.v ?? (e as HTMLElement).dataset.t));
@@ -35,7 +38,7 @@ test('the header theme button switches scheme, saves only a choice that differs 
   expect(await bg()).toBe('rgb(15, 18, 24)');
 });
 
-test('sources filter shows independent or vendor sources only', async ({ page }) => {
+test('sources filter shows independent, or vendor and company, sources only', async ({ page }) => {
   await page.goto(PAGE);
   const total = await page.locator('#src li').count();
   expect(total).toBeGreaterThan(50);
@@ -45,7 +48,8 @@ test('sources filter shows independent or vendor sources only', async ({ page })
     const shown = await vis(page, '#src li');
     expect(shown.length).toBeGreaterThan(0);
     expect(shown.length).toBeLessThan(total);
-    expect(new Set(shown)).toEqual(new Set([f]));
+    // The vendor filter also shows company-reported sources (data-t="co")
+    for (const t of shown) expect(f === 'ind' ? [t] : [['ven', 'co'].includes(t!) ? 'ven' : t]).toEqual([f]);
   }
   await page.locator('#sf button[data-f="all"]').click();
   expect((await vis(page, '#src li')).length).toBe(total);
@@ -59,7 +63,8 @@ test('claim check filter shows one verdict at a time', async ({ page }) => {
     await page.locator(`#vf button[data-f="${f}"]`).click();
     const shown = await vis(page, '#claims tr');
     expect(shown.length, `verdict ${f}`).toBeGreaterThan(0);
-    expect(new Set(shown)).toEqual(new Set([f]));
+    // The vendor filter also shows company-reported sources (data-t="co")
+    for (const t of shown) expect(f === 'ind' ? [t] : [['ven', 'co'].includes(t!) ? 'ven' : t]).toEqual([f]);
     await expect(page.locator('#claims tr:not([hidden])').first()).toBeVisible();
   }
   await page.locator('#vf button[data-f="all"]').click();
@@ -137,7 +142,7 @@ test('Download PDF: dialog opens, closes (Cancel, Esc, backdrop) and prints in t
 });
 
 test('reliability chart: sort and select a platform', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   const rows = page.locator('#db .db-row');
   await expect(rows).toHaveCount(7);
   await expect(rows.first()).toContainText('Retell'); // highest pass^3
@@ -149,7 +154,7 @@ test('reliability chart: sort and select a platform', async ({ page }) => {
 });
 
 test('economics calculator: presets and sliders update the outputs', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   const save = page.locator('#t-save');
   const base = await save.textContent();
   await page.locator('#calc-ctrls [data-preset="cons"]').click();
@@ -163,7 +168,7 @@ test('economics calculator: presets and sliders update the outputs', async ({ pa
 });
 
 test('router demo: utterances and threshold change the verdict', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   const verdict = page.locator('#rverdict .verdict');
   // Default: the multi-intent example at threshold 0.75; neither intent clears it, so hand off
   await expect(page.locator('#o-th')).toHaveText('0.75');
@@ -183,7 +188,7 @@ test('router demo: utterances and threshold change the verdict', async ({ page }
 });
 
 test('thinker-responder, memory, options, personas, use cases, pilot and latency tools respond', async ({ page }) => {
-  await page.goto(PAGE);
+  await page.goto(BASE);
   // Thinker-responder vs one LLM
   const other = page.locator('#tr-mode button:not([aria-pressed="true"])').first();
   await other.click();
