@@ -1,0 +1,19 @@
+T7. Deployment and data posture.
+
+"Sovereign" in practice means private endpoints under contract.
+
+The case for keeping protected data and conversation logs under your control is strong. The case for running voice inference on your own GPUs is weak for 2026 to 2027, except for small models such as routers.
+
+Model API under a BAA or equivalent, modified or zero retention. Status in 2026: OpenAI covers the Realtime API with modified retention; Bedrock stores no prompts by default; Anthropic covers its HIPAA-ready API. Pros: Fastest; frontier quality; vendor carries ops. Cons: Terms can change; contracts needed for every component.
+
+Dedicated cloud tenancy over private network. Status in 2026: Stanford runs Secure GPT this way on Azure. Pros: No public internet path; enterprise audit. Cons: More integration work; not every voice model offered.
+
+Managed enterprise agent platform. Status in 2026: Sierra runs the full voice stack (Tandem Voice, Curie, Fleming) and prices on outcomes. Pros: Fastest to production; vendor owns tuning and safety layers. Cons: Least control over models, routing and logs; negotiate export rights.
+
+Self-hosted small models (routers, classifiers). Status in 2026: Encoders run in tens of ms on one GPU or CPU. Pros: Cheap; no data leaves; no contract question. Cons: You own training, calibration and monitoring.
+
+Self-hosted large open-weight models. Status in 2026: No named US health system found doing this for patient-facing voice. Pros: Full control. Cons: Beat the cheapest API in only 24 percent of 900 modeled scenarios.
+
+Open versus closed models.
+
+Enterprise surveys put open-source models near 11 percent of LLM API share. Open models win on cheap, high-volume work, which is exactly the router's job.

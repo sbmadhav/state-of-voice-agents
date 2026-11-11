@@ -1,0 +1,47 @@
+Section 2: Published results.
+
+Where it is already working: access and service, not advice.
+
+The strongest published results so far come from health systems, and every one is administrative. All figures are reported by the organization or its vendor, with no control group, so expect some regression at scale.
+
+Tampa General. Hyro.
+
+2.4 min.
+
+Average wait, down from 6.2 minutes, within two weeks.
+
+Wait, before6.2 min.
+
+Wait, after2.4 min.
+
+Abandon, before34 percent.
+
+Abandon, after14.9 percent.
+
+Also 21 percent more appointments scheduled.
+
+Self-reported.
+
+WellSpan. Hippocratic AI.
+
+160K+.
+
+Patient calls a month handled by an AI agent.
+
+About 7,000 hours of conversation; partnership expanded July 30, 2026.
+
+Self-reported.
+
+Intermountain. Hyro + Agentforce Health.
+
+44 percent.
+
+Of repetitive calls automated.
+
+Call abandonment down 85 percent on in-scope lines such as patient portal support.
+
+Self-reported.
+
+For financial services, I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. Author's view. CX, IT and operations leaders report the same gap: 98 percent have deployed AI in the customer journey, but only 5 percent can quantify its impact on business outcomes. Vendor-reported.
+
+Enterprise agent platforms are moving into healthcare too. Sierra says it serves most Fortune 50 healthcare companies, and announced new voice models at Sierra Summit 2026. No healthcare outcome figures have been published yet. Vendor-reported.

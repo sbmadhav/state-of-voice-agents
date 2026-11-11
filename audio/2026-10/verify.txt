@@ -1,0 +1,47 @@
+T10. Claim check.
+
+Claims circulating about voice AI, checked.
+
+Benchmark figures, vendor claims and one widely shared decision-offload cost model, each traced to a source. Filter by verdict.
+
+Cekura Bench: 7 configurations, 82 scenarios, 3 repeats, 246 calls each. Verdict: partial or vendor. What the evidence shows: Design confirmed; the live hub now lists 8 platforms.
+
+Pass three is the primary metric. Verdict: verified. What the evidence shows: Share of scenarios where all three retained calls pass.
+
+Retell, ElevenLabs, Vapi and Gemini Live figures. Verdict: verified. What the evidence shows: Exact match on all four reported metrics.
+
+LiveKit 70.73 percent and Pipecat 63.41 percent pass three. Verdict: verified. What the evidence shows: pass three confirmed; other metrics not seen.
+
+GPT Realtime 64.63 percent pass three. Verdict: unverified or wrong. What the evidence shows: Not found; the separate speech-to-speech benchmark shows 79.3 percent.
+
+Per-platform model stacks. Verdict: unverified or wrong. What the evidence shows: Providers chose their own stacks; not independently confirmed.
+
+Entity drift between transcript and tool call. Verdict: verified. What the evidence shows: Documented instance with a phone number.
+
+TypeSafe Jev exists, built by an ex-OpenAI researcher. Verdict: verified. What the evidence shows: Released September 15, 2026.
+
+Jev latency 70 to 150 milliseconds. Verdict: unverified or wrong. What the evidence shows: Vendor quotes 70 to 500 milliseconds; one test measured median 175 milliseconds, 95th percentile 270 milliseconds.
+
+Jev 4.2 cents per million input tokens, free output. Verdict: partial or vendor. What the evidence shows: Matches early-access vendor pricing.
+
+Jev is calibrated and cannot hallucinate. Verdict: partial or vendor. What the evidence shows: Output is always schema-valid; calibration weaker than claimed in independent tests.
+
+Decision models are 400 times cheaper than LLMs. Verdict: unverified or wrong. What the evidence shows: Not in primary sources; real savings in one cascade test were about 72 percent.
+
+OpenAI Decisions API is generally available. Verdict: unverified or wrong. What the evidence shows: Public beta since October 6, 2026.
+
+Open-source Laya is a drop-in router. Verdict: unverified or wrong. What the evidence shows: Routed base checkpoint scores 42.5 percent on Banking77; fine-tuning required.
+
+Open models hit 78.4 percent of AI Gateway token volume. Verdict: verified. What the evidence shows: Exact post; one-day record on a developer-heavy gateway.
+
+Regulated enterprises are moving inference off public APIs. Verdict: partial or vendor. What the evidence shows: Private cloud endpoints common; no named US on-prem voice deployment.
+
+Decision-offload simulator: about 730 milliseconds versus 1,900 milliseconds turns. Verdict: unverified or wrong. What the evidence shows: Simulated, not measured.
+
+Decision-offload simulator: 11,017 dollars a month saved. Verdict: partial or vendor. What the evidence shows: Plausible arithmetic, but about 6 percent of run rate with no infrastructure modeled.
+
+Sierra serves 80 percent of Fortune 50 healthcare companies. Verdict: partial or vendor. What the evidence shows: Vendor claim from Sierra Summit 2026; not independently verified.
+
+Limited-memory models cannot hallucinate. Verdict: unverified or wrong. What the evidence shows: Authors: does not guarantee perfect factuality.
+
+Fact storage is about 99 percent of model size. Verdict: unverified or wrong. What the evidence shows: No study measures it; retrieval models match 18 times to 50 times larger models on knowledge tasks.

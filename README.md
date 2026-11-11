@@ -38,7 +38,7 @@ Every figure links to its source. Vendor-reported numbers are labeled as such.
 
 ## Voice-overs
 
-Each section of the latest edition can be read aloud by an AI voice from ElevenLabs, with an overall read time and listening time in the hero. The scripts are the full section text written for the ear, and they double as transcripts: `audio/YYYY-MM/<section-id>.txt`, produced from `index.html` by `python3 tools/narration.py` (which also writes the "About N min read" figure). The MP3s are generated once by the **Voice-over** workflow (`.github/workflows/voiceover.yml`), hosted on Cloudflare R2 (or committed next to the scripts) and listed in a `manifest.json`; a section's Listen control appears only once the manifest lists its audio.
+Each section of the latest edition, and of the October 2026 baseline, can be read aloud by an AI voice from ElevenLabs, with an overall read time and listening time in the hero. The scripts are the full section text written for the ear, and they double as transcripts: `audio/YYYY-MM/<section-id>.txt`, produced from `index.html` by `python3 tools/narration.py` (which also writes the "About N min read" figure). The MP3s are generated once by the **Voice-over** workflow (`.github/workflows/voiceover.yml`), hosted on Cloudflare R2 (or committed next to the scripts) and listed in a `manifest.json`; a section's Listen control appears only once the manifest lists its audio.
 
 To switch it on:
 
@@ -54,7 +54,7 @@ To switch it on:
 
 Without these, the MP3s are committed to the repository. MP3s committed earlier move to R2 on the next run without being regenerated.
 
-Each section is recorded once: only sections whose text, voice or model changed are regenerated. An edition is about 35,000 to 60,000 characters of narration, billed against the ElevenLabs plan's character quota; each run logs the characters it sent. Without the secret, the workflow skips the audio step with a notice.
+Each section is recorded once: only sections whose text, voice or model changed are regenerated. A monthly update is about 35,000 characters of narration and the October baseline about 70,000, billed against the ElevenLabs plan's character quota; each run logs the characters it sent. Without the secret, the workflow skips the audio step with a notice.
 
 ## Editions
 

@@ -197,3 +197,23 @@ test('audio hosted on Cloudflare R2: the player streams the https URL from the m
   expect(hits, 'nothing is downloaded before the reader presses Listen').toBe(0);
   expect(issues.console, 'console errors').toEqual([]);
 });
+
+test('the October baseline has voice-overs too, including sections inside Part II', async ({ page, issues }) => {
+  const OCT = '/state-of-voice-agents/editions/2026-10/';
+  const mp3s: string[] = [];
+  await page.route(/\/state-of-voice-agents\/audio\/2026-10\/manifest\.json/, route => route.fulfill({
+    status: 200, contentType: 'application/json',
+    body: JSON.stringify({ edition: '2026-10', sections: { brief: entry('brief', 200), gap: entry('gap', 80), 't-router': entry('t-router', 400) } }),
+  }));
+  await page.route(/\/state-of-voice-agents\/audio\/2026-10\/[a-z0-9-]+\.mp3/, route => { mp3s.push(route.request().url()); return route.fulfill({ status: 200, contentType: 'audio/mpeg', body: SILENT_MP3 }); });
+  await page.goto(OCT);
+  await expect(page.locator('#read-min')).toHaveText(/^About \d+ min read$/);
+  await expect(page.locator('#gap .listen button')).toBeVisible();
+  await expect(page.locator('#t-router .listen button')).toBeVisible();   // nested in the technical appendix wrapper
+  await expect(page.locator('#calc .listen')).toHaveCount(0);
+  await expect(page.locator('#listen-all-btn')).toContainText('Listen to the whole report');
+  await expect(page.locator('#listen-t-router-panel audio')).toHaveAttribute('src', '/state-of-voice-agents/audio/2026-10/t-router.mp3');
+  await expect(page.locator('#listen-t-router-panel a', { hasText: 'Transcript' })).toHaveAttribute('href', '/state-of-voice-agents/audio/2026-10/t-router.txt');
+  expect(mp3s, 'nothing downloads before Listen is pressed').toEqual([]);
+  expect(issues.console, 'console errors').toEqual([]);
+});

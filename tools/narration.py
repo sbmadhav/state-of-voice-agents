@@ -4,9 +4,10 @@
     python3 tools/narration.py            write audio/<edition>/<section-id>.txt and update the read time in index.html
     python3 tools/narration.py --check    exit 1 if a script or the read time is out of date (changes nothing)
     python3 tools/narration.py --stdout   print the scripts instead of writing them
+    python3 tools/narration.py --page editions/2026-10/index.html   another edition's page
 
 The edition comes from <main data-audio-base="/state-of-voice-agents/audio/YYYY-MM/">. One script is written for
-the hero (#brief) and for each top-level <section id> in <main>, except the comments widget. Scripts carry the
+the hero (#brief) and for each <section id> in <main>, except the comments widget. Scripts carry the
 full visible text, written for the ear: tables become sentences (a <table data-narrate="{0}: {1}..."> template
 names the row pattern; otherwise "Column: value" pairs), citation markers, interactive controls and anything
 marked data-narrate-skip are left out, evidence labels are read as short phrases, and symbols are expanded
@@ -311,15 +312,18 @@ def main_node(root):
 def narration(main):
     """Ordered (section id, script) pairs."""
     out = []
-    targets = [n for n in main.children if isinstance(n, Node) and n.attrs.get("id")
-               and (n.tag == "section" or "hero" in n.classes) and n.attrs["id"] not in SKIP_SECTIONS]
+    # Every section in <main>, in page order, also those inside a wrapper (the October baseline's Part II)
+    targets = [n for n in main.find_all(lambda n: n.attrs.get("id") and (n.tag == "section" or "hero" in n.classes))
+               if n.attrs["id"] not in SKIP_SECTIONS]
     for sec in targets:
         sid = sec.attrs["id"]
         if sid == "sources":
             h2 = squash(raw_text(sec.find(lambda n: n.tag == "h2")))
             count = len(list(sec.find_all(lambda n: n.tag == "li" and (n.attrs.get("id") or "").startswith("src-"))))
-            text = (f"{end(h2)}{BR}The {count} sources for this update are listed on the page, numbered in order of "
-                    f"first use, each with a link. October's sources are in the October baseline.")
+            update = "October baseline" in raw_text(sec)   # a monthly update points back to the baseline's list
+            text = (f"{end(h2)}{BR}The {count} sources for this {'update' if update else 'report'} are listed on the "
+                    f"page, numbered in order of first use, each with a link."
+                    + (" October's sources are in the October baseline." if update else ""))
         else:
             text = resolve_labels(render(sec))
         out.append((sid, tidy(speak(text))))

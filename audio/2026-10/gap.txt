@@ -1,0 +1,7 @@
+Section 1: Reliability.
+
+A demo call is not a production call.
+
+The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.
+
+Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability. A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect; the benchmark does not break failures down by type. With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.

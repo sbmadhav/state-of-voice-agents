@@ -1,0 +1,31 @@
+T8. Fraud and identity controls.
+
+Design identity in from day one.
+
+Cloned customer voice requesting protected data. Control: Liveness detection plus passive voice, device and behavior signals. Runs in: Contact center platform. Evidence: Embedded in NICE CXone and Zoom Contact Center.
+
+Knowledge-based answers stolen in breaches. Control: Step-up verification to the number on file or app push. Runs in: Agent workflow, deterministic. Evidence: In one payer case, knowledge-based checks missed a fraud pattern across 1,200 targeted accounts, vendor-reported.
+
+Misheard identity details, wrong-account match. Control: Recognition biased with the record on file; spell-back. Runs in: STT layer. Evidence: Up to 15 percent fewer major transcription errors, vendor-reported.
+
+Fraud intent buried in a routine call. Control: Router hard rule: any fraud signal escalates regardless of confidence. Runs in: System-1 router. Evidence: author's view.
+
+Critical transactions and authorizations. Control: Voiceprint match plus liveness and deepfake detection, then a one-time code for anything irreversible. Runs in: Contact center platform + agent workflow. Evidence: A reporter passed a bank's voice ID with an AI clone of his own voice in 2023; liveness is now offered alongside voiceprints.
+
+Card numbers spoken on the call. Control: Pause recording and transcription, or take the card by keypad with the tones masked, so the agent never hears the number. Runs in: Telephony and payment provider. Evidence: PCI guidance on telephone payments.
+
+Personal data in transcripts and logs. Control: Redact names, account and ID numbers from the transcript stream before storage; keep raw audio only where retention rules allow. Runs in: Speech-to-text and logging layer. Evidence: author's view.
+
+Bots or AI agents calling in at scale. Control: Detect machine callers before the agent engages. Runs in: Agent platform. Evidence: Sierra Fleming, announced October 2026, vendor-reported.
+
+Outbound AI calls without consent (US). Control: Prior express consent, identification, opt-out. Runs in: Dialer policy. Evidence: FCC 24-17, February 2024.
+
+Scammers posing as your organization. Control: Published callback and "we never ask" policy; customer education. Runs in: Marketing and communications. Evidence: Family-impersonation clone scams documented.
+
+Low. Examples: Hours, directions, appointment or card status. Checks: Passive voice, device and behavior signals; caller ID match. Friction to plan for: None for the caller.
+
+Medium. Examples: Address change, refill request, payment date. Checks: Passive signals plus a one-time code to the number on file, or an app push. Friction to plan for: Some older or distressed callers drop; offer a person.
+
+High. Examples: Payments, prescription changes, authorizations. Checks: Voiceprint plus liveness and deepfake detection, then a one-time code. Friction to plan for: False rejects on phone-quality audio; a fast route to a person is required.
+
+Author's view. Tiers and examples are a starting point for fraud and compliance teams. Texted codes carry SIM-swap risk, so prefer an app push where customers have the app.

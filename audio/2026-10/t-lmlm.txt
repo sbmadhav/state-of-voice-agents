@@ -1,0 +1,71 @@
+T6. Limited Memory Language Models.
+
+How LMLM works, and what it has shown.
+
+Zhao et al. "Pre-training Limited Memory Language Models with Internal and External Knowledge," ICLR 2026. Code and 176-million-parameter and 382 million checkpoints are public under MIT.
+
+Mechanism.
+
+Training text is annotated with inline lookups: entity, relation, then the retrieved value.
+
+Loss is zeroed on the retrieved value tokens. The model still trains on every other token, so it learns when and how to look up, not the value itself.
+
+The store holds 54.6 million (entity, relation, value) triples extracted from Wikipedia by an 8 billion annotator trained on GPT-4o-labeled seeds.
+
+At inference, a lookup token pauses generation; the query is matched by embedding similarity (rejection threshold 0.6) and the value is inserted.
+
+Budget: about 3 billion tokens, 8 epochs, at most 8 H100-days per model.
+
+Follow-up: Co-LMLM (July 2026).
+
+Replaces relational triples with vector keys and free-text values, so knowledge is no longer limited to entity attributes.
+
+About 2.2 milliseconds per retrieval versus 28.6 milliseconds for a question-generating lookup, which fits inside a voice turn.
+
+Reports that lookup timing is imperfect: forcing lookups added 5.9 points on SimpleQA.
+
+LLaMA2 standard. Params: 382 million. FactScore: 14.0. T-REx EM: 52.0. PopQA: 22.7.
+
+LLaMA2 LMLM. Params: 382 million. FactScore: 31.9. T-REx EM: 58.1. PopQA: 50.8.
+
+LLaMA2 LMLM, store off. Params: 382 million. FactScore: 12.8. T-REx EM: 38.5. PopQA: n/a.
+
+LLaMA2. Params: 7 billion. FactScore: 34.0. T-REx EM: 60.5. PopQA: 29.2.
+
+LLaMA3.1. Params: 8 billion. FactScore: 40.3. T-REx EM: 67.3. PopQA: 29.4.
+
+Source: Zhao et al. A 355 million RAG baseline scored higher on T-REx than the same-size LMLM (75.8 versus 58.7) but lower on FactScore and PopQA, so retrieval-augmented frontier models remain the practical benchmark to beat.
+
+How much of a model is fact storage?
+
+LMLM 382 million ≈ LLaMA2-7B18x.
+
+RETRO 7.5 billion ≈ GPT-3 175B25x.
+
+Atlas 11 billion > 540 billion on NQ50x.
+
+Parameter reduction at comparable performance on knowledge-heavy tasks. Models store about 2 bits of knowledge per parameter, falling toward 1 bit for rarely seen facts. Question-answering accuracy tracks how often a fact appears in training data. None of these measure the share of a frontier model's weights spent on facts; reasoning, code and multilingual skill need parameters too.
+
+Every fact it shares is correct; it cannot hallucinate. Verdict: overstated. Defensible version: It cuts hallucination sharply and makes each fact traceable; errors from wrong lookups, missing rows and extraction remain.
+
+It keeps non-repeating data out of the model. Verdict: partly. Defensible version: It offloads factual attributes by type, common and rare alike; rare facts are where models learn worst.
+
+Fact storage is ~99 percent of model bloat. Verdict: unsupported. Defensible version: Retrieval models match models 18 to 50 times larger on knowledge tasks; the exact share is unmeasured.
+
+It makes training cheap. Verdict: partly. Defensible version: It still trains on the full corpus and adds lookup and store-building cost; the saving is fewer parameters for a given factual accuracy, which lowers serving cost.
+
+It keeps sensitive data out of weights. Verdict: plausible, untested. Defensible version: Designed to, and extraction attacks show why it matters, but no privacy-attack evaluation has been published.
+
+What has to be true for regulated contact centers.
+
+Extraction quality: turning CRM, EHR and policy text into rows relies on LLM annotators; their errors become confident wrong answers.
+
+Beyond entity facts: contact center knowledge is often procedural ("if the plan is X and the claim is Y"). Free-text values help, unproven here.
+
+Reliable lookups: the model must know when to look up and must not fall back on weights.
+
+Live data still needs tools: balances and appointments change by the minute; LMLM covers static knowledge, not transactions.
+
+Total cost versus RAG: pre-training a private small model plus building and refreshing the store must beat retrieval on a frontier API.
+
+Evidence at scale: nothing yet on dialog, speech, models above about 400 million, or enterprise data. A 2026 position paper argues for this direction but reports no deployments.

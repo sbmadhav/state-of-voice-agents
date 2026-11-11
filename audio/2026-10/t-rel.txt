@@ -1,0 +1,33 @@
+T3. Measuring reliability.
+
+Pass k: why single-run numbers flatter every vendor.
+
+Pass k counts a scenario only when all k runs succeed. It came from Sierra's tau-bench and now appears in Cekura Bench and tau2-bench voice mode. Even assuming independent runs, small per-call error rates compound quickly.
+
+Per-call success probability.
+
+Same model, different harness.
+
+In Cekura's speech-to-speech benchmark (11 models, 2,952 calls), GPT Realtime 2.1 alone reached 79.3 percent pass three, while its mini sibling scored 50.0 percent and saved all fields correctly on only 64.5 percent of data-saving calls versus 92.0 percent.
+
+Recovery is its own axis.
+
+A 2026 interruption benchmark found task completion and recovery quality only partly related. Test barge-in and correction separately from happy paths.
+
+Release scorecard.
+
+Perception: word error rate on phone-grade audio, by accent and language, and on noisy, multi-speaker recordings (TV, car, a family member talking); entity accuracy for names, dates, phone and account numbers.
+
+Routing: intent accuracy, out-of-scope recall, misroute rate (transfers after routing), calibration error.
+
+Turn-taking: false and missed barge-ins, backchannel handling.
+
+Latency: P95 turn time, not mean; dead air over 10 seconds.
+
+Action correctness: exact argument match on every tool call. This is the hard gate.
+
+Repeatability: pass three on a golden set of more than 200 scenarios; every production failure becomes a regression case; block a release if task completion drops more than 3 points or latency rises more than 10 percent.
+
+Emotion: frustration and confusion caught in real time on labeled calls, checked across accents and age groups; sentiment scored on every call after it ends.
+
+Persona: each persona passes the same golden set; tone may differ, facts and policies may not.

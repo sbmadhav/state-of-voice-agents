@@ -22,7 +22,7 @@ The three theses stand: reliability is the gap, think silently, then respond, an
 
 How to read this update: method, labels and disclosure.
 
-Delta only. Findings published between October 12 and November 9, 2026 carry a "new" tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.
+Delta only. Findings published between October 12 and November 10, 2026 carry a "new" tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.
 
 Labels. Independent. Vendor-reported. Company-reported. Author's view. Every figure links to its source.
 

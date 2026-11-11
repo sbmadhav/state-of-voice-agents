@@ -1,0 +1,11 @@
+T11. Tooling and implementation.
+
+What to borrow, what to avoid.
+
+Frontend and developer tooling.
+
+Vercel's AI Voice Elements give React components for persona, mic capture, transcript and playback; useful for web prototypes, irrelevant to telephony.
+
+Why implementations fail.
+
+Abstract goals instead of concrete use cases, bots isolated from scheduling and CRM systems, no handoff path, messy knowledge, and no measurement after launch. Vendor-reported. OpenAI's own rebuild relied on a silent production test to find failures synthetic load tests missed.

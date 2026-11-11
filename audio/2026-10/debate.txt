@@ -1,0 +1,67 @@
+Section 12: Think tank.
+
+Seven seats at the table.
+
+A structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models? The seven seats are synthetic perspectives written to stress-test the argument, not a survey of real people.
+
+Chief Digital and CX Officer.
+
+Expand in phases. Voice is the front door, and it is now also a brand-trust channel.
+
+Evidence: A large health system cut abandonment 56 percent and scheduled 21 percent more appointments in two weeks. Concern: One bad call becomes the story. Scammers posing as your brand erode trust in every legitimate call. Would change their mind: Pilot satisfaction falling below the human baseline.
+
+CFO.
+
+Fund a pilot, not a platform. Pay for resolved calls.
+
+Evidence: The higher-resolution stack is cheaper per 1,000 calls despite a higher per-minute rate. A decision-first cascade cut classification cost about 72 percent in one test. Concern: Vertical vendors rarely publish pricing. Early-access model prices may be subsidized. Would change their mind: Verified cost per resolved call below half the human cost at day 90.
+
+CISO and Privacy Officer.
+
+Hosted APIs only under contract. Self-host the small models. Prefer facts in governed stores.
+
+Evidence: Hosted decision APIs need a BAA or equivalent; self-hosted encoders avoid the question. Extraction attacks have pulled personal data from model weights. Concern: Voice cloning, prompt injection, retention terms that change. Would change their mind: A signed contract and SOC 2 Type II from every layer, testing vendor included.
+
+Contact Center Operations.
+
+Start with scheduling, billing and status checks; warm transfer with full context.
+
+Evidence: Intermountain: 44 percent of repetitive calls automated and 85 percent lower abandonment. Concern: Wrong write-backs, misroutes, authentication failures, staff morale. Would change their mind: Misroute or wrong-action rate above 0.5 percent on audit.
+
+Clinical and Risk Safety Lead.
+
+Administrative only. No triage, no advice. Escalation by rule, not by threshold.
+
+Evidence: No validated autonomous triage deployment found. Best models reach only about 53 percent on multi-intent benchmarks. Concern: Missed red flags, older and non-English callers, regulatory exposure. Would change their mind: An independent safety evaluation with prospective outcomes.
+
+AI Platform Architect.
+
+Thinker-responder: tiered router in front, narrowed tools per sub-agent, and a governed fact store, with a limited-memory trial for static knowledge once it beats retrieval. On a managed platform such as Sierra, insist on exporting routing decisions and logs.
+
+Evidence: A 0.1 billion fine-tuned classifier hits 93.5 percent on Banking77 in 22 milliseconds. Tool retrieval more than tripled selection accuracy. A 382 million LMLM approached a 7 billion model on factual precision. Concern: Lock-in at orchestration and integration layers; model churn every few weeks. Would change their mind: A vendor refusing to export logs or routing decisions.
+
+Skeptic / red team.
+
+Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers.
+
+Evidence: Jev's Banking77 score varies 10.7 points by lab. Benign context flipped 61 percent of correct decisions. LMLM is untested above 400 million parameters or on dialog. Sierra publishes single-run voice scores, not repeat reliability. Concern: Every outcome figure here is customer- or vendor-reported, with no control group. Would change their mind: 90 percent+ pass three on your own scenarios, audited by an independent party.
+
+Where the perspectives converge.
+
+Start with inbound administrative calls and warm human transfer.
+
+Build a golden evaluation set before choosing a vendor, and gate every change on it.
+
+Measure repeat reliability and cost per resolved call, not containment or demo quality.
+
+Use a fast router, with calibrated thresholds and rule-based escalation.
+
+Own the evaluation data, routing logs and call logs, whichever vendor wins.
+
+Still unresolved.
+
+Fine-tuned classifier (cheapest, most accurate on fixed intents) versus a hosted decision API (no training data, adapts to new intents).
+
+When a private limited-memory model beats retrieval on a frontier model, on total cost.
+
+Speed versus safety on outbound calls, where consent rules bite at scale.

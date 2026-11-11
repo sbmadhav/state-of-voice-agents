@@ -1,0 +1,45 @@
+Section 9: What comes next.
+
+Models that look facts up instead of memorizing them.
+
+A Limited Memory Language Model (LMLM) is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database, not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model. Facts stay in a table people can inspect, correct and delete. It suits slow-changing knowledge such as benefits, policies and fees; live data such as balances, claims and appointment slots stays on tool and MCP calls.
+
+Caller asks.
+
+"What's the coverage limit on my plan, member 4471?".
+
+Agent answers.
+
+Illustrative. The deletion behavior mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning degraded the model. Logs, transcripts, caches and backups still need their own deletion.
+
+Why a governed fact store fits regulated conversations.
+
+Facts become governed data. Each one is a row with access control, versioning and change review.
+
+Deletion from the model is real. Removing rows forgets them without retraining. Copies in logs, transcripts and backups need their own retention rules.
+
+Less sensitive data in weights. Researchers have extracted names, phone numbers and emails from model weights, even from data seen once.
+
+Every answer has provenance. Each lookup is a logged call with the value it returned.
+
+Room to shrink the model. In research, a 382 million limited-memory model came close to a 7 billion model on factual precision; details are in the technical appendix (T6).
+
+My view: build the fact store now, and treat limited-memory training as a gated bet.
+
+Retrieval on a frontier model is the safe default today, and the evidence for limited-memory models is still research-stage: Wikipedia facts, models under 400 million parameters, no dialog, voice or production use. A governed fact store pays off either way. Training is a bet to stage behind gates, not a commitment.
+
+Now · no-regretBuild the governed fact store.
+
+Turn plans, policies, products, providers and fees into versioned rows with owners, access control and deletion. It powers retrieval today and LMLM tomorrow.
+
+When the store is ready · trialTrial a small model on one domain.
+
+Start from the open LMLM code (MIT) on one de-identified domain, such as benefits or product FAQs. Go further only if it beats retrieval on factual precision, deletion, latency and total cost.
+
+Only if it wins · scalePut it behind the responder.
+
+Expand domains for static knowledge. Live balances, claims and appointment slots always stay on tools.
+
+Compute is not the hard part: the paper trained each model in at most 8 H100-days, roughly 400 dollars to 500 dollars at 2 dollars to 2.69 dollars an hour for rented H100s. Author's arithmetic. Budget for data engineering, store quality and evaluation instead.
+
+What the research does and does not show yet, claim by claim, is in the technical appendix (T6).

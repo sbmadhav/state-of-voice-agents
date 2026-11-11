@@ -1,0 +1,7 @@
+Section 4: Economics.
+
+The lever is resolution rate, not token price.
+
+Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person, and those tend to be the longer, harder ones. Some calls the agent closes come back as repeat calls. Defaults use published per-minute pricing and a fully loaded human cost per call. Platform, integration and team costs are a fixed annual line.
+
+Author's arithmetic. Illustrative only. The escalation and repeat-call defaults are assumptions, not sourced figures; use your own. Worst case: resolution 15 points lower, escalations 15 points costlier, 5 points more repeat calls. Best case: resolution 10 points higher, escalations 10 points cheaper, 3 points fewer repeat calls. A published comparison found the pricier stack with higher resolution (14 cents/min, 70 percent resolved) costs less per 1,000 calls than the cheaper one (9 cents/min, 55 percent). Cost models that count only LLM token savings miss most of the money.

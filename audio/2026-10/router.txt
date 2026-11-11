@@ -1,0 +1,47 @@
+Section 5: Think silently, then respond.
+
+A thinker-responder model for conversational agents.
+
+People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the thinker, making typed decisions silently, and a conversational LLM is the responder, turning those decisions into a natural reply.
+
+One caller turn, two ways.
+
+Caller: "I got charged twice for my visit last month.".
+
+What the thinker decides (System 1, silent, typed).
+
+Intent: which sub-agent owns this turn (billing, scheduling, complaint).
+
+Risk: fraud, clinical, vulnerable-caller or complaint flags that force a handoff.
+
+Tools: which MCP servers to expose, and which facts to fetch before speaking.
+
+Turn state: is the caller done, correcting themselves, or just saying "mm-hmm".
+
+Speaker: is this the caller, or someone else in the room.
+
+Emotion: frustration or confusion that should change the tone, slow things down or hand off.
+
+Confidence: a probability on each, so low-confidence turns hand off instead of guessing.
+
+Why it works.
+
+Faster: decisions take tens to hundreds of milliseconds, so the responder starts with data already fetched.
+
+Cheaper: the expensive model only writes the reply, not the routing.
+
+Safer: the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.
+
+A deliberate difference: OpenAI and Sierra put the fast model on the talking side and a slower reasoner behind it. This design puts the fast model on the deciding side. The two combine: a fast talker, a fast silent decider, and a slower reasoner when needed.
+
+Works with any voice stack: the thinker does not need a speech-to-text pipeline. Beside a speech-to-speech or full-duplex model it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. Because a full-duplex model starts speaking within a few hundred milliseconds, the thinker also needs a stop control: when it flags risk mid-turn, it cuts the audio output at once, before protected data or advice reaches the caller.
+
+Limit: the thinker handles bounded choices. Open-ended reasoning still needs a deeper planner the responder can call.
+
+Pick a caller turn.
+
+Confidence threshold Below the threshold, the router hands off instead of guessing.
+
+Illustrative. Probabilities are examples of a calibrated multi-label router, not output from a specific product.
+
+Routing speed, the cost of a cascade and a check of this thesis against the evidence are in the technical appendix (T5).
