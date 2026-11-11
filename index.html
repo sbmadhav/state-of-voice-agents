@@ -1141,12 +1141,14 @@ document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childL
  const spoken=s=>{s=Math.max(1,Math.round(s));const m=Math.floor(s/60),r=s%60;return (m?m+' minute'+(m>1?'s':''):'')+(m&&r?' ':'')+(r?r+' second'+(r>1?'s':''):'')};
  const icon='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ // An MP3 is either a file beside the manifest or, once uploaded to Cloudflare R2, an https URL in the manifest
+ const srcOf=f=>/^https:\/\//.test(f.url||'')?f.url:base+f.file;
  const titleOf=sec=>{const h=sec.querySelector('h1,h2');return h?h.textContent.trim():sec.id};
  // One player at a time: starting any audio pauses the others
  document.addEventListener('play',e=>{document.querySelectorAll('main audio').forEach(a=>{if(a!==e.target&&!a.paused)a.pause()})},true);
  fetch(base+'manifest.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{
   const files=(m&&m.sections)||{};
-  const secs=[...main.querySelectorAll(':scope > section[id], :scope > header.hero[id]')].filter(sec=>files[sec.id]&&files[sec.id].file);
+  const secs=[...main.querySelectorAll(':scope > section[id], :scope > header.hero[id]')].filter(sec=>files[sec.id]&&(files[sec.id].file||files[sec.id].url));
   if(!secs.length)return;
   secs.forEach(sec=>{
    const f=files[sec.id],id=sec.id,title=titleOf(sec);
@@ -1154,7 +1156,7 @@ document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childL
    box.innerHTML=`<button type="button" class="md-btn md-btn--sm" aria-expanded="false" aria-controls="listen-${id}-panel">${icon}Listen<span class="md-sr-only"> to ${esc(title)}, ${spoken(f.duration||0)}</span> <span class="listen-dur" aria-hidden="true">${fmt(f.duration||0)}</span></button>`+
     `<div class="listen-panel" id="listen-${id}-panel" hidden><audio controls preload="none"></audio><p class="note listen-links"><a href="${base}${id}.txt">Transcript<span class="md-sr-only"> of ${esc(title)}</span></a><span>AI voice by ElevenLabs</span></p></div>`;
    const btn=box.querySelector('button'),panel=box.querySelector('.listen-panel'),au=box.querySelector('audio');
-   au.src=base+f.file;au.setAttribute('aria-label','Narration: '+title+', '+spoken(f.duration||0));
+   au.src=srcOf(f);au.setAttribute('aria-label','Narration: '+title+', '+spoken(f.duration||0));
    btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
    if(sec.classList.contains('hero')){const h=sec.querySelector('h1');h.insertAdjacentElement('afterend',box);box.style.marginTop='var(--space-3)'}
    else{const head=sec.querySelector('.head');(head||sec.querySelector('.wrap')||sec).appendChild(box)}
@@ -1164,7 +1166,7 @@ document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childL
   if(total>0){const lm=$('listen-min');lm.textContent=' · '+Math.max(1,Math.round(total/60))+' min listen';lm.hidden=false}
   const all=$('listen-all'),btn=$('listen-all-btn'),panel=$('listen-all-panel'),au=$('listen-all-audio'),now=$('listen-now'),tx=$('listen-all-tx'),next=$('listen-next');
   let i=0;
-  const load=k=>{i=k;const sec=secs[i];au.src=base+files[sec.id].file;tx.href=base+sec.id+'.txt';
+  const load=k=>{i=k;const sec=secs[i];au.src=srcOf(files[sec.id]);tx.href=base+sec.id+'.txt';
    now.textContent='Now playing '+(i+1)+' of '+secs.length+': '+titleOf(sec);next.hidden=i>=secs.length-1};
   load(0);
   au.addEventListener('ended',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});

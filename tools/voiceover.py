@@ -14,8 +14,16 @@ Settings, from the environment:
     ELEVENLABS_API_KEY    required, unless --dry-run; never printed or written anywhere
     ELEVENLABS_VOICE_ID   default WQP7cQUF5aAS6Axh5yaa ("Elara - Crisp Pro Narrator", an ElevenLabs default voice)
     ELEVENLABS_MODEL_ID   default eleven_v4 (ElevenLabs' highest-quality model; 10,000 characters a request)
+
+Hosting. By default each MP3 is written beside its script, to be committed. When Cloudflare R2 is configured, the
+MP3 is uploaded there instead (S3 API, SigV4, standard library only) and the manifest records its public URL, so
+the repository holds no audio. An MP3 is recorded once: it is regenerated only when its section's text, the voice
+or the model changes.
+    R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET   all four, or none
+    AUDIO_BASE_URL        the bucket's public address, e.g. https://audio.sbmadhav.com
 """
-import argparse, hashlib, json, os, pathlib, re, sys, time, urllib.error, urllib.request
+import argparse, datetime, hashlib, hmac, json, os, pathlib, re, sys, time
+import urllib.error, urllib.parse, urllib.request
 
 API = "https://api.elevenlabs.io/v1/text-to-speech/{voice}?output_format=mp3_44100_128"
 DEFAULT_VOICE = "WQP7cQUF5aAS6Axh5yaa"
@@ -138,6 +146,72 @@ def tts(key, voice, model, text, previous_ids, next_text):
             raise SystemExit(f"Could not reach ElevenLabs: {e.reason}") from None
 
 
+def _hmac(key, msg):
+    return hmac.new(key, msg.encode("utf-8"), hashlib.sha256).digest()
+
+
+def signing_key(secret, date, region, service):
+    """AWS Signature Version 4 signing key (R2 speaks the S3 API; its region is "auto")."""
+    k = _hmac(("AWS4" + secret).encode("utf-8"), date)
+    for part in (region, service, "aws4_request"):
+        k = _hmac(k, part)
+    return k
+
+
+def r2_settings():
+    """Cloudflare R2 settings from the environment, or None when R2 is not configured (MP3s then stay in the repo)."""
+    names = ("R2_ACCOUNT_ID", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY", "R2_BUCKET", "AUDIO_BASE_URL")
+    vals = {n: os.environ.get(n, "").strip() for n in names}
+    if not any(vals.values()):
+        return None
+    missing = [n for n, v in vals.items() if not v]
+    if missing:
+        sys.exit("Cloudflare R2 is partly configured; missing " + ", ".join(missing))
+    if not re.fullmatch(r"[0-9a-f]{32}", vals["R2_ACCOUNT_ID"]):
+        sys.exit("R2_ACCOUNT_ID does not look like a Cloudflare account ID")
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,61}[a-z0-9]", vals["R2_BUCKET"]):
+        sys.exit("R2_BUCKET does not look like a bucket name")
+    if not re.fullmatch(r"https://[A-Za-z0-9.-]+(/[A-Za-z0-9._~/-]*)?", vals["AUDIO_BASE_URL"]):
+        sys.exit("AUDIO_BASE_URL must be an https URL, for example https://audio.example.com")
+    vals["AUDIO_BASE_URL"] = vals["AUDIO_BASE_URL"].rstrip("/")
+    return vals
+
+
+def r2_put(cfg, key, data, now=None):
+    """Upload one object to R2 with a SigV4-signed PUT. `key` is the object path, e.g. 2026-11/fs-1a2b3c4d.mp3."""
+    host = f"{cfg['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com"
+    path = "/" + urllib.parse.quote(f"{cfg['R2_BUCKET']}/{key}", safe="/-_.~")
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    amz, date = now.strftime("%Y%m%dT%H%M%SZ"), now.strftime("%Y%m%d")
+    payload = hashlib.sha256(data).hexdigest()
+    headers = {"cache-control": "public, max-age=31536000, immutable", "content-type": "audio/mpeg",
+               "host": host, "x-amz-content-sha256": payload, "x-amz-date": amz}
+    signed = ";".join(sorted(headers))
+    canonical = "\n".join(["PUT", path, "", *[f"{k}:{headers[k]}" for k in sorted(headers)], "", signed, payload])
+    scope = f"{date}/auto/s3/aws4_request"
+    to_sign = "\n".join(["AWS4-HMAC-SHA256", amz, scope, hashlib.sha256(canonical.encode()).hexdigest()])
+    sig = hmac.new(signing_key(cfg["R2_SECRET_ACCESS_KEY"], date, "auto", "s3"), to_sign.encode(),
+                   hashlib.sha256).hexdigest()
+    headers["authorization"] = (f"AWS4-HMAC-SHA256 Credential={cfg['R2_ACCESS_KEY_ID']}/{scope}, "
+                                f"SignedHeaders={signed}, Signature={sig}")
+    req = urllib.request.Request(f"https://{host}{path}", data=data, method="PUT", headers=headers)
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=300):
+                return f"{cfg['AUDIO_BASE_URL']}/{key}"
+        except urllib.error.HTTPError as e:
+            detail = e.read()[:300].decode("utf-8", "replace")
+            if e.code in (429, 500, 502, 503, 504) and attempt < 3:
+                time.sleep(3 * 2 ** attempt)
+                continue
+            raise SystemExit(f"Cloudflare R2 returned HTTP {e.code} for {key}: {detail}") from None
+        except urllib.error.URLError as e:
+            if attempt < 3:
+                time.sleep(3 * 2 ** attempt)
+                continue
+            raise SystemExit(f"Could not reach Cloudflare R2: {e.reason}") from None
+
+
 def next_context(text):
     """The start of the next chunk, cut at a word boundary."""
     if len(text) <= NEXT_TEXT:
@@ -170,14 +244,32 @@ def main():
     changed = False
     for sid in sorted(set(entries) - set(scripts)):   # a section that no longer exists
         print(f"{sid}: removed")
-        (folder / entries[sid]["file"]).unlink(missing_ok=True)
+        if entries[sid].get("file"):
+            (folder / entries[sid]["file"]).unlink(missing_ok=True)
         del entries[sid]
         changed = True
+
+    r2 = None if a.dry_run else r2_settings()
+
+    def have_audio(e):   # hosted on R2 (a URL in the manifest), or an MP3 file in the folder
+        return bool(e.get("url")) or ("file" in e and (folder / e["file"]).exists())
 
     todo = [sid for sid, text in scripts.items()
             if entries.get(sid, {}).get("sha256") != sha256(text)
             or entries.get(sid, {}).get("voice_id") != voice or entries.get(sid, {}).get("model_id") != model
-            or not (folder / entries.get(sid, {}).get("file", f"{sid}.mp3")).exists()]
+            or not have_audio(entries.get(sid, {}))]
+
+    # MP3s generated before R2 was configured move there without being regenerated (no ElevenLabs cost)
+    if r2:
+        for sid, e in entries.items():
+            if sid in todo or e.get("url") or not (folder / e.get("file", "")).is_file():
+                continue
+            local = folder / e["file"]
+            e["url"] = r2_put(r2, f"{folder.name}/{sid}-{e['sha256'][:8]}.mp3", local.read_bytes())
+            local.unlink()
+            del e["file"]
+            print(f"{sid}: moved to Cloudflare R2")
+            changed = True
     chars = sum(len(scripts[s]) for s in todo)
     print(f"Voice {voice}, model {model}; {len(scripts)} sections, {len(todo)} to generate, "
           f"{chars:,} characters to send")
@@ -203,9 +295,17 @@ def main():
         mp3 = join_mp3(parts)
         if not mp3:
             sys.exit(f"{sid}: the response was not MP3 audio")
-        name = f"{sid}.mp3"
-        (folder / name).write_bytes(mp3)
-        entries[sid] = {"file": name, "sha256": sha256(text), "duration": round(duration(mp3), 2),
+        digest = sha256(text)
+        old = entries.get(sid, {})
+        if old.get("file") and old["file"] != f"{sid}.mp3":
+            (folder / old["file"]).unlink(missing_ok=True)
+        if r2:   # the object name carries the text's hash, so a new recording never hits a cached old one
+            where = {"url": r2_put(r2, f"{folder.name}/{sid}-{digest[:8]}.mp3", mp3)}
+            (folder / f"{sid}.mp3").unlink(missing_ok=True)
+        else:
+            (folder / f"{sid}.mp3").write_bytes(mp3)
+            where = {"file": f"{sid}.mp3"}
+        entries[sid] = {**where, "sha256": digest, "duration": round(duration(mp3), 2),
                         "bytes": len(mp3), "characters": len(text), "voice_id": voice, "model_id": model}
         print(f"{sid}: {len(pieces)} request(s), {len(text):,} characters, {entries[sid]['duration']:.1f} s, "
               f"{len(mp3):,} bytes")

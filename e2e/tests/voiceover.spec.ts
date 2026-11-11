@@ -176,3 +176,24 @@ test('Listen controls have no serious or critical axe violations', async ({ page
     expect(found, scheme).toEqual([]);
   }
 });
+
+test('audio hosted on Cloudflare R2: the player streams the https URL from the manifest', async ({ page, issues }) => {
+  const R2 = 'https://audio.example.test/2026-11/fs-0a1b2c3d.mp3';
+  let hits = 0;
+  await page.route('https://audio.example.test/**', route => { hits++; return route.fulfill({ status: 200, contentType: 'audio/mpeg', body: SILENT_MP3 }); });
+  // One section on R2 (url, no file), one beside the manifest (file), one with a non-https url that must be ignored
+  await stubAudio(page, {
+    fs: { url: R2, sha256: '0'.repeat(64), duration: 12, bytes: SILENT_MP3.length },
+    tv: entry('tv', 61),
+    hc: { url: 'http://audio.example.test/hc.mp3', file: 'hc.mp3', sha256: '0'.repeat(64), duration: 5, bytes: SILENT_MP3.length },
+  });
+  await page.goto(PAGE);
+  await expect(page.locator('#fs .listen button')).toBeVisible();
+  await expect(page.locator('#listen-fs-panel audio')).toHaveAttribute('src', R2);
+  await expect(page.locator('#listen-tv-panel audio')).toHaveAttribute('src', '/state-of-voice-agents/audio/2026-11/tv.mp3');
+  await expect(page.locator('#listen-hc-panel audio')).toHaveAttribute('src', '/state-of-voice-agents/audio/2026-11/hc.mp3');
+  // The transcript stays on this site
+  await expect(page.locator('#listen-fs-panel a', { hasText: 'Transcript' })).toHaveAttribute('href', '/state-of-voice-agents/audio/2026-11/fs.txt');
+  expect(hits, 'nothing is downloaded before the reader presses Listen').toBe(0);
+  expect(issues.console, 'console errors').toEqual([]);
+});
