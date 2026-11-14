@@ -1,6 +1,6 @@
 # Changelog
 
-## November 2026 update, research cutoff November 10, 2026
+## November 2026 update, research cutoff November 14, 2026
 
 The first monthly update. From this edition on, the root page carries only what changed since the previous edition and links back for everything else; the October 2026 edition is the full baseline report.
 
@@ -14,6 +14,7 @@ The first monthly update. From this edition on, the root page carries only what 
 - Regulation: financial services rules mapped (Regulation E and Z, UDAAP, FDCPA and Regulation F, fair lending, accessibility, GLBA, bank incident notification, PCI DSS 3.3.1, model risk and third-party guidance, FFIEC and NYDFS, FinCEN, FCC 26-67, FCC 24-84, Colorado, Utah).
 - Fraud: a correction to October (voice is a signal, not a factor, per 2024 NYDFS guidance), a revised high-risk tier and financial fraud data.
 - Models and routing: Decisions API GA, Zoom and LiveKit decision models, Jev latency and edge limits, ElevenLabs (Eleven Realtime, transcript redaction, contact center integrations), Deepgram Think-Live and Flux TTS, GPT-Live SIP, Regal's Oct 15 run, open speech models, and market consolidation (Salesforce and Cresta, Five9 and Level AI). Also shipped: Claude Fable 5.2, Phonic-1, NVIDIA NemotronLabs VoiceChat, Meta Muse voice, Pipecat, ConvFill, Dessa.
+- What's new in the voice AI world (added November 14, section 8): a ranked link list of ten releases since October 12, each with its date, one line on why it matters for regulated contact centers, an evidence label and a link to the maker's announcement: ElevenLabs Scribe v3 and Scribe v3 Live, Retell LLM, Cartesia Managed Agents, Soniox STT v6, Bland Tofu-1, Rime Prism, Pipecat 1.16, Mistral Voxtral 3, xAI Grok Voice 3.0 and the Hume Audio Decision API. Health care notes and the claim check become sections 9 and 10; the research cutoff moves from November 10 to November 14; the read time is now about 26 minutes.
 - Reviewed by an independent critical pass before publishing; fixes include the direction of the FCC opt-out change, credit union figures, evidence labels and the regulation map.
 - Health care notes: California AB 1979, clinic results, clinical speech recognition.
 - Claim check: 16 new or revised claims only.

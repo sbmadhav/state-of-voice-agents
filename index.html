@@ -277,6 +277,7 @@ th,td{text-align:left;padding:var(--space-2-5) var(--space-3);border-bottom:1px 
 th{font-family:var(--font-mono);font-size:var(--text-kicker-size);text-transform:uppercase;letter-spacing:var(--text-kicker-tracking);color:var(--ink-muted);font-weight:var(--text-code-weight);background:var(--bg-alt)}
 tr:last-child td{border-bottom:0}
 td.n{font-family:var(--font-mono);font-size:var(--text-code-size);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#whatsnew td:nth-child(3){white-space:nowrap}
 table.t-router{table-layout:fixed;min-width:0}
 table.t-router td,table.t-router th{overflow-wrap:anywhere}
 table.t-router td.n .chip{white-space:normal;margin-top:var(--space-1)}
@@ -543,6 +544,7 @@ ol.src li:target{background:var(--accent-soft)}
     <a href="#rules">Rules</a>
     <a href="#fraud">Fraud</a>
     <a href="#models">Models</a>
+    <a href="#whatsnew">What's new</a>
     <a href="#hc">Health care</a>
     <a href="#verify">Claims</a>
     <a href="#unchanged">Unchanged</a>
@@ -557,7 +559,7 @@ ol.src li:target{background:var(--accent-soft)}
     <p class="eyebrow">State of conversational voice agents · Monthly update · Financial services focus, with health care notes</p>
     <p style="margin-top:var(--space-2)"><span class="edition">November 2026 edition</span> <span class="note" style="margin-left:var(--space-2)">Builds on the <a href="/state-of-voice-agents/editions/2026-10/#brief">October 2026 baseline</a>. Only what changed, or is reviewed for the first time, is here.</span></p>
     <div class="hero-audio" data-narrate-skip>
-      <p class="readtime"><span id="read-min">About 23 min read</span><span id="listen-min" hidden></span></p>
+      <p class="readtime"><span id="read-min">About 26 min read</span><span id="listen-min" hidden></span></p>
       <div class="listen-all" id="listen-all" hidden>
         <button type="button" class="md-btn md-btn--sm" id="listen-all-btn" aria-expanded="false" aria-controls="listen-all-panel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Listen to the whole update</button>
         <span class="note">AI voice by ElevenLabs</span>
@@ -586,7 +588,7 @@ ol.src li:target{background:var(--accent-soft)}
       <summary>How to read this update: method, labels and disclosure</summary>
       <div class="howto-body">
         <ul class="tight">
-          <li><strong>Delta only.</strong> Findings published between October 12 and November 10, 2026 carry a <span class="vd" data-say="&quot;new&quot;">new</span> tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.</li>
+          <li><strong>Delta only.</strong> Findings published between October 12 and November 14, 2026 carry a <span class="vd" data-say="&quot;new&quot;">new</span> tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.</li>
           <li><strong>Labels.</strong> <span class="chip k-ind">independent</span> <span class="chip k-ven">vendor-reported</span> <span class="chip k-ven">company-reported</span> <span class="chip k-our">author's view</span>. Every figure links to its source.</li>
           <li><strong>Method.</strong> A review of public sources up to the research cutoff. I did not run my own tests.</li>
           <li><strong>Terms.</strong> "Repeat reliability" (pass^3) is the share of test scenarios passed on all three tries. WER is the share of words transcribed wrongly. Full-duplex models listen and talk at the same time. A System-1 model makes fast typed decisions (route, risk, done talking) without writing prose.</li>
@@ -808,9 +810,32 @@ ol.src li:target{background:var(--accent-soft)}
   </div>
 </section>
 
+<section id="whatsnew">
+  <div class="wrap stack">
+    <div class="head"><p class="eyebrow">8 · New releases</p><h2>What's new in the voice AI world</h2>
+      <p class="lede">The ten releases and launches since October 12 that matter most to teams building voice agents for regulated contact centers, in the author's order of relevance. This is a link list, not an endorsement; the releases that change a recommendation are analyzed in <a href="#models">section 7</a>. Dates are 2026.</p></div>
+    <div class="tbl"><table data-narrate="Number {0}: {1}, {2}. {3}.">
+      <thead><tr><th>Rank</th><th>Release</th><th>Date</th><th>What it is and why it matters</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td><strong>Scribe v3 and Scribe v3 Live</strong>, ElevenLabs <span class="vd">new</span></td><td>Nov 10</td><td>Speech-to-text models for recorded and live audio. The live model adds speaker labels and makes 31% fewer word errors than Scribe v2 Realtime across 102 languages. Both are HIPAA-eligible under a business associate agreement, with a zero-retention mode and EU data residency, so they can be assessed for regulated calls now. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://elevenlabs.io/blog/scribe-v3" target="_blank" rel="noopener">ElevenLabs: Scribe v3</a></td></tr>
+        <tr><td class="n">2</td><td><strong>Retell LLM (Tell-1)</strong>, Retell AI <span class="vd">new</span></td><td>Nov 13</td><td>An in-house language model that starts its reply at once and reasons silently while the first sentence plays; available from Nov 19 at $0.035 a minute. Its 94.4 average is on Retell's own vCX benchmark, so test it on your own scripts before relying on the ranking. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://www.retellai.com/retell-llm" target="_blank" rel="noopener">Retell AI: Retell LLM</a></td></tr>
+        <tr><td class="n">3</td><td><strong>Managed Agents</strong>, Cartesia <span class="vd">new</span></td><td>Oct 29</td><td>A hosted voice agent platform with telephony, knowledge bases and tool calls, at a launch price of $0.03 a minute. Cartesia reports 87% accuracy on ServiceNow's EVA-Bench enterprise scenarios. The announcement does not cover HIPAA or PCI terms; ask before a pilot. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://www.cartesia.ai/blog/managed-agents" target="_blank" rel="noopener">Cartesia: Managed Agents</a></td></tr>
+        <tr><td class="n">4</td><td><strong>STT v6</strong>, Soniox <span class="vd">new</span></td><td>Nov 3</td><td>Speech recognition that receives the agent's own text and keeps the agent's voice out of the transcript, including while the caller interrupts. It targets agents that hear themselves on speakerphones and in cars. Soniox published no benchmark figures. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://soniox.com/blog/soniox-stt-v6" target="_blank" rel="noopener">Soniox: STT v6</a></td></tr>
+        <tr><td class="n">5</td><td><strong>Tofu-1</strong>, Bland <span class="vd">new</span></td><td>Nov 13</td><td>A full-duplex speech-to-speech model in research preview for a limited number of enterprises, aimed at noisy, multi-speaker calls in banking, health care, insurance and government. Bland describes a television test like the one in <a href="#tv">section 3</a>, but publishes no measured results, pricing or compliance terms. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://www.bland.ai/speech-to-speech" target="_blank" rel="noopener">Bland: Tofu-1</a></td></tr>
+        <tr><td class="n">6</td><td><strong>Prism</strong>, Rime <span class="vd">new</span></td><td>Oct 28</td><td>A speech-to-speech model that writes each reply as text before speaking it, so guardrails can check or rewrite the words first. Rime reports 0.57 s to first audio and 56.6 on the tau-Voice customer-service benchmark, which Rime ran itself on Artificial Analysis's test harness. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://www.rime.ai/resources/prism-first-speech-to-speech-for-enterprise" target="_blank" rel="noopener">Rime: Prism</a></td></tr>
+        <tr><td class="n">7</td><td><strong>Pipecat 1.16</strong>, open-source framework <span class="vd">new</span></td><td>Nov 12</td><td>Adds speaker labels to transcripts from every speech-to-text service that supports them, pause and resume for Genesys AudioHook audio streams, a jambonz telephony connector and support for Soniox's agent-voice filtering. Relevant to teams that run their own call pipeline to keep control of data.</td><td><a href="https://github.com/pipecat-ai/pipecat/releases/tag/v1.16.0" target="_blank" rel="noopener">GitHub: Pipecat v1.16.0</a></td></tr>
+        <tr><td class="n">8</td><td><strong>Voxtral 3</strong>, Mistral AI <span class="vd">new</span></td><td>Oct 20</td><td>Speech-to-text and text-to-speech models with a voice agent SDK, offered on an EU-hosted API or for deployment on your own servers, which helps where audio must stay in a region or on premises. Mistral reports live transcription in under 500 ms in more than 35 languages. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://mistral.ai/news/voxtral-3/" target="_blank" rel="noopener">Mistral AI: Voxtral 3</a></td></tr>
+        <tr><td class="n">9</td><td><strong>Grok Voice 3.0</strong>, xAI <span class="vd">new</span></td><td>Oct 14</td><td>A speech-to-speech model in xAI's API at $0.08 a minute. The company cites a score of 86.9 on the Artificial Analysis Speech-to-Speech Index and says Starlink call centers resolve about 70% of 20,000 daily calls without a person. The announcement gives no compliance terms. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://x.ai/news/grok-voice-3" target="_blank" rel="noopener">xAI: Grok Voice 3.0</a></td></tr>
+        <tr><td class="n">10</td><td><strong>Audio Decision API</strong>, Hume AI <span class="vd">new</span></td><td>Nov 2</td><td>Answers yes or no, multiple-choice and rating questions directly from call audio, such as whether a caller sounds frustrated or a voice is AI-generated, and returns probabilities. Hume reports 70.7% agreement with a human panel. Access is by waitlist; treat it as a signal to test, not a control. <span class="chip k-ven">vendor-reported</span></td><td><a href="https://www.hume.ai/blog/introducing-hume-audio-decision-api" target="_blank" rel="noopener">Hume AI: Audio Decision API</a></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Each link opens the maker's own announcement in a new tab. Figures are the makers' claims and were not tested for this report.</p>
+  </div>
+</section>
+
 <section id="hc">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">8 · Health care notes</p><h2>What changed for health systems</h2>
+    <div class="head"><p class="eyebrow">9 · Health care notes</p><h2>What changed for health systems</h2>
       <p class="lede">October's health care analysis stands: <a href="/state-of-voice-agents/editions/2026-10/#peers">published results</a>, <a href="/state-of-voice-agents/editions/2026-10/#usecases">readiness by call type</a> and <a href="/state-of-voice-agents/editions/2026-10/#t-reg">regulation</a>.</p></div>
     <div class="panel">
       <ul class="tight">
@@ -825,7 +850,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="verify">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">9 · Claim check</p><h2>New and revised claims</h2>
+    <div class="head"><p class="eyebrow">10 · Claim check</p><h2>New and revised claims</h2>
       <p class="lede">Claims checked for the first time this month, or whose verdict changed. The other October claims stand: <a href="/state-of-voice-agents/editions/2026-10/#verify">October, T10</a>.</p></div>
     <span class="ix">Interactive · filter by verdict</span>
     <div class="seg" role="group" aria-label="Filter claims" id="vf">
@@ -904,7 +929,7 @@ ol.src li:target{background:var(--accent-soft)}
 </section>
 
 <footer class="foot">
-  <div class="wrap"><strong style="color:var(--ink)">By Madhav Srinivasan</strong> · November 2026 edition · Research cutoff November 10, 2026<br>Bracketed numbers in the text link to the numbered sources above. Past editions: <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">github.com/sbmadhav/state-of-voice-agents</a>.<br>Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.</div>
+  <div class="wrap"><strong style="color:var(--ink)">By Madhav Srinivasan</strong> · November 2026 edition · Research cutoff November 14, 2026<br>Bracketed numbers in the text link to the numbered sources above. Past editions: <a href="https://github.com/sbmadhav/state-of-voice-agents" target="_blank" rel="noopener">github.com/sbmadhav/state-of-voice-agents</a>.<br>Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.</div>
 </footer>
 </main>
 
