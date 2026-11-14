@@ -66,6 +66,40 @@ test('November update: delta-only, financial services focus, links back to the O
   for (const id of back) await expect(page.locator(`[id="${id}"]`), `October has #${id}`).toHaveCount(1);
 });
 
+test("What's new: ten ranked releases, each with an external source link, reachable from the section nav", async ({ page }) => {
+  await page.goto('/state-of-voice-agents/');
+  const section = page.locator('section#whatsnew');
+  await expect(section.locator('h2')).toHaveText("What's new in the voice AI world");
+  await expect(section.locator('.eyebrow')).toHaveText(/^8 · /);
+  // It sits between Models and Health care notes, and the eyebrow numbers run 1 to 10 in order
+  const ids = await page.locator('main > section').evaluateAll(ss => ss.map(s => s.id));
+  expect(ids.slice(ids.indexOf('models'), ids.indexOf('models') + 3)).toEqual(['models', 'whatsnew', 'hc']);
+  const numbers = await page.locator('main > section .head .eyebrow').evaluateAll(es => es.map(e => /^(\d+) · /.exec(e.textContent || '')?.[1]).filter(Boolean).map(Number));
+  expect(numbers).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const rows = section.locator('tbody tr');
+  await expect(rows).toHaveCount(10);
+  const hrefs: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const row = rows.nth(i);
+    await expect(row.locator('td').first()).toHaveText(String(i + 1));
+    const link = row.locator('a[target="_blank"][href^="https://"]');
+    await expect(link, `row ${i + 1} has one external source link`).toHaveCount(1);
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute('rel', /noopener/);
+    await expect(link).not.toHaveText('');
+    const href = (await link.getAttribute('href'))!;
+    expect(new URL(href).hostname).not.toMatch(/(^|\.)sbmadhav\.com$/);
+    hrefs.push(href);
+  }
+  expect(new Set(hrefs).size).toBe(10);
+  // The section nav links to it, right after Models
+  const nav = await page.locator('nav.jump a').evaluateAll(as => as.map(a => a.getAttribute('href')));
+  expect(nav.indexOf('#whatsnew')).toBe(nav.indexOf('#models') + 1);
+  await page.locator('nav.jump a[href="#whatsnew"]').click();
+  await expect(page).toHaveURL(/#whatsnew$/);
+  await expect(section.locator('h2')).toBeInViewport();
+});
+
 test('citations resolve to numbered sources, also without JavaScript', async ({ page, browser }) => {
   await page.goto('/state-of-voice-agents/');
   const keys = await page.locator('a.c').evaluateAll(as => [...new Set(as.map(a => (a as HTMLElement).dataset.s))]);

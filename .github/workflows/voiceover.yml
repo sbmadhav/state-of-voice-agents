@@ -12,8 +12,8 @@ name: Voice-over
 # MP3s on Cloudflare R2 instead of in this repository, add the secrets R2_ACCOUNT_ID, R2_ACCESS_KEY_ID and
 # R2_SECRET_ACCESS_KEY and the variables R2_BUCKET and AUDIO_BASE_URL (the bucket's public https address).
 #
-# Never pushes to main. workflow_dispatch and pushes to main commit the audio to a new branch and open a pull
-# request; pull_request runs commit to the PR's own branch, and only when that branch is in this repository.
+# Never pushes to main. Audio is generated only on workflow_dispatch: the run commits it to a new branch and
+# opens a pull request, also when generation stopped partway, so nothing already recorded is lost.
 
 on:
   workflow_dispatch:
@@ -60,8 +60,9 @@ jobs:
   audio:
     name: Generate audio
     needs: narration
-    # Fork pull requests get neither the secret nor a token that can push, so they skip
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    # Audio costs ElevenLabs credits, so it is generated only when someone runs the workflow by hand
+    # (Actions > Voice-over > Run workflow). Pushes and pull requests only check the narration text.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -111,10 +112,16 @@ jobs:
           AUDIO_BASE_URL: ${{ vars.AUDIO_BASE_URL }}
           EDITIONS: ${{ steps.ed.outputs.editions }}
         run: |
-          for ed in $EDITIONS; do python3 tools/voiceover.py "audio/$ed"; done
+          # Latest edition first, so a quota that runs out mid-run costs the archive, not the current page
+          status=0
+          for ed in $(echo $EDITIONS | tr ' ' '\n' | sort -r); do python3 tools/voiceover.py "audio/$ed" || { status=$?; break; }; done
+          exit $status
 
+      # Runs even when generation stopped partway (for example, the ElevenLabs quota ran out): the script
+      # saves the manifest after every section, so the sections already paid for are kept and the next run
+      # only records the rest
       - name: Commit the audio
-        if: steps.key.outputs.present == 'true'
+        if: ${{ !cancelled() && steps.key.outputs.present == 'true' && steps.ed.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ github.token }}
           EDITION: ${{ steps.ed.outputs.editions }}

@@ -8,7 +8,7 @@ STATE OF CONVERSATIONAL VOICE AGENTS · MONTHLY UPDATE · FINANCIAL SERVICES FOC
 
 November 2026 edition Builds on the October 2026 baseline. Only what changed, or is reviewed for the first time, is here.
 
-About 23 min read
+About 26 min read
 
 Banks and credit unions reach the front door
 
@@ -227,7 +227,26 @@ Meta: voice conversations in its consumer Muse app (US, Nov 5); no developer API
 Frameworks: Pipecat pairs a fast front-end model with a slower back-end model; Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source.[78][79] NEW vendor-reported
 Research: ConvFill (a small talker covering a frontier model's delay; a later paper notes it does not measure the risk of the filler contradicting the final answer)[80][81] independent; Block's Dessa (full-duplex, trained only on audio, no benchmarks).[82] NEW
 
-8 · HEALTH CARE NOTES
+8 · NEW RELEASES
+
+What's new in the voice AI world
+
+The ten releases and launches since October 12 that matter most to teams building voice agents for regulated contact centers, in the author's order of relevance. This is a link list, not an endorsement; the releases that change a recommendation are analyzed in section 7. Dates are 2026.
+
+RANK	RELEASE	DATE	WHAT IT IS AND WHY IT MATTERS	SOURCE
+1	Scribe v3 and Scribe v3 Live, ElevenLabs NEW	Nov 10	Speech-to-text models for recorded and live audio. The live model adds speaker labels and makes 31% fewer word errors than Scribe v2 Realtime across 102 languages. Both are HIPAA-eligible under a business associate agreement, with a zero-retention mode and EU data residency, so they can be assessed for regulated calls now. vendor-reported	ElevenLabs: Scribe v3 https://elevenlabs.io/blog/scribe-v3
+2	Retell LLM (Tell-1), Retell AI NEW	Nov 13	An in-house language model that starts its reply at once and reasons silently while the first sentence plays; available from Nov 19 at $0.035 a minute. Its 94.4 average is on Retell's own vCX benchmark, so test it on your own scripts before relying on the ranking. vendor-reported	Retell AI: Retell LLM https://www.retellai.com/retell-llm
+3	Managed Agents, Cartesia NEW	Oct 29	A hosted voice agent platform with telephony, knowledge bases and tool calls, at a launch price of $0.03 a minute. Cartesia reports 87% accuracy on ServiceNow's EVA-Bench enterprise scenarios. The announcement does not cover HIPAA or PCI terms; ask before a pilot. vendor-reported	Cartesia: Managed Agents https://www.cartesia.ai/blog/managed-agents
+4	STT v6, Soniox NEW	Nov 3	Speech recognition that receives the agent's own text and keeps the agent's voice out of the transcript, including while the caller interrupts. It targets agents that hear themselves on speakerphones and in cars. Soniox published no benchmark figures. vendor-reported	Soniox: STT v6 https://soniox.com/blog/soniox-stt-v6
+5	Tofu-1, Bland NEW	Nov 13	A full-duplex speech-to-speech model in research preview for a limited number of enterprises, aimed at noisy, multi-speaker calls in banking, health care, insurance and government. Bland describes a television test like the one in section 3, but publishes no measured results, pricing or compliance terms. vendor-reported	Bland: Tofu-1 https://www.bland.ai/speech-to-speech
+6	Prism, Rime NEW	Oct 28	A speech-to-speech model that writes each reply as text before speaking it, so guardrails can check or rewrite the words first. Rime reports 0.57 s to first audio and 56.6 on the tau-Voice customer-service benchmark, which Rime ran itself on Artificial Analysis's test harness. vendor-reported	Rime: Prism https://www.rime.ai/resources/prism-first-speech-to-speech-for-enterprise
+7	Pipecat 1.16, open-source framework NEW	Nov 12	Adds speaker labels to transcripts from every speech-to-text service that supports them, pause and resume for Genesys AudioHook audio streams, a jambonz telephony connector and support for Soniox's agent-voice filtering. Relevant to teams that run their own call pipeline to keep control of data.	GitHub: Pipecat v1.16.0 https://github.com/pipecat-ai/pipecat/releases/tag/v1.16.0
+8	Voxtral 3, Mistral AI NEW	Oct 20	Speech-to-text and text-to-speech models with a voice agent SDK, offered on an EU-hosted API or for deployment on your own servers, which helps where audio must stay in a region or on premises. Mistral reports live transcription in under 500 ms in more than 35 languages. vendor-reported	Mistral AI: Voxtral 3 https://mistral.ai/news/voxtral-3/
+9	Grok Voice 3.0, xAI NEW	Oct 14	A speech-to-speech model in xAI's API at $0.08 a minute. The company cites a score of 86.9 on the Artificial Analysis Speech-to-Speech Index and says Starlink call centers resolve about 70% of 20,000 daily calls without a person. The announcement gives no compliance terms. vendor-reported	xAI: Grok Voice 3.0 https://x.ai/news/grok-voice-3
+10	Audio Decision API, Hume AI NEW	Nov 2	Answers yes or no, multiple-choice and rating questions directly from call audio, such as whether a caller sounds frustrated or a voice is AI-generated, and returns probabilities. Hume reports 70.7% agreement with a human panel. Access is by waitlist; treat it as a signal to test, not a control. vendor-reported	Hume AI: Audio Decision API https://www.hume.ai/blog/introducing-hume-audio-decision-api
+Each link opens the maker's own announcement in a new tab. Figures are the makers' claims and were not tested for this report.
+
+9 · HEALTH CARE NOTES
 
 What changed for health systems
 
@@ -239,7 +258,7 @@ Clinic results: about 50% of calls handled end to end in a vendor's most recentl
 Clinical speech: Nemotron 3.5 Transcribe's error rate on accented clinical speech fell from 30.8% to 23.8% with prompting alone, and to 11.8% after fine-tuning; test on your own patients' audio.[16] NEW vendor-reported
 The TV-in-the-room finding applies equally to patients calling from home or a waiting room. author's view
 
-9 · CLAIM CHECK
+10 · CLAIM CHECK
 
 New and revised claims
 
@@ -590,7 +609,7 @@ Written in a personal capacity; the views are my own, not any employer's. No com
 
 Back to sbmadhav.com
 Connect on LinkedIn
-By Madhav Srinivasan · November 2026 edition · Research cutoff November 10, 2026
+By Madhav Srinivasan · November 2026 edition · Research cutoff November 14, 2026
 Bracketed numbers in the text link to the numbered sources above. Past editions: github.com/sbmadhav/state-of-voice-agents.
 Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
 
