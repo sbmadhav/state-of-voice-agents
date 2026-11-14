@@ -317,6 +317,21 @@ table.t-router td.n .chip{white-space:normal;margin-top:var(--space-1)}
 .pk .v{font-family:var(--font-mono);font-size:var(--text-code-size);font-variant-numeric:tabular-nums}
 .pk .k{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--ink-muted)}
 
+/* Voice-overs: AI narration of each section, from /state-of-voice-agents/audio/<edition>/ (same origin).
+   Controls stay hidden until the edition's manifest lists audio for that section. */
+.hero-audio{display:grid;gap:var(--space-2);margin-top:var(--space-3)}
+.readtime{font-family:var(--font-mono);font-size:var(--text-kicker-size);letter-spacing:var(--text-kicker-tracking);color:var(--ink-muted)}
+.listen-all{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2) var(--space-3)}
+.listen{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2) var(--space-3)}
+.listen .md-btn,.listen-all .md-btn{box-shadow:none}
+.listen .md-btn svg,.listen-all .md-btn svg{width:14px;height:14px}
+.listen-dur{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--ink-muted);font-weight:var(--text-body-weight)}
+.listen-panel{flex:1 0 100%;display:grid;gap:var(--space-1-5)}
+.listen-panel>*{max-width:36rem}
+.listen-panel audio{width:100%;min-width:0}
+.listen-links{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+.listen-next{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;font-size:inherit}
+@media print{.listen,.listen-all,#listen-min{display:none!important}}
 /* sources */
 ol.src{padding-left:0;list-style:none;display:grid;gap:var(--space-2);font-size:var(--text-label-sm-size);counter-reset:none}
 ol.src li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:var(--space-2);padding:var(--space-2) 0;border-bottom:1px solid var(--line)}
@@ -528,11 +543,23 @@ ol.src li:target{background:var(--accent-soft)}
 </nav>
 </div>
 
-<main id="main" tabindex="-1">
+<main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-10/">
 <header class="hero" id="brief">
   <div class="wrap">
     <p class="eyebrow">State of conversational voice agents · Healthcare first, with notes for financial services</p>
     <p style="margin-top:var(--space-2)"><span class="edition">October 2026 edition</span></p>
+    <div class="hero-audio" data-narrate-skip>
+      <p class="readtime"><span id="read-min">About 46 min read</span><span id="listen-min" hidden></span></p>
+      <div class="listen-all" id="listen-all" hidden>
+        <button type="button" class="md-btn md-btn--sm" id="listen-all-btn" aria-expanded="false" aria-controls="listen-all-panel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Listen to the whole report</button>
+        <span class="note">AI voice by ElevenLabs</span>
+        <div class="listen-panel" id="listen-all-panel" hidden>
+          <p class="note" id="listen-now" aria-live="polite"></p>
+          <audio id="listen-all-audio" controls preload="none" aria-label="Whole report, AI narration"></audio>
+          <p class="note listen-links"><button type="button" class="listen-next" id="listen-next">Next section</button> <a id="listen-all-tx" href="#">Transcript</a></p>
+        </div>
+      </div>
+    </div>
     <h1 style="margin-top:var(--space-3)">Voice agents at the front door</h1>
     <div class="wave" id="wave" aria-hidden="true"></div>
     <div class="wave-cap" aria-hidden="true"><span>caller</span><span>agent</span><span>caller</span><span>agent</span><span>handoff</span></div>
@@ -643,7 +670,7 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
       <div class="axis" aria-hidden="true"><div></div><div class="ticks" id="ticks"></div><div></div></div>
       <div class="db" id="db"></div>
-      <div class="keyline">
+      <div class="keyline" data-narrate-skip>
         <span><i class="sw" style="background:var(--accent)"></i>Passed all 3 tries (pass^3)</span>
         <span><i class="sw" style="border:3px solid var(--ink-muted)"></i>Single-run task completion</span>
         <span><i class="sw" style="background:var(--signal-soft);border-radius:3px;width:20px;height:8px"></i>The demo gap</span>
@@ -715,7 +742,7 @@ ol.src li:target{background:var(--accent-soft)}
       <h2>The lever is resolution rate, not token price</h2>
       <p class="lede">Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person, and those tend to be the longer, harder ones. Some calls the agent closes come back as repeat calls. Defaults use published per-minute pricing<a class="c" data-s="beri" href="#src-beri" title="beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)">[24]</a> and a fully loaded human cost per call<a class="c" data-s="helpware" href="#src-helpware" title="Helpware: Healthcare call center costs (2026)">[25]</a>. Platform, integration and team costs are a fixed annual line.</p>
     </div>
-    <div class="calc">
+    <div class="calc" data-narrate-skip>
       <div class="panel stack" id="calc-ctrls">
         <span class="ix">Interactive · drag sliders or pick a preset</span>
         <div class="ctrl"><label for="c-calls">Daily inbound calls, all queues <output id="o-calls"></output></label><input type="range" id="c-calls" min="2000" max="60000" step="1000" value="15000"></div>
@@ -1997,6 +2024,48 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
   finally{$('bolt-send').disabled=false}
  }
 })();
+/* Voice-overs: one Listen control per narrated section and a playlist in the hero, from the edition's
+   manifest (written by .github/workflows/voiceover.yml). No autoplay; only one player sounds at a time. */
+(function(){
+ const main=$('main'),base=main&&main.dataset.audioBase;if(!base||!window.fetch)return;
+ const fmt=s=>{s=Math.max(0,Math.round(s));const m=Math.floor(s/60),r=s%60;return m+':'+String(r).padStart(2,'0')};
+ const spoken=s=>{s=Math.max(1,Math.round(s));const m=Math.floor(s/60),r=s%60;return (m?m+' minute'+(m>1?'s':''):'')+(m&&r?' ':'')+(r?r+' second'+(r>1?'s':''):'')};
+ const icon='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
+ const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ // An MP3 is either a file beside the manifest or, once uploaded to Cloudflare R2, an https URL in the manifest
+ const srcOf=f=>/^https:\/\//.test(f.url||'')?f.url:base+f.file;
+ const titleOf=sec=>{const h=sec.querySelector('h1,h2');return h?h.textContent.trim():sec.id};
+ // One player at a time: starting any audio pauses the others
+ document.addEventListener('play',e=>{document.querySelectorAll('main audio').forEach(a=>{if(a!==e.target&&!a.paused)a.pause()})},true);
+ fetch(base+'manifest.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{
+  const files=(m&&m.sections)||{};
+  const secs=[...main.querySelectorAll('section[id], header.hero[id]')].filter(sec=>files[sec.id]&&(files[sec.id].file||files[sec.id].url));
+  if(!secs.length)return;
+  secs.forEach(sec=>{
+   const f=files[sec.id],id=sec.id,title=titleOf(sec);
+   const box=document.createElement('div');box.className='listen';box.setAttribute('data-narrate-skip','');
+   box.innerHTML=`<button type="button" class="md-btn md-btn--sm" aria-expanded="false" aria-controls="listen-${id}-panel">${icon}Listen<span class="md-sr-only"> to ${esc(title)}, ${spoken(f.duration||0)}</span> <span class="listen-dur" aria-hidden="true">${fmt(f.duration||0)}</span></button>`+
+    `<div class="listen-panel" id="listen-${id}-panel" hidden><audio controls preload="none"></audio><p class="note listen-links"><a href="${base}${id}.txt">Transcript<span class="md-sr-only"> of ${esc(title)}</span></a><span>AI voice by ElevenLabs</span></p></div>`;
+   const btn=box.querySelector('button'),panel=box.querySelector('.listen-panel'),au=box.querySelector('audio');
+   au.src=srcOf(f);au.setAttribute('aria-label','Narration: '+title+', '+spoken(f.duration||0));
+   btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
+   if(sec.classList.contains('hero')){const h=sec.querySelector('h1');h.insertAdjacentElement('afterend',box);box.style.marginTop='var(--space-3)'}
+   else{const head=sec.querySelector('.head');(head||sec.querySelector('.wrap')||sec).appendChild(box)}
+  });
+  // Listening time, and the whole update as a playlist, in section order
+  const total=secs.reduce((t,sec)=>t+(+files[sec.id].duration||0),0);
+  if(total>0){const lm=$('listen-min');lm.textContent=' · '+Math.max(1,Math.round(total/60))+' min listen';lm.hidden=false}
+  const all=$('listen-all'),btn=$('listen-all-btn'),panel=$('listen-all-panel'),au=$('listen-all-audio'),now=$('listen-now'),tx=$('listen-all-tx'),next=$('listen-next');
+  let i=0;
+  const load=k=>{i=k;const sec=secs[i];au.src=srcOf(files[sec.id]);tx.href=base+sec.id+'.txt';
+   now.textContent='Now playing '+(i+1)+' of '+secs.length+': '+titleOf(sec);next.hidden=i>=secs.length-1};
+  load(0);
+  au.addEventListener('ended',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});
+  next.addEventListener('click',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});
+  btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
+  all.hidden=false;
+ }).catch(()=>{});
+})();
 /* Comments: utterances (GitHub issues, free, no ads). Loads on the published site only; inside an embed the GitHub links are shown instead. */
 (function(){
  const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
@@ -2025,6 +2094,8 @@ document.addEventListener('click', function (e) {
   if (!window.siteTrack || !e.target.closest) return;
   if (e.target.closest('#pdf-open')) siteTrack('voice/pdf', 'Opened Download PDF');
   else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
+  else if (e.target.closest('#listen-all-btn')) siteTrack('voice/listen-all', 'Opened Listen to the whole report');
+  else if (e.target.closest('.listen > button')) siteTrack('voice/listen', 'Opened a section voice-over');
 }, true);
 </script>
 

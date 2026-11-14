@@ -1,0 +1,33 @@
+State of conversational voice agents. Monthly update. Financial services focus, with health care notes.
+
+November 2026 edition.
+
+Builds on the October 2026 baseline. Only what changed, or is reviewed for the first time, is here.
+
+Banks and credit unions reach the front door.
+
+Reviewed for the first time, bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all reported by the institution or its vendor. A new entrant topped the reliability benchmark, OpenAI's decision API left beta, the FCC gave callers more flexibility on opt-outs, and California tightened rules on AI in health care. The new risk is ordinary: a TV playing in the room broke most voice agents in one test.
+
+Best repeat reliability: 87.8 percent. October: 75.6 percent, 7 platforms. A new entrant, PolyAI, leads ten configurations; its range (about 79 percent to 93 percent) overlaps the runner-up's. Vendor-reported.
+
+Share of all calls, dated bank result: 7 percent. October: not reviewed. Southern Cross Credit Union's voice agent takes 7 percent of all calls, mostly balances (October 27). Undated vendor case studies claim 37 percent to 90 percent. Vendor-reported.
+
+Task completion, TV on: 8.6 percent. Same test, clean calls: 38.7 percent. Across 14 voice systems on simulated calls with a TV playing in the room. Vendor-reported.
+
+TCPA opt-out rules: November 25. October: not reviewed. FCC 26-67 takes effect: one or more approved opt-out methods, disclosed on the call; category-limited opt-outs; a wider fraud-alert exemption. Independent.
+
+Unchanged since October.
+
+The three theses stand: reliability is the gap, think silently, then respond, and invest in governed memory. So do the economics model, the 90-day pilot and the router comparison. Everything else is indexed at the end with a link to its October section.
+
+How to read this update: method, labels and disclosure.
+
+Delta only. Findings published between October 12 and November 10, 2026 carry a "new" tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.
+
+Labels. Independent. Vendor-reported. Company-reported. Author's view. Every figure links to its source.
+
+Method. A review of public sources up to the research cutoff. I did not run my own tests.
+
+Terms. "Repeat reliability" (pass three) is the share of test scenarios passed on all three tries. Word error rate is the share of words transcribed wrongly. Full-duplex models listen and talk at the same time. A System-1 model makes fast typed decisions (route, risk, done talking) without writing prose.
+
+Disclosure. Written in a personal capacity. No commercial relationship with any vendor named, and no sponsorship. Regulatory summaries are not legal advice.

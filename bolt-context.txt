@@ -8,6 +8,8 @@ STATE OF CONVERSATIONAL VOICE AGENTS · MONTHLY UPDATE · FINANCIAL SERVICES FOC
 
 November 2026 edition Builds on the October 2026 baseline. Only what changed, or is reviewed for the first time, is here.
 
+About 23 min read
+
 Banks and credit unions reach the front door
 
 Reviewed for the first time, bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all reported by the institution or its vendor. A new entrant topped the reliability benchmark, OpenAI's decision API left beta, the FCC gave callers more flexibility on opt-outs, and California tightened rules on AI in health care. The new risk is ordinary: a TV playing in the room broke most voice agents in one test.
@@ -181,6 +183,7 @@ TCPA opt-out rules, FCC 26-67 NEW	Callers may designate one or more approved met
 FCC AI call disclosure proposal (FCC 24-84)	Would require AI disclosure at consent and on the call	Proposed Aug 2024; not adopted as of Oct 2026[49]
 Colorado SB 26-189	Notice before automated tools materially influence financial or lending decisions; explanation and human review after an adverse outcome; fraud and AML tools carved out	Signed May 14, 2026; effective Jan 1, 2027, if rulemaking is done; October listed it as unverified[50]
 Utah AI Policy Act	Disclose AI when asked; regulated occupations disclose up front in high-risk interactions, including financial advice and collecting sensitive data	Effective May 7, 2025; sunsets July 1, 2027[51]
+New York RAISE Act (frontier AI developers) NEW	Covers the model makers, not the bank: AI developers with more than $500M in annual revenue (OpenAI and Anthropic are named) must register by Jan 1, 2027, publish safety frameworks and model transparency reports, and report critical safety incidents within 72 hours, against 15 days under California's SB 53. Fines run up to $1M per violation, then $3M. For a bank, those filings are new evidence for vendor due diligence author's view	Registration opened Nov 10, 2026; takes effect at the start of 2027[52]
 
 6 · FRAUD AND IDENTITY
 
@@ -193,10 +196,10 @@ Correction: New York's financial regulator advised in October 2024 against voice
 New: deepfake detectors degrade substantially after the audio crosses a real phone line. On call audio, one detector's equal error rate (where missed fakes equal false alarms) was 37.9%, and 22.4% after retraining on call audio.[14] NEW independent
 Revised tier: for payments, payee changes and limit increases, use an app push or another phishing-resistant check; keep voiceprint and liveness as risk signals that can block, never as the only factor that approves. author's view
 FINANCIAL FRAUD DATA
-Synthetic-voice attacks rose 149% at banks and 475% at insurers in 2024, across 1.2 billion calls analyzed.[52] vendor-reported
-One credit union's deepfake detection avoided $2.57M of fraud exposure in about 13 months.[53] vendor-reported
-US consumers reported $3.5B lost to impostor scams in 2025; bank impersonators accounted for nearly $1B, more than government impersonators.[54] independent
-Generative AI could push US fraud losses from $12.3B in 2023 to $40B by 2027 (a projection).[55] independent
+Synthetic-voice attacks rose 149% at banks and 475% at insurers in 2024, across 1.2 billion calls analyzed.[53] vendor-reported
+One credit union's deepfake detection avoided $2.57M of fraud exposure in about 13 months.[54] vendor-reported
+US consumers reported $3.5B lost to impostor scams in 2025; bank impersonators accounted for nearly $1B, more than government impersonators.[55] independent
+Generative AI could push US fraud losses from $12.3B in 2023 to $40B by 2027 (a projection).[56] independent
 
 7 · MODELS, PLATFORMS AND ROUTING
 
@@ -205,24 +208,24 @@ What shipped, and what it changes
 Releases that change a recommendation, then a short list of everything else. The architecture and routing analysis is in October, T1 and T5.
 
 FAST DECISION MODELS (SYSTEM 1)
-OpenAI Decisions API: beta to generally available (Oct 22) on GPT-6 Luna, up to 400 questions a request, $0.10 per million input tokens. GPT-Live sends turns to it while the caller is still speaking. Sierra, a customer, reported p95 under 280 ms in launch coverage.[15][56] NEW vendor-reported
-New options: Zoom Decisions ($0.042 and $0.10 per million input tokens; 81.3% and 83.9% on five text benchmarks)[57]; LiveKit's DecisionModel runs named decisions beside the call.[58] NEW vendor-reported
-Jev: October p50 175 ms, p95 270 ms; a second test measured p50 151 ms, p95 247 ms. No self-hosted version exists.[59][60] independent
-Edge: open Laya needs about 1 GB (0.85 GB ONNX at fp16); a Cloudflare Worker gets 128 MB. Run decision models in containers or on your own servers.[61][62] author's view
+OpenAI Decisions API: beta to generally available (Oct 22) on GPT-6 Luna, up to 400 questions a request, $0.10 per million input tokens. GPT-Live sends turns to it while the caller is still speaking. Sierra, a customer, reported p95 under 280 ms in launch coverage.[15][57] NEW vendor-reported
+New options: Zoom Decisions ($0.042 and $0.10 per million input tokens; 81.3% and 83.9% on five text benchmarks)[58]; LiveKit's DecisionModel runs named decisions beside the call.[59] NEW vendor-reported
+Jev: October p50 175 ms, p95 270 ms; a second test measured p50 151 ms, p95 247 ms. No self-hosted version exists.[60][61] independent
+Edge: open Laya needs about 1 GB (0.85 GB ONNX at fp16); a Cloudflare Worker gets 128 MB. Run decision models in containers or on your own servers.[62][63] author's view
 SPEECH, TELEPHONY AND CONTACT CENTER
-ElevenLabs: Eleven Realtime Max scored 98.8% on Big Bench Audio reasoning and 87.1% on tool-use task success in independent tests, with 0.57 s to first audio, slower than the 470 ms claimed; it opened to all workspaces on Nov 2.[63][64][31] independent Its agents now plug natively into NiCE CXone, Genesys Cloud, Amazon Connect and Five9, so a pilot can sit inside an existing contact center.[65] NEW vendor-reported HIPAA and retention terms for Realtime are not yet documented.
-Deepgram: Think-Live, which decides when the agent should listen, wait or respond, is generally available, and Flux TTS is GA in nine languages (Oct 29). No benchmarks published.[66] NEW vendor-reported
-OpenAI: GPT-Live connects directly to phone lines over SIP (the standard for business telephony), inbound and outbound, with call transfer.[67] vendor-reported
-Two new models are too slow for live voice: in Regal's Oct 15 run, GPT-6.1 Sol (1,711 ms) and Gemini 3.8 Flash (2,516 ms) miss its 1,300 ms bar; GPT-6 Sol leads at 786 of 1,000.[68] NEW vendor-reported
-Open speech: NVIDIA Nemotron 3.5 Transcribe (4.71% English WER, commercial license) is for recorded calls; it does not stream.[16][69] Gradium Phonon produces speech in about 43 ms on a server CPU and about 7 ms on a laptop CPU; only its 31M English model is Apache-2.0, while the 40M and multilingual models are non-commercial.[17][70] NEW vendor-reported
-Market: Salesforce agreed to acquire Cresta (Nov 2) and Five9 to acquire Level AI for about $325M (Nov 5); check data-export and exit terms in any new contract.[71][72] NEW company-reported
+ElevenLabs: Eleven Realtime Max scored 98.8% on Big Bench Audio reasoning and 87.1% on tool-use task success in independent tests, with 0.57 s to first audio, slower than the 470 ms claimed; it opened to all workspaces on Nov 2.[64][65][31] independent Its agents now plug natively into NiCE CXone, Genesys Cloud, Amazon Connect and Five9, so a pilot can sit inside an existing contact center.[66] NEW vendor-reported HIPAA and retention terms for Realtime are not yet documented.
+Deepgram: Think-Live, which decides when the agent should listen, wait or respond, is generally available, and Flux TTS is GA in nine languages (Oct 29). No benchmarks published.[67] NEW vendor-reported
+OpenAI: GPT-Live connects directly to phone lines over SIP (the standard for business telephony), inbound and outbound, with call transfer.[68] vendor-reported
+Two new models are too slow for live voice: in Regal's Oct 15 run, GPT-6.1 Sol (1,711 ms) and Gemini 3.8 Flash (2,516 ms) miss its 1,300 ms bar; GPT-6 Sol leads at 786 of 1,000.[69] NEW vendor-reported
+Open speech: NVIDIA Nemotron 3.5 Transcribe (4.71% English WER, commercial license) is for recorded calls; it does not stream.[16][70] Gradium Phonon produces speech in about 43 ms on a server CPU and about 7 ms on a laptop CPU; only its 31M English model is Apache-2.0, while the 40M and multilingual models are non-commercial.[17][71] NEW vendor-reported
+Market: Salesforce agreed to acquire Cresta (Nov 2) and Five9 to acquire Level AI for about $325M (Nov 5); check data-export and exit terms in any new contract.[72][73] NEW company-reported
 ALSO SHIPPED, NO CHANGE TO RECOMMENDATIONS
-Anthropic Claude Fable 5.2 (Nov 9): a text model, usable as the reasoner behind a voice layer; $8 and $40 per million input and output tokens, up to 30% faster than 5.1; no audio and no voice-agent benchmarks yet.[73] NEW vendor-reported
-Phonic-1 (Oct 29): a speech-to-speech model claiming 83.2 on tau-cubed voice (Sierra's benchmark of voice agents completing customer-service tasks) against 79.9 for GPT-Live 1.[74] NEW vendor-reported
-NVIDIA NemotronLabs VoiceChat (Sept 2026): an open full-duplex model that calls tools while it talks; 33.0% pass@1 on tool use against 54.0% for Gemini 3.1 Live.[75] vendor-reported
-Meta: voice conversations in its consumer Muse app (US, Nov 5); no developer API or enterprise voice model.[76] NEW vendor-reported
-Frameworks: Pipecat pairs a fast front-end model with a slower back-end model; Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source.[77][78] NEW vendor-reported
-Research: ConvFill (a small talker covering a frontier model's delay; a later paper notes it does not measure the risk of the filler contradicting the final answer)[79][80] independent; Block's Dessa (full-duplex, trained only on audio, no benchmarks).[81] NEW
+Anthropic Claude Fable 5.2 (Nov 9): a text model, usable as the reasoner behind a voice layer; $8 and $40 per million input and output tokens, up to 30% faster than 5.1; no audio and no voice-agent benchmarks yet.[74] NEW vendor-reported
+Phonic-1 (Oct 29): a speech-to-speech model claiming 83.2 on tau-cubed voice (Sierra's benchmark of voice agents completing customer-service tasks) against 79.9 for GPT-Live 1.[75] NEW vendor-reported
+NVIDIA NemotronLabs VoiceChat (Sept 2026): an open full-duplex model that calls tools while it talks; 33.0% pass@1 on tool use against 54.0% for Gemini 3.1 Live.[76] vendor-reported
+Meta: voice conversations in its consumer Muse app (US, Nov 5); no developer API or enterprise voice model.[77] NEW vendor-reported
+Frameworks: Pipecat pairs a fast front-end model with a slower back-end model; Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source.[78][79] NEW vendor-reported
+Research: ConvFill (a small talker covering a frontier model's delay; a later paper notes it does not measure the risk of the filler contradicting the final answer)[80][81] independent; Block's Dessa (full-duplex, trained only on audio, no benchmarks).[82] NEW
 
 8 · HEALTH CARE NOTES
 
@@ -231,8 +234,8 @@ What changed for health systems
 October's health care analysis stands: published results, readiness by call type and regulation.
 
 California AB 1979 (signed Oct 2026, effective Jan 1, 2027): a licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt.[18] NEW independent
-Payer and administrator calls: a health plan administrator is putting voice agents on inbound provider calls about eligibility, benefits, balances and claims status, handing off to people in its existing contact center (Nov 4).[82] NEW vendor-reported
-Clinic results: about 50% of calls handled end to end in a vendor's most recently onboarded pilot clinics.[83] NEW vendor-reported
+Payer and administrator calls: a health plan administrator is putting voice agents on inbound provider calls about eligibility, benefits, balances and claims status, handing off to people in its existing contact center (Nov 4).[83] NEW vendor-reported
+Clinic results: about 50% of calls handled end to end in a vendor's most recently onboarded pilot clinics.[84] NEW vendor-reported
 Clinical speech: Nemotron 3.5 Transcribe's error rate on accented clinical speech fell from 30.8% to 23.8% with prompting alone, and to 11.8% after fine-tuning; test on your own patients' audio.[16] NEW vendor-reported
 The TV-in-the-room finding applies equally to patients calling from home or a waiting room. author's view
 
@@ -253,18 +256,18 @@ GPT Realtime 64.63% pass^3	verified	Was unverified in October; now listed on the
 California AB 1609 (customer service chatbots) was signed	verified	Was unverified in October; signed Sept 28, 2026 as Chapter 733, effective Jan 1, 2027[12]
 Colorado's replacement AI law takes effect Jan 1, 2027	verified	Was unverified in October; signed May 14, 2026, effective Jan 1, 2027 if rulemaking is complete[50]
 PolyAI leads Cekura Bench at 87.8% pass^3	partial or vendor	On the hub, but two checks were not scored for PolyAI and its range overlaps the runner-up's[1]
-Jev can run locally or at the edge	unverified or wrong	No weights or self-hosted build; open Laya needs about 1 GB, beyond a Cloudflare Worker's 128 MB[60]
+Jev can run locally or at the edge	unverified or wrong	No weights or self-hosted build; open Laya needs about 1 GB, beyond a Cloudflare Worker's 128 MB[61]
 Banks are replacing contact-center staff with voice bots	unverified or wrong	Commonwealth Bank cut 45 roles citing a voice bot, then reversed the cuts; no large US bank publishes voice-agent metrics[26]
 Voice biometrics is enough for high-risk banking calls	unverified or wrong	New York's regulator advises against voice as an authentication factor; detectors miss more over phone lines[13]
 Customers do not want AI on bank calls	partial or vendor	About 30% accept it for routine tasks; most want a person for fraud and collections[30]
 A TV in the room breaks most voice agents	partial or vendor	Vendor research on simulated calls: task completion fell from 38.7% to 8.6% across 14 systems; noise options were off[4]
 An open model removes background voices better than commercial tools	partial or vendor	VoxLock 4.95% WER vs 5.30% to 9.38% for three commercial tools, in its author's own test[9]
-Open-source speech recognition has caught up	partial or vendor	Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models[69]
-Eleven Realtime starts speaking in 470 ms	unverified or wrong	Independent tests measured 0.57 s (Max) and 0.62 s (Mini); its reasoning scores did match[63]
-Salesforce Launa-Omni matches the leading voice models	partial or vendor	Second on Scale's Audio MultiChallenge (59.69 vs 60.40, within error); its tau-cubed voice score is self-reported[84]
-Chatbase Voice gives speech-to-speech agents chat-grade control	unverified or wrong	Chatbase names no model or architecture and publishes no tests[85]
-Fish Audio understands conversations, not just text	unverified or wrong	Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call[86]
-Block's Dessa is a usable full-duplex voice model	unverified or wrong	Research preview with a waitlist; no size, benchmarks or tool use published[81]
+Open-source speech recognition has caught up	partial or vendor	Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models[70]
+Eleven Realtime starts speaking in 470 ms	unverified or wrong	Independent tests measured 0.57 s (Max) and 0.62 s (Mini); its reasoning scores did match[64]
+Salesforce Launa-Omni matches the leading voice models	partial or vendor	Second on Scale's Audio MultiChallenge (59.69 vs 60.40, within error); its tau-cubed voice score is self-reported[85]
+Chatbase Voice gives speech-to-speech agents chat-grade control	unverified or wrong	Chatbase names no model or architecture and publishes no tests[86]
+Fish Audio understands conversations, not just text	unverified or wrong	Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call[87]
+Block's Dessa is a usable full-duplex voice model	unverified or wrong	Research preview with a waitlist; no size, benchmarks or tool use published[82]
 
 UNCHANGED SINCE OCTOBER
 
@@ -449,108 +452,111 @@ https://www.skadden.com/insights/publications/2026/06/colorado-repeals-and-repla
 Perkins Coie: New Utah AI laws change disclosure requirements (2025) independent
 https://www.ashurstperkinscoie.com/en/insights/new-utah-ai-laws-change-disclosure-requirements-and-identity-protections-target-mental-health-chatbo/
 [52]
+TechCrunch: OpenAI, Anthropic face new oversight as New York's AI safety law takes effect (Nov 10, 2026) independent
+https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/
+[53]
 CIO Influence: Pindrop 2025 Voice Intelligence and Security Report (Jun 12, 2025) vendor
 https://cioinfluence.com/security/pindrops-2025-voice-intelligence-security-report-reveals-1300-surge-in-deepfake-fraud/
-[53]
+[54]
 American Banker: Michigan credit union blocks fraud with deepfake detection (Dec 23, 2025) vendor
 https://www.americanbanker.com/creditunions/news/michigan-credit-union-blocks-fraud-with-deepfake-detection
-[54]
+[55]
 Techlicious: Imposter scam losses hit $3.5 billion in 2025, FTC data (Jun 15, 2026) independent
 https://www.techlicious.com/blog/imposter-scam-losses-3-billion-2025-ftc/
-[55]
+[56]
 Deloitte Insights: Deepfake banking fraud risk on the rise (May 29, 2024) independent
 https://www.deloitte.com/us/en/insights/industry/financial-services/deepfake-banking-fraud-risk-on-the-rise.html
-[56]
+[57]
 Unite.AI: OpenAI makes Decisions API generally available with GPT-6 Luna (Oct 22, 2026) vendor
 https://www.unite.ai/openai-makes-decisions-api-generally-available-with-gpt-6-luna/
-[57]
+[58]
 Zoom AI Research: Introducing Zoom Decisions APIs (Oct 19, 2026) vendor
 https://www.zoom.com/en/ai-research/introducing-zoom-decisions-apis-accurate-speech-reliable-action/
-[58]
+[59]
 LiveKit Agents 1.8.9 release notes: DecisionModel backends (Oct 24, 2026) vendor
 https://github.com/livekit/agents/releases/tag/livekit-agents%401.8.9
-[59]
+[60]
 OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026) vendor
 https://openrouter.ai/blog/insights/jev-vs-claude-opus-5-classification
-[60]
+[61]
 OrcaRouter: Is there an open-source Jev? Measured latency and look-alikes (Sep 30, 2026) independent
 https://www.orcarouter.ai/blog/jev-open-source
-[61]
+[62]
 Hugging Face onnx-community: Laya ONNX weights independent
 https://huggingface.co/onnx-community/laya-ONNX
-[62]
+[63]
 Cloudflare: Workers platform limits (updated Oct 29, 2026) vendor
 https://developers.cloudflare.com/workers/platform/limits
-[63]
+[64]
 Artificial Analysis: speech-to-speech models leaderboard (read Nov 6, 2026) independent
 https://artificialanalysis.ai/models/speech-to-speech
-[64]
+[65]
 JDN: ElevenLabs unveils faster, more accurate speech-to-speech models (Oct 20, 2026) independent
 https://www.journaldunet.com/en/1556895-elevenlabs-unveils-faster-more-accurate-speech-to-speech-models/
-[65]
+[66]
 ElevenLabs: ElevenAgents contact center integrations (Nov 4, 2026) vendor
 https://elevenlabs.io/blog/elevenagents-contact-center-integrations
-[66]
+[67]
 Deepgram: Voice agents that keep the thread, Think-Live and Flux TTS (Oct 29, 2026) vendor
 https://deepgram.com/blog/voice-agents-that-keep-the-thread
-[67]
+[68]
 OpenAI: GPT-Live SIP guide vendor
 https://developers.openai.com/api/docs/guides/voice-sip
-[68]
+[69]
 Regal: Best LLMs for voice AI agents, October 2026 benchmark (Oct 15, 2026) vendor
 https://www.regal.ai/blog/voice-cx-benchmark-new-llms-october-2026
-[69]
+[70]
 eesel: Nemotron 3.5 Transcribe against closed models (Oct 29, 2026) independent
 https://www.eesel.ai/blog/nemotron-3-5-transcribe
-[70]
+[71]
 Gradium: Phonon open weights, laptop and Raspberry Pi latency, licenses (Oct 20, 2026) vendor
 https://gradium.ai/blog/release-phonon-open-weight
-[71]
+[72]
 Salesforce: Salesforce signs definitive agreement to acquire Cresta (Nov 2, 2026) company
 https://www.salesforce.com/news/stories/salesforce-signs-definitive-agreement-to-acquire-cresta/
-[72]
+[73]
 Five9: agreement to acquire Level AI, SEC Form 8-K exhibit (Nov 5, 2026) company
 https://www.sec.gov/Archives/edgar/data/0001288847/000128884726000141/projectlanderpressreleas.htm
-[73]
+[74]
 Anthropic: Claude Fable 5.2 and Mythos 5.2 (Nov 9, 2026) vendor
 https://www.anthropic.com/claude-fable-and-mythos-5-2
-[74]
+[75]
 Phonic: Introducing Phonic-1 (Oct 29, 2026) vendor
 https://phonic.ai/blog/phonic-1
-[75]
+[76]
 NVIDIA: NemotronLabs VoiceChat, an open full-duplex speech-to-speech model with tool calling (arXiv 2609.21967, Sept 2026) vendor
 https://arxiv.org/abs/2609.21967
-[76]
+[77]
 Meta: Introducing Muse AI voice and expressive avatars (Nov 5, 2026) vendor
 https://about.fb.com/news/2026/11/introducing-muse-ai-voice-expressive-avatars/
-[77]
+[78]
 Pipecat v1.13.0 release notes: LLMWithBackend (Oct 19, 2026) vendor
 https://github.com/pipecat-ai/pipecat/releases/tag/v1.13.0
-[78]
+[79]
 Deepgram: Deepgram is acquiring Daily, makers of Pipecat (Oct 29, 2026) vendor
 https://deepgram.com/blog/daily-pipecat-deepgram
-[79]
+[80]
 Srinivas et al. (University of Washington): ConvFill, conversational infill (arXiv 2511.07397) independent
 https://arxiv.org/abs/2511.07397
-[80]
+[81]
 Huang, Tan et al.: PACE, a playback-aligned context engine for full-duplex voice dialogue (arXiv 2609.10372) independent
 https://arxiv.org/abs/2609.10372
-[81]
+[82]
 Voice AI Space: Block launches Dessa, a full-duplex speech model trained only on audio (Oct 24, 2026) independent
 https://www.voiceaispace.com/articles/block-launches-dessa-a-full-duplex-speech-model-trained-only-on-audio
-[82]
+[83]
 PR Newswire: WellNet Healthcare selects EHVAhealth voice AI for provider calls (Nov 4, 2026) vendor
 https://www.prnewswire.com/news-releases/tpa-wellnet-healthcare-selects-ehvahealth-voice-ai-to-automate-health-plan-provider-calls-302928436.html
-[83]
+[84]
 Newswire: MEDFAR acquires AlloMia (Oct 14, 2026) vendor
 https://www.newswire.ca/news-releases/medfar-acquires-allomia-advancing-myle-as-a-system-of-intelligence-for-clinics-860139604.html
-[84]
+[85]
 Scale AI: Audio MultiChallenge leaderboard (read Nov 6, 2026) independent
 https://labs.scale.com/leaderboard/audiomc
-[85]
+[86]
 Chatbase: Voice product page (read Nov 6, 2026) vendor
 https://www.chatbase.co/voice
-[86]
+[87]
 eesel: Fish Audio Drama 3 tested, citing Artificial Analysis (Oct 2026) independent
 https://www.eesel.ai/de/blog/fish-audio-drama-3-test
 
@@ -584,7 +590,7 @@ Written in a personal capacity; the views are my own, not any employer's. No com
 
 Back to sbmadhav.com
 Connect on LinkedIn
-By Madhav Srinivasan · November 2026 edition · Research cutoff November 9, 2026
+By Madhav Srinivasan · November 2026 edition · Research cutoff November 10, 2026
 Bracketed numbers in the text link to the numbered sources above. Past editions: github.com/sbmadhav/state-of-voice-agents.
 Outcome figures are customer- or vendor-reported unless marked otherwise. Regulatory summaries are not legal advice.
 

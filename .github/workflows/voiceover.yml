@@ -1,0 +1,145 @@
+name: Voice-over
+
+# AI narration of the report with ElevenLabs. tools/narration.py turns each section of index.html into a script
+# (audio/<edition>/<section>.txt, committed: they are also the transcripts), and tools/voiceover.py generates MP3s
+# only for scripts whose SHA-256 differs from audio/<edition>/manifest.json.
+#
+# Needs the repository secret ELEVENLABS_API_KEY (Settings > Secrets and variables > Actions). Optional repository
+# variables: ELEVENLABS_VOICE_ID (default WQP7cQUF5aAS6Axh5yaa, "Elara - Crisp Pro Narrator") and
+# ELEVENLABS_MODEL_ID (default eleven_v4). Without the secret, the audio job skips with a notice.
+#
+# Each section is recorded once and regenerated only when its text, the voice or the model changes. To host the
+# MP3s on Cloudflare R2 instead of in this repository, add the secrets R2_ACCOUNT_ID, R2_ACCESS_KEY_ID and
+# R2_SECRET_ACCESS_KEY and the variables R2_BUCKET and AUDIO_BASE_URL (the bucket's public https address).
+#
+# Never pushes to main. workflow_dispatch and pushes to main commit the audio to a new branch and open a pull
+# request; pull_request runs commit to the PR's own branch, and only when that branch is in this repository.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
+  pull_request:
+    branches: [main]
+    paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voiceover-${{ github.head_ref || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  narration:
+    name: Narration text is current
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      # The scripts and the read time are derived from index.html; a stale copy would narrate an old page
+      - name: Scripts and read time match index.html
+        run: |
+          ok=true
+          python3 tools/narration.py --check || ok=false
+          # Archived editions that carry voice-overs
+          for page in editions/*/index.html; do
+            if grep -q 'data-audio-base=' "$page"; then
+              python3 tools/narration.py --check --page "$page" || ok=false
+            fi
+          done
+          if [ "$ok" != "true" ]; then
+            echo "::error::Narration text or read time is out of date. Run python3 tools/narration.py (add --page editions/YYYY-MM/index.html for an archived edition) and commit the result."
+            exit 1
+          fi
+
+  audio:
+    name: Generate audio
+    needs: narration
+    # Fork pull requests get neither the secret nor a token that can push, so they skip
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write        # commit the MP3s and manifest to a branch (never main)
+      pull-requests: write   # open the pull request on workflow_dispatch and push
+    steps:
+      - name: Check for the ElevenLabs key
+        id: key
+        env:
+          HAS_KEY: ${{ secrets.ELEVENLABS_API_KEY != '' }}
+        run: |
+          if [ "$HAS_KEY" = "true" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Voice-over skipped::No ELEVENLABS_API_KEY secret. Add it in Settings > Secrets and variables > Actions, then run the Voice-over workflow."
+          fi
+
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        if: steps.key.outputs.present == 'true'
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || '' }}
+          persist-credentials: false
+
+      - name: Find the editions
+        if: steps.key.outputs.present == 'true'
+        id: ed
+        run: |
+          # Every edition folder with a manifest: the latest edition and any archived one that has voice-overs
+          eds=$(for m in audio/*/manifest.json; do basename "$(dirname "$m")"; done | grep -E '^[0-9]{4}-[0-9]{2}$' | sort | tr '\n' ' ')
+          echo "editions=$eds" >> "$GITHUB_OUTPUT"
+          for ed in $eds; do python3 tools/voiceover.py "audio/$ed" --dry-run; done
+
+      # The key reaches only this step, as an environment variable; the script never prints or stores it
+      - name: Generate changed sections
+        if: steps.key.outputs.present == 'true'
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ vars.ELEVENLABS_VOICE_ID }}
+          ELEVENLABS_MODEL_ID: ${{ vars.ELEVENLABS_MODEL_ID }}
+          # Cloudflare R2 (optional): with all of these set, MP3s are uploaded to the bucket and only the
+          # manifest, which records their URLs, is committed
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          AUDIO_BASE_URL: ${{ vars.AUDIO_BASE_URL }}
+          EDITIONS: ${{ steps.ed.outputs.editions }}
+        run: |
+          for ed in $EDITIONS; do python3 tools/voiceover.py "audio/$ed"; done
+
+      - name: Commit the audio
+        if: steps.key.outputs.present == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITION: ${{ steps.ed.outputs.editions }}
+          EVENT: ${{ github.event_name }}
+          HEAD_REF: ${{ github.head_ref }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          git add audio
+          if git diff --cached --quiet; then
+            echo "No narration changed; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Voice-over: generate audio (${EDITION% })"
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          if [ "$EVENT" = "pull_request" ]; then
+            git push -q "$remote" "HEAD:refs/heads/$HEAD_REF"
+            echo "::notice::Committed the audio to $HEAD_REF"
+          else
+            branch="voiceover/run-$RUN_ID"
+            git push -q "$remote" "HEAD:refs/heads/$branch"
+            body="Generated by the Voice-over workflow (run $RUN_ID). Audio manifest (and MP3s, unless hosted on Cloudflare R2) for these editions: $EDITION; see the run log for the characters sent to ElevenLabs."
+            if ! gh pr create --repo "$REPO" --base main --head "$branch" --title "Voice-over audio (${EDITION% })" --body "$body"; then
+              echo "::warning::Pushed $branch but could not open a pull request (allow GitHub Actions to create pull requests in Settings > Actions > General). Open it from https://github.com/$REPO/compare/main...$branch"
+            fi
+          fi

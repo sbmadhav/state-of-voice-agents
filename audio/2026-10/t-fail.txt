@@ -1,0 +1,27 @@
+T4. Failure modes.
+
+Agents mostly break on audio, identity and integration.
+
+Background noise and chatter. Mechanism: TV, traffic or other people in the room get transcribed as the caller, causing inserted words, false turns and false barge-ins. Evidence: Background speech pushed streaming STT error rates to 22 percent to 31 percent; isolating the main speaker cut them by up to 43 percent, mostly by removing inserted words, vendor-reported. Mitigation: Isolate the caller's voice before STT and VAD; avoid generic noise suppression, which can distort the caller's speech and raise errors.
+
+Wrong speaker answered. Mechanism: A caregiver or bystander answers a verification question, or the agent follows the wrong voice. Evidence: Speaker-conditioned VAD detects the target speaker frame by frame and ignores others. Mitigation: Diarize, lock onto the caller's voice in the first seconds, and re-verify if the voice changes before any sensitive step.
+
+Self-reply to echo. Mechanism: Agent's own speech leaks back, is transcribed as the caller, and gets answered. Evidence: Seen in a public WebRTC test; rates varied widely by client. Mitigation: Strong echo cancellation; compare input against agent playback.
+
+False barge-in. Mechanism: Echo treated as interruption; agent stops mid-word. Evidence: A turn model marked echo "complete" at p=0.954. Mitigation: Speaker or echo attribution before turn detection.
+
+VAD threshold trade-off. Mechanism: Lower thresholds speed replies but admit short echo bursts. Evidence: 500 → 384 milliseconds saved 116 milliseconds, added 3 failures. Mitigation: Tune per channel; validate on real devices.
+
+Misroute. Mechanism: Router picks the wrong sub-agent, or one intent of two. Evidence: Best models reach only 53.4 percent on a multi-intent benchmark. Mitigation: Multi-label output, thresholds, frontier fallback.
+
+Context-flipped decision. Mechanism: Extra benign text changes a correct routing decision. Evidence: 61.4 percent of correct decisions flipped. Mitigation: Route on the caller's turn only, not retrieved or third-party text.
+
+Entity drift. Mechanism: Transcript correct, different value reaches the tool. Evidence: Observed phone number mismatch. Mitigation: Read-back confirmation; server-side validation.
+
+Wrong saved data. Mechanism: Fields written incorrectly. Evidence: 64.5 percent versus 92.0 percent all-correct by model. Mitigation: Exact-match audits on write-backs.
+
+Dead air. Mechanism: more than 10 seconds silence from stalled provider or reasoning. Evidence: 3.3 percent to 5.3 percent of calls by model. Mitigation: Async tools; filler speech; timeouts with handoff.
+
+Connection failures. Mechanism: Call never completes cleanly. Evidence: Clean calls as low as 72.4 percent. Mitigation: Telephony redundancy; count against reliability.
+
+Misheard identity details. Mechanism: Names, emails, IDs garbled; verification fails and cascades. Evidence: Context-aware ASR cut major errors up to 15 percent. Mitigation: Bias recognition with the record on file; spell-back.

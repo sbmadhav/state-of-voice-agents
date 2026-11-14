@@ -1,0 +1,63 @@
+Executive summary. About ten minutes.
+
+What this report argues, in plain terms.
+
+Voice agents can now take routine calls in regulated contact centers. What separates the teams that succeed is not which model they buy, but how they test, how the agent decides, what it remembers, who it is listening to, and how it proves who the caller is. Nine points, each linked to the evidence.
+
+1.
+
+Ready for routine calls, not for unsupervised high-risk ones.
+
+Agents now handle scheduling, billing questions and status checks well. In one public benchmark, the best platform completed over 90 percent of scenarios on a single try, but passed only 75.6 percent when each scenario had to succeed three times in a row. The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44 percent of repetitive calls automated, but every published result is administrative and self-reported.
+
+Reliability and results 2.
+
+Evaluation is the asset that lasts.
+
+Models change every month; the top score on one voice benchmark rose from 30 percent to 67 percent in eight months. What you keep is a golden test set: hundreds of real, de-identified call scenarios with known right answers, including noisy lines and upset callers, run three times on every change. A drop in score blocks the release, the way failing tests block code. Build it before choosing a vendor: it is how you compare vendors, gate releases and hold contracts to account.
+
+The golden test set 3.
+
+Think silently, then respond.
+
+People size up a question before they answer it. A voice agent should too. A small, fast "System 1" model answers typed questions in tens of milliseconds, each with a confidence score: which team owns this, is there fraud or clinical risk, is the caller finished, is it even the caller speaking. It never writes prose. A conversational LLM then responds, with the right data already fetched.
+
+This is faster and cheaper: in one test, routing first kept accuracy at about 84 percent while cutting cost from 2.42 dollars to about 69 cents per 1,000 requests. It is also safer, because every decision is a logged record, and fraud, clinical and complaint signals always go to a person by rule. It works beside any voice stack, and it can cut the audio mid-sentence if it spots risk.
+
+The thinker-responder model 4.
+
+Hear the right caller.
+
+Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to 22 percent to 31 percent, and isolating the main speaker cut them by up to 43 percent. Diarization separates the voices, so the agent locks onto the caller and checks identity again if a different voice takes over before a sensitive step. Test with noise and side conversations, not clean demo audio.
+
+Noise and diarization 5.
+
+Emotion and persona: worth piloting, not yet proven.
+
+Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice: offer callers a choice, then keep each caller's preferred voice consistent. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used, so run both as experiments behind the golden test set.
+
+Emotion and persona 6.
+
+Build governed memory now; train limited-memory models later.
+
+Turn plans, policies, fees and provider details into a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Limited-memory models go further: they are trained to look facts up in that store instead of memorizing them. In research, a 382 million-parameter model approached a 7 billion model on factual precision, and deleting a row made the model forget the fact. That research is early (Wikipedia facts, small models, no voice or production use), so trial it on one domain once the store is ready, and scale only if it beats retrieval. Live data such as balances and appointment slots always comes from your systems through tools.
+
+Governed memory 7.
+
+A voice is no longer proof of identity.
+
+Over half of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice. Match the check to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness detection for irreversible actions, and always a person as the fallback. Card numbers should never reach the agent at all. For outbound calls, consent belongs to the current subscriber, so check lists against the FCC's Reassigned Numbers Database.
+
+Trust and identity 8.
+
+The money is in resolution, not token price.
+
+Savings come from calls the agent truly resolves, meaning no repeat contact on any channel within 48 hours. The calls left for people are the harder ones, so honest models show smaller savings than vendor pitches. With this report's default assumptions, the agent breaks even at about 40 percent resolution, and each extra point of resolution is worth far more than cheaper tokens. Contract on price per resolved call, with rights to export logs and evaluation data.
+
+The economics model 9.
+
+What to do in the next 90 days.
+
+Pick two or three inbound administrative call types in one market. Build the golden test set (more than 200 scenarios). Set the go-live bar by risk: about 85 percent repeat reliability for informational calls, 95 percent for anything that writes data or moves money, and zero critical failures. Transfer to a person with full context. At day 90, judge on cost per resolved call, abandonment and zero wrong-account actions. Whatever the outcome, keep the test set, routing logs and recordings: they are the most valuable thing the pilot produces.
+
+The pilot playbook.

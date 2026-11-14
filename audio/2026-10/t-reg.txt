@@ -1,0 +1,25 @@
+T9. Regulation.
+
+Mostly disclosure and consent, and tightening.
+
+A summary of selected US rules for orientation, not legal advice and not a complete list. US healthcare focus; financial services adds its own regimes (GLBA, PCI DSS, UDAAP) not reviewed here. Items marked unverified come from secondary sources and need confirmation against the enacted text and by counsel.
+
+TCPA, FCC 24-17. What it requires: AI voices count as "artificial"; outbound calls generally need prior express consent, with narrow healthcare exemptions; consent belongs to the current subscriber, so check the Reassigned Numbers Database; 500 dollars to 1,500 dollars per violation. Status: In force since February 8, 2024.
+
+Call recording consent (state wiretap laws). What it requires: Some states, including California, Florida, Maryland and Pennsylvania, require every party's consent to record; announce recording and transcription at the start of the call. Status: In force; varies by state; check with counsel.
+
+HIPAA BAAs. What it requires: Every layer that touches PHI: model, router, STT, TTS, orchestration, telephony, testing. Status: Available from major model providers with retention options.
+
+California AB 3030. What it requires: Disclaimer and a route to a human on generative AI clinical messages, unless clinician-reviewed. Status: Effective January 1, 2025.
+
+California AB 489. What it requires: AI may not imply it holds a health care license. Status: Effective January 1, 2026.
+
+California AB 1609. What it requires: Large businesses disclose chatbots and offer a human within set times. Status: Reported signed September 28, 2026, unverified.
+
+Texas TRAIGA (HB 149). What it requires: Health care providers disclose AI use to patients. Status: Effective January 1, 2026.
+
+Utah AI Policy Act. What it requires: Proactive disclosure in high-risk interactions by regulated occupations. Status: In force.
+
+Colorado SB 26-189. What it requires: Replaces the 2024 AI Act, which never took effect; covers automated decisions in consequential areas such as credit, employment and housing, with no general chatbot disclosure duty. Status: Reported effective January 1, 2027, unverified.
+
+Right to deletion (state privacy laws, GDPR). What it requires: Erase personal data on request. Status: Easier to honor in the model when facts live in a store, not weights; logs, transcripts and backups still need their own deletion.

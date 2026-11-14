@@ -1,0 +1,5 @@
+Section 3: Pace of change.
+
+2026 moved fast. Snapshots go stale in a quarter.
+
+On Sierra's voice benchmark, the best score rose from 30 percent to 67 percent in eight months. Lock in your data and evaluations, not a model.

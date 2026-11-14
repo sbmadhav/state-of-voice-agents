@@ -1,0 +1,39 @@
+T1. Architecture.
+
+Three generations, converging on "talk fast, think slow".
+
+OpenAI's GPT-Live removes the separate turn detector and delegates search and reasoning to a frontier model behind an asynchronous boundary, so a slow tool call cannot stall audio. Sierra's Tandem Voice pairs a real-time conversation layer with a reasoning layer. Gemini 3.8 Live calls tools in the background. A typed System-1 router fits beside any of these as the dispatch layer.
+
+Examples. Cascaded (STT, LLM, TTS): Pipecat, LiveKit, Retell; Agentforce Voice. Native speech-to-speech: gpt-realtime-2.1; Gemini Live API. Continuous full-duplex: OpenAI GPT-Live; Gemini 3.8 Live; Sierra Tandem Voice.
+
+Turn-taking. Cascaded (STT, LLM, TTS): VAD plus turn detector. Native speech-to-speech: Turn detector still decides when to start. Continuous full-duplex: Model controls turns, can backchannel.
+
+Tone and prosody. Cascaded (STT, LLM, TTS): Lost in transcription. Native speech-to-speech: Kept. Continuous full-duplex: Kept.
+
+Tools and reasoning. Cascaded (STT, LLM, TTS): Inside the LLM step, blocking. Native speech-to-speech: In-model or blocking. Continuous full-duplex: Async delegation to a frontier model.
+
+Audit trail. Cascaded (STT, LLM, TTS): Native text at every step. Native speech-to-speech: Transcripts available. Continuous full-duplex: Transcripts derived after the fact.
+
+Control and vendor choice. Cascaded (STT, LLM, TTS): Highest. Native speech-to-speech: Medium. Continuous full-duplex: Lowest today (single vendor).
+
+Fit for regulated work. Cascaded (STT, LLM, TTS): Per-step audit and per-component contracts. Native speech-to-speech: Simpler flows with one covered vendor. Continuous full-duplex: Watch closely; GPT-Live API announced as upcoming.
+
+Production reality: calls arrive over SIP trunks as compressed 8 kHz audio, with jitter and packet loss, so test on that audio rather than clean recordings. Integrations with scheduling, CRM and EHR systems are usually the slowest and most brittle part of a launch; budget for them first. Author's view.
+
+Reference flow (cascaded, with a System-1 router).
+
+Audio in.
+
+Caller (phone, 8 kHz)→Echo cancel→Isolate caller's voice + diarize→Speaker-aware VAD + turn model→Streaming STT.
+
+Thinker · System 1.
+
+Router: intent, risk flags (typed probabilities)→Pick sub-agent + its MCP servers→Fraud, clinical, complaint or low confidence: escalate.
+
+Responder · LLM.
+
+Sub-agent LLM with narrowed tools→Facts from governed store or system of record→Read-back before any write→TTS.
+
+Always.
+
+One correlation ID across VAD, STT, router, LLM, tool and TTS events→Replayable trace.

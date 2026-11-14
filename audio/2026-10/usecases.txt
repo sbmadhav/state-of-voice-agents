@@ -1,0 +1,25 @@
+Section 7: Where to start.
+
+Readiness against risk, by call type.
+
+Healthcare shown, because that is where results are published. Green is the pilot zone. Red stays human until there is independent safety evidence.
+
+Start here Next wave Clinically supervised only Not yet.
+
+Confirm, cancel, reschedule. Zone: Start here. Reported outcome: Abandonment down 56 percent, appointments up 21 percent at Tampa General. Example vendors: Hyro, Assort, Hello Patient, Zocdoc Zo.
+
+Routing and FAQ, portal help. Zone: Start here. Reported outcome: 44 percent of repetitive calls automated, abandonment down 85 percent at Intermountain. Example vendors: Hyro, Talkdesk, Sierra.
+
+Ambient documentation. Zone: Next wave. Reported outcome: Adjacent category, widely piloted for clinical notes and handoffs. Example vendors: Abridge, Microsoft/Nuance, Commure.
+
+Refill status. Zone: Next wave. Reported outcome: Included in Tampa General scope; no isolated metric found. Example vendors: Hyro, Assort.
+
+Billing and revenue cycle. Zone: Next wave. Reported outcome: Billing agent live in 40 days at one urgent care network (vendor-reported). Example vendors: Hello Patient, Infinitus, Prosper.
+
+Prior auth and payer calls. Zone: Next wave. Reported outcome: Positioned by vendors; no outcome metric found. Example vendors: Infinitus, Prosper, Sierra.
+
+Post-discharge follow-up. Zone: Supervised only. Reported outcome: 9.0/10 patient rating reported by vendor; heavy clinical supervision. Example vendors: Hippocratic AI.
+
+Screening outreach (outbound). Zone: Supervised only. Reported outcome: Higher kit requests among Spanish-speaking patients (vendor-reported); consent rules apply. Example vendors: Hippocratic AI.
+
+Nurse triage lines. Zone: Not yet. Reported outcome: No validated autonomous deployment found; vendors exclude diagnosis. Example vendors: None recommended.

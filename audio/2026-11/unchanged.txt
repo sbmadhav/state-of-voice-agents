@@ -1,0 +1,27 @@
+Unchanged since October.
+
+Read these in the October baseline.
+
+No new evidence moved these sections, so they are not repeated here. Sections updated in part above (T1 architecture, T4 failure modes, T5 routing, T8 fraud, T9 regulation) still hold where this update does not change them.
+
+Executive summary: The nine-point argument, still current except where this update says otherwise.
+
+Published health care results, pace of change: Health system outcomes and the 2026 timeline to October.
+
+The economics model: Cost per resolved call; break-even near 40 percent resolution under default assumptions.
+
+The thinker-responder model: Silent System-1 decisions beside a conversational LLM, with a live demo.
+
+What separates a good agent: The golden test set, hearing the right caller, emotion and persona.
+
+Readiness by call type, health care: The health care version of the readiness map above.
+
+Governed memory: Fact stores now, limited-memory models later; no new research this month.
+
+Options, 90-day pilot, debate: Strategic paths, pilot gates and the seven-seat debate.
+
+Latency budget, pass k, LMLM detail: Technical appendix sections with no new data.
+
+Deployment and data posture: Private endpoints under contract; the open speech models above add options.
+
+Tooling and implementation: What to borrow and what to avoid.

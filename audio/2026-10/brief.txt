@@ -1,0 +1,53 @@
+State of conversational voice agents. Healthcare first, with notes for financial services.
+
+October 2026 edition.
+
+Voice agents at the front door.
+
+Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in four test scenarios when each was run three times.
+
+The one-minute read.
+
+What we know. The best platform passed 75.6 percent of test scenarios on all three tries; the top three are within the margin of error. Every published deployment result is administrative and self-reported.
+
+What to watch. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that any model bet goes stale in a quarter.
+
+What to do. Build a golden test set from your own calls and gate every change on it. Pilot narrow, judged on cost per resolved call. Separate silent decisions from the conversation, and build a governed fact store; trial limited-memory models only once they beat retrieval.
+
+: 56 percent. Lower call abandonment at a large health system within two weeks of go-live. Self-reported.
+
+: 75.6 percent. Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 65 percent to 84 percent at 95 percent confidence). Vendor-reported.
+
+: 5 percent. Of CX, IT and operations leaders can quantify AI's impact on business outcomes, though 98 percent have deployed it in the customer journey. Vendor-reported.
+
+: Over half. Of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice. Vendor-reported.
+
+Thesis 1Reliability is the gap.
+
+In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms. Test repeatability on your own calls.
+
+Thesis 2A thinker-responder agent.
+
+A fast System-1 thinker decides silently; a conversational LLM speaks. People don't narrate every thought before they answer.
+
+Thesis 3Invest in governed memory.
+
+A governed fact store pays off today. Limited-memory models that look facts up are promising but research-stage: trial them against retrieval first.
+
+Evidence labels used throughout: Independent. Vendor or self-reported. Unverified. Author's view, arithmetic or illustration. Charts and tools you can use carry.
+
+How to read this report: method, limits and disclosure.
+
+Method. A review of public sources up to the research cutoff. I did not run my own tests; every figure links to its source.
+
+Which vendors. Platforms and models appear when they publish benchmark results or deployment outcomes, or run at large health systems or banks. Sierra is included in the market analysis wherever evidence exists, because of its healthcare footprint. It was not part of the seven-platform reliability test, and that gap is noted rather than filled in.
+
+How much weight. Peer-reviewed and independent tests first, then vendor benchmarks with a published method, then customer-reported outcomes, then vendor claims. The label on each figure says which it is.
+
+Illustrative tools. The router, latency, economics and limited-memory demos are models for exploring trade-offs, not measurements of a product.
+
+Recommendations. Thresholds, pilot gates and suggested paths are proposals to adapt to your risk, call mix and baseline.
+
+Disclosure. Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.
+
+Corrections. Post them in the comments or as a GitHub issue; changes are logged in the changelog.

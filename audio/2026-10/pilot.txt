@@ -1,0 +1,119 @@
+Section 11: A pilot playbook.
+
+A 90-day pilot with gates set before launch.
+
+Teams are at different points on this path. If you are starting out, expanding to new call types or resetting a stalled rollout, this is one way to run it; if you are already in production, the golden test set, gates and kill criteria work as an audit of what you have. The shape: one market or line of business, inbound only, two or three call types, warm transfer with full context. The pre-launch bar is set above the best public benchmark on purpose, because public scenarios are generic.
+
+Weeks 0 to 4Build the golden test set.
+
+More than 200 scenarios from your own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, upset callers. Silent shadow test on recorded audio.
+
+Gate · end of week 4Pass^3 bar set by risk.
+
+About 85 percent for informational calls, 95 percent for anything that writes data or moves money, and zero critical failures at any rate. Every scenario run three times on phone-grade audio. Router thresholds calibrated on held-out data. Identity controls signed off.
+
+Weeks 5 to 12Live in one market.
+
+Every failure becomes a regression test. Weekly audit of tool-call write-backs and misroutes (transfers after routing).
+
+Day 90Scale, adjust, or stop.
+
+Decide against the criteria below, not against a demo.
+
+Scale ifSuccess at day 90.
+
+Abandonment down 30 percent or more on in-scope queues.
+
+50 percent or more of in-scope calls resolved without a person, with no repeat contact on any channel within 48 hours (hang-ups don't count).
+
+Zero wrong-customer or wrong-account write-backs on audit.
+
+Satisfaction at or above the human baseline.
+
+Recording, transcript, routing decision and tool trace on 100 percent of calls.
+
+Stop ifKill criteria, any time.
+
+Any protected data disclosed to an unverified caller.
+
+Any advice beyond approved content: clinical guidance, or a financial recommendation outside an approved script.
+
+Wrong-action rate above 0.5 percent of tool calls on audit.
+
+A vendor refuses to export logs or evaluation data.
+
+Author's view. Starting points tied to the published results above, not an industry standard. The pre-launch bar is a risk-management choice, not a benchmark-derived number: a narrow golden set of two or three call types is easier than a broad generic benchmark, so it can sit above the best public score (75.6 percent), and the bar rises with the harm a failure can do. A high overall pass rate never offsets a critical failure, such as protected data given to the wrong caller or a wrong payment; one of those blocks launch. With 200 scenarios, a measured 90 percent carries a margin of about plus or minus 4 points. 30 percent lower abandonment is about half what peers report (56 percent to 85 percent). 50 percent resolution is in the range of reported automation (44 percent at one health system). Tighten the bar for higher-risk call types, and lower the resolution target for complex queues.
+
+After day 90: what to do next.
+
+Gates met: scale in waves.
+
+Months 4 to 6Widen.
+
+Add two or three call types and one more market at a time, each through the same pass three gate.
+
+Retrain the router on pilot transcripts; you now have real labeled intents.
+
+Outbound only where consent is on file.
+
+Months 7 to 12Own.
+
+Move routing and evaluation in-house; keep vendors on the responder and voice stack.
+
+Renegotiate on price per resolved call, with log and routing export rights.
+
+Trial a limited-memory model on one knowledge domain, if the fact store is ready.
+
+OngoingGovern.
+
+Monthly review of misroutes, wrong actions and complaints.
+
+Change control: re-run the golden set before any model, prompt or persona change.
+
+Grow the golden set every week from real failures.
+
+Score sentiment on every call and review the angriest calls weekly.
+
+Report resolved calls, abandonment and satisfaction to the board quarterly.
+
+Some gates missed: fix, then re-run.
+
+Weeks 1 to 4Diagnose.
+
+Rank failures from the logs; most trace to audio, identity or integration, not the model.
+
+Narrow scope to the call types that passed.
+
+Weeks 5 to 8Fix.
+
+Swap the weak component (speech-to-text, turn detection, router thresholds) rather than the whole platform.
+
+Add every failure to the test suite.
+
+Weeks 9 to 20Re-run.
+
+Repeat the 90-day pilot on the narrowed scope with the same gates.
+
+Scale only after a clean pass.
+
+Kill criterion hit: stop and keep the learning.
+
+ImmediatelyContain.
+
+Turn the agent off for affected call types; route to people.
+
+Notify compliance and run an incident review.
+
+Next 30 daysLearn.
+
+Write a blameless post-mortem: what failed, why the gates did not catch it earlier.
+
+Keep the test suite, logs and recordings.
+
+Next editionRevisit.
+
+Re-evaluate when the failing capability improves; benchmarks move every quarter.
+
+Continue building the governed fact store; it pays off regardless.
+
+Author's view. Whatever the outcome, keep the test suite, routing logs and call recordings. They are the most valuable thing the pilot produces.

@@ -36,6 +36,26 @@ Every figure links to its source. Vendor-reported numbers are labeled as such.
 - Daybreak (light) and Deep Space (dark) schemes. The page follows the reader's device setting by default; the sun/moon button in the site header switches it, like on every sbmadhav.com page.
 - **Download PDF** reformats the page for letter-size pages in the theme the reader chooses: tabs and filters are expanded and controls are hidden.
 
+## Voice-overs
+
+Each section of the latest edition, and of the October 2026 baseline, can be read aloud by an AI voice from ElevenLabs, with an overall read time and listening time in the hero. The scripts are the full section text written for the ear, and they double as transcripts: `audio/YYYY-MM/<section-id>.txt`, produced from `index.html` by `python3 tools/narration.py` (which also writes the "About N min read" figure). The MP3s are generated once by the **Voice-over** workflow (`.github/workflows/voiceover.yml`), hosted on Cloudflare R2 (or committed next to the scripts) and listed in a `manifest.json`; a section's Listen control appears only once the manifest lists its audio.
+
+To switch it on:
+
+1. In GitHub, open Settings > Secrets and variables > Actions and add the repository secret `ELEVENLABS_API_KEY`.
+2. Optional, on the Variables tab: `ELEVENLABS_VOICE_ID` (default `WQP7cQUF5aAS6Axh5yaa`, "Elara - Crisp Pro Narrator", one of ElevenLabs' replacements for its retiring default voices) and `ELEVENLABS_MODEL_ID` (default `eleven_v4`).
+3. Open Actions > Voice-over > Run workflow. The workflow commits the audio to a new branch and opens a pull request (it never pushes to `main`). For this, Settings > Actions > General must allow GitHub Actions to create pull requests; otherwise the run log links to the branch.
+
+**Hosting the audio on Cloudflare R2 (recommended).** A full edition is roughly 30 MB of MP3s, which would outgrow GitHub Pages over a couple of years. With R2 configured, the workflow uploads each MP3 to the bucket and commits only the manifest, which records the public URLs; the page streams the audio from there.
+
+1. In Cloudflare, create an R2 bucket and give it a public address: a custom domain such as `audio.sbmadhav.com` (R2 > the bucket > Settings > Custom Domains), or the bucket's `r2.dev` URL.
+2. Create an R2 API token with Object Read & Write on that bucket (R2 > Manage API tokens). Note the Access Key ID and Secret Access Key.
+3. In GitHub, add the secrets `R2_ACCOUNT_ID` (the Cloudflare account ID), `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY`, and the variables `R2_BUCKET` (the bucket name) and `AUDIO_BASE_URL` (the public address, for example `https://audio.sbmadhav.com`).
+
+Without these, the MP3s are committed to the repository. MP3s committed earlier move to R2 on the next run without being regenerated.
+
+Each section is recorded once: only sections whose text, voice or model changed are regenerated. A monthly update is about 35,000 characters of narration and the October baseline about 70,000, billed against the ElevenLabs plan's character quota; each run logs the characters it sent. Without the secret, the workflow skips the audio step with a notice.
+
 ## Editions
 
 | Edition | Link | Notes |
@@ -69,7 +89,7 @@ Then open http://localhost:8126/state-of-voice-agents/.
 
 ## Checks
 
-There is no build. `.github/workflows/design-system.yml` checks that every page's header matches the pinned design-system header and loads the pinned files, and `.github/workflows/e2e.yml` runs the Playwright tests. Before publishing, check every changed number against its source, test light and dark themes, a phone-width screen and Download PDF, and for a new edition follow [UPDATING.md](UPDATING.md).
+There is no build. `.github/workflows/voiceover.yml` checks that the narration text and read time match `index.html`; `.github/workflows/design-system.yml` checks that every page's header matches the pinned design-system header and loads the pinned files, and `.github/workflows/e2e.yml` runs the Playwright tests. Before publishing, check every changed number against its source, test light and dark themes, a phone-width screen and Download PDF, and for a new edition follow [UPDATING.md](UPDATING.md).
 
 ## Contributing
 

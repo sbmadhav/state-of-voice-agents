@@ -1,0 +1,35 @@
+Section 3: New failure mode.
+
+The TV in the room.
+
+October listed background chatter as one failure among many (T4). New evidence puts it first.
+
+The noise that hurts most is not traffic or wind. It is another voice. Veris called 14 voice systems as a simulated utility-billing customer, 100 tasks run three times each (1,906 calls scored), with street, café and TV audio mixed in at equal loudness. With the TV on, task completion fell from 38.7 percent (372 of 961 calls) to 8.6 percent (81 of 945). Nine of the 14 systems fell below 5 percent; only GPT-Live 1 (36.1 percent) and Grok Voice (33.8 percent) stayed above 20 percent. Caller verification fell from 81.3 percent to 52.5 percent, and 90 percent of TV calls carried 10 or more words the caller never said, against 2 percent of clean calls. New this month. Vendor-reported. Vendors' noise options were left off and the calls were simulated, so treat the levels as directional.
+
+Clean calls versus TV on: task completion 38.7 percent versus 8.6 percent; caller verification 81.3 percent versus 52.5 percent.
+
+In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech; caller-voice isolation does. Author's view.
+
+Caller-voice isolation on Krisp's benchmark of 265 real recordings.
+
+No processing: word error rate 23.21 percent, and 66.48 leaked words a minute.
+
+VoxLock (open, Apache-2.0, 27 million parameters): word error rate 4.95 percent, and 0.11 leaked words a minute.
+
+Krisp VI 2.5: word error rate 5.30 percent, and 1.52 leaked words a minute.
+
+Ai-coustics Voice Focus 2.2 L: word error rate 6.84 percent, and 0.66 leaked words a minute.
+
+Sanas SE 1.0: word error rate 9.38 percent, and 13.76 leaked words a minute.
+
+Vendor-reported. The VoxLock developer's own comparison, scored with one speech-to-text model; on meeting audio, ai-coustics leaked fewer words. VoxLock learns the caller's voice from the first 3 to 15 seconds with no enrollment, adds 24 milliseconds of delay and keeps up on one CPU core. New this month. Because it learns from the opening seconds, test calls where another voice is louder at the start. Author's view.
+
+Controls.
+
+First, isolate the caller's voice before speech-to-text and turn detection.
+
+Second, let a voice interrupt the agent only when it matches the caller.
+
+Third, read back identity details, amounts and account numbers before any write; re-verify if a different voice answers a security question.
+
+Fourth, add TV, café and second-speaker audio to the golden test set and block releases on it.

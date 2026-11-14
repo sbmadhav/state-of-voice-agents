@@ -1,0 +1,23 @@
+Section 6: Fraud and identity.
+
+Correction: voice is a signal, not a factor.
+
+October's tiers (T8) put voiceprint plus liveness at the top. That missed guidance already in place, and new research reinforces the change.
+
+What changed.
+
+Correction: New York's financial regulator advised in October 2024 against voice as an authentication factor, preferring liveness checks or phishing-resistant methods. Independent.
+
+New: deepfake detectors degrade substantially after the audio crosses a real phone line. On call audio, one detector's equal error rate (where missed fakes equal false alarms) was 37.9 percent, and 22.4 percent after retraining on call audio. New this month. Independent.
+
+Revised tier: for payments, payee changes and limit increases, use an app push or another phishing-resistant check; keep voiceprint and liveness as risk signals that can block, never as the only factor that approves. Author's view.
+
+Financial fraud data.
+
+Synthetic-voice attacks rose 149 percent at banks and 475 percent at insurers in 2024, across 1.2 billion calls analyzed. Vendor-reported.
+
+One credit union's deepfake detection avoided 2.57 million dollars of fraud exposure in about 13 months. Vendor-reported.
+
+US consumers reported 3.5 billion dollars lost to impostor scams in 2025; bank impersonators accounted for nearly 1 billion dollars, more than government impersonators. Independent.
+
+Generative AI could push US fraud losses from 12.3 billion dollars in 2023 to 40 billion dollars by 2027 (a projection). Independent.

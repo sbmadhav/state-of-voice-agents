@@ -1,0 +1,13 @@
+T2. Latency budget.
+
+Where the seconds go in a turn.
+
+Human turn gaps across ten languages cluster around a quarter second. Measured platform turns in the benchmark averaged 1.27 seconds to 3.08 seconds. Adjust the stages, or pick a preset.
+
+Be candid about the trade-off: a cascade (speech-to-text, LLM, text-to-speech) takes turns like a walkie-talkie. Even with a fast router and prefetch it lands near 1.5 seconds a turn, and cutting endpointing further clips callers mid-sentence. If turns under 800 milliseconds are a hard requirement, use a speech-to-speech or full-duplex model and accept a coarser, after-the-fact audit trail. The thinker fits beside either.
+
+Illustrative. Sourced anchors: fixed silence endpointing of 500 to 800 milliseconds is still common; the fastest LLM first-token time in Regal's 27-model test was 584 milliseconds; a self-hosted router costs 20 to 50 milliseconds. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn. Commit a route only on the finished turn, and route again when the caller corrects themselves ("cancel.. No, just move it"); any prefetch is speculative and dropped on a re-route.
+
+Caller experience beats raw model quality.
+
+In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression. Vendor-reported.

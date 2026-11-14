@@ -1,0 +1,81 @@
+Section 10: The decision.
+
+Four ways to play the next 12 months.
+
+Buy a platform or vertical vendor Sierra, Hyro, Hippocratic AI.
+
+Pros.
+
+Fastest time to value.
+
+Integrations and compliance contracts are standard.
+
+Vendor carries tuning, safety layers and ops.
+
+Cons.
+
+Opaque pricing.
+
+Less control over evaluation, routing and data.
+
+Lock-in at the integration layer.
+
+ROI logic: Abandonment and scheduling lift convert to revenue; labor avoided on in-scope queues. Verdict: Strong for the pilot itself.
+
+Build on a platform Retell, LiveKit, Pipecat.
+
+Pros.
+
+Full transparency and model choice.
+
+Lowest per-minute cost.
+
+Own every trace and the router.
+
+Cons.
+
+Needs a dedicated team.
+
+You own integration and safety.
+
+Slower first launch.
+
+ROI logic: About 8 cents to 14 cents a minute against roughly 6 dollars a human call; break-even depends on resolution rate. Verdict: Right later, not first.
+
+Hybrid (recommended) Buy now, own the router and evals.
+
+Pros.
+
+Quick wins from a vertical vendor.
+
+You build the test suite, routing layer, logs and governed fact store in parallel.
+
+Builds the governed fact store, with the option to trial limited-memory models.
+
+Keeps the exit door open.
+
+Cons.
+
+Two workstreams to govern.
+
+Needs contract terms for log and eval export.
+
+ROI logic: Captures near-term savings while building leverage for the next contract cycle. Verdict: Recommended.
+
+Wait Revisit in 2027.
+
+Pros.
+
+No execution risk.
+
+Models and benchmarks keep improving.
+
+Cons.
+
+Peers compound gains.
+
+IVR frustration persists.
+
+No internal evaluation muscle.
+
+ROI logic: Negative: forgone abandonment and scheduling gains. Verdict: Not recommended.

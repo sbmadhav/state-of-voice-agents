@@ -1,0 +1,21 @@
+Section 8: Trust and identity.
+
+Over half.
+
+Of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice, bots and IVR reconnaissance. Vendor-reported.
+
+A voice is no longer proof of identity.
+
+This is a brand question as much as a security one. Customers will be targeted by callers pretending to be you, and your agent will hear callers pretending to be customers.
+
+Liveness and deepfake detection in the contact center platform, before any protected data.
+
+Step-up verification (one-time code to the number on file), not birth date or security questions alone.
+
+For payments, prescription changes and other authorizations, add voiceprint verification with liveness detection; a voiceprint alone can be fooled by a clone.
+
+Match the friction to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness only for irreversible actions. Liveness checks over phone-quality audio reject some genuine callers, and texted codes lose some older or distressed callers, so always offer a person as the fallback. Author's view.
+
+A published "we will never ask you for" policy, owned by marketing.
+
+In the US, outbound AI-voice calls count as artificial-voice calls under the TCPA since the FCC's 2024 ruling, so they generally need prior express consent; healthcare exemptions are narrow, so check reminder programs with counsel. Consent belongs to the current subscriber, so check outbound lists against the FCC Reassigned Numbers Database before every campaign.
