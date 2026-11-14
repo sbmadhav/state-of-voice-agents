@@ -64,7 +64,7 @@ jobs:
     # (Actions > Voice-over > Run workflow). Pushes and pull requests only check the narration text.
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     permissions:
       contents: write        # commit the MP3s and manifest to a branch (never main)
       pull-requests: write   # open the pull request on workflow_dispatch and push
