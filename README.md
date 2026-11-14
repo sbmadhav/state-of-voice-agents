@@ -46,6 +46,8 @@ To switch it on:
 2. Optional, on the Variables tab: `ELEVENLABS_VOICE_ID` (default `WQP7cQUF5aAS6Axh5yaa`, "Elara - Crisp Pro Narrator", one of ElevenLabs' replacements for its retiring default voices) and `ELEVENLABS_MODEL_ID` (default `eleven_v4`).
 3. Open Actions > Voice-over > Run workflow. The workflow commits the audio to a new branch and opens a pull request (it never pushes to `main`). For this, Settings > Actions > General must allow GitHub Actions to create pull requests; otherwise the run log links to the branch.
 
+See [docs/audio-hosting.md](docs/audio-hosting.md) for the current state, the recommendation (R2 behind `audio.sbmadhav.com`, with the site's DNS on Cloudflare) and the exact steps.
+
 **Hosting the audio on Cloudflare R2 (recommended).** A full edition is roughly 30 MB of MP3s, which would outgrow GitHub Pages over a couple of years. With R2 configured, the workflow uploads each MP3 to the bucket and commits only the manifest, which records the public URLs; the page streams the audio from there.
 
 1. In Cloudflare, create an R2 bucket and give it a public address: a custom domain such as `audio.sbmadhav.com` (R2 > the bucket > Settings > Custom Domains), or the bucket's `r2.dev` URL.
