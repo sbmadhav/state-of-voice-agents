@@ -1,4 +1,132 @@
 {
   "edition": "2026-11",
-  "sections": {}
+  "sections": {
+    "about": {
+      "file": "about.mp3",
+      "sha256": "a567f30ca37358f8183d953f5ef6341171ed451eb15e343db02d5513cdea7a54",
+      "duration": 38.27,
+      "bytes": 612310,
+      "characters": 578,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "brief": {
+      "file": "brief.mp3",
+      "sha256": "bff1549dea0a0fcb48da13f2edccd84123def7c99dc61228e80c7f3e0ce92519",
+      "duration": 220.4,
+      "bytes": 3526321,
+      "characters": 2866,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "delta": {
+      "file": "delta.mp3",
+      "sha256": "410d14f7d34edf5998f21c736a0eb09a66187115327344e82df2f56a0e173aaa",
+      "duration": 235.76,
+      "bytes": 3772080,
+      "characters": 2867,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "fraud": {
+      "file": "fraud.mp3",
+      "sha256": "5ab35a0a02f49a0d1f67b048badb685333111f3894baa6425150d42dc2e3f80b",
+      "duration": 120.45,
+      "bytes": 1927209,
+      "characters": 1526,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "fs": {
+      "file": "fs.mp3",
+      "sha256": "9b96e2af599db72438f9bde8240e47d371510d3845025dd7d2116f20ee5729f0",
+      "duration": 396.75,
+      "bytes": 6347963,
+      "characters": 5167,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "hc": {
+      "file": "hc.mp3",
+      "sha256": "800eba69e4a2d526211f56a50b01429692faded979637ec6ae844bbacdc4749b",
+      "duration": 100.91,
+      "bytes": 1614576,
+      "characters": 1308,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "models": {
+      "file": "models.mp3",
+      "sha256": "b7c583189a77919edb4c131038e0e30f661c2aea8f9f23e1cc8e01d6a3b75003",
+      "duration": 355.53,
+      "bytes": 5688423,
+      "characters": 4376,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "reliability": {
+      "file": "reliability.mp3",
+      "sha256": "f7055076171ab36d767d1fd5a288d9b20d606a74aec9777af0697b01364e5791",
+      "duration": 147.49,
+      "bytes": 2359797,
+      "characters": 1691,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "rules": {
+      "file": "rules.mp3",
+      "sha256": "f63acc79c8ba73c6886911e5aacca3c4733ccbd2953dce5124ba1e5b65ca0733",
+      "duration": 556.25,
+      "bytes": 8900022,
+      "characters": 6965,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "sources": {
+      "file": "sources.mp3",
+      "sha256": "17d11c8cebc040c51d8de0498a056bc70c61e824ab95d87182039ba989e4ae74",
+      "duration": 12.28,
+      "bytes": 196440,
+      "characters": 178,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "tv": {
+      "file": "tv.mp3",
+      "sha256": "b4da749db276bd5b9271906babce175c60c84297de0f61aaf627fd4f13304574",
+      "duration": 228.39,
+      "bytes": 3654217,
+      "characters": 2685,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "unchanged": {
+      "file": "unchanged.mp3",
+      "sha256": "26136aecaf266a50856ebd7e1cbd72f32470a588209d47672addd4fa4e64caa5",
+      "duration": 99.4,
+      "bytes": 1590334,
+      "characters": 1327,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "verify": {
+      "file": "verify.mp3",
+      "sha256": "a1eefd605cec35c5a722f91f45ddfe909b842508c3fce86d0c72e6856bff347a",
+      "duration": 304.33,
+      "bytes": 4869224,
+      "characters": 3554,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    },
+    "whatsnew": {
+      "file": "whatsnew.mp3",
+      "sha256": "23f37f8089b8b05804c6f33219b859c6fd910e75ba8ef045c10f8ab3574f2e6c",
+      "duration": 317.99,
+      "bytes": 5087816,
+      "characters": 4166,
+      "voice_id": "WQP7cQUF5aAS6Axh5yaa",
+      "model_id": "eleven_v4"
+    }
+  },
+  "total_duration": 3134.2
 }
