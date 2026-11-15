@@ -4,19 +4,19 @@ Set the gates before launch and let day 90 decide.
 
 A 90-day pilot settles the question only if the conditions for scaling and for stopping are written down before the first live call.
 
-Teams are at different points on this path. For a team that is starting out, expanding to new call types or resetting a stalled rollout, this is one way to run a pilot. For a team already in production, the golden test set (real, de-identified call scenarios with known right answers), the gates and the kill criteria work as an audit.
+Teams are at different points on this path. For a team that is starting out, expanding to new call types or resetting a stalled rollout, this is one way to run a pilot. For a team already in production, the golden test set, the gates and the kill criteria work as an audit of what it has.
 
-The shape is narrow by design: one market or line of business, inbound calls only, two or three call types, and a warm transfer to a person with full context. The pre-launch bar is set above the best public benchmark on purpose, because public scenarios are generic. The timeline below runs from the first test scenario to the decision on day 90.
+The shape is narrow by design: one market or line of business, inbound calls only, two or three call types, and a warm transfer to a person with full context. The agent takes no live call until it clears a gate at the end of week 4.
 
-The pilot has four stages, and the agent takes no live call until it clears the gate at the end of week 4. The schedule and the bar are my proposal.
+The pilot runs in four steps, from the first test scenario to the decision on day 90. The schedule and the bar are my proposal.
 
 In weeks 0 to 4, the team builds the golden test set.
 
-The set holds more than 200 scenarios from the team's own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, and upset callers. The agent is then tested silently, in shadow mode, on recorded audio.
+The set holds 200 or more scenarios from the team's own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, and upset callers. The agent is then tested silently, in shadow mode, on recorded audio.
 
 At the gate, at the end of week 4, risk sets the bar for repeat reliability.
 
-Repeat reliability, or pass three, is the share of scenarios that pass on all three runs. The bar is about 85 percent for informational calls and 95 percent for anything that writes data or moves money, with zero critical failures at any rate. Every scenario is run three times on phone-grade audio. Router thresholds are calibrated on held-out data, and identity controls are signed off.
+The bar is about 85 percent for informational calls and 95 percent for anything that writes data or moves money, with zero critical failures at any rate. Every scenario is run three times on phone-grade audio. Router thresholds are calibrated on held-out data, and identity controls are signed off.
 
 In weeks 5 to 12, the agent goes live in one market.
 
@@ -26,7 +26,7 @@ On day 90, the team decides to scale, adjust or stop.
 
 The decision is made against the criteria below, not against a demo.
 
-Five conditions justify scaling at day 90, and any one of four ends the pilot at once. The thresholds are starting points tied to the published results earlier in this report, not an industry standard.
+Five conditions justify scaling at day 90, and any one of four stops the pilot at any time. The thresholds are starting points tied to the published results earlier in this report, not an industry standard.
 
 Scale if all five of these hold at day 90.
 
@@ -52,11 +52,9 @@ A vendor refuses to export logs or evaluation data.
 
 Each threshold has a reason.
 
-The pre-launch bar is a risk-management choice, not a number derived from a benchmark. A narrow golden set of two or three call types is easier than a broad generic benchmark, so the bar can sit above the best public score. That score is the 75.6 percent repeat reliability of the leading platform in Cekura's benchmark, which a testing vendor runs. Vendor-reported. The bar also rises with the harm a failure can do. A high overall pass rate never offsets a critical failure, such as protected data given to the wrong caller or a wrong payment; one of those blocks launch. Author's view.
+The pre-launch bar is a risk-management choice, not a number derived from a benchmark. The best public score is the 75.6 percent repeat reliability of the leading platform in Cekura's benchmark. Vendor-reported. A narrow golden set of two or three call types is easier than a broad generic benchmark, so the bar can sit above that score. It also rises with the harm a failure can do. A high overall pass rate never offsets a critical failure, such as protected data given to the wrong caller or a wrong payment; one of those blocks launch. Author's view.
 
-The other figures are anchored in the same way. With 200 scenarios, a measured 90 percent carries a margin of about plus or minus 4 points. A 30 percent fall in abandonment is about half of what peers report (56 percent to 85 percent), and 50 percent resolution is in the range of reported automation (44 percent at one health system). Self-reported. A team should tighten the bar for higher-risk call types and lower the resolution target for complex queues. Author's view.
-
-The tabs below give the plan for each of the three ways day 90 can end.
+With 200 scenarios, a measured 90 percent carries a margin of about plus or minus 4 points. A 30 percent fall in abandonment is about half of what peers report (56 percent to 85 percent), and 50 percent resolution is in the range of reported automation (44 percent at one health system). Self-reported. A team should tighten the bar for higher-risk call types and lower the resolution target for complex queues. Author's view.
 
 Meeting the gates leads to scaling in waves, missing some leads to a fix and a second run, and hitting a kill criterion stops the pilot. The plans are my recommendation.
 
@@ -130,4 +128,4 @@ Re-evaluate when the failing capability improves, because benchmarks move every 
 
 Keep building the governed fact store, which pays off regardless.
 
-Whatever the outcome, the test suite, the routing logs and the call recordings are worth keeping, because they are the most valuable thing the pilot produces. Author's view. The next section stress-tests this plan, and the argument behind it, from seven synthetic points of view.
+Whatever the outcome, the test suite, the routing logs and the call recordings are worth keeping, because they are the most valuable thing the pilot produces. Author's view.

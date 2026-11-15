@@ -4,13 +4,13 @@ Buy now, but own the router and the tests.
 
 Of four ways to play the next 12 months, I recommend the hybrid: buy a vendor's agent now, and build the tests, the router, the logs and the fact store in parallel.
 
-The choice is less about which vendor wins than about what the organization ends up owning. A bought platform reaches production fastest but leaves evaluation, routing and data largely with the vendor. Building keeps that control and takes longer. Waiting avoids the execution risk and forgoes the gains. Each card below gives the case for an option, the case against it, the source of its return and my verdict.
+The choice is less about which vendor wins than about what the organization ends up owning. Each card gives the case for an option, the case against it and the source of its return.
 
-The four options earn four different verdicts: buying is strong for the pilot itself, building is right later, the hybrid is recommended and waiting is not. The verdicts are mine, and the build option's cost figures are the published ones behind the economics model.
+Each of the four options earns a different verdict, and only the hybrid is recommended. The verdicts are mine, and the build option's cost figures are the published ones behind the economics model.
 
 Buy a platform or vertical vendor.
 
-Buying from a platform or vertical vendor such as Sierra, Hyro or Hippocratic AI is the fastest route to value. Integrations and compliance contracts come as standard, and the vendor carries the tuning, the safety layers and the operations.
+A vendor such as Sierra, Hyro or Hippocratic AI is the fastest route to value. Integrations and compliance contracts come as standard, and the vendor carries the tuning, the safety layers and the operations.
 
 The costs are opaque pricing, less control over evaluation, routing and data, and lock-in at the integration layer.
 

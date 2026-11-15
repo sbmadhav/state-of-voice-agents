@@ -2,13 +2,13 @@ Section 9: What comes next.
 
 The next step is a model that looks facts up.
 
-A limited-memory model looks specific facts up in a table that people can inspect, correct and delete. The research is early, but the fact store it depends on is worth building now.
+The research on such models is early, but the fact store they depend on is worth building now.
 
-A Limited Memory Language Model (LMLM), proposed by Zhao and colleagues at ICLR 2026, is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database and not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model, and facts stay in the table.
+Zhao and colleagues proposed the Limited Memory Language Model (LMLM) in a paper at the ICLR 2026 conference. It is trained so that specific facts, such as a plan's coverage or a card's limit, live in an external database and not in the model's weights. During training the model is not rewarded for memorizing those values; it learns to issue a lookup and copy the answer. Language and reasoning stay in the model, and facts stay in a table that people can inspect, correct and delete.
 
-The approach suits slow-changing knowledge such as benefits, policies and fees. Live data such as balances, claims and appointment slots stays on tool calls, including those made over the Model Context Protocol (MCP). The demo below shows what each kind of model says once a customer asks to be forgotten and the record is deleted.
+The approach suits slow-changing knowledge such as benefits, policies and fees. Live data such as balances, claims and appointment slots stays on tool and MCP calls. The demo below deletes a customer's record and shows what each kind of model then says.
 
-Once the record is deleted, the limited-memory model can no longer give the answer, while the standard model goes on repeating it from its weights. The demo mirrors the paper's unlearning result: removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning, which retrains a model to forget, degraded it. Illustrative.
+Once the record is deleted, the limited-memory model can no longer give the answer, while the standard model goes on repeating it from its weights. The demo mirrors the paper's unlearning result. Removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning, which adjusts a model's weights to make it forget, degraded it. Illustrative.
 
 A governed fact store fits regulated conversations.
 
@@ -18,9 +18,9 @@ Less sensitive data sits in the weights, which matters because researchers have 
 
 The fact store is the safe investment, and training is a gated bet.
 
-Retrieval, in which a frontier model is handed the relevant facts at answer time, is the safe default today. The evidence for limited-memory models is still research-stage: Wikipedia facts, models under 400 million parameters, and no dialog, voice or production use. A governed fact store pays off either way, so I would build it now and treat training as a bet to stage behind gates, not a commitment. Author's view.
+Retrieval on a frontier model, one of the largest general-purpose language models, is the safe default today. The evidence for limited-memory models is still research-stage: Wikipedia facts, models under 400 million parameters, and no dialog, voice or production use. A governed fact store pays off either way, so I would build it now and treat training as a bet to stage behind gates. Author's view.
 
-Only the first of the three stages is a commitment; the other two each wait for a result. The staging is my recommendation.
+Only the first of the three stages is a commitment; each of the others waits on the one before it. The staging is my recommendation.
 
 The first stage starts now and carries no regret. Build the governed fact store.
 
@@ -32,7 +32,7 @@ The trial starts from the open LMLM code (MIT license) on one de-identified doma
 
 The third stage is scale, and only if the trial wins. Put it behind the responder.
 
-The model sits behind the responder, the conversational model that speaks to the caller, and takes on more domains of static knowledge. Live balances, claims and appointment slots always stay on tools.
+The model then takes on more domains of static knowledge. Live balances, claims and appointment slots always stay on tools.
 
 Compute is not the hard part. The paper trained each model in at most 8 H100-days of graphics-processor time, which is roughly 400 dollars to 500 dollars at 2 dollars to 2.69 dollars an hour for a rented H100. Author's arithmetic. The budget belongs with data engineering, store quality and evaluation.
 

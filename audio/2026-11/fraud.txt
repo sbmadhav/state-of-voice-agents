@@ -4,9 +4,9 @@ Correction: a voice is a risk signal, not a way to approve a payment.
 
 This section corrects the October edition. Its risk tiers (T8) put voiceprint plus liveness at the top, which missed guidance already in place.
 
-The guidance is New York's. In October 2024 the state's financial regulator advised against voice as an authentication factor, preferring liveness checks, which test that a live person is speaking, or phishing-resistant methods. Independent.
+The guidance is New York's. In October 2024 the state's financial regulator advised against using voice as an authentication factor, preferring liveness checks or phishing-resistant methods. Independent.
 
-New research reinforces the change. RealComm, new this month, is a benchmark of deepfake detection over real communication channels. It found that detectors degrade substantially after the audio crosses a real phone line. On call audio, one detector's equal error rate (where missed fakes equal false alarms) was 37.9 percent, and 22.4 percent after retraining on call audio. Independent.
+New research reinforces the change. RealComm, a benchmark of deepfake detection over real communication channels, found that detectors degrade substantially after the audio crosses a real phone line. On call audio, one detector's equal error rate (where missed fakes equal false alarms) was 37.9 percent, and 22.4 percent after retraining on call audio. Independent.
 
 The fraud figures show what is at stake. Pindrop's 2025 report counted a rise in synthetic-voice attacks of 149 percent at banks and 475 percent at insurers in 2024, across 1.2 billion calls analyzed. Vendor-reported. One credit union's deepfake detection is reported to have avoided 2.57 million dollars of fraud exposure in about 13 months. Vendor-reported. US consumers reported 3.5 billion dollars lost to impostor scams in 2025, and bank impersonators accounted for nearly 1 billion dollars, more than government impersonators. Independent. Generative AI could push US fraud losses from 12.3 billion dollars in 2023 to 40 billion dollars by 2027, a projection by Deloitte. Independent.
 

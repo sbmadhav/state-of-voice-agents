@@ -4,9 +4,9 @@ T7. Deployment and data posture.
 
 Private cloud endpoints are common, and I found no named US health system that runs large open-weight models itself for patient-facing voice.
 
-"Sovereign" deployment covers two different aims. The case for the first, keeping protected data and conversation logs under the organization's own control, is strong. The case for the second, running voice inference on its own GPUs, is weak for 2026 to 2027, except for small models such as routers. The table compares five postures, from a model API under a BAA, the contract that HIPAA, the US health privacy law, requires before a vendor handles protected health data, to large models that a team hosts itself.
+"Sovereign" deployment covers two different aims. The case for the first, keeping protected data and conversation logs under the organization's own control, is strong. The case for the second, running voice inference on its own GPUs, is weak for 2026 to 2027, except for small models such as routers. Five postures span the range, from a model API under a BAA to large models that a team hosts itself.
 
-Three of the five postures rest on a contract with a provider, and two are self-hosted. The status column cites provider documentation and published deployments.
+Three of the five postures depend on a provider, and two are self-hosted.
 
 Model API under a BAA or equivalent, with modified or zero retention. OpenAI covers the Realtime API with modified retention, Amazon Bedrock stores no prompts by default and Anthropic covers its HIPAA-ready API. It is the fastest route and gives frontier quality, and the vendor carries operations. Terms can change, and every component needs its own contract.
 
@@ -18,4 +18,4 @@ Self-hosted small models (routers, classifiers). Encoders run in tens of millise
 
 Self-hosted large open-weight models. I found no named US health system doing this for patient-facing voice. It gives full control. It beat the cheapest API in only 24 percent of 900 modeled scenarios.
 
-Enterprise surveys put open-source models near 11 percent of LLM API share. Open models win on cheap, high-volume work, which is exactly the router's job. That points to a mixed posture: a frontier model behind a contract and a private endpoint for the conversation, and a small open model, hosted by the team, for routing. The next section turns from where data sits to who is calling.
+Enterprise surveys put open-source models near 11 percent of LLM API share. Open models win on cheap, high-volume work, which is exactly the router's job. That points to a mixed posture: a frontier model on a private endpoint under contract for the conversation, and a small open model that the team hosts itself for routing. T8 turns from where data sits to who is calling.

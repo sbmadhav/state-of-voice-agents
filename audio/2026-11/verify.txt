@@ -2,15 +2,15 @@ Section 10: Claim check.
 
 Four claims October could not verify are now confirmed.
 
-Four claims that October listed as unverified are now confirmed. The other 13 claims checked this month are new, and none of them is fully verified.
+The four are the Decisions API's general availability, GPT Realtime's benchmark score, the signing of California's AB 1609 and the effective date of Colorado's replacement AI law. Of the other 13 claims, all checked for the first time this month, six are partly true or vendor-only and seven are unverified or wrong.
 
-The four are the Decisions API's general availability, GPT Realtime's benchmark score, and the signing of California's AB 1609 and Colorado's replacement AI law. Several of the new claims fail in the same way: a maker names a capability and publishes no test. The other October verdicts stand, and are in October, T10. The buttons above the table filter it by verdict.
+Several of the newly checked claims fail in the same way: a maker names a capability and publishes no test. The other October verdicts stand, and are in October, T10. The buttons above the table filter it by verdict.
 
-Of the 17 claims checked this month, four are verified, six are partly true or vendor-only, and seven are unverified or wrong. The verdicts are mine, and each row cites the source that decided it.
+The verdicts on these 17 claims are mine, and each row cites a source.
 
 "OpenAI Decisions API is generally available." The verdict is verified. October listed this as unverified, because the API was in public beta. It became generally available on October 22, 2026, on GPT-6 Luna.
 
-"GPT Realtime passes 64.63 percent of scenarios on all three tries (pass three)." The verdict is verified. October listed this as unverified. The score is now listed on the benchmark hub.
+"GPT Realtime scores 64.63 percent pass three." The verdict is verified. October listed this as unverified. The score is now listed on the benchmark hub.
 
 "California AB 1609 (customer service chatbots) was signed." The verdict is verified. October listed this as unverified. The bill was signed on September 28, 2026, as Chapter 733, and takes effect on January 1, 2027.
 
@@ -24,7 +24,7 @@ Of the 17 claims checked this month, four are verified, six are partly true or v
 
 "Voice biometrics is enough for high-risk banking calls." The verdict is unverified or wrong. New York's regulator advises against voice as an authentication factor, and detectors miss more over phone lines.
 
-"Customers do not want AI on bank calls." The verdict is partial or vendor. About 30 percent accept it for routine tasks, and most want a person for fraud and collections.
+"Customers do not want AI on bank calls." The verdict is partial or vendor. About 30 percent accept it for routine tasks, and most want a person for suspected fraud and collections.
 
 "A TV in the room breaks most voice agents." The verdict is partial or vendor. In a vendor's research on simulated calls, task completion fell from 38.7 percent to 8.6 percent across 14 systems, with noise options off.
 
@@ -42,4 +42,4 @@ Of the 17 claims checked this month, four are verified, six are partly true or v
 
 "Block's Dessa is a usable full-duplex voice model." The verdict is unverified or wrong. Dessa is a research preview with a waitlist, and no size, benchmarks or tool use are published.
 
-These verdicts describe the evidence as of November 14. What this update leaves untouched is indexed next.
+These verdicts describe the evidence as of November 14.

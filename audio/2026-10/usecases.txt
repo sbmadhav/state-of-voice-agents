@@ -4,10 +4,14 @@ Scheduling and routing are ready; nurse triage is not.
 
 Appointment changes and call routing are mature and low in risk, so a pilot should start there. Nurse triage sits at the opposite corner of the grid and stays with people.
 
-Not every call is equally ready for an agent. The grid places nine health care call types by the maturity of the technology and the risk of the call; health care is shown because that is where results are published. Green is the pilot zone. Red stays with people until there is independent safety evidence. Selecting a call type shows its reported outcome, example vendors and example deployments.
+The grid places nine health care call types by the maturity of the technology and the risk of the call. Health care is shown because that is where results are published. Green is the pilot zone, and red stays with people until there is independent safety evidence. Selecting a call type shows its reported outcome, example vendors and example deployments.
 
-Of nine health care call types, two are ready for a pilot, four form a next wave, two need clinical supervision and one is not ready. The outcomes are reported by health systems or vendors, and the placement is my judgment. Author's view.
+Of nine health care call types, two are ready for a pilot, four form a next wave, two need clinical supervision and one is not ready. The outcomes are reported by health systems or vendors, and the placement is my judgment.
 
-The evidence thins as the risk rises. The two "Start here" types have the strongest published outcomes: Tampa General's for appointment changes, and Intermountain's for routing and portal help. The next wave has less to show. Refill status is within Tampa General's scope, but I found no separate metric for it, and a vendor reports a billing agent live in 40 days at one urgent care network. For prior authorization and payer calls I found no outcome metric, and ambient documentation is an adjacent category, widely piloted for clinical notes and handoffs.
+The published evidence is strongest where the risk is lowest. The two call types in the pilot zone carry the outcomes from section 2: Tampa General's for appointment changes, and Intermountain's for routing and portal help.
 
-The two supervised types rest on vendor reports: a patient rating of 9.0 out of 10 for post-discharge follow-up, under heavy clinical supervision, and a higher rate of kit requests among Spanish-speaking patients after outbound screening calls, to which consent rules apply. Hippocratic AI is the example vendor for both. For nurse triage lines I found no validated autonomous deployment, and vendors exclude diagnosis. Whatever the call type, the agent has to know who is calling, and section 8 shows why a voice no longer proves it.
+The next wave has less to show. A vendor reports a billing agent live in 40 days at one urgent care network. Refill status is within Tampa General's scope, but I found no separate metric for it. Vendors position their agents for prior authorization and payer calls, but there too I found no outcome metric. Ambient documentation is an adjacent category, widely piloted for clinical notes and handoffs.
+
+The two supervised types rest on vendor reports. One is a patient rating of 9.0 out of 10 for post-discharge follow-up, under heavy clinical supervision. The other is higher kit requests among Spanish-speaking patients in outbound screening, on calls to which consent rules apply. Hippocratic AI is the example vendor for both.
+
+For nurse triage lines I found no validated autonomous deployment, and vendors exclude diagnosis. Whatever the call type, the agent has to know who is calling, and the next section shows why a voice no longer proves it.

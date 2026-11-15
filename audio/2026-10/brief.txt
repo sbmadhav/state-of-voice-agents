@@ -1,36 +1,34 @@
 State of conversational voice agents. Health care first, with notes for financial services.
 
-Voice agents at the front door: ready for routine calls, not for risky ones.
+Voice agents at the front door: ready for routine calls, not for unsupervised high-risk ones.
 
-In one vendor-run benchmark, the leading voice platform completed more than nine test scenarios in ten on a single try, and about three in four when each had to succeed three times. This report sets out what that gap means for regulated contact centers, health care first, and what to build before choosing a vendor.
+What separates the teams that succeed with voice agents is not which model they buy. It is how they test, how the agent decides, what it remembers, who it is listening to and how it proves who the caller is.
 
 By Madhav Srinivasan. Published October 12, 2026.
 
 The text was edited for readability on November 15, 2026. The findings and figures are as first published. The latest update is the November 2026 edition.
 
-Within two weeks of going live with a voice agent, Tampa General reports, the average wait for callers fell from 6.2 minutes to 2.4, and call abandonment, the share who hung up before being answered, fell from 34 percent to 14.9 percent. Self-reported. Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In that vendor-run benchmark, which covered seven platforms, the leading one still failed about one scenario in four when each of 82 scenarios was run three times.
+Tampa General reports that within two weeks of going live with a voice agent, the average wait for its callers fell from 6.2 minutes to 2.4. The share who hung up before being answered, known as call abandonment, fell from 34 percent to 14.9 percent. Self-reported. Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark of seven platforms, the leading one still failed about one test scenario in four when each of 82 was run three times.
 
 The one-minute read.
 
-What separates the teams that succeed is not which model they buy. It is how they test, how the agent decides, what it remembers, who it is listening to and how it proves who the caller is. I argue that from public sources; I did not run my own tests.
+This review rests on public sources; I did not run my own tests. The top three platforms in that benchmark are within its margin of error, and every published deployment result is administrative and self-reported. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that a bet on one model goes stale in a quarter.
 
-The evidence is narrow. The top three platforms in that benchmark are within its margin of error, and every published deployment result is administrative and self-reported. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that a bet on one model goes stale in a quarter.
+A team should build a golden test set from its own calls and gate every change on it. A pilot should stay narrow and be judged on cost per resolved call.
 
-Because scores move that fast, the first thing to build is a golden test set: a team's own calls, with known right answers, that every change must pass. Because the published wins are administrative, a pilot should stay narrow and be judged on cost per resolved call. The agent's silent decisions belong apart from the conversation, and its facts in a governed store. Limited-memory models, which look facts up there, merit a trial only once they beat retrieval, today's way of fetching facts for a model.
+Four figures frame the report. All four are vendor-reported or self-reported.
 
-Four figures frame the report: a strong published result, the best reliability score, a gap in measurement and the share of fraud that uses AI. All four are vendor-reported or self-reported.
+Fall in call abandonment: 56 percent. Tampa General reports the drop within two weeks of going live with its voice agent.
 
-Fall in call abandonment: 56 percent. Tampa General reports the drop within two weeks of going live with its voice agent. Self-reported.
-
-Best repeat reliability: 75.6 percent. In Cekura's benchmark, which a testing vendor runs, the leading platform passed this share of 82 scenarios on all three tries (about 65 to 84 percent at 95 percent confidence). Vendor-reported.
+Best repeat reliability: 75.6 percent. In Cekura's benchmark, which a testing vendor runs, the leading platform passed this share of 82 scenarios on all three tries (about 65 percent to 84 percent at 95 percent confidence).
 
 Can quantify AI's impact: 5 percent. Only this share of customer experience, IT and operations leaders can quantify AI's impact on business outcomes, a Talkdesk and NewtonX report says, though 98 percent have deployed it in the customer journey. Vendor-reported.
 
-Fraud attempts using AI: Over half. Pindrop, a deepfake-detection vendor, reports that this share of fraud attempts at health care contact centers now involves AI-generated elements such as synthetic voice. Vendor-reported.
+Fraud attempts involving AI: Over half. Pindrop, a deepfake-detection vendor, reports that this share of fraud attempts at health care contact centers now involves AI-generated elements such as synthetic voice.
 
 Thesis 1: Reliability, not capability, is the gap.
 
-In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms. A team finds out how ready an agent is only by testing repeatability on its own calls.
+In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms, so a team should test repeatability on its own calls.
 
 Thesis 2: An agent should decide silently, then speak.
 
@@ -38,13 +36,11 @@ People do not narrate every thought before they answer. A small, fast model, cal
 
 Thesis 3: Governed memory pays off now; the models built on it are still research.
 
-A governed fact store, in which every fact has an owner and a version, pays off today through retrieval. Limited-memory models, which look facts up in it instead of memorizing them, are promising but still research, so they should be trialed against retrieval first.
+A governed fact store, in which every fact has an owner and a version, pays off today through retrieval, the current way of fetching facts for a model. Limited-memory models, which look facts up in the store instead of memorizing them, are promising but still research, so they should be trialed against retrieval first.
 
-Every figure in this report carries one of four evidence labels: Independent. Vendor or self-reported. Unverified. Author's view, arithmetic or illustration. Charts and tools that respond to input are marked interactive.
+Four evidence labels are used throughout this report: Independent. Vendor or self-reported. Unverified. Author's view, arithmetic or illustration. Charts and tools that respond to input are marked interactive.
 
 How to read this report: method, limits and disclosure.
-
-Seven notes explain how to weigh what follows.
 
 This is a review of public sources up to the research cutoff. I did not run my own tests, and every figure links to its source.
 

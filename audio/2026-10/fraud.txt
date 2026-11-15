@@ -4,11 +4,11 @@ A voice is no longer proof of identity.
 
 Voices can now be cloned, so an identity check has to rise with the harm that a wrong answer could do.
 
-Pindrop, a deepfake-detection vendor, reports that over half of fraud attempts at health care contact centers now involve AI-generated elements. It counts synthetic voice, bots and reconnaissance through the phone menu (the interactive voice response system, or IVR) among them. Vendor-reported.
+Pindrop reports that over half of fraud attempts at health care contact centers now involve AI-generated elements. They include synthetic voice, bots and reconnaissance through the phone menu (the interactive voice response system, or IVR). Vendor-reported.
 
-Identity on the phone is a brand question as much as a security one. Customers will be targeted by callers pretending to be the organization, and its agent will hear callers pretending to be customers. A voiceprint alone does not settle who is speaking: in 2023 a reporter got into his own bank account with an AI clone of his voice.
+Identity on the phone is a brand question as much as a security one. Customers will be targeted by callers pretending to be the organization, and its agent will hear callers pretending to be customers. A voiceprint alone can be fooled: in 2023 a reporter got into his own bank account with an AI clone of his voice.
 
-Heavier checks have costs too. Liveness checks, which test for a live speaker, reject some genuine callers over phone-quality audio, and texted codes lose some older or distressed callers. The six controls below match the friction to the risk and keep a person as the fallback. Author's view.
+Heavier checks have costs too. Liveness checks reject some genuine callers over phone-quality audio, and texted codes lose some older or distressed callers. That is why the controls below always keep a person as the fallback. Author's view.
 
 Six controls put the strongest checks on the requests that can do the most harm. They are my recommendations.
 
@@ -22,6 +22,6 @@ Match the friction to the risk: passive signals for status checks, a one-time co
 
 Publish a "we will never ask you for" policy, and make marketing its owner.
 
-In the US, outbound AI-voice calls have counted as artificial-voice calls under the Telephone Consumer Protection Act (TCPA) since a 2024 ruling by the Federal Communications Commission (FCC), so they generally need prior express consent. Health care exemptions are narrow, so reminder programs should be checked with counsel. Consent belongs to the current subscriber, so outbound lists should be checked against the FCC Reassigned Numbers Database before every campaign.
+In the US, outbound AI-voice calls have counted as artificial-voice calls under the Telephone Consumer Protection Act (TCPA) since the FCC's 2024 ruling, so they generally need prior express consent. Health care exemptions are narrow, so reminder programs should be checked with counsel. Consent belongs to the current subscriber, so outbound lists should be checked against the FCC Reassigned Numbers Database before every campaign.
 
 The appendix maps each control to the threat it answers (T8). With the caller identified, the next question is where the agent's facts should live.

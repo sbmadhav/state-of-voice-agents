@@ -2,12 +2,10 @@ Section 3: Pace of change.
 
 Any ranking here will be stale within a quarter.
 
-The field moved fast in 2026. On one voice benchmark the best score more than doubled in eight months, and the releases kept coming through October.
+The field moved fast in 2026. On Sierra's voice benchmark the best score more than doubled in eight months, from 30 percent to 67 percent.
 
-The year opened with money and a sign of the threat: on February 4 the voice platform ElevenLabs raised 500 million dollars, at a valuation of 11 billion dollars, and on February 26 Pindrop, a deepfake-detection vendor, expanded into health care contact centers. On May 1 Sierra published tau-voice, its benchmark of real-time voice agents, on which the best score had risen from 30 percent to 67 percent in eight months. Vendor-reported. The pace then picked up, as the timeline shows: six of its eleven entries fall between September 10 and October 9.
+Sierra published that benchmark, tau-voice, on May 1, and the figures are its own. The pace then picked up. September and early October brought new voice models and three small models that make decisions instead of conversation, on which section 5 builds. The timeline shows how closely the releases followed one another.
 
-Between February and October 2026, releases, funding and research changed the models, the money and the threats that this report describes. Each entry links to its source, and the source list says which sources are independent and which are vendors.
+Six of the timeline's eleven entries fall between September 10 and October 9. Each entry links to its source, and the source list says which sources are independent and which are vendors.
 
-The second half of the year brought two kinds of release. One was real-time voice models. GPT-Live began rolling out in ChatGPT Voice on July 8, and OpenAI released GPT-Live 1 and gpt-realtime-2.1 between September 10 and 14. The other was small models that make decisions instead of conversation, on which section 5 builds. September 15 brought one of each, with the launch of Gemini 3.8 Live and early access to TypeSafe's Jev. The open-source Laya followed between September 18 and 20, and OpenAI announced its Decisions API at DevDay on September 29 and opened a public beta on October 6, the day Sierra announced Tandem Voice.
-
-The research behind section 9 moved too: the Co-LMLM paper of July 8 extended limited-memory models beyond facts stored as triples. On October 9 a field analysis set out where voice agents break. Models and rankings age that fast. A team's own test data and evaluations do not, which is why they, and not a model, are the thing to lock in. The next section works out what a resolved call is worth.
+Models and rankings age that fast. A team's own test data and evaluations do not, which is why they, and not a model, are the thing to lock in. The next section works out what a resolved call is worth.

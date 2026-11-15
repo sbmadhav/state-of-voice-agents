@@ -4,13 +4,13 @@ A voice agent should decide silently before it speaks.
 
 People size up a question before they answer, and they do not say every thought aloud. A voice agent can work the same way if a fast model decides silently and a conversational model speaks.
 
-I call the design thinker-responder. The thinker is a fast System 1 model: a small model that returns typed answers, each with a probability, and never writes prose. OpenAI's Decisions API, the open-source Laya and TypeSafe's Jev are examples. The responder is a conversational LLM that turns those decisions into a natural reply.
+This report calls the design thinker-responder. The thinker is a fast System 1 model: a small model that returns typed answers, each with a probability, and never writes prose. OpenAI's Decisions API, the open-source Laya and TypeSafe's Jev are examples. The responder is a conversational LLM that turns those decisions into a natural reply.
 
 The first demo plays one caller turn, "I got charged twice for my visit last month," both ways. The thing to notice is what the caller hears before the first useful word.
 
-On the same caller turn, the thinker-responder agent answers directly, and a single model that reasons aloud keeps the caller waiting about 2 seconds for the first useful word. The exchange is not a recording of a product. Illustrative.
+On the same caller turn, the thinker-responder agent answers directly, and a single model that reasons aloud keeps the caller waiting about 2 seconds for the first useful word. The exchange is illustrative, not a recording of a product.
 
-On each caller turn the thinker settles seven things, and it returns each as a typed value, not as a sentence.
+On each caller turn the thinker settles seven things.
 
 Intent is the sub-agent that owns the turn, such as billing, scheduling or complaints.
 
@@ -28,12 +28,14 @@ Confidence is a probability on each of the others, so that a low-confidence turn
 
 The split pays off in three ways. It is faster, because the decisions take tens to hundreds of milliseconds and the responder starts with its data already fetched. It is cheaper, because the expensive model writes only the reply, not the routing. And it is safer, because the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules, and the responder cannot narrate a tool result it never received.
 
-This is a deliberate difference from OpenAI and Sierra, which put the fast model on the talking side and a slower reasoner behind it. The design here puts the fast model on the deciding side. The two combine into a fast talker, a fast silent decider and a slower reasoner for when one is needed.
+OpenAI and Sierra both put the fast model on the talking side and a slower reasoner behind it. This design differs deliberately: it puts the fast model on the deciding side. The two combine into a fast talker, a fast silent decider and a slower reasoner for when one is needed.
 
-The thinker works with any voice stack, because it does not need a speech-to-text pipeline. Beside a speech-to-speech model, or a full-duplex one that listens and speaks at the same time, it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. A full-duplex model starts speaking within a few hundred milliseconds, so the thinker also needs a stop control. When it flags risk in the middle of a turn, it cuts the audio output at once, before protected data or advice reaches the caller. The thinker's limit is that it handles bounded choices. Open-ended reasoning still needs a deeper planner that the responder can call.
+The thinker works with any voice stack, because it does not need a speech-to-text pipeline. Beside a speech-to-speech model, or a full-duplex one that listens and speaks at the same time, it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. A full-duplex model starts speaking within a few hundred milliseconds, so the thinker also needs a stop control. When it flags risk in the middle of a turn, it cuts the audio output at once, before protected data or advice reaches the caller.
 
-The second demo shows the routing decision itself. Each caller turn gets a probability for each of six destinations, and more than one can be high at once. The two turns to try are the ambiguous one, which no intent claims, and the clinical one, which a rule sends to a person whatever the threshold says.
+The thinker has a limit: it handles bounded choices. Open-ended reasoning still needs a deeper planner that the responder can call.
 
-An intent that clears the confidence threshold is routed, a turn where none does is handed off, and a fraud or clinical signal goes to a person by rule. The probabilities are examples of a calibrated multi-label router, not output from a specific product. Illustrative.
+The second demo shows the routing decision itself. Each caller turn gets a probability for each of six destinations, and more than one can be high at once. The two turns to try are the ambiguous one and the clinical one.
+
+An intent that clears the confidence threshold is routed, a turn where none does is handed off, and a fraud or clinical signal goes to a person by rule. The probabilities are examples of a calibrated multi-label router, not output from a specific product.
 
 Routing speed, the cost of a cascade (a small model first, a large one as the fallback) and a check of this thesis against the evidence are in the technical appendix (T5). The next section turns to two capabilities that carry over whatever model or vendor sits underneath.

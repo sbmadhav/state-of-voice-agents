@@ -2,11 +2,11 @@ T9. Regulation.
 
 The rules ask mostly for disclosure and consent, and they are tightening.
 
-Most of the US rules that touch a health care voice agent ask it to disclose that it is an AI or to obtain consent, and new state laws took effect in 2025 and 2026.
+Most of the selected US rules ask for disclosure of AI use or for consent, and new state laws took effect in 2025 and 2026.
 
-The table summarizes selected US rules for orientation. It is not legal advice and not a complete list. Its focus is US health care; financial services adds its own regimes, not reviewed here: the Gramm-Leach-Bliley Act (GLBA), the card industry's data security standard (PCI DSS) and the rules on unfair, deceptive or abusive acts or practices (UDAAP). Items marked unverified come from secondary sources and need confirmation against the enacted text and by counsel.
+The ten rules summarized here are a selection, given for orientation. This is not legal advice and not a complete list. The focus is US health care. Financial services adds its own regimes, not reviewed here: the Gramm-Leach-Bliley Act (GLBA), the card industry's data security standard (PCI DSS) and the rules on unfair, deceptive or abusive acts or practices (UDAAP). Items marked unverified come from secondary sources and need confirmation against the enacted text and by counsel.
 
-Most of the ten rules ask for disclosure or consent, and the newest carry dates in 2026 and 2027. Two statuses are marked unverified, and all of it is orientation, not legal advice.
+The newest of the ten rules carry dates in 2026 and 2027, and two of those dates are unverified. All of it is orientation, not legal advice.
 
 Telephone Consumer Protection Act (TCPA), FCC 24-17. AI voices count as "artificial," so outbound calls generally need prior express consent, with narrow health care exemptions. Consent belongs to the current subscriber, so call lists need checking against the Reassigned Numbers Database. The cost is 500 dollars to 1,500 dollars per violation. It has been in force since February 8, 2024.
 
@@ -22,10 +22,10 @@ California AB 1609. Large businesses must disclose chatbots and offer a human wi
 
 Texas TRAIGA (HB 149). Health care providers must disclose AI use to patients. It took effect on January 1, 2026.
 
-Utah AI Policy Act. Regulated occupations must make the disclosure proactively in high-risk interactions. It is in force.
+Utah AI Policy Act. It requires proactive disclosure in high-risk interactions by regulated occupations. It is in force.
 
 Colorado SB 26-189. It replaces the 2024 AI Act, which never took effect. It covers automated decisions in consequential areas such as credit, employment and housing, and carries no general chatbot disclosure duty. It is reported to take effect on January 1, 2027. Unverified.
 
 Right to deletion (state privacy laws, GDPR). Personal data must be erased on request. This is easier to honor in the model when facts live in a store, not weights. Logs, transcripts and backups still need their own deletion.
 
-None of this replaces counsel. The table does show where the rules concentrate: disclosure of AI use, consent to outbound calls and to recording, and a route to a human. The next section checks claims made about the technology itself.
+None of this replaces counsel. What the summary does show is where the rules concentrate: disclosure of AI use, consent to outbound calls and to recording, and a route to a human. T10 checks claims made about the technology itself.

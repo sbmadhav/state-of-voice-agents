@@ -4,21 +4,19 @@ A second voice in the room breaks most voice agents.
 
 October listed background chatter as one failure among many (T4). A test on simulated calls this month puts it first.
 
-The noise that hurts most is not traffic or wind. It is another voice. The evidence comes from a Veris test, new this month, that called 14 voice systems as a simulated utility-billing customer. It ran 100 tasks three times each (1,906 calls scored) and mixed street, café and TV audio into the calls at equal loudness.
+The noise that hurts most is not traffic or wind. It is another voice. The evidence comes from a Veris test that called 14 voice systems as a simulated utility-billing customer. It ran 100 tasks three times each (1,906 calls scored) and mixed street, café and TV audio into the calls at equal loudness.
 
 With the TV on, task completion fell from 38.7 percent (372 of 961 calls) to 8.6 percent (81 of 945). Nine of the 14 systems fell below 5 percent, and only GPT-Live 1 (36.1 percent) and Grok Voice (33.8 percent) stayed above 20 percent. Caller verification fell from 81.3 percent to 52.5 percent, and 90 percent of TV calls carried 10 or more words the caller never said, against 2 percent of clean calls. Vendor-reported. Vendors' noise options were left off and the calls were simulated, so the levels are directional.
 
-A TV in the room cut both task completion and caller verification. Each pair of bars sets clean calls against calls with the TV on, in Veris's test.
+In Veris's test, a TV in the room cut both task completion and caller verification.
 
-In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech. Caller-voice isolation, which passes on only the caller's voice, does. Author's view.
+In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech. Caller-voice isolation, which passes on only the caller's voice, does. Author's view. The table sets four isolation tools against unprocessed audio.
 
-The table sets four isolation tools against unprocessed audio. One of them, VoxLock, new this month, is an open model.
+On Krisp's benchmark of 265 real recordings, the open VoxLock model had the lowest error rate and leaked the fewest words. The comparison is the VoxLock developer's own, scored with one speech-to-text model.
 
-On Krisp's benchmark of 265 real recordings, the open VoxLock model had the lowest error rate and leaked the fewest words. The comparison is the VoxLock developer's own, scored with one speech-to-text model. Vendor-reported.
+Unprocessed audio had a word error rate of 23.21 percent and leaked 66.48 words a minute.
 
-No processing had a word error rate of 23.21 percent and leaked 66.48 words a minute.
-
-VoxLock (open, Apache-2.0, 27 million parameters) had a word error rate of 4.95 percent and leaked 0.11 words a minute.
+VoxLock (open, Apache-2.0, 27 million parameters), new this month, had a word error rate of 4.95 percent and leaked 0.11 words a minute.
 
 Krisp VI 2.5 had a word error rate of 5.30 percent and leaked 1.52 words a minute.
 
@@ -28,7 +26,7 @@ Sanas SE 1.0 had a word error rate of 9.38 percent and leaked 13.76 words a minu
 
 The result has a limit: on meeting audio, ai-coustics leaked fewer words. VoxLock learns the caller's voice from the first 3 to 15 seconds with no enrollment, adds 24 milliseconds of delay and keeps up on one CPU core. Vendor-reported. Because it learns from the opening seconds, a team should test calls where another voice is louder at the start. Author's view.
 
-Four controls keep a second voice from changing what the agent does. They are my recommendations after this test. Author's view.
+I recommend four controls to keep a second voice from steering the agent.
 
 First, isolate the caller's voice before speech-to-text and turn detection.
 
@@ -38,4 +36,4 @@ Third, read back identity details, amounts and account numbers before any write,
 
 Fourth, add TV, café and second-speaker audio to the golden test set, the team's own call scenarios with known right answers, and block releases on it.
 
-The last of those controls is the one that outlasts any single result. The next section shows why: the reliability benchmark changed leaders this month.
+The last of those controls outlasts any single result, as the next section shows: the reliability benchmark changed leaders this month.

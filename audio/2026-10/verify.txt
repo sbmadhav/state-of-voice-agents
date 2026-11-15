@@ -4,52 +4,52 @@ Of 21 circulating claims, six check out.
 
 I traced 21 circulating claims to their sources: benchmark figures, vendor claims and one widely shared decision-offload cost model. Fewer than a third hold up as stated.
 
-Each claim in the table carries one of three verdicts. It is verified when the source matches it. It is partial or vendor when the source confirms only part of it or is the vendor's own statement. It is unverified or wrong when I could not find it or the source says otherwise.
+Each claim carries one of three verdicts. It is verified when the source matches it. It is partial or vendor when the source confirms only part of it or is the vendor's own statement. It is unverified or wrong when I could not find it or the source says otherwise.
 
-The nine claims that fail include ones about latency, about cost and about models that supposedly cannot hallucinate. The buttons above the table show one verdict at a time.
+The nine claims in the last group include ones about latency, about cost and about models that supposedly cannot hallucinate.
 
-Six claims are verified, six are partial or rest on a vendor's word, and nine are unverified or wrong. Every row cites the source I checked, and the verdicts are mine.
+Six claims are verified, six are partial or rest on a vendor's word, and nine are unverified or wrong. Each row gives the claim as it circulates, then my verdict and what the source I checked shows.
 
-The claim is this: Cekura Bench ran 7 configurations through 82 scenarios with 3 repeats, 246 calls each. My verdict is partial or vendor. The design is confirmed, but the live hub now lists 8 platforms.
+Cekura Bench ran 7 configurations through 82 scenarios with 3 repeats, 246 calls each. I rate that claim partial or vendor. The design is confirmed, but the live hub now lists 8 platforms.
 
-The claim is this: pass three is the primary metric. My verdict is verified. It is the share of scenarios in which all three retained calls pass.
+Pass three is the primary metric. I rate that claim verified. It is the share of scenarios in which all three retained calls pass.
 
-The claim is this: The figures quoted for Retell, ElevenLabs, Vapi and Gemini Live are right. My verdict is verified. They match exactly on all four reported metrics.
+The figures quoted for Retell, ElevenLabs, Vapi and Gemini Live are right. I rate that claim verified. They match exactly on all four reported metrics.
 
-The claim is this: LiveKit scored 70.73 percent and Pipecat 63.41 percent on pass three. My verdict is verified. Both pass three scores are confirmed; I did not see the other metrics.
+LiveKit scored 70.73 percent and Pipecat 63.41 percent on pass three. I rate that claim verified. Both pass three scores are confirmed; I did not see the other metrics.
 
-The claim is this: GPT Realtime scored 64.63 percent on pass three. My verdict is unverified or wrong. I could not find this figure; the separate speech-to-speech benchmark shows 79.3 percent.
+GPT Realtime scored 64.63 percent on pass three. I rate that claim unverified or wrong. I could not find this figure; the separate speech-to-speech benchmark shows 79.3 percent.
 
-The claim is this: The model stack listed for each platform is accurate. My verdict is unverified or wrong. Providers chose their own stacks, and the lists are not independently confirmed.
+The model stack listed for each platform is accurate. I rate that claim unverified or wrong. Providers chose their own stacks, and the lists are not independently confirmed.
 
-The claim is this: Entity drift happens between the transcript and the tool call. My verdict is verified. One instance, with a phone number, is documented.
+Entity drift happens between the transcript and the tool call. I rate that claim verified. An instance with a phone number is documented.
 
-The claim is this: TypeSafe Jev exists and was built by an ex-OpenAI researcher. My verdict is verified. It was released on September 15, 2026.
+TypeSafe Jev exists and was built by an ex-OpenAI researcher. I rate that claim verified. It was released on September 15, 2026.
 
-The claim is this: Jev answers in 70 to 150 milliseconds. My verdict is unverified or wrong. The vendor quotes 70 to 500 milliseconds; one test measured a median of 175 milliseconds and a 95th percentile of 270 milliseconds.
+Jev answers in 70 to 150 milliseconds. I rate that claim unverified or wrong. The vendor quotes 70 to 500 milliseconds; one test measured a median of 175 milliseconds and a 95th percentile of 270 milliseconds.
 
-The claim is this: Jev costs 4.2 cents per million input tokens, with free output. My verdict is partial or vendor. This matches the vendor's early-access pricing.
+Jev costs 4.2 cents per million input tokens, with free output. I rate that claim partial or vendor. This matches the vendor's early-access pricing.
 
-The claim is this: Jev is calibrated and cannot hallucinate. My verdict is partial or vendor. Its output is always schema-valid, but calibration was weaker than claimed in independent tests.
+Jev is calibrated and cannot hallucinate. I rate that claim partial or vendor. Its output is always schema-valid, but calibration was weaker than claimed in independent tests.
 
-The claim is this: Decision models are 400 times cheaper than LLMs. My verdict is unverified or wrong. The figure is not in primary sources; the real saving in one cascade test was about 72 percent.
+Decision models are 400 times cheaper than LLMs. I rate that claim unverified or wrong. The figure is not in primary sources; the real saving in one cascade test was about 72 percent.
 
-The claim is this: OpenAI Decisions API is generally available. My verdict is unverified or wrong. It has been in public beta since October 6, 2026.
+OpenAI Decisions API is generally available. I rate that claim unverified or wrong. It has been in public beta since October 6, 2026.
 
-The claim is this: Open-source Laya is a drop-in router. My verdict is unverified or wrong. Its routed base checkpoint scores 42.5 percent on Banking77, so fine-tuning is required.
+Open-source Laya is a drop-in router. I rate that claim unverified or wrong. Its routed base checkpoint scores 42.5 percent on Banking77, so fine-tuning is required.
 
-The claim is this: Open models hit 78.4 percent of AI Gateway token volume. My verdict is verified. The post says exactly that; it was a one-day record on a developer-heavy gateway.
+Open models hit 78.4 percent of AI Gateway token volume. I rate that claim verified. The post says exactly that; it was a one-day record on a developer-heavy gateway.
 
-The claim is this: Regulated enterprises are moving inference off public APIs. My verdict is partial or vendor. Private cloud endpoints are common, but I found no named US on-premises voice deployment.
+Regulated enterprises are moving inference off public APIs. I rate that claim partial or vendor. Private cloud endpoints are common, but I found no named US on-premises voice deployment.
 
-The claim is this: A decision-offload simulator shows turns of about 730 milliseconds, against 1,900 milliseconds. My verdict is unverified or wrong. The figures are simulated, not measured.
+A decision-offload simulator shows turns of about 730 milliseconds, against 1,900 milliseconds. I rate that claim unverified or wrong. The figures are simulated, not measured.
 
-The claim is this: The same simulator shows 11,017 dollars a month saved. My verdict is partial or vendor. The arithmetic is plausible, but the saving is about 6 percent of run rate and no infrastructure is modeled.
+The decision-offload simulator shows 11,017 dollars a month saved. I rate that claim partial or vendor. The arithmetic is plausible, but the saving is about 6 percent of run rate and no infrastructure is modeled.
 
-The claim is this: Sierra serves 80 percent of Fortune 50 health care companies. My verdict is partial or vendor. Sierra made the claim at its Summit 2026, and it is not independently verified.
+Sierra serves 80 percent of Fortune 50 health care companies. I rate that claim partial or vendor. Sierra made the claim at its Summit 2026, and it is not independently verified.
 
-The claim is this: Limited-memory models cannot hallucinate. My verdict is unverified or wrong. The authors say the method does not guarantee perfect factuality.
+Limited-memory models cannot hallucinate. I rate that claim unverified or wrong. The authors say the method does not guarantee perfect factuality.
 
-The claim is this: Fact storage is about 99 percent of model size. My verdict is unverified or wrong. No study measures it; retrieval models match models 18 times to 50 times larger on knowledge tasks.
+Fact storage is about 99 percent of model size. I rate that claim unverified or wrong. No study measures it; retrieval models match models 18 times to 50 times larger on knowledge tasks.
 
-The nine claims that fail should not be repeated as fact, and the six partial ones need their caveat attached. The last section turns from claims to practice.
+The nine unverified or wrong claims should not be repeated as fact, and the six partial ones need their caveat attached. T11 turns from claims to practice.

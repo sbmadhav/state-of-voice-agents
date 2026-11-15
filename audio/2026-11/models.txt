@@ -2,19 +2,19 @@ Section 7: Models, platforms and routing.
 
 OpenAI's decision API left beta, and two new models are too slow for live voice.
 
-Among the releases that change a recommendation, two stand out, and a short list of everything else follows. The architecture and routing analysis is in October, T1 and T5.
+The releases that change a recommendation come first, and a short list of everything else follows. The architecture and routing analysis is in October, T1 and T5.
 
-OpenAI's Decisions API, new this month, was in public beta in October and became generally available on October 22. It is a System-1 service, one that makes fast typed decisions (route, risk, done talking) without writing prose. It runs on GPT-6 Luna, takes up to 400 questions in a request and costs 10 cents per million input tokens. GPT-Live, OpenAI's voice model, sends turns to it while the caller is still speaking, and Sierra, a customer, reported a 95th-percentile latency under 280 milliseconds in launch coverage. Vendor-reported.
+OpenAI's Decisions API was in public beta in October and became generally available on October 22. It is a System-1 service, one that makes fast typed decisions (route, risk, done talking) without writing prose. It runs on GPT-6 Luna, takes up to 400 questions in a request and costs 10 cents per million input tokens. GPT-Live, OpenAI's voice model, sends turns to it while the caller is still speaking, and Sierra, a customer, reported a 95th-percentile latency under 280 milliseconds in launch coverage. Vendor-reported.
 
-Speed cuts the other way for two new language models. Regal's benchmark for voice agents, new this month, ran on October 15. GPT-6.1 Sol (1,711 milliseconds) and Gemini 3.8 Flash (2,516 milliseconds) missed the bar of 1,300 milliseconds that Regal sets for live voice, while GPT-6 Sol led at 786 of 1,000. Vendor-reported. The two panels below hold the other releases that change a recommendation.
+Speed cuts the other way for two new language models. Regal's benchmark for voice agents ran on October 15. GPT-6.1 Sol (1,711 milliseconds) and Gemini 3.8 Flash (2,516 milliseconds) missed the bar of 1,300 milliseconds that Regal sets for live voice, while GPT-6 Sol led at 786 of 1,000. Vendor-reported.
 
-The month's other consequential releases fall in two layers: fast decision models, and speech, telephony and the contact center. Each item carries its evidence label.
+The other releases that change a recommendation fall into two groups. Zoom Decisions, LiveKit's DecisionModel, the ElevenLabs integrations, Deepgram's Think-Live, Nemotron 3.5 Transcribe, Phonon and the two acquisitions are new this month.
 
 Fast decision models (System 1).
 
-Zoom Decisions, new this month, is priced at 4.2 cents and 10 cents per million input tokens, and Zoom reports 81.3 percent and 83.9 percent on five text benchmarks. Vendor-reported.
+Zoom Decisions is priced at 4.2 cents and 10 cents per million input tokens, and Zoom reports 81.3 percent and 83.9 percent on five text benchmarks.
 
-LiveKit's DecisionModel, new this month, runs named decisions beside the call. Vendor-reported.
+LiveKit's DecisionModel runs named decisions beside the call. Vendor-reported.
 
 A second test of Jev measured a median of 151 milliseconds and a 95th percentile of 247 milliseconds, against October's 175 milliseconds and 270 milliseconds. No self-hosted version exists. Independent.
 
@@ -22,34 +22,34 @@ Open Laya is too large for the edge: it needs about 1 gigabyte (0.85 gigabytes o
 
 Speech, telephony and contact center.
 
-ElevenLabs' Eleven Realtime Max scored 98.8 percent on Big Bench Audio reasoning and 87.1 percent on tool-use task success in independent tests. Its 0.57 seconds to first audio was slower than the 470 milliseconds claimed, and it opened to all workspaces on November 2. Independent. HIPAA and retention terms for Realtime are not yet documented.
+ElevenLabs' Eleven Realtime Max scored 98.8 percent on Big Bench Audio reasoning and 87.1 percent on tool-use task success in independent tests. Its 0.57 seconds to first audio was slower than the 470 milliseconds claimed, and it opened to all workspaces on November 2. HIPAA and retention terms for Realtime are not yet documented.
 
-ElevenLabs' agents, new this month, now plug natively into NiCE CXone, Genesys Cloud, Amazon Connect and Five9, so a pilot can sit inside an existing contact center. Vendor-reported.
+ElevenLabs' agents now plug natively into NiCE CXone, Genesys Cloud, Amazon Connect and Five9, so a pilot can sit inside an existing contact center. Vendor-reported.
 
-Deepgram's Think-Live, new this month, decides when the agent should listen, wait or respond. It is generally available, as is Flux TTS in nine languages (October 29). Deepgram published no benchmarks. Vendor-reported.
+Deepgram's Think-Live decides when the agent should listen, wait or respond. It is generally available, as is Flux TTS in nine languages (October 29). Deepgram published no benchmarks. Vendor-reported.
 
 OpenAI's GPT-Live connects directly to phone lines over SIP (the standard for business telephony), inbound and outbound, with call transfer. Vendor-reported.
 
-NVIDIA's Nemotron 3.5 Transcribe, new this month, is an open speech model with a commercial license and a 4.71 percent English word error rate. It is for recorded calls, because it does not stream. Vendor-reported.
+NVIDIA's Nemotron 3.5 Transcribe is an open speech model with a commercial license and a 4.71 percent English word error rate. It is for recorded calls, because it does not stream. Vendor-reported.
 
-Gradium's Phonon, new this month, produces speech in about 43 milliseconds on a server CPU and about 7 milliseconds on a laptop CPU. Only its 31-million-parameter English model is Apache-2.0, while the 40-million-parameter and multilingual models are non-commercial. Vendor-reported.
+Gradium's Phonon produces speech in about 43 milliseconds on a server CPU and about 7 milliseconds on a laptop CPU. Only its 31-million-parameter English model is Apache-2.0, while the 40-million-parameter and multilingual models are non-commercial. Vendor-reported.
 
-Two acquisitions, new this month, were agreed: Salesforce is to acquire Cresta (November 2), and Five9 is to acquire Level AI for about 325 million dollars (November 5). With vendors changing hands, any new contract should settle data-export and exit terms. Company-reported.
+Two acquisitions were agreed: Salesforce is to acquire Cresta (November 2), and Five9 is to acquire Level AI for about 325 million dollars (November 5). With vendors changing hands, any new contract should settle data-export and exit terms. Company-reported.
 
-These releases also shipped, and none changes a recommendation. The figures are the makers' own unless an item is labeled independent.
+These releases also shipped, and none changes a recommendation. All but NVIDIA's VoiceChat and ConvFill are new this month, and the figures are the makers' own unless an item is labeled independent.
 
-Anthropic's Claude Fable 5.2 (November 9), new this month, is a text model, usable as the reasoner behind a voice layer, at 8 dollars and 40 dollars per million input and output tokens and up to 30 percent faster than 5.1. It has no audio and no voice-agent benchmarks yet. Vendor-reported.
+Anthropic's Claude Fable 5.2 (November 9) is a text model, usable as the reasoner behind a voice layer. It costs 8 dollars and 40 dollars per million input and output tokens and is up to 30 percent faster than 5.1. It has no audio and no voice-agent benchmarks yet. Vendor-reported.
 
-Phonic-1 (October 29), new this month, is a speech-to-speech model. Phonic claims 83.2 on tau-cubed voice, Sierra's benchmark of voice agents completing customer-service tasks, against 79.9 for GPT-Live 1. Vendor-reported.
+Phonic-1 (October 29) is a speech-to-speech model. Phonic claims 83.2 on tau-cubed voice, Sierra's benchmark of voice agents completing customer-service tasks, against 79.9 for GPT-Live 1.
 
 NVIDIA's NemotronLabs VoiceChat (September 2026) is an open full-duplex model (it listens and talks at the same time) that calls tools while it talks. It passed 33.0 percent of tool-use tasks on the first try (pass at one), against 54.0 percent for Gemini 3.1 Live. Vendor-reported.
 
-Meta, new this month, added voice conversations to its consumer Muse app (US, November 5). It offers no developer API or enterprise voice model. Vendor-reported.
+Meta added voice conversations to its consumer Muse app (US, November 5). It offers no developer API or enterprise voice model. Vendor-reported.
 
-Pipecat, new this month, is an open-source framework that now pairs a fast front-end model with a slower back-end model. Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source. Vendor-reported.
+Pipecat is an open-source framework that now pairs a fast front-end model with a slower back-end model. Deepgram is acquiring Daily, Pipecat's maker, and Pipecat stays open source. Vendor-reported.
 
 ConvFill, a research system, has a small talker cover a frontier model's delay. A later paper notes that it does not measure the risk of the filler contradicting the final answer. Independent.
 
-Block's Dessa, new this month, is a full-duplex model trained only on audio, with no benchmarks.
+Block's Dessa is a full-duplex model trained only on audio, with no benchmarks.
 
-With the Decisions API out of beta, adopting it is now a contract question: data use, third-party risk and, in health care, a business associate agreement. Author's view. The next section lists ten more releases to know about.
+With the Decisions API out of beta, adopting it turns on the contract: data use, third-party risk and, in health care, a business associate agreement. Author's view.

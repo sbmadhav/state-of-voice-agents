@@ -4,9 +4,7 @@ What did not change, and where to read it.
 
 No new evidence moved the October sections listed here, so this update does not repeat them.
 
-Five technical sections were updated in part above: T1 on architecture, T4 on failure modes, T5 on routing, T8 on fraud and T9 on regulation. They still hold wherever this update does not change them. The table says in a line what each of the other sections covers.
-
-These October sections carry no new evidence this month. Each link opens the baseline.
+Each link opens an October section that this update leaves as it stands.
 
 Executive summary. Its nine-point argument is still current, except where this update says otherwise.
 
@@ -16,7 +14,7 @@ The economics model. It works out cost per resolved call, with break-even near 4
 
 The thinker-responder model. A System-1 model decides silently beside a conversational LLM, and the section has a live demo.
 
-What separates a good agent. It covers the golden test set built from a team's own calls, hearing the right caller, emotion and persona.
+What separates a good agent. It covers the golden test set, hearing the right caller, emotion and persona.
 
 Readiness by call type, health care. This is the health care version of the readiness map above.
 
@@ -30,4 +28,4 @@ Deployment and data posture. It describes private endpoints under contract, and 
 
 Tooling and implementation. It says what to borrow and what to avoid.
 
-For these sections the October text is still the one to read. The sources for this update follow.
+Five technical sections were updated in part above: T1 on architecture, T4 on failure modes, T5 on routing, T8 on fraud and T9 on regulation. They still hold wherever this update does not change them.

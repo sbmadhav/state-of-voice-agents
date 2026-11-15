@@ -2,56 +2,56 @@ Section 2: Financial services.
 
 Banks are automating the same routine calls that health systems did.
 
-The first review of bank and credit union results finds them on balances, payments and branch hours. Every performance figure is reported by the institution or its vendor, with no control group.
+Every performance figure in this first review of bank and credit union results is reported by the institution or its vendor, with no control group.
 
-October did not review financial services, so most of the results below predate it; those published since October 12 are tagged "new". They repeat the pattern of October's health care results, and I expect the figures to regress at scale, as with those. I found no voice-agent metrics for the largest US banks. In the table, the highest shares of calls automated come from undated case studies, and the one dated share is the lowest.
+October did not review financial services, so most of these results predate it; those published since October 12 are tagged "new". They repeat the pattern of October's health care results, and I expect the figures to regress at scale, as with those. I found no voice-agent metrics for the largest US banks. The table's one dated share of calls is also its lowest.
 
 Published results from banks, credit unions and lenders sit mostly on routine servicing calls. Each row carries its evidence label, and only the last is independent.
 
-Service 1st Federal Credit Union (US). A Glia agent handles inbound servicing. Glia's undated case study says it fully handles 37 percent of calls, with abandonment down 96 percent and wait down 91 percent. Vendor-reported.
+Service 1st Federal Credit Union (US). A Glia agent handles inbound servicing. Glia's undated case study says the agent fully handles 37 percent of calls, with abandonment down 96 percent and wait down 91 percent.
 
-WEOKIE Federal Credit Union (US). An interface.ai agent handles balances, loan payments and branch hours. A press release puts wait time down 50 percent (March 2025), and the vendor's case study says 66 percent of calls are automated. Vendor-reported.
+WEOKIE Federal Credit Union (US). An interface.ai agent handles balances, loan payments and branch hours. A press release puts wait time down 50 percent (March 2025), and the vendor's case study says 66 percent of calls are automated.
 
-Other US credit unions. Agents from interface.ai handle inbound servicing, some with chat. Undated case studies put calls automated at 40 percent to 90 percent. Vendor-reported.
+Other US credit unions. Agents from interface.ai handle inbound servicing, some with chat. Its undated case studies put calls automated at 40 percent to 90 percent.
 
-Southern Cross Credit Union (Australia), new this month. Salesforce Agentforce Voice handles balance inquiries after verification. By the vendor's account, it takes 7 percent of all calls and gives balances to 95 percent of verified callers who choose that option. Vendor-reported.
+Southern Cross Credit Union (Australia), new this month. Salesforce Agentforce Voice handles balance inquiries after verification. By the vendor's account, it takes 7 percent of all calls and gives balances to 95 percent of verified callers who choose that option.
 
-CIBC (Canada). A proprietary platform runs a voice assistant for clients. CIBC reports more than 16 million calls, including calls the assistant routed to people. It first launched in late 2024 and expanded in 2025. Company-reported.
+CIBC (Canada). A proprietary platform runs a voice assistant for clients. CIBC reports more than 16 million calls, including calls the assistant routed to people. It first launched in late 2024 and expanded in 2025.
 
 Klarna. An ElevenLabs agent handles payment status and next steps. The claim is "Up to 10 times faster", with no baseline given. Vendor-reported.
 
-Unnamed North American lender, new this month. A Synthflow agent makes outbound collections calls. Synthflow reports a four-week trial in which right-party contact was 4.9 percent against a 3.5 percent benchmark and 49 percent of conversations ended in a promise to pay. It gives no sample size or kept-promise rate. Vendor-reported.
+Unnamed North American lender, new this month. A Synthflow agent makes outbound collections calls. Synthflow reports a four-week trial in which right-party contact was 4.9 percent against a 3.5 percent benchmark and 49 percent of conversations ended in a promise to pay. It gives no sample size or kept-promise rate.
 
-NatWest (UK), new this month. The bank uses NVIDIA for voice questions in its app, not in the contact center. NatWest reports 20 percent fewer misheard words after tuning to UK regional accents. Company-reported.
+NatWest (UK), new this month. The bank uses NVIDIA for voice questions in its app, not in the contact center. NatWest reports 20 percent fewer misheard words after tuning speech recognition to UK regional accents.
 
 Commonwealth Bank (Australia). An in-house voice bot handles inbound calls. The bank cut 45 roles, citing lower call volumes, then reversed the cuts after its union disputed the claim (August 2025). Independent.
 
 Status calls are ready, payments need a pilot and fraud claims stay with people.
 
-I sort a bank's calls into three tiers, by the evidence behind each and by what an error would cost. The table gives the reason for each tier and the controls it requires.
+I sort a bank's calls by the evidence behind each and by what an error would cost.
 
-Six groups of financial calls fall into three readiness tiers. The tiers are a starting point for operations and compliance teams; the health care version is in October, section 7. Author's view.
+Six groups of financial calls fall into three readiness tiers. They are a starting point for operations and compliance teams; the health care version is in October, section 7. Author's view.
 
-Balance, transaction and payment status, branch hours and routing. These calls are ready to deploy. Most published results sit here. The agent verifies the caller before giving account data, and the caller has a fast route to a person.
+Balance, transaction and payment status, branch hours and routing are ready to deploy. Most published results sit here. The agent verifies the caller before giving account data, and the caller has a fast route to a person.
 
-Loan or card payment by phone. These calls are ready for a pilot. Credit unions report it, but money moves, so errors cost. The agent reads back the amount and account, and card numbers stay out of the voice path (keypad entry with tones masked).
+Loan or card payment by phone is ready for a pilot. Credit unions report it, but money moves, so errors cost. The agent reads back the amount and account, and card numbers stay out of the voice path (keypad entry with tones masked).
 
-Card activation, lock and travel notices. These calls are ready for a pilot. I found no published results. An unlock or replacement needs a step-up check.
+Card activation, lock and travel notices are ready for a pilot. I found no published results. An unlock or replacement needs a step-up check.
 
-Payment reminders and collections (outbound). These calls are ready for a pilot. The evidence is one vendor trial, and consent, call-frequency and third-party disclosure rules apply. Consent is on file, opt-out works in natural language, no account details go to a wrong party and frequency is capped.
+Payment reminders and collections (outbound) are ready for a pilot. The evidence is one vendor trial, and consent, call-frequency and third-party disclosure rules apply. Consent is on file, opt-out works in natural language, no account details go to a wrong party and frequency is capped.
 
-Dispute and error intake. These calls are ready for a pilot, with care. The CFPB named failing to recognize disputes as a chatbot risk. The agent logs every possible dispute as one, tells a caller with a card billing error how to give written notice, and hands off with the transcript. Author's view.
+Dispute and error intake is ready for a pilot, with care. The Consumer Financial Protection Bureau (CFPB) named failing to recognize disputes as a chatbot risk. The agent logs every possible dispute as one, tells a caller with a card billing error how to give written notice, and hands off with the transcript. Author's view.
 
-Fraud claims, hardship, complaints, advice. These calls stay with people. Customers want a person here, and outcomes are high-stakes. The agent detects these calls and transfers them by rule, never by a confidence threshold.
+Fraud claims, hardship, complaints and advice stay with people. Customers want a person here, and outcomes are high-stakes. The agent detects these calls and transfers them by rule, never by a confidence threshold.
 
-Two new controls came to market this month. ElevenLabs added real-time transcript redaction for personal, health and card data (November 2), and Telnyx's Pay over Voice gives the agent the payment result, never the card number, inside a PCI DSS v4.0.1 assessment (November 6). Vendor-reported.
+Vendors have brought two new controls to market. ElevenLabs added real-time transcript redaction for personal, health and card data (November 2). Telnyx's Pay over Voice gives the agent only the payment result, never the card number, inside a PCI DSS v4.0.1 assessment (November 6). Vendor-reported.
 
-Customers accept an agent for routine tasks and want a person for fraud.
+Most customers want a person involved, and a majority want one for fraud.
 
-In a TD Bank survey of more than 2,500 consumers, 81 percent want some human involvement when they call their bank. Company-reported. In a survey from Answering Service Care and Censuswide, about 30 percent accept AI for routine tasks such as balance checks, and 55 percent want a person for suspected fraud and for debt collection. Vendor-reported. J.D. Power surveyed 18,028 customers and found that satisfaction with banks' in-app virtual assistants dropped sharply on disputes and fraud, where limited escalation trapped people in self-service loops. Independent.
+In a TD Bank survey of more than 2,500 consumers, 81 percent want some human involvement when they call their bank. Company-reported. Answering Service Care and Censuswide report that about 30 percent accept AI for routine tasks such as balance checks, and that 55 percent want a person for suspected fraud and for debt collection. Vendor-reported. J.D. Power surveyed 18,028 customers and found that satisfaction with banks' in-app virtual assistants dropped sharply on disputes and fraud, where limited escalation trapped people in self-service loops. Independent.
 
 October's economics model and pilot plan carry over to a bank.
 
-The economics model and 90-day pilot apply as written, and a bank should judge the pilot on cost per resolved call and zero wrong-account actions. Where October names the electronic health record (EHR) and scheduling systems, a bank should think of its core banking and card systems; integration is still the slowest part of a launch. Where October asks for a business associate agreement (BAA), a bank should look for its own equivalents: GLBA vendor terms, the scope of its PCI assessment and incident-notice clauses, which section 5 sets out. The health care call types give way to the financial readiness map above. Author's view.
+The economics model and 90-day pilot apply as written, and a bank should judge the pilot on cost per resolved call and zero wrong-account actions. Where October names the electronic health record (EHR) and scheduling systems, a bank should think of its core banking and card systems; integration is still the slowest part of a launch. Where October asks for a BAA, a bank should look for its own equivalents: GLBA vendor terms, the scope of its PCI assessment and incident-notice clauses, which section 5 sets out. The health care call types give way to the financial readiness map above. Author's view.
 
-Several controls in the readiness map, from verification to the read-back of an amount, depend on the agent hearing the right person. The next section reports a test in which a television was speaking too.
+Verification and the read-back of an amount both depend on the agent hearing the right person. The next section reports a test in which a television was speaking too.

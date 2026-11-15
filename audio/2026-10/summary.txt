@@ -8,7 +8,7 @@ Point 1.
 
 Agents can take the routine calls, but not yet the same way every time.
 
-Agents now handle scheduling, billing questions and status checks well. In one public benchmark, the best platform completed over 90 percent of scenarios on a single try but passed only 75.6 percent when each scenario had to succeed three times in a row. The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44 percent of repetitive calls automated, but every published result is administrative and self-reported.
+In one public benchmark, the best platform completed over 90 percent of scenarios on a single try but passed only 75.6 percent when each scenario had to succeed three times in a row. The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44 percent of repetitive calls automated, but every published result is administrative and self-reported.
 
 Point 2.
 
@@ -20,7 +20,7 @@ Point 3.
 
 An agent should think silently, then respond.
 
-People size up a question before they answer it, and a voice agent should too. A small, fast "System 1" model answers typed questions in tens of milliseconds, each with a confidence score: which team owns the call, whether there is fraud or clinical risk, whether the caller has finished, whether it is even the caller speaking. It never writes prose. A conversational LLM then responds, with the right data already fetched.
+People size up a question before they answer it, and a voice agent should too. A small, fast "System 1" model answers typed questions in tens of milliseconds, each with a confidence score. The questions include which team owns the call, whether there is fraud or clinical risk, whether the caller has finished and whether it is even the caller speaking. The model never writes prose. A conversational LLM then responds, with the right data already fetched.
 
 The split is faster and cheaper. In one test, routing first kept accuracy at about 84 percent while cutting cost from 2.42 dollars to about 69 cents per 1,000 requests. It is also safer, because every decision is a logged record, and fraud, clinical and complaint signals always go to a person by rule. The fast model works beside any voice stack, and it can cut the audio mid-sentence if it spots risk.
 
@@ -28,19 +28,21 @@ Point 4.
 
 The agent has to hear the right caller.
 
-Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to between 22 and 31 percent, and isolating the main speaker cut them by up to 43 percent. Diarization separates the voices, so the agent can lock onto the caller and check identity again if a different voice takes over before a sensitive step. Tests therefore need noise and side conversations, not clean demo audio.
+Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to between 22 percent and 31 percent, and isolating the main speaker cut them by up to 43 percent. Diarization separates the voices, so the agent can lock onto the caller and check identity again if a different voice takes over before a sensitive step. Tests therefore need noise and side conversations, not clean demo audio.
 
 Point 5.
 
 Emotion and persona are worth piloting but not yet proven.
 
-Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice, so callers can be offered a choice and then hear their preferred voice on every call. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used, so both belong behind the golden test set as experiments.
+Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice. Callers can be offered a choice and then hear their preferred voice on every call. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used, so both belong behind the golden test set as experiments.
 
 Point 6.
 
 Governed memory comes first, and limited-memory models later.
 
-Plans, policies, fees and provider details belong in a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Limited-memory models go further, because they are trained to look facts up in that store instead of memorizing them. In research, a 382 million-parameter model approached a 7 billion model on factual precision, and deleting a row made the model forget the fact. That research is early (Wikipedia facts, small models, no voice or production use), so the sensible order is to trial it on one domain once the store is ready and to scale only if it beats retrieval. Live data such as balances and appointment slots always comes from the organization's own systems through tools.
+Plans, policies, fees and provider details belong in a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Live data such as balances and appointment slots always comes from the organization's own systems through tools.
+
+Limited-memory models go further, because they are trained to look facts up in that store instead of memorizing them. In research, a 382 million-parameter model approached a 7 billion model on factual precision, and deleting a row made the model forget the fact. That research is early: Wikipedia facts, small models, no voice or production use. The sensible order is therefore to trial it on one domain once the store is ready and to scale only if it beats retrieval.
 
 Point 7.
 

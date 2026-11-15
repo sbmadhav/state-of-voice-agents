@@ -4,9 +4,9 @@ The identity check should match the harm a wrong answer can do.
 
 A status question, an address change and a payment do not need the same proof of identity. Ten controls and three risk tiers set out which check belongs where.
 
-Section 8 argued that a voice no longer proves who is calling. The design answer is to tie the strength of the identity check to the harm a wrong answer can do, so that a question about opening hours passes on passive signals and a payment does not. Identity has to be designed in from day one, because the controls sit in different layers, from the contact center platform and the speech-to-text (STT) layer to the dialer and the marketing team.
+Section 8 argued that a voice no longer proves who is calling. Identity has to be designed in from day one, and its controls sit in different layers, from the contact center platform and the speech-to-text layer to the dialer and the marketing team.
 
-Each of ten identity risks has a control and a layer where that control runs. Three rows rest on vendor reports and two on my own judgment, and each is labeled.
+Each of ten identity risks has a control and a layer where that control runs. Three rows rest on vendor reports and two on my own judgment.
 
 Cloned customer voice requesting protected data. Liveness detection, which tests that a live person is speaking, runs with passive voice, device and behavior signals. It runs in the contact center platform. It is embedded in NICE CXone and Zoom Contact Center.
 
@@ -36,4 +36,4 @@ Medium risk. These include an address change, a refill request and a payment dat
 
 High risk. These include payments, prescription changes and authorizations. A voiceprint is checked with liveness and deepfake detection, and a one-time code follows. Phone-quality audio causes false rejects, so a fast route to a person is required.
 
-The one-time code has a weakness of its own. Texted codes carry the risk of a SIM swap, in which a fraudster takes over the customer's phone number, so an app push is the better choice where customers have the app. Author's view. Several of these controls are also legal duties, which the next section summarizes.
+The one-time code has a weakness of its own. Texted codes carry the risk of a SIM swap, in which a fraudster takes over the customer's phone number, so an app push is the better choice where customers have the app. Author's view. One control, consent for outbound AI calls, is also a legal requirement, and T9 summarizes that rule and others.

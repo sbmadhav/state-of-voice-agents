@@ -1,42 +1,56 @@
 Section 12: Think tank.
 
-Seven seats agree on five things and split on three.
+Seven seats agree on five things and leave three unresolved.
 
-Seven synthetic perspectives, written to stress-test this report's argument, converge on five points and leave three questions unresolved. They are not a survey of real people.
+The seats are synthetic perspectives, written to stress-test this report's argument. They are not a survey of real people.
 
-I staged a structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models? Every seat at the table is synthetic. I wrote each one to argue from the evidence its role would weigh most, to name its main concern and to say what would change its mind. The tool below gives each seat's case in its own voice.
+I staged a structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models? I wrote each seat to argue from the evidence its role would weigh most, to name its main concern and to say what would change its mind.
 
-Each seat argues from the evidence that matters most to its role and says what would change its mind. The seats are synthetic, and the figures they quote carry their sources and evidence labels elsewhere in this report.
+Each of the seven seats makes its case in the first person. The figures the seats quote carry their sources and evidence labels elsewhere in this report.
 
 The Chief Digital and CX Officer seat, a synthetic persona, argues:
 
-Expand in phases. Voice is the front door, and it is now also a brand-trust channel. The gains are on the record: a large health system reports that it cut abandonment 56 percent and scheduled 21 percent more appointments in two weeks. My worry is that one bad call becomes the story, and that scammers posing as the brand erode trust in every legitimate call. I would change my mind if pilot satisfaction fell below the human baseline.
+Expand in phases. Voice is the front door, and it is now also a brand-trust channel.
+
+A large health system reports that it cut abandonment 56 percent and scheduled 21 percent more appointments in two weeks. My worry is that one bad call becomes the story, and that scammers posing as the brand erode trust in every legitimate call. I would change my mind if pilot satisfaction fell below the human baseline.
 
 The CFO seat, a synthetic persona, argues:
 
-Fund a pilot, not a platform. Pay for resolved calls. The stack that resolves more calls is cheaper per 1,000 calls despite its higher per-minute rate, and in one test a decision-first cascade cut classification cost by about 72 percent. Pricing is what worries me: vertical vendors rarely publish theirs, and early-access model prices may be subsidized. A verified cost per resolved call below half the human cost at day 90 would change my mind.
+Fund a pilot, not a platform. Pay for resolved calls.
+
+The stack that resolves more calls is cheaper per 1,000 calls despite its higher per-minute rate, and in one test a decision-first cascade cut classification cost by about 72 percent. Pricing is what worries me: vertical vendors rarely publish theirs, and early-access model prices may be subsidized. A verified cost per resolved call below half the human cost at day 90 would change my mind.
 
 The CISO and Privacy Officer seat, a synthetic persona, argues:
 
-Use hosted APIs only under contract. Self-host the small models, and prefer facts in governed stores. A hosted decision API needs a business associate agreement (BAA), the contract US health privacy law requires of vendors that handle patient data, or an equivalent; a self-hosted encoder avoids the question. Extraction attacks have pulled personal data out of model weights. What concerns me is voice cloning, prompt injection and retention terms that change. It would take a signed contract and a SOC 2 Type II report from every layer, the testing vendor included, to change my mind.
+Use hosted APIs only under contract. Self-host the small models, and prefer facts in governed stores.
+
+A hosted decision API needs a business associate agreement (BAA), the contract US health privacy law requires of vendors that handle patient data, or an equivalent; a self-hosted encoder avoids the question. Extraction attacks have pulled personal data out of model weights. What concerns me is voice cloning, prompt injection and retention terms that change. It would take a signed contract and a SOC 2 Type II report from every layer, the testing vendor included, to change my mind.
 
 The Contact Center Operations seat, a synthetic persona, argues:
 
-Start with scheduling, billing and status checks, and make every transfer warm, with full context. Intermountain reports that it automated 44 percent of its repetitive calls and cut abandonment by 85 percent. I worry about wrong write-backs, misroutes, authentication failures and staff morale. A misroute or wrong-action rate above 0.5 percent on audit would change my mind.
+Start with scheduling, billing and status checks, and make every transfer warm, with full context.
+
+Intermountain reports that it automated 44 percent of its repetitive calls and cut abandonment by 85 percent. I worry about wrong write-backs, misroutes, authentication failures and staff morale. A misroute or wrong-action rate above 0.5 percent on audit would change my mind.
 
 The Clinical and Risk Safety Lead seat, a synthetic persona, argues:
 
-Keep the agent administrative. It gives no triage and no advice, and it escalates by rule, not by threshold. No validated deployment of autonomous triage has been found, and the best models reach only about 53 percent on multi-intent benchmarks. My concerns are missed red flags, older and non-English callers, and regulatory exposure. An independent safety evaluation with prospective outcomes would change my mind.
+Keep the agent administrative. It gives no triage and no advice, and it escalates by rule, not by threshold.
+
+No validated deployment of autonomous triage has been found, and the best models reach only about 53 percent on multi-intent benchmarks. My concerns are missed red flags, older and non-English callers, and regulatory exposure. An independent safety evaluation with prospective outcomes would change my mind.
 
 The AI Platform Architect seat, a synthetic persona, argues:
 
-Build a thinker-responder, in which a fast model decides silently and a conversational model speaks: a tiered router in front, narrowed tools for each sub-agent and a governed fact store, with a limited-memory trial for static knowledge once it beats retrieval. On a managed platform such as Sierra, insist on exporting routing decisions and logs. A fine-tuned classifier with 0.1 billion parameters hits 93.5 percent on the Banking77 intent benchmark in 22 milliseconds. Tool retrieval more than tripled selection accuracy in one study, and a 382 million limited-memory model approached a 7 billion model on factual precision. My concern is lock-in at the orchestration and integration layers, and model churn every few weeks. A vendor that refused to export logs or routing decisions would change my mind.
+Build a thinker-responder: a tiered router in front, narrowed tools for each sub-agent and a governed fact store, with a limited-memory trial for static knowledge once it beats retrieval. On a managed platform such as Sierra, insist on exporting routing decisions and logs.
+
+A fine-tuned classifier with 0.1 billion parameters hits 93.5 percent on the Banking77 intent benchmark in 22 milliseconds. Tool retrieval more than tripled selection accuracy in one study, and a 382 million limited-memory model approached a 7 billion model on factual precision. My concern is lock-in at the orchestration and integration layers, and model churn every few weeks. A vendor that refused to export logs or routing decisions would change my mind.
 
 The Skeptic / red team seat, a synthetic persona, argues:
 
-Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers. The Banking77 score of Jev, a hosted decision model, varies by 10.7 points from lab to lab, and benign context flipped 61 percent of correct decisions in one study. The limited-memory approach is untested above 400 million parameters or on dialog, and Sierra publishes single-run voice scores, not repeat reliability. Every outcome figure in this report is customer- or vendor-reported, with no control group. Show me 90 percent or more on pass three on your own scenarios, audited by an independent party, and I will change my mind.
+Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers.
 
-The seven seats agree on five points and leave three questions open. Both lists are my synthesis of the synthetic positions above.
+The Banking77 score of Jev, a hosted decision model, varies by 10.7 points from lab to lab, and benign context flipped 61 percent of correct decisions in one study. The limited-memory approach is untested above 400 million parameters or on dialog, and Sierra publishes single-run voice scores, not repeat reliability. Every outcome figure in this report is customer- or vendor-reported, with no control group. Show me 90 percent or more on pass three on your own scenarios, audited by an independent party, and I will change my mind.
+
+The seven seats agree on five points and leave three questions unresolved. Both lists are my synthesis of the synthetic positions above.
 
 Where the seats agree.
 
@@ -52,10 +66,10 @@ The organization should own the evaluation data, the routing logs and the call l
 
 What stays unresolved.
 
-The seats split on the router. A fine-tuned classifier is the cheapest and most accurate choice on fixed intents, while a hosted decision API needs no training data and adapts to new intents.
+The seats do not settle the router. A fine-tuned classifier is the cheapest and most accurate choice on fixed intents, while a hosted decision API needs no training data and adapts to new intents.
 
 No seat can say when a private limited-memory model beats retrieval on a frontier model on total cost.
 
 Speed pulls against safety on outbound calls, where consent rules bite at scale.
 
-Part II, the technical appendix, takes up the three open questions. T5 compares the routers, T6 sets out what the limited-memory research shows, and T8 and T9 cover consent on outbound calls.
+Part II, the technical appendix, takes up the three unresolved questions. T5 compares the routers, T6 sets out what the limited-memory research shows, and T8 and T9 cover consent on outbound calls.
