@@ -150,7 +150,7 @@ test('reliability chart: sort and select a platform', async ({ page }) => {
   await expect(rows.first()).toContainText('ElevenLabs'); // fastest turn time
   await page.locator('#db .db-row', { hasText: 'Gemini Live' }).click();
   await expect(page.locator('#db .db-row', { hasText: 'Gemini Live' })).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('#db-detail')).toContainText('Gemini Live: of 82 scenarios');
+  await expect(page.locator('#db-detail')).toContainText('Gemini Live passed about 25 of 82 scenarios');
 });
 
 test('economics calculator: presets and sliders update the outputs', async ({ page }) => {
@@ -200,7 +200,7 @@ test('thinker-responder, memory, options, personas, use cases, pilot and latency
   // Options
   await page.locator('#opts .opt').first().click();
   await expect(page.locator('#opts .opt').first()).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('#opt-detail')).toContainText('Strong for the pilot itself.');
+  await expect(page.locator('#opt-detail')).toContainText('It is strong for the pilot itself.');
   // Personas
   await page.locator('#personas .persona', { hasText: 'CFO' }).click();
   await expect(page.locator('#pdetail')).toContainText('Fund a pilot, not a platform.');

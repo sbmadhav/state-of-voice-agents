@@ -69,7 +69,7 @@ test('November update: delta-only, financial services focus, links back to the O
 test("What's new: ten ranked releases, each with an external source link, reachable from the section nav", async ({ page }) => {
   await page.goto('/state-of-voice-agents/');
   const section = page.locator('section#whatsnew');
-  await expect(section.locator('h2')).toHaveText("What's new in the voice AI world");
+  await expect(section.locator('h2')).toHaveText('Ten releases to know about, in order of relevance');
   await expect(section.locator('.eyebrow')).toHaveText(/^8 · /);
   // It sits between Models and Health care notes, and the eyebrow numbers run 1 to 10 in order
   const ids = await page.locator('main > section').evaluateAll(ss => ss.map(s => s.id));
