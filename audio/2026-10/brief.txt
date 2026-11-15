@@ -1,8 +1,10 @@
 State of conversational voice agents. Healthcare first, with notes for financial services.
 
-October 2026 edition.
-
 Voice agents at the front door.
+
+By Madhav Srinivasan. Published October 12, 2026.
+
+The text was edited for readability on November 15, 2026. The findings and figures are as first published. The latest update is the November 2026 edition.
 
 Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in four test scenarios when each was run three times.
 

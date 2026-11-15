@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="State of conversational voice agents, October 2026 edition: reliability, economics, a thinker-responder architecture and governed memory for regulated contact centers, healthcare first.">
 <meta name="author" content="Madhav Srinivasan">
+<meta property="article:author" content="Madhav Srinivasan">
+<meta property="article:published_time" content="2026-10-12">
+<meta property="article:modified_time" content="2026-11-15">
 <!-- header.js keeps theme-color on the current --bg; this is only the first-paint value -->
 <meta name="theme-color" content="#F6F7F9">
 <link rel="canonical" href="https://sbmadhav.com/state-of-voice-agents/">
@@ -317,6 +320,26 @@ table.t-router td.n .chip{white-space:normal;margin-top:var(--space-1)}
 .pk .v{font-family:var(--font-mono);font-size:var(--text-code-size);font-variant-numeric:tabular-nums}
 .pk .k{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--ink-muted)}
 
+/* Edition navigation, standfirst and byline: where the reader is, which edition this is, who wrote it and when */
+.edition-nav{display:grid;gap:var(--space-2);margin-bottom:var(--space-4)}
+.crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:var(--space-1) var(--space-2);margin:0;padding:0;font-family:var(--font-mono);font-size:var(--text-kicker-size);letter-spacing:var(--text-kicker-tracking);color:var(--ink-muted)}
+.crumbs li{display:inline-flex;gap:var(--space-2);align-items:center}
+.crumbs li+li::before{content:"/";color:var(--ink-muted)}
+.crumbs a{color:inherit;padding-block:var(--space-1)}
+.crumbs [aria-current]{color:var(--ink)}
+.editions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2)}
+.editions ul{list-style:none;display:flex;flex-wrap:wrap;gap:var(--space-2);margin:0;padding:0}
+.editions a{display:inline-flex;flex-wrap:wrap;gap:var(--space-1-5);align-items:baseline;padding:var(--space-1) var(--space-2-5);border:1px solid var(--line);border-radius:var(--radius-pill);font-size:var(--text-small-size);color:var(--ink);text-decoration:none}
+.editions a:hover{border-color:var(--ink)}
+.editions a[aria-current="page"]{border-color:var(--ink);font-weight:var(--text-label-weight)}
+.editions .ed-kind{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--ink-muted);font-weight:var(--text-body-weight)}
+.standfirst{margin-top:var(--space-4);max-width:62ch;font-family:var(--font-sans);font-size:var(--text-title-size);line-height:var(--text-label-leading);font-weight:var(--text-body-weight)}
+.byline{margin-top:var(--space-3);font-size:var(--text-small-size);color:var(--ink-muted)}
+.byline-note{margin-top:var(--space-1)}
+.byline strong{color:var(--ink);font-weight:var(--text-label-weight)}
+.hero-audio{margin-top:var(--space-3)}
+@media (max-width:760px){.standfirst{font-size:var(--text-lede-size)}}
+@media print{.editions{display:none!important}}
 /* Voice-overs: AI narration of each section, from /state-of-voice-agents/audio/<edition>/ (same origin).
    Controls stay hidden until the edition's manifest lists audio for that section. */
 .hero-audio{display:grid;gap:var(--space-2);margin-top:var(--space-3)}
@@ -546,10 +569,28 @@ ol.src li:target{background:var(--accent-soft)}
 <main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-10/">
 <header class="hero" id="brief">
   <div class="wrap">
+    <div class="edition-nav" data-narrate-skip>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">sbmadhav.com</a></li>
+          <li><a href="/state-of-voice-agents/">State of Voice Agents</a></li>
+          <li><span aria-current="page">October 2026</span></li>
+        </ol>
+      </nav>
+      <nav class="editions" aria-label="Editions of this report">
+        <span class="lbl">Editions</span>
+        <ul>
+          <li><a href="/state-of-voice-agents/">November 2026 <span class="ed-kind">Latest update</span></a></li>
+          <li><a href="/state-of-voice-agents/editions/2026-10/" aria-current="page">October 2026 <span class="ed-kind">Baseline report</span></a></li>
+        </ul>
+      </nav>
+    </div>
     <p class="eyebrow">State of conversational voice agents · Healthcare first, with notes for financial services</p>
-    <p style="margin-top:var(--space-2)"><span class="edition">October 2026 edition</span></p>
+    <h1 style="margin-top:var(--space-3)">Voice agents at the front door</h1>
+    <p class="byline">By <strong>Madhav Srinivasan</strong>. Published <time datetime="2026-10-12">October 12, 2026</time>.</p>
+    <p class="byline byline-note">The text was edited for readability on <time datetime="2026-11-15">November 15, 2026</time>. The findings and figures are as first published. The latest update is the <a href="/state-of-voice-agents/">November 2026 edition</a>.</p>
     <div class="hero-audio" data-narrate-skip>
-      <p class="readtime"><span id="read-min">About 46 min read</span><span id="listen-min" hidden></span></p>
+      <p class="readtime"><span id="read-min">About 47 min read</span><span id="listen-min" hidden></span></p>
       <div class="listen-all" id="listen-all" hidden>
         <button type="button" class="md-btn md-btn--sm" id="listen-all-btn" aria-expanded="false" aria-controls="listen-all-panel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>Listen to the whole report</button>
         <span class="note">AI voice by ElevenLabs</span>
@@ -560,7 +601,6 @@ ol.src li:target{background:var(--accent-soft)}
         </div>
       </div>
     </div>
-    <h1 style="margin-top:var(--space-3)">Voice agents at the front door</h1>
     <div class="wave" id="wave" aria-hidden="true"></div>
     <div class="wave-cap" aria-hidden="true"><span>caller</span><span>agent</span><span>caller</span><span>agent</span><span>handoff</span></div>
 
@@ -2049,7 +2089,7 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
    const btn=box.querySelector('button'),panel=box.querySelector('.listen-panel'),au=box.querySelector('audio');
    au.src=srcOf(f);au.setAttribute('aria-label','Narration: '+title+', '+spoken(f.duration||0));
    btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
-   if(sec.classList.contains('hero')){const h=sec.querySelector('h1');h.insertAdjacentElement('afterend',box);box.style.marginTop='var(--space-3)'}
+   if(sec.classList.contains('hero')){sec.querySelector('.hero-audio').appendChild(box);box.style.marginTop='var(--space-2)'}
    else{const head=sec.querySelector('.head');(head||sec.querySelector('.wrap')||sec).appendChild(box)}
   });
   // Listening time, and the whole update as a playlist, in section order

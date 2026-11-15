@@ -1,12 +1,12 @@
 State of conversational voice agents. Monthly update. Financial services focus, with health care notes.
 
-November 2026 edition.
-
-Builds on the October 2026 baseline. Only what changed, or is reviewed for the first time, is here.
-
 Banks and credit unions reach the front door.
 
 Reviewed for the first time, bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all reported by the institution or its vendor. A new entrant topped the reliability benchmark, OpenAI's decision API left beta, the FCC gave callers more flexibility on opt-outs, and California tightened rules on AI in health care. The new risk is ordinary: a TV playing in the room broke most voice agents in one test.
+
+By Madhav Srinivasan. Published November 10, 2026. Updated November 15, 2026.
+
+This update builds on the October 2026 baseline and covers only what changed since then, or is reviewed for the first time.
 
 Best repeat reliability: 87.8 percent. October: 75.6 percent, 7 platforms. A new entrant, PolyAI, leads ten configurations; its range (about 79 percent to 93 percent) overlaps the runner-up's. Vendor-reported.
 

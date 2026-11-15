@@ -37,6 +37,8 @@ A new edition goes out every 30 days. Use this checklist each time.
 - [ ] Test light and dark themes, phone width, and Download PDF in both themes.
 
 ## 3. Publish
+- [ ] Edition navigation: on the new page set the breadcrumb, the byline dates (`Published`, `Updated`) and the `article:published_time` and `article:modified_time` meta tags. Add the new edition to the `nav.editions` switcher on the new page and on every archived edition (`editions/*/index.html`), with `aria-current="page"` on the page's own edition, so readers can move between editions in both directions.
+- [ ] Write the edition as an article, following `docs/editorial-style.md`: a narrative paragraph opens every section, sentences are complete, and tables and lists are captioned exhibits.
 - [ ] Point the voice-overs at the new edition: in `index.html`, set `<main data-audio-base="/state-of-voice-agents/audio/YYYY-MM/">` and create `audio/YYYY-MM/manifest.json` containing `{"edition": "YYYY-MM", "sections": {}}`. Leave the previous edition's `audio/` folder as it is.
 - [ ] Regenerate the narration text and the read time: `python3 tools/narration.py`. It writes `audio/YYYY-MM/<section-id>.txt` and updates "About N min read" in the hero. Read a few scripts aloud in your head: give a new table a `data-narrate="{0}: {1}..."` row template if the "Column: value" fallback sounds stiff, and mark anything that should not be read with `data-narrate-skip`. Commit the `.txt` files; they are also the transcripts.
 - [ ] Copy `index.html` to `editions/YYYY-MM/index.html`, along with `og.png`. Keep the Explore menu and analytics scripts (see CLAUDE.md).
