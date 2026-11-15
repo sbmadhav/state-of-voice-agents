@@ -1,23 +1,29 @@
 Section 1: At a glance.
 
-October versus November.
+Nine findings moved since October.
 
-Each row is a finding that moved. Rows link to the detail below.
+Two are first reviews, one is a correction and six are updates.
 
-Repeat reliability. In October: Retell led at 75.6 percent of 82 scenarios passed three times in a row; 7 platforms. In November: PolyAI, newly tested, leads at 87.8 percent; 10 configurations; the 7 October results are unchanged. What it means: Leaders change monthly; your own golden test set stays the gate.
+This update covers October 12 to November 14, 2026. The first reviews are of bank results and bank regulation, and the correction is to October's advice on identity checks.
 
-Financial services results. In October: Not reviewed; the report expected balances and payments first. In November: One dated result: 7 percent of all calls at an Australian credit union; undated US case studies claim 37 percent to 90 percent; CIBC reports more than 16 million voice-assistant calls. What it means: The expected pattern held: routine servicing first; all figures are self-reported.
+Each row sets what October said beside what this update found, then says what follows. Rows link to the sections that carry the sources and evidence labels.
 
-Background speech. In October: Background speech raised transcription errors to 22 percent to 31 percent. In November: With a TV on, task completion fell from 38.7 percent to 8.6 percent; an open model isolates the caller. What it means: The failure mode to test first.
+Repeat reliability. Retell led 7 platforms, with 75.6 percent of 82 scenarios passed three times in a row. PolyAI, newly tested, now leads 10 configurations at 87.8 percent, and the 7 October results are unchanged. Leaders change monthly, so a team's own test set stays the gate.
 
-Financial regulation. In October: GLBA, PCI DSS and UDAAP named but not reviewed. In November: Mapped below, including Regulation E and Z, debt collection rules, new model-risk guidance and the FCC opt-out order. What it means: The new model-risk guidance excludes generative AI, so voice agents fall under general governance.
+Financial services results. October did not review them, but expected balances and payments first. The one dated share is 7 percent of all calls, at an Australian credit union. Undated US case studies claim 37 percent to 90 percent, and CIBC reports more than 16 million voice-assistant calls. The expected pattern held, with routine servicing first, and all figures are self-reported.
 
-California chatbot law. In October: AB 1609 reported as signed, unverified. In November: Confirmed: signed September 28, 2026, effective January 1, 2027; covers phone and online customer service at businesses over 500 million dollars revenue. What it means: Large banks need a human within 15 minutes, or a booked appointment, when a caller asks.
+Background speech. October found that background speech raised transcription errors to 22 percent to 31 percent. With a TV on, task completion fell from 38.7 percent to 8.6 percent in one test, and an open model now isolates the caller. This is the failure mode to test first.
 
-Identity checks. In October: Voiceprint plus liveness, then a one-time code, for high-risk calls. In November: Corrected: treat voice as a signal, not a factor; detectors also miss more over real phone lines. What it means: High-risk steps move to app push or other phishing-resistant checks.
+Financial regulation. October named three regimes but did not review them: the Gramm-Leach-Bliley Act (GLBA), the Payment Card Industry Data Security Standard (PCI DSS) and the ban on unfair, deceptive or abusive acts or practices (UDAAP). This update maps them to a voice agent, along with Regulations E and Z, debt collection rules, new model-risk guidance and the FCC opt-out order. The new model-risk guidance excludes generative AI, so voice agents fall under general governance.
 
-System-1 decisions. In October: OpenAI Decisions API in public beta. In November: Decisions API generally available, with native GPT-Live integration. What it means: Now a contract question: data use, third-party risk and, in health care, a BAA.
+California chatbot law. October reported AB 1609 as signed, but unverified. It is now confirmed as signed on September 28, 2026 and effective January 1, 2027, and it covers phone and online customer service at businesses over 500 million dollars in revenue. Large banks need a human within 15 minutes, or a booked appointment, when a caller asks.
 
-Open speech models. In October: Open models fit only small routers. In November: Open models now cover recorded-call transcription, speech output and voice isolation. What it means: More of the audio path can stay on your own infrastructure; live transcription still needs streaming models.
+Identity checks. October advised voiceprint plus liveness, then a one-time code, for high-risk calls. That advice is now corrected: voice is a risk signal, not an authentication factor, and deepfake detectors also miss more over real phone lines. High-risk steps move to app push or other phishing-resistant checks.
 
-Health care. In October: Disclosure rules in California, Texas and Utah. In November: California AB 1979 adds a licensed-judgment rule and covers health care chatbots under its medical privacy law. What it means: Scheduling and routine messages stay exempt.
+System-1 decisions. OpenAI's Decisions API was in public beta. It is now generally available, with native GPT-Live integration. Adoption becomes a contract question: data use, third-party risk and, in health care, a business associate agreement (BAA).
+
+Open speech models. October found open models fit only for small routers. Open models now cover the transcription of recorded calls, speech output and voice isolation. More of the audio path can stay on a team's own infrastructure, but live transcription still needs streaming models.
+
+Health care. October covered disclosure rules in California, Texas and Utah. California's AB 1979 adds a licensed-judgment rule and covers health care chatbots under the state's medical privacy law. Scheduling and routine messages stay exempt.
+
+The bank results, this update's focus, come next, and the television test follows them.

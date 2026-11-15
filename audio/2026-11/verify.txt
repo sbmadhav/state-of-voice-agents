@@ -1,39 +1,45 @@
 Section 10: Claim check.
 
-New and revised claims.
+Four claims October could not verify are now confirmed.
 
-Claims checked for the first time this month, or whose verdict changed. The other October claims stand: October, T10.
+The four are the Decisions API's general availability, GPT Realtime's benchmark score, the signing of California's AB 1609 and the effective date of Colorado's replacement AI law. Of the other 13 claims, all checked for the first time this month, six are partly true or vendor-only and seven are unverified or wrong.
 
-Claim: OpenAI Decisions API is generally available. Verdict: verified. Evidence: Was unverified (public beta) in October; generally available October 22, 2026, on GPT-6 Luna.
+Several of the newly checked claims fail in the same way: a maker names a capability and publishes no test. The other October verdicts stand, and are in October, T10. The buttons above the table filter it by verdict.
 
-Claim: GPT Realtime 64.63 percent pass three. Verdict: verified. Evidence: Was unverified in October; now listed on the benchmark hub.
+The verdicts on these 17 claims are mine, and each row cites a source.
 
-Claim: California AB 1609 (customer service chatbots) was signed. Verdict: verified. Evidence: Was unverified in October; signed September 28, 2026 as Chapter 733, effective January 1, 2027.
+"OpenAI Decisions API is generally available." The verdict is verified. October listed this as unverified, because the API was in public beta. It became generally available on October 22, 2026, on GPT-6 Luna.
 
-Claim: Colorado's replacement AI law takes effect January 1, 2027. Verdict: verified. Evidence: Was unverified in October; signed May 14, 2026, effective January 1, 2027 if rulemaking is complete.
+"GPT Realtime scores 64.63 percent pass three." The verdict is verified. October listed this as unverified. The score is now listed on the benchmark hub.
 
-Claim: PolyAI leads Cekura Bench at 87.8 percent pass three. Verdict: partial or vendor. Evidence: On the hub, but two checks were not scored for PolyAI and its range overlaps the runner-up's.
+"California AB 1609 (customer service chatbots) was signed." The verdict is verified. October listed this as unverified. The bill was signed on September 28, 2026, as Chapter 733, and takes effect on January 1, 2027.
 
-Claim: Jev can run locally or at the edge. Verdict: unverified or wrong. Evidence: No weights or self-hosted build; open Laya needs about 1 gigabyte, beyond a Cloudflare Worker's 128 megabytes.
+"Colorado's replacement AI law takes effect on January 1, 2027." The verdict is verified. October listed this as unverified. The law was signed on May 14, 2026, and takes effect on January 1, 2027, if rulemaking is complete.
 
-Claim: Banks are replacing contact-center staff with voice bots. Verdict: unverified or wrong. Evidence: Commonwealth Bank cut 45 roles citing a voice bot, then reversed the cuts; no large US bank publishes voice-agent metrics.
+"PolyAI leads Cekura Bench at 87.8 percent pass three." The verdict is partial or vendor. The score is on the hub, but two checks were not scored for PolyAI and its range overlaps the runner-up's.
 
-Claim: Voice biometrics is enough for high-risk banking calls. Verdict: unverified or wrong. Evidence: New York's regulator advises against voice as an authentication factor; detectors miss more over phone lines.
+"Jev can run locally or at the edge." The verdict is unverified or wrong. No weights or self-hosted build exist, and open Laya needs about 1 gigabyte, beyond a Cloudflare Worker's 128 megabytes.
 
-Claim: Customers do not want AI on bank calls. Verdict: partial or vendor. Evidence: About 30 percent accept it for routine tasks; most want a person for fraud and collections.
+"Banks are replacing contact-center staff with voice bots." The verdict is unverified or wrong. Commonwealth Bank cut 45 roles citing a voice bot, then reversed the cuts. No large US bank publishes voice-agent metrics.
 
-Claim: A TV in the room breaks most voice agents. Verdict: partial or vendor. Evidence: Vendor research on simulated calls: task completion fell from 38.7 percent to 8.6 percent across 14 systems; noise options were off.
+"Voice biometrics is enough for high-risk banking calls." The verdict is unverified or wrong. New York's regulator advises against voice as an authentication factor, and detectors miss more over phone lines.
 
-Claim: An open model removes background voices better than commercial tools. Verdict: partial or vendor. Evidence: VoxLock 4.95 percent word error rate versus 5.30 percent to 9.38 percent for three commercial tools, in its author's own test.
+"Customers do not want AI on bank calls." The verdict is partial or vendor. About 30 percent accept it for routine tasks, and most want a person for suspected fraud and collections.
 
-Claim: Open-source speech recognition has caught up. Verdict: partial or vendor. Evidence: Nemotron 3.5 Transcribe leads open models on recorded audio, but does not stream and still trails the best closed models.
+"A TV in the room breaks most voice agents." The verdict is partial or vendor. In a vendor's research on simulated calls, task completion fell from 38.7 percent to 8.6 percent across 14 systems, with noise options off.
 
-Claim: Eleven Realtime starts speaking in 470 milliseconds. Verdict: unverified or wrong. Evidence: Independent tests measured 0.57 seconds (Max) and 0.62 seconds (Mini); its reasoning scores did match.
+"An open model removes background voices better than commercial tools." The verdict is partial or vendor. VoxLock's word error rate was 4.95 percent, against 5.30 percent to 9.38 percent for three commercial tools, in its author's own test.
 
-Claim: Salesforce Launa-Omni matches the leading voice models. Verdict: partial or vendor. Evidence: Second on Scale's Audio MultiChallenge (59.69 versus 60.40, within error); its tau-cubed voice score is self-reported.
+"Open-source speech recognition has caught up." The verdict is partial or vendor. Nemotron 3.5 Transcribe leads open models on recorded audio, but it does not stream and still trails the best closed models.
 
-Claim: Chatbase Voice gives speech-to-speech agents chat-grade control. Verdict: unverified or wrong. Evidence: Chatbase names no model or architecture and publishes no tests.
+"Eleven Realtime starts speaking in 470 milliseconds." The verdict is unverified or wrong. Independent tests measured 0.57 seconds for the Max model and 0.62 seconds for the Mini. Its reasoning scores did match.
 
-Claim: Fish Audio understands conversations, not just text. Verdict: unverified or wrong. Evidence: Its models generate expressive multi-speaker speech from tagged scripts; nothing shows reasoning over a live call.
+"Salesforce Launa-Omni matches the leading voice models." The verdict is partial or vendor. It is second on Scale's Audio MultiChallenge (59.69 against 60.40, within error), and its tau-cubed voice score is self-reported.
 
-Claim: Block's Dessa is a usable full-duplex voice model. Verdict: unverified or wrong. Evidence: Research preview with a waitlist; no size, benchmarks or tool use published.
+"Chatbase Voice gives speech-to-speech agents chat-grade control." The verdict is unverified or wrong. Chatbase names no model or architecture and publishes no tests.
+
+"Fish Audio understands conversations, not just text." The verdict is unverified or wrong. Its models generate expressive multi-speaker speech from tagged scripts, and nothing shows reasoning over a live call.
+
+"Block's Dessa is a usable full-duplex voice model." The verdict is unverified or wrong. Dessa is a research preview with a waitlist, and no size, benchmarks or tool use are published.
+
+These verdicts describe the evidence as of November 14.

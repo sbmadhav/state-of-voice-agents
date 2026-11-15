@@ -1,45 +1,45 @@
 Section 6: What separates a good agent.
 
-Two foundations, and two experiments worth running.
+Two capabilities outlast any model, and two are still experiments.
 
-Models change every month. Two capabilities decide whether an agent holds up on real calls, and they carry over from one model or vendor to the next. Two more are promising but early: pilot them behind the golden test set.
+Two capabilities decide whether an agent holds up on real calls, and they carry over from one model or vendor to the next. Two more are promising but early.
 
-Foundation · A golden test set and an evaluation framework.
+Models change every month. The two foundations are a golden test set with an evaluation framework around it, and audio handling that picks the caller's voice out of a noisy room. The two experiments, reading the caller's emotion and tuning the agent's persona, are worth piloting behind the golden test set.
 
-The most valuable asset a team builds. Hundreds of real, de-identified call scenarios, each with a known right answer, run three times on every change to models, prompts, tools or personas.
+The two foundations come with targets a team can test against, and the two experiments come with cautions. Vendor figures are labeled, and the estimate of test runs is my arithmetic.
 
-Common guidance: more than 200 scenarios before production, more than 500 for multilingual enterprise use,, vendor-reported. To detect a 5-point change in a pass rate near 80 percent, plan for several hundred runs per version, not the 100 sometimes quoted. Author's arithmetic.
+Foundation.
 
-Mix happy paths with edge cases, errors, adversarial callers and noisy audio, and add every production failure as a new case.
+A golden test set gates every change.
 
-Block a release when a score drops, the same way failing tests block code.
+A golden test set is the most valuable asset a team builds. It holds hundreds of real, de-identified call scenarios, each with a known right answer, and it runs three times on every change to models, prompts, tools or personas.
 
-Foundation · Hearing the right caller.
+Common guidance, here from the vendor Hamming's evaluation guide, is 200 or more scenarios before production and 500 or more for multilingual enterprise use. Detecting a 5-point change in a pass rate near 80 percent takes several hundred runs per version, not the 100 sometimes quoted. Author's arithmetic. The set should mix calls that go to plan with edge cases, errors, adversarial callers and noisy audio, and every production failure should join it as a new case. A drop in score then blocks a release, the same way failing tests block code.
+
+Foundation.
+
+The agent has to pick out the caller's voice.
 
 Real callers phone from cars, kitchens and waiting rooms, with a TV on or someone talking beside them. How the agent performs there matters more than how it performs in a quiet demo.
 
-Background speech pushed streaming speech-to-text error rates to 22 percent to 31 percent; isolating the main speaker cut errors by up to 43 percent. Vendor-reported.
+In one vendor test, by ai-coustics, background speech pushed the error rates of streaming speech-to-text to between 22 percent and 31 percent, and isolating the main speaker cut errors by up to 43 percent.
 
-Separate the voices (diarization), lock onto the caller, and re-verify identity if a different voice takes over before a sensitive step.
+The remedy is diarization, which separates the voices so that the agent can lock onto the caller and verify identity again if a different voice takes over before a sensitive step. For the same reason, tests should run at several noise levels and with side conversations, not just on clean audio.
 
-Test at several noise levels and with side conversations, not just clean audio.
+Experiment.
 
-Experiment · Emotion in real time, sentiment on every call.
+Emotion scores are a signal, not a judgment.
 
-During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.
+During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff, a transfer that carries the context with it. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.
 
-Treat emotion scores as a signal for routing and review, not a judgment of the caller. Accuracy varies, so check that they work equally across accents and age groups.
+An emotion score is best treated as a signal for routing and review, not a judgment of the caller. Accuracy varies, so a team should check that the scores work equally across accents and age groups. In the EU, people must be told when an emotion recognition system is used.
 
-In the EU, people must be told when an emotion recognition system is used.
+Experiment.
 
-Experiment · Persona is the brand.
+The persona is the brand.
 
 Callers judge the organization by how its agent sounds. Voice, pace, warmth and word choice deserve the same care as a brand guide.
 
-One subscription business reported resolution rates up more than 50 percent after tuning its voice persona. Vendor-reported.
+One subscription business reported resolution rates up more than 50 percent after tuning its voice persona, according to Sierra. Vendor-reported. I would offer callers a choice of a few personas and then keep each caller's preferred voice consistent on every call. Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.
 
-Offer callers a choice of a few personas, then keep each caller's preferred voice consistent on every call. Author's view.
-
-Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.
-
-Author's view. The experiments have little evidence so far: mostly vendor case studies, and none yet shows emotion detection or personas improving AI-agent outcomes at scale.
+The two experiments have little evidence behind them so far. What exists is mostly vendor case studies, and none yet shows emotion detection or personas improving AI-agent outcomes at scale. Author's view. The foundations are the place to start, and the next section does the same sorting for the calls themselves.

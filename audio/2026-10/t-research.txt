@@ -1,11 +1,11 @@
 T11. Tooling and implementation.
 
-What to borrow, what to avoid.
+By one vendor's account, implementations fail on vague goals and missing handoffs.
 
-Frontend and developer tooling.
+A published account of failed chatbot projects points to goals, integration, handoff, knowledge and measurement.
 
-Vercel's AI Voice Elements give React components for persona, mic capture, transcript and playback; useful for web prototypes, irrelevant to telephony.
+The last question for an engineering team is what to borrow and what to avoid. On the frontend, Vercel's AI Voice Elements give React components for persona, microphone capture, transcript and playback. They are useful for web prototypes and irrelevant to telephony, which is how a contact center's calls arrive.
 
-Why implementations fail.
+Netguru's account of why chatbot implementations fail says what to avoid: abstract goals instead of concrete use cases, bots isolated from scheduling and CRM systems, no handoff path, messy knowledge and no measurement after launch. Vendor-reported. OpenAI's own rebuild adds a lesson on testing: it relied on a silent production test to find failures that synthetic load tests had missed.
 
-Abstract goals instead of concrete use cases, bots isolated from scheduling and CRM systems, no handoff path, messy knowledge, and no measurement after launch. Vendor-reported. OpenAI's own rebuild relied on a silent production test to find failures synthetic load tests missed.
+Both accounts fit the argument of this report: what separates the teams that succeed is not which model they buy.

@@ -1,53 +1,57 @@
-State of conversational voice agents. Healthcare first, with notes for financial services.
+State of conversational voice agents. Health care first, with notes for financial services.
 
-October 2026 edition.
+Voice agents at the front door: ready for routine calls, not for unsupervised high-risk ones.
 
-Voice agents at the front door.
+What separates the teams that succeed with voice agents is not which model they buy. It is how they test, how the agent decides, what it remembers, who it is listening to and how it proves who the caller is.
 
-Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in four test scenarios when each was run three times.
+By Madhav Srinivasan. Published October 12, 2026.
+
+The text was edited for readability on November 15, 2026. The findings and figures are as first published. The latest update is the November 2026 edition.
+
+Tampa General reports that within two weeks of going live with a voice agent, the average wait for its callers fell from 6.2 minutes to 2.4. The share who hung up before being answered, known as call abandonment, fell from 34 percent to 14.9 percent. Self-reported. Voice agents are now good enough to take routine calls in regulated contact centers: scheduling, billing questions, balance and status checks. They are not yet consistent enough to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark of seven platforms, the leading one still failed about one test scenario in four when each of 82 was run three times.
 
 The one-minute read.
 
-What we know. The best platform passed 75.6 percent of test scenarios on all three tries; the top three are within the margin of error. Every published deployment result is administrative and self-reported.
+This review rests on public sources; I did not run my own tests. The top three platforms in that benchmark are within its margin of error, and every published deployment result is administrative and self-reported. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that a bet on one model goes stale in a quarter.
 
-What to watch. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that any model bet goes stale in a quarter.
+A team should build a golden test set from its own calls and gate every change on it. A pilot should stay narrow and be judged on cost per resolved call.
 
-What to do. Build a golden test set from your own calls and gate every change on it. Pilot narrow, judged on cost per resolved call. Separate silent decisions from the conversation, and build a governed fact store; trial limited-memory models only once they beat retrieval.
+Four figures frame the report. All four are vendor-reported or self-reported.
 
-: 56 percent. Lower call abandonment at a large health system within two weeks of go-live. Self-reported.
+Fall in call abandonment: 56 percent. Tampa General reports the drop within two weeks of going live with its voice agent.
 
-: 75.6 percent. Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 65 percent to 84 percent at 95 percent confidence). Vendor-reported.
+Best repeat reliability: 75.6 percent. In Cekura's benchmark, which a testing vendor runs, the leading platform passed this share of 82 scenarios on all three tries (about 65 percent to 84 percent at 95 percent confidence).
 
-: 5 percent. Of CX, IT and operations leaders can quantify AI's impact on business outcomes, though 98 percent have deployed it in the customer journey. Vendor-reported.
+Can quantify AI's impact: 5 percent. Only this share of customer experience, IT and operations leaders can quantify AI's impact on business outcomes, a Talkdesk and NewtonX report says, though 98 percent have deployed it in the customer journey. Vendor-reported.
 
-: Over half. Of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice. Vendor-reported.
+Fraud attempts involving AI: Over half. Pindrop, a deepfake-detection vendor, reports that this share of fraud attempts at health care contact centers now involves AI-generated elements such as synthetic voice.
 
-Thesis 1Reliability is the gap.
+Thesis 1: Reliability, not capability, is the gap.
 
-In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms. Test repeatability on your own calls.
+In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms, so a team should test repeatability on its own calls.
 
-Thesis 2A thinker-responder agent.
+Thesis 2: An agent should decide silently, then speak.
 
-A fast System-1 thinker decides silently; a conversational LLM speaks. People don't narrate every thought before they answer.
+People do not narrate every thought before they answer. A small, fast model, called System 1 after the term for quick, intuitive judgment, decides silently, and a conversational large language model (LLM) speaks.
 
-Thesis 3Invest in governed memory.
+Thesis 3: Governed memory pays off now; the models built on it are still research.
 
-A governed fact store pays off today. Limited-memory models that look facts up are promising but research-stage: trial them against retrieval first.
+A governed fact store, in which every fact has an owner and a version, pays off today through retrieval, the current way of fetching facts for a model. Limited-memory models, which look facts up in the store instead of memorizing them, are promising but still research, so they should be trialed against retrieval first.
 
-Evidence labels used throughout: Independent. Vendor or self-reported. Unverified. Author's view, arithmetic or illustration. Charts and tools you can use carry.
+Four evidence labels are used throughout this report: Independent. Vendor or self-reported. Unverified. Author's view, arithmetic or illustration. Charts and tools that respond to input are marked interactive.
 
 How to read this report: method, limits and disclosure.
 
-Method. A review of public sources up to the research cutoff. I did not run my own tests; every figure links to its source.
+This is a review of public sources up to the research cutoff. I did not run my own tests, and every figure links to its source.
 
-Which vendors. Platforms and models appear when they publish benchmark results or deployment outcomes, or run at large health systems or banks. Sierra is included in the market analysis wherever evidence exists, because of its healthcare footprint. It was not part of the seven-platform reliability test, and that gap is noted rather than filled in.
+A platform or model appears when it publishes benchmark results or deployment outcomes, or runs at large health systems or banks. Sierra, an enterprise agent platform, is included in the market analysis wherever evidence exists, because of its health care footprint. It was not part of the seven-platform reliability test, and I note that gap instead of filling it in.
 
-How much weight. Peer-reviewed and independent tests first, then vendor benchmarks with a published method, then customer-reported outcomes, then vendor claims. The label on each figure says which it is.
+I weigh the evidence in a fixed order: peer-reviewed and independent tests first, then vendor benchmarks with a published method, then customer-reported outcomes, then vendor claims. The label on each figure says which it is.
 
-Illustrative tools. The router, latency, economics and limited-memory demos are models for exploring trade-offs, not measurements of a product.
+The interactive tools are illustrative. The router, latency, economics and limited-memory demos are models for exploring trade-offs, not measurements of a product.
 
-Recommendations. Thresholds, pilot gates and suggested paths are proposals to adapt to your risk, call mix and baseline.
+The recommendations are proposals. A team should adapt the thresholds, pilot gates and suggested paths to its own risk, call mix and baseline.
 
-Disclosure. Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.
+I wrote this in a personal capacity, and the views are my own, not any employer's. I have no commercial relationship with any vendor named and no sponsor.
 
-Corrections. Post them in the comments or as a GitHub issue; changes are logged in the changelog.
+Corrections are welcome in the comments or as a GitHub issue, and changes are logged in the changelog.

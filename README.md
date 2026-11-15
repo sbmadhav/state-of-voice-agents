@@ -65,7 +65,7 @@ Each section is recorded once: only sections whose text, voice or model changed 
 | November 2026 | [editions/2026-11](https://sbmadhav.com/state-of-voice-agents/editions/2026-11/) | Update: what changed since October, financial services focus |
 | October 2026 | [editions/2026-10](https://sbmadhav.com/state-of-voice-agents/editions/2026-10/) | Full baseline report, with the interactive tools |
 
-The root `index.html` always holds the latest edition. Since November 2026, each monthly edition is an update that carries only what changed and links back to the October 2026 baseline (or a later update) for everything else. Each month's edition is also archived under `editions/YYYY-MM/`. See [UPDATING.md](UPDATING.md) for the monthly checklist and [CHANGELOG.md](CHANGELOG.md) for what changed.
+The root `index.html` always holds the latest edition. Since November 2026, each monthly edition is an update that carries only what changed and links back to the October 2026 baseline (or a later update) for everything else. Each month's edition is also archived under `editions/YYYY-MM/`. See [UPDATING.md](UPDATING.md) for the monthly checklist and [CHANGELOG.md](CHANGELOG.md) for what changed. Each edition is written as an article for a human reader, to the standard in [docs/editorial-style.md](docs/editorial-style.md), and carries a breadcrumb, an edition switcher and its publication date.
 
 ## About
 

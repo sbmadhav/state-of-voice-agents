@@ -1,13 +1,19 @@
 T2. Latency budget.
 
-Where the seconds go in a turn.
+Even with a fast router, a cascade lands near 1.5 seconds a turn.
 
-Human turn gaps across ten languages cluster around a quarter second. Measured platform turns in the benchmark averaged 1.27 seconds to 3.08 seconds. Adjust the stages, or pick a preset.
+People leave about a quarter of a second between turns, and a cascade cannot be pushed much below a second and a half without clipping callers.
 
-Be candid about the trade-off: a cascade (speech-to-text, LLM, text-to-speech) takes turns like a walkie-talkie. Even with a fast router and prefetch it lands near 1.5 seconds a turn, and cutting endpointing further clips callers mid-sentence. If turns under 800 milliseconds are a hard requirement, use a speech-to-speech or full-duplex model and accept a coarser, after-the-fact audit trail. The thinker fits beside either.
+Across ten languages, the gaps between speakers' turns cluster around a quarter second. Independent. Measured platform turns in Cekura's benchmark, which a testing vendor runs, averaged 1.27 seconds to 3.08 seconds.
 
-Illustrative. Sourced anchors: fixed silence endpointing of 500 to 800 milliseconds is still common; the fastest LLM first-token time in Regal's 27-model test was 584 milliseconds; a self-hosted router costs 20 to 50 milliseconds. Run the router in parallel with end-of-turn detection, and route once at call start or on topic shift, not every turn. Commit a route only on the finished turn, and route again when the caller corrects themselves ("cancel.. No, just move it"); any prefetch is speculative and dropped on a re-route.
+The trade-off deserves candor. A cascade takes turns like a walkie-talkie: it waits for silence, transcribes, reasons and only then speaks. Even with a fast router and prefetch it lands near 1.5 seconds a turn, and cutting endpointing (the wait for silence that ends a turn) any further clips callers mid-sentence. A team that needs turns under 800 milliseconds as a hard requirement should use a speech-to-speech or full-duplex model and accept a coarser, after-the-fact audit trail. The thinker fits beside either.
 
-Caller experience beats raw model quality.
+The tool below splits one turn into six stages, and the total is the figure to watch.
 
-In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression. Vendor-reported.
+In all three presets, endpointing and the language model's first token take most of the turn. The presets rest on three sourced anchors. Fixed silence endpointing of 500 to 800 milliseconds is still common, the fastest LLM first-token time in Regal's 27-model test was 584 milliseconds, and a self-hosted router costs 20 to 50 milliseconds. The remaining timings are assumptions. Illustrative.
+
+The router's place in the turn needs as much care as its speed. It should run in parallel with end-of-turn detection, and it should route once, at the start of the call or on a shift of topic, not on every turn. A route is committed only on the finished turn, and the router routes again when the caller corrects themselves ("cancel… no, just move it"). Any prefetch is therefore speculative, and it is dropped on a re-route. Author's view.
+
+Speed matters because caller experience beats raw model quality. In Regal's benchmark (27 models, 80 scenarios, 316,311 scored samples), the ten slowest LLMs scored about 128 points lower on a 1,000-point scale despite slightly better task progression. Vendor-reported.
+
+A fast turn still has to produce the same result on every call. T3 turns to how that is measured.

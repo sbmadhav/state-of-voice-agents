@@ -69,7 +69,7 @@ test('November update: delta-only, financial services focus, links back to the O
 test("What's new: ten ranked releases, each with an external source link, reachable from the section nav", async ({ page }) => {
   await page.goto('/state-of-voice-agents/');
   const section = page.locator('section#whatsnew');
-  await expect(section.locator('h2')).toHaveText("What's new in the voice AI world");
+  await expect(section.locator('h2')).toHaveText('Ten releases to know about, in order of relevance');
   await expect(section.locator('.eyebrow')).toHaveText(/^8 · /);
   // It sits between Models and Health care notes, and the eyebrow numbers run 1 to 10 in order
   const ids = await page.locator('main > section').evaluateAll(ss => ss.map(s => s.id));
@@ -125,3 +125,28 @@ for (const ed of EDITIONS) {
     expect((await request.get(`/state-of-voice-agents/editions/${ed}/og.png`)).status()).toBe(200);
   });
 }
+
+test('every edition has a breadcrumb, an edition switcher and its publication date', async ({ page }) => {
+  for (const [url, label, published] of [
+    ['/state-of-voice-agents/', 'November 2026', '2026-11-10'],
+    ['/state-of-voice-agents/editions/2026-11/', 'November 2026', '2026-11-10'],
+    ['/state-of-voice-agents/editions/2026-10/', 'October 2026', '2026-10-12'],
+  ]) {
+    await page.goto(url);
+    const crumbs = page.locator('nav.crumbs li');
+    await expect(crumbs).toHaveCount(3);
+    await expect(page.locator('nav.crumbs [aria-current="page"]')).toHaveText(label);
+    await expect(page.locator('nav.editions a')).toHaveCount(2);
+    await expect(page.locator('nav.editions a[aria-current="page"]')).toContainText(label);
+    await expect(page.locator('.byline').first()).toContainText('By Madhav Srinivasan');
+    await expect(page.locator('.byline time').first()).toHaveAttribute('datetime', published);
+    expect(await page.locator('meta[property="article:published_time"]').getAttribute('content')).toBe(published);
+  }
+  // Switching editions from the latest page lands on the October baseline, dated to its first publication
+  await page.goto('/state-of-voice-agents/');
+  await page.locator('nav.editions a', { hasText: 'October 2026' }).click();
+  await expect(page).toHaveURL(/\/editions\/2026-10\/$/);
+  await expect(page.locator('.byline').first()).toContainText('Published October 12, 2026');
+  await page.locator('nav.editions a', { hasText: 'November 2026' }).click();
+  await expect(page).toHaveURL(/\/state-of-voice-agents\/$/);
+});

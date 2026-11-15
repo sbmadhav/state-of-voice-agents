@@ -30,6 +30,16 @@ The first monthly update. From this edition on, the root page carries only what 
 - Regulation: added New York's RAISE Act for frontier AI developers (registration opened Nov 10, 2026; effective at the start of 2027) and what it means for vendor due diligence.
 - The October 2026 baseline also gets voice-overs and a read time (about 46 minutes): 27 narration scripts under `audio/2026-10/`. No report content changed.
 
+### Editorial rewrite, November 15, 2026
+
+- Both editions were rewritten as articles after an editorial review against technical publications (IEEE Spectrum, MIT Technology Review, The Economist's style guide, InfoQ trend reports, Stanford's AI Index, Thoughtworks Technology Radar). The standard each edition is now edited against is in `docs/editorial-style.md`.
+- Every section has a heading that states its finding, a short deck, a narrative opening, a caption on each exhibit and a close. Table cells, tiles and cards are complete sentences, and terms are defined where they first appear.
+- No finding, figure, source or evidence label changed. A second, independent copy-desk pass compared the new text with the old, sentence by sentence, and corrected 69 places where the rewrite had said more than the original did.
+- Section headings are now claims; for example "The TV in the room" became "A second voice in the room breaks most voice agents". Section ids and numbers are unchanged, so existing links still work.
+- Edition navigation on every edition: a breadcrumb, an edition switcher, and a byline with the publication date (November 10, 2026 for this update).
+- Read time is about 34 minutes (was 26), because fragments became sentences.
+- Bolt's context was regenerated from the rewritten text and now includes the method and disclosure notes.
+
 ## October 2026 (first edition), published October 12, 2026
 
 - Theses: reliability gap, thinker-responder agents, and investing in limited-memory model training.
@@ -155,3 +165,8 @@ Changes after outside reviews of the page:
   - Phone-network audio and integrations as practical limits.
   - What counts as a failed benchmark scenario.
 - The October edition is now frozen; further changes go to the November edition (see UPDATING.md).
+
+### Edited for readability, November 15, 2026
+- The text was rewritten as an article, to the standard in `docs/editorial-style.md`: claim headings, narrative openings, captioned exhibits, complete sentences in tables, cards and the interactive tools. The findings and figures are as first published on October 12, 2026; the edit is noted under the byline.
+- The headline now carries the finding: "Voice agents at the front door: ready for routine calls, not for unsupervised high-risk ones". Section ids and numbers are unchanged.
+- A breadcrumb, an edition switcher and a dated byline were added. Read time is about 69 minutes (was 47), including the technical appendix.

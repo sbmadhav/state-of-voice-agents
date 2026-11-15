@@ -70,7 +70,7 @@ test('a Listen control appears only for sections in the manifest, with its durat
   // Visible duration from the manifest; the accessible name says what plays and for how long
   await expect(fs).toContainText('Listen');
   await expect(fs.locator('.listen-dur')).toHaveText('4:12');
-  await expect(fs).toHaveAccessibleName(/^Listen to Where voice agents are working in banking, 4 minutes 12 seconds/);
+  await expect(fs).toHaveAccessibleName(/^Listen to Banks are automating the same routine calls that health systems did, 4 minutes 12 seconds/);
   await expect(fs).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator('#listen-min')).toHaveText(' · 5 min listen');
 
@@ -88,8 +88,8 @@ test('a Listen control appears only for sections in the manifest, with its durat
   await expect(audio).toHaveAttribute('controls', '');
   await expect(audio).toHaveAttribute('preload', 'none');
   await expect(audio).toHaveAttribute('src', '/state-of-voice-agents/audio/2026-11/fs.mp3');
-  await expect(audio).toHaveAttribute('aria-label', /^Narration: Where voice agents are working in banking/);
-  const tx = panel.getByRole('link', { name: 'Transcript of Where voice agents are working in banking' });
+  await expect(audio).toHaveAttribute('aria-label', /^Narration: Banks are automating the same routine calls that health systems did/);
+  const tx = panel.getByRole('link', { name: 'Transcript of Banks are automating the same routine calls that health systems did' });
   await expect(tx).toHaveAttribute('href', '/state-of-voice-agents/audio/2026-11/fs.txt');
   await expect(panel).toContainText('AI voice by ElevenLabs');
   await page.keyboard.press('Enter');
@@ -129,9 +129,9 @@ test('the hero playlist plays the sections in order, with an AI voice disclosure
   await expect(page.locator('#listen-all-audio')).toHaveAttribute('src', /\/audio\/2026-11\/brief\.mp3$/);
   await expect(page.locator('#listen-all-tx')).toHaveAttribute('href', '/state-of-voice-agents/audio/2026-11/brief.txt');
   await page.locator('#listen-next').click();
-  await expect(page.locator('#listen-now')).toHaveText('Now playing 2 of 3: Where voice agents are working in banking');
+  await expect(page.locator('#listen-now')).toHaveText('Now playing 2 of 3: Banks are automating the same routine calls that health systems did');
   await page.locator('#listen-next').click();
-  await expect(page.locator('#listen-now')).toHaveText('Now playing 3 of 3: The TV in the room');
+  await expect(page.locator('#listen-now')).toHaveText('Now playing 3 of 3: A second voice in the room breaks most voice agents');
   await expect(page.locator('#listen-next')).toBeHidden();
   expect(issues.console, 'console errors').toEqual([]);
 });

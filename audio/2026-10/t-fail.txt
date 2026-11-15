@@ -2,26 +2,34 @@ T4. Failure modes.
 
 Agents mostly break on audio, identity and integration.
 
-Background noise and chatter. Mechanism: TV, traffic or other people in the room get transcribed as the caller, causing inserted words, false turns and false barge-ins. Evidence: Background speech pushed streaming STT error rates to 22 percent to 31 percent; isolating the main speaker cut them by up to 43 percent, mostly by removing inserted words, vendor-reported. Mitigation: Isolate the caller's voice before STT and VAD; avoid generic noise suppression, which can distort the caller's speech and raise errors.
+The published evidence points to twelve failure modes, and each has a known mitigation.
 
-Wrong speaker answered. Mechanism: A caregiver or bystander answers a verification question, or the agent follows the wrong voice. Evidence: Speaker-conditioned VAD detects the target speaker frame by frame and ignores others. Mitigation: Diarize, lock onto the caller's voice in the first seconds, and re-verify if the voice changes before any sensitive step.
+When a voice agent fails, the language model is seldom where the trouble starts. A television in the room is transcribed as the caller, the agent answers its own echo, or a correctly transcribed phone number reaches the tool as a different value. The evidence is uneven: it comes from vendor benchmarks, a public echo test by webrtcHacks, and research papers.
 
-Self-reply to echo. Mechanism: Agent's own speech leaks back, is transcribed as the caller, and gets answered. Evidence: Seen in a public WebRTC test; rates varied widely by client. Mitigation: Strong echo cancellation; compare input against agent playback.
+Most of the twelve failures arise in the audio path, the identity check or the integrations. Each evidence cell names its source, and vendors' figures carry the vendor-reported label.
 
-False barge-in. Mechanism: Echo treated as interruption; agent stops mid-word. Evidence: A turn model marked echo "complete" at p=0.954. Mitigation: Speaker or echo attribution before turn detection.
+Background noise and chatter. A TV, traffic or other people in the room get transcribed as the caller, which causes inserted words, false turns and false barge-ins. In a benchmark by ai-coustics, a speaker-isolation vendor, background speech pushed streaming speech-to-text error rates to between 22 percent and 31 percent. Isolating the main speaker cut them by up to 43 percent, mostly by removing inserted words. Isolate the caller's voice before speech-to-text and VAD. Generic noise suppression is best avoided, because it can distort the caller's speech and raise errors.
 
-VAD threshold trade-off. Mechanism: Lower thresholds speed replies but admit short echo bursts. Evidence: 500 → 384 milliseconds saved 116 milliseconds, added 3 failures. Mitigation: Tune per channel; validate on real devices.
+Wrong speaker answered. A caregiver or bystander answers a verification question, or the agent follows the wrong voice. Speaker-conditioned VAD, such as Google's Personal VAD, detects the target speaker frame by frame and ignores others. Diarize the call, lock onto the caller's voice in the first seconds, and verify again if the voice changes before any sensitive step.
 
-Misroute. Mechanism: Router picks the wrong sub-agent, or one intent of two. Evidence: Best models reach only 53.4 percent on a multi-intent benchmark. Mitigation: Multi-label output, thresholds, frontier fallback.
+Self-reply to echo. The agent's own speech leaks back, is transcribed as the caller and gets answered. A public test by webrtcHacks over WebRTC, the browser standard for real-time communication, showed this, and the rates varied widely by client. Use strong echo cancellation, and compare the incoming audio against the agent's own playback.
 
-Context-flipped decision. Mechanism: Extra benign text changes a correct routing decision. Evidence: 61.4 percent of correct decisions flipped. Mitigation: Route on the caller's turn only, not retrieved or third-party text.
+False barge-in. The agent hears its own echo, takes it for the caller interrupting and stops mid-word. In the same test, a turn-detection model judged echo to be a completed turn, with a probability of 0.954. Attribute each sound to a speaker, or to echo, before turn detection runs.
 
-Entity drift. Mechanism: Transcript correct, different value reaches the tool. Evidence: Observed phone number mismatch. Mitigation: Read-back confirmation; server-side validation.
+VAD threshold trade-off. A lower threshold speeds up replies but admits short bursts of echo. In the same test, cutting the threshold from 500 milliseconds to 384 milliseconds saved 116 milliseconds and added 3 failures. Tune the threshold for each channel, and validate it on real devices.
 
-Wrong saved data. Mechanism: Fields written incorrectly. Evidence: 64.5 percent versus 92.0 percent all-correct by model. Mitigation: Exact-match audits on write-backs.
+Misroute. The router picks the wrong sub-agent, or only one of a caller's two intents. In a research paper, the best models reached only 53.4 percent on a multi-intent benchmark. Give the router multi-label output and thresholds, with a frontier model as the fallback.
 
-Dead air. Mechanism: more than 10 seconds silence from stalled provider or reasoning. Evidence: 3.3 percent to 5.3 percent of calls by model. Mitigation: Async tools; filler speech; timeouts with handoff.
+Context-flipped decision. Extra, benign text in the context changes a routing decision that was correct. In the JevOut study of decision models, natural context flipped 61.4 percent of correct decisions. Route on the caller's turn only, never on retrieved or third-party text.
 
-Connection failures. Mechanism: Call never completes cleanly. Evidence: Clean calls as low as 72.4 percent. Mitigation: Telephony redundancy; count against reliability.
+Entity drift. The transcript is correct, but a different value reaches the tool. A Retell post that cites Cekura Bench documents one instance, a mismatched phone number. Read the value back to the caller for confirmation, and validate it on the server.
 
-Misheard identity details. Mechanism: Names, emails, IDs garbled; verification fails and cascades. Evidence: Context-aware ASR cut major errors up to 15 percent. Mitigation: Bias recognition with the record on file; spell-back.
+Wrong saved data. The agent writes fields incorrectly. In Cekura's speech-to-speech benchmark, one model saved every field correctly on 64.5 percent of data-saving calls, against 92.0 percent for another. Vendor-reported. Audit write-backs for exact matches.
+
+Dead air. A stalled provider or reasoning step leaves 10 seconds or more of silence. In the same benchmark, dead air occurred on 3.3 percent to 5.3 percent of calls, depending on the model. Make tool calls asynchronous, use filler speech, and set timeouts that end in a handoff.
+
+Connection failures. The call never completes cleanly. On Cekura Bench, the share of clean calls was as low as 72.4 percent. Vendor-reported. Build in telephony redundancy, and count these failures against reliability.
+
+Misheard identity details. Names, emails and IDs are garbled, so verification fails and the errors cascade. Sierra reports that context-aware speech recognition cut major errors by up to 15 percent. Bias recognition toward the record on file, and spell the details back to the caller.
+
+Two of the twelve failures, the misroute and the context-flipped decision, belong to the router, which T5 takes up.

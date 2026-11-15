@@ -1,25 +1,17 @@
 Section 7: Where to start.
 
-Readiness against risk, by call type.
+Scheduling and routing are ready; nurse triage is not.
 
-Healthcare shown, because that is where results are published. Green is the pilot zone. Red stays human until there is independent safety evidence.
+Appointment changes and call routing are mature and low in risk, so a pilot should start there. Nurse triage sits at the opposite corner of the grid and stays with people.
 
-Start here Next wave Clinically supervised only Not yet.
+The grid places nine health care call types by the maturity of the technology and the risk of the call. Health care is shown because that is where results are published. Green is the pilot zone, and red stays with people until there is independent safety evidence. Selecting a call type shows its reported outcome, example vendors and example deployments.
 
-Confirm, cancel, reschedule. Zone: Start here. Reported outcome: Abandonment down 56 percent, appointments up 21 percent at Tampa General. Example vendors: Hyro, Assort, Hello Patient, Zocdoc Zo.
+Of nine health care call types, two are ready for a pilot, four form a next wave, two need clinical supervision and one is not ready. The outcomes are reported by health systems or vendors, and the placement is my judgment.
 
-Routing and FAQ, portal help. Zone: Start here. Reported outcome: 44 percent of repetitive calls automated, abandonment down 85 percent at Intermountain. Example vendors: Hyro, Talkdesk, Sierra.
+The published evidence is strongest where the risk is lowest. The two call types in the pilot zone carry the outcomes from section 2: Tampa General's for appointment changes, and Intermountain's for routing and portal help.
 
-Ambient documentation. Zone: Next wave. Reported outcome: Adjacent category, widely piloted for clinical notes and handoffs. Example vendors: Abridge, Microsoft/Nuance, Commure.
+The next wave has less to show. A vendor reports a billing agent live in 40 days at one urgent care network. Refill status is within Tampa General's scope, but I found no separate metric for it. Vendors position their agents for prior authorization and payer calls, but there too I found no outcome metric. Ambient documentation is an adjacent category, widely piloted for clinical notes and handoffs.
 
-Refill status. Zone: Next wave. Reported outcome: Included in Tampa General scope; no isolated metric found. Example vendors: Hyro, Assort.
+The two supervised types rest on vendor reports. One is a patient rating of 9.0 out of 10 for post-discharge follow-up, under heavy clinical supervision. The other is higher kit requests among Spanish-speaking patients in outbound screening, on calls to which consent rules apply. Hippocratic AI is the example vendor for both.
 
-Billing and revenue cycle. Zone: Next wave. Reported outcome: Billing agent live in 40 days at one urgent care network (vendor-reported). Example vendors: Hello Patient, Infinitus, Prosper.
-
-Prior auth and payer calls. Zone: Next wave. Reported outcome: Positioned by vendors; no outcome metric found. Example vendors: Infinitus, Prosper, Sierra.
-
-Post-discharge follow-up. Zone: Supervised only. Reported outcome: 9.0/10 patient rating reported by vendor; heavy clinical supervision. Example vendors: Hippocratic AI.
-
-Screening outreach (outbound). Zone: Supervised only. Reported outcome: Higher kit requests among Spanish-speaking patients (vendor-reported); consent rules apply. Example vendors: Hippocratic AI.
-
-Nurse triage lines. Zone: Not yet. Reported outcome: No validated autonomous deployment found; vendors exclude diagnosis. Example vendors: None recommended.
+For nurse triage lines I found no validated autonomous deployment, and vendors exclude diagnosis. Whatever the call type, the agent has to know who is calling, and the next section shows why a voice no longer proves it.

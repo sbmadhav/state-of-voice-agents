@@ -1,81 +1,43 @@
 Section 10: The decision.
 
-Four ways to play the next 12 months.
+Buy now, but own the router and the tests.
 
-Buy a platform or vertical vendor Sierra, Hyro, Hippocratic AI.
+Of four ways to play the next 12 months, I recommend the hybrid: buy a vendor's agent now, and build the tests, the router, the logs and the fact store in parallel.
 
-Pros.
+The choice is less about which vendor wins than about what the organization ends up owning. Each card gives the case for an option, the case against it and the source of its return.
 
-Fastest time to value.
+Each of the four options earns a different verdict, and only the hybrid is recommended. The verdicts are mine, and the build option's cost figures are the published ones behind the economics model.
 
-Integrations and compliance contracts are standard.
+Buy a platform or vertical vendor.
 
-Vendor carries tuning, safety layers and ops.
+A vendor such as Sierra, Hyro or Hippocratic AI is the fastest route to value. Integrations and compliance contracts come as standard, and the vendor carries the tuning, the safety layers and the operations.
 
-Cons.
+The costs are opaque pricing, less control over evaluation, routing and data, and lock-in at the integration layer.
 
-Opaque pricing.
+The return comes from abandonment and scheduling gains, which convert to revenue, and from labor avoided on in-scope queues. It is strong for the pilot itself.
 
-Less control over evaluation, routing and data.
+Build on a platform.
 
-Lock-in at the integration layer.
+Building on a platform such as Retell, LiveKit or Pipecat gives full transparency and a free choice of model, at the lowest per-minute cost. The organization owns every trace and the router.
 
-ROI logic: Abandonment and scheduling lift convert to revenue; labor avoided on in-scope queues. Verdict: Strong for the pilot itself.
+It needs a dedicated team, which then owns integration and safety, and the first launch comes later.
 
-Build on a platform Retell, LiveKit, Pipecat.
+The agent costs about 8 cents to 14 cents a minute against roughly 6 dollars for a call handled by a person, and the break-even depends on the resolution rate. It is the right choice later, not first.
 
-Pros.
+Hybrid (recommended).
 
-Full transparency and model choice.
+In the hybrid, a vertical vendor delivers the quick wins while the organization builds its own test suite, routing layer, logs and governed fact store in parallel. The fact store brings the option to trial limited-memory models, and the arrangement keeps the exit door open.
 
-Lowest per-minute cost.
+The price is two workstreams to govern, and a contract that must include terms for exporting logs and evaluation data.
 
-Own every trace and the router.
+The hybrid captures near-term savings while building leverage for the next contract cycle. I recommend it.
 
-Cons.
+Wait.
 
-Needs a dedicated team.
+Waiting until 2027 carries no execution risk, and models and benchmarks keep improving in the meantime.
 
-You own integration and safety.
+Waiting has costs. Peers compound their gains, callers stay frustrated with the phone menu (IVR), and the organization builds no evaluation skill of its own.
 
-Slower first launch.
+The return is negative, because the abandonment and scheduling gains are forgone. I do not recommend it.
 
-ROI logic: About 8 cents to 14 cents a minute against roughly 6 dollars a human call; break-even depends on resolution rate. Verdict: Right later, not first.
-
-Hybrid (recommended) Buy now, own the router and evals.
-
-Pros.
-
-Quick wins from a vertical vendor.
-
-You build the test suite, routing layer, logs and governed fact store in parallel.
-
-Builds the governed fact store, with the option to trial limited-memory models.
-
-Keeps the exit door open.
-
-Cons.
-
-Two workstreams to govern.
-
-Needs contract terms for log and eval export.
-
-ROI logic: Captures near-term savings while building leverage for the next contract cycle. Verdict: Recommended.
-
-Wait Revisit in 2027.
-
-Pros.
-
-No execution risk.
-
-Models and benchmarks keep improving.
-
-Cons.
-
-Peers compound gains.
-
-IVR frustration persists.
-
-No internal evaluation muscle.
-
-ROI logic: Negative: forgone abandonment and scheduling gains. Verdict: Not recommended.
+A bought platform is strong for the pilot itself, so the hybrid starts there. The next section sets out that pilot, with its gates fixed before launch.

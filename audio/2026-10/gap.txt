@@ -2,6 +2,14 @@ Section 1: Reliability.
 
 A demo call is not a production call.
 
-The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.
+A single successful call says little about the next one. In a benchmark that ran every scenario three times, all seven platforms scored well below their single-call results.
 
-Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability. A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect; the benchmark does not break failures down by type. With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.
+Cekura, a voice-testing vendor, ran the same test agent on seven voice platforms: 82 realistic caller scenarios about appointments and Medicare, three times each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly.
+
+The benchmark reports two scores. Single-run task completion is the share of calls that finish the task, and on it every platform looks ready. Repeat reliability, which the benchmark calls pass three, is the share of scenarios that pass all three calls, and it is the number that matters for customers and patients. The best platform, Retell, completed more than 90 percent of single calls but passed only 75.6 percent of scenarios three times out of three. The shaded band on each row of the chart is that difference, the demo gap.
+
+On six of the seven platforms, the single-run score is 18 to 38 points above repeat reliability, and on Gemini Live the gap is wider still. The figures are Cekura's, and selecting a platform shows whether they could be verified.
+
+The result has limits. Cekura sells voice testing, and its scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability. A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect, and the benchmark does not break failures down by type.
+
+With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. The result is directional, and a team should rerun the test on its own call types, including any Sierra deployment. The next section turns to what health systems report from live calls.

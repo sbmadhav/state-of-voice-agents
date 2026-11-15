@@ -1,15 +1,11 @@
 Section 9: Health care notes.
 
-What changed for health systems.
+For health systems, October stands and California adds a rule.
 
-October's health care analysis stands: published results, readiness by call type and regulation.
+October's health care analysis stands: its published results, readiness by call type and regulation. One California law and three vendor reports are new.
 
-California AB 1979 (signed October 2026, effective January 1, 2027): a licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt. New this month. Independent.
+California's AB 1979 was signed in October 2026 and takes effect on January 1, 2027. A licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt. Independent.
 
-Payer and administrator calls: a health plan administrator is putting voice agents on inbound provider calls about eligibility, benefits, balances and claims status, handing off to people in its existing contact center (November 4). New this month. Vendor-reported.
+A health plan administrator is putting voice agents on inbound provider calls about eligibility, benefits, balances and claims status, handing off to people in its existing contact center (November 4). Vendor-reported. A vendor reports that about 50 percent of calls are handled end to end in its most recently onboarded pilot clinics. NVIDIA reports that Nemotron 3.5 Transcribe cut its error rate on accented clinical speech from 30.8 percent to 23.8 percent with prompting alone, and to 11.8 percent after fine-tuning.
 
-Clinic results: about 50 percent of calls handled end to end in a vendor's most recently onboarded pilot clinics. New this month. Vendor-reported.
-
-Clinical speech: Nemotron 3.5 Transcribe's error rate on accented clinical speech fell from 30.8 percent to 23.8 percent with prompting alone, and to 11.8 percent after fine-tuning; test on your own patients' audio. New this month. Vendor-reported.
-
-The TV-in-the-room finding applies equally to patients calling from home or a waiting room. Author's view.
+Those speech figures are the maker's own, so a health system should test on its own patients' audio. The TV-in-the-room finding applies equally to patients calling from home or a waiting room. Author's view.

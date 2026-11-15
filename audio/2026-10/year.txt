@@ -1,5 +1,11 @@
 Section 3: Pace of change.
 
-2026 moved fast. Snapshots go stale in a quarter.
+Any ranking here will be stale within a quarter.
 
-On Sierra's voice benchmark, the best score rose from 30 percent to 67 percent in eight months. Lock in your data and evaluations, not a model.
+The field moved fast in 2026. On Sierra's voice benchmark the best score more than doubled in eight months, from 30 percent to 67 percent.
+
+Sierra published that benchmark, tau-voice, on May 1, and the figures are its own. The pace then picked up. September and early October brought new voice models and three small models that make decisions instead of conversation, on which section 5 builds. The timeline shows how closely the releases followed one another.
+
+Six of the timeline's eleven entries fall between September 10 and October 9. Each entry links to its source, and the source list says which sources are independent and which are vendors.
+
+Models and rankings age that fast. A team's own test data and evaluations do not, which is why they, and not a model, are the thing to lock in. The next section works out what a resolved call is worth.
