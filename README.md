@@ -44,7 +44,7 @@ To switch it on:
 
 1. In GitHub, open Settings > Secrets and variables > Actions and add the repository secret `ELEVENLABS_API_KEY`.
 2. Optional, on the Variables tab: `ELEVENLABS_VOICE_ID` (default `WQP7cQUF5aAS6Axh5yaa`, "Elara - Crisp Pro Narrator", one of ElevenLabs' replacements for its retiring default voices) and `ELEVENLABS_MODEL_ID` (default `eleven_v4`).
-3. Open Actions > Voice-over > Run workflow. The workflow commits the audio to a new branch and opens a pull request (it never pushes to `main`). For this, Settings > Actions > General must allow GitHub Actions to create pull requests; otherwise the run log links to the branch.
+3. Open Actions > Voice-over > Run workflow. The workflow commits the audio to a new branch and opens a pull request (it never pushes to `main`). For this, Settings > Actions > General must allow GitHub Actions to create pull requests; otherwise the run log links to the branch. To record one edition only, type it in the "edition" box (for example `2026-11`); left empty, the run records every edition, latest first.
 
 See [docs/audio-hosting.md](docs/audio-hosting.md) for the current state, the recommendation (R2 behind `audio.sbmadhav.com`, with the site's DNS on Cloudflare) and the exact steps.
 

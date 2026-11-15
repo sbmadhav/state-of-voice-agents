@@ -14,9 +14,15 @@ name: Voice-over
 #
 # Never pushes to main. Audio is generated only on workflow_dispatch: the run commits it to a new branch and
 # opens a pull request, also when generation stopped partway, so nothing already recorded is lost.
+# A run can be limited to one edition (the "edition" input), to record and check the latest before the archive.
 
 on:
   workflow_dispatch:
+    inputs:
+      edition:
+        description: 'Edition to record, as YYYY-MM (for example 2026-11). Leave empty to record every edition, latest first.'
+        required: false
+        default: ''
   push:
     branches: [main]
     paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
@@ -90,9 +96,19 @@ jobs:
       - name: Find the editions
         if: steps.key.outputs.present == 'true'
         id: ed
+        env:
+          ONLY: ${{ inputs.edition }}
         run: |
           # Every edition folder with a manifest: the latest edition and any archived one that has voice-overs
           eds=$(for m in audio/*/manifest.json; do basename "$(dirname "$m")"; done | grep -E '^[0-9]{4}-[0-9]{2}$' | sort | tr '\n' ' ')
+          # One edition only, when the run asks for it: record and check the latest before spending on the archive
+          if [ -n "$ONLY" ]; then
+            if ! echo "$ONLY" | grep -Eq '^[0-9]{4}-[0-9]{2}$' || [ ! -f "audio/$ONLY/manifest.json" ]; then
+              echo "::error::No edition \"$ONLY\" with voice-overs. Editions: $eds"
+              exit 1
+            fi
+            eds="$ONLY "
+          fi
           echo "editions=$eds" >> "$GITHUB_OUTPUT"
           for ed in $eds; do python3 tools/voiceover.py "audio/$ed" --dry-run; done
 
