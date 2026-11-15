@@ -1,101 +1,95 @@
 T5. System-1 routing.
 
-Typed decision models and routers, compared.
+For a fixed intent list, a small classifier is often the fastest and most accurate router.
 
-A System-1 model returns typed answers (choice, score, yes/no) with probabilities in one pass and never writes prose. Three families now compete for the routing job: hosted decision APIs, open decision models, and plain fine-tuned classifiers.
+On published figures, a fine-tuned classifier with 0.1 billion parameters labels banking questions faster and more accurately than a hosted decision model or a frontier model, one of the largest general-purpose language models. The figures come from different labs, so the comparison is directional.
 
-OpenAI Decisions API. Type: Closed, hosted; beta since October 6, 2026. Output: Predicate, choice, score + probabilities. Latency: ~10 times faster than Responses, vendor-reported. Cost: 10 cents/M in; output free. Evidence: Text and images; HIPAA for eligible customers with a BAA.
+Two of the failures in the previous section, the misroute and the decision flipped by extra context, happen in the router, the step that decides what a call is about before the agent speaks. The models built for that step are System-1 models, also called decision models: each returns a typed answer (a choice, a score, or a yes or no) with probabilities in one pass and never writes prose. Three families compete for the job: hosted decision APIs, open decision models and plain fine-tuned classifiers. I did not run my own tests, so the table reports what each maker, model card or outside test has published.
 
-TypeSafe Jev. Type: Closed, hosted. Output: Choice, Score, Noul (a 0 to 1 "is this true?" answer) + probabilities. Latency: median 175 milliseconds; 95th percentile 270 milliseconds. Cost: 4.2 cents/M in; ~11 cents per 1k calls. Evidence: Banking77 81.0 percent versus frontier 84.4 percent; no public BAA.
+The eight options run from hosted APIs priced per token to open models that a team hosts itself, and four have a latency measured in milliseconds. Sources are cited in the last column, and two cells are labeled vendor-reported.
 
-Laya (Convai). Type: Open, Apache-2.0; 421-million-parameter and 322 million multilingual. Output: Same typed interface. Latency: 33 to 40 milliseconds (T4); CPU OK. Cost: Self-host. Evidence: Routed base checkpoint 42.5 percent on Banking77; 76.6 percent on its own typed-decisions benchmark after fine-tuning on that benchmark's training split.
+OpenAI Decisions API. It is closed and hosted, in beta since October 6, 2026. It returns a predicate (a yes or no), a choice or a score, with probabilities. OpenAI says it is about 10 times faster than Responses. Vendor-reported. It costs 10 cents per million input tokens, and output is free. It takes text and images, and is offered under HIPAA to eligible customers with a business associate agreement (BAA).
 
-Arch-Router-1.5 billion (Katanemo). Type: Open weights. Output: Route name. Latency: 51 milliseconds (L40S). Cost: Self-host. Evidence: 93.2 percent routing accuracy versus 92.8 percent for a frontier model.
+TypeSafe Jev. It is closed and hosted. It returns a Choice, a Score or a Noul (a 0 to 1 "is this true?" answer), with probabilities. One test measured a median of 175 milliseconds and a 95th percentile of 270 milliseconds. It costs 4.2 cents per million input tokens, or about 11 cents per 1,000 calls. It scored 81.0 percent on Banking77 against 84.4 percent for a frontier model, and it has no public BAA.
 
-Fine-tuned ModernBERT-base. Type: Open, 0.1 billion. Output: Intent label. Latency: 22.5 milliseconds (T4). Cost: Self-host. Evidence: Banking77 93.5 percent.
+Laya (Convai). It is open under Apache-2.0, in 421-million-parameter and 322 million multilingual sizes. It has the same typed interface. It answers in 33 to 40 milliseconds on a T4 GPU and can run on a CPU. It is self-hosted. Its routed base checkpoint scored 42.5 percent on Banking77. It reached 76.6 percent on its own typed-decisions benchmark after fine-tuning on that benchmark's training split.
 
-Semantic-router (Aurelio). Type: Open, MIT. Output: Route or none. Latency: One embedding call. Cost: Embedding cost. Evidence: Returns "none" below threshold; good for out-of-scope.
+Arch-Router-1.5 billion (Katanemo). It has open weights. It returns a route name. It answers in 51 milliseconds on an L40S GPU. It is self-hosted. Katanemo reports 93.2 percent routing accuracy, against 92.8 percent for a frontier model.
 
-Sierra Curie. Type: Closed, inside the Sierra platform. Output: Orchestration across Sierra's model "constellation". Latency: Not published. Cost: In platform pricing. Evidence: Announced October 2026; Sierra also runs Fleming to detect bot and agent callers, vendor-reported.
+Fine-tuned ModernBERT-base. It is an open encoder with 0.1 billion parameters. It returns an intent label. It answers in 22.5 milliseconds on a T4 GPU. It is self-hosted. Its model card reports 93.5 percent on Banking77.
 
-RouteLLM. Type: Open. Output: Strong versus weak model. Latency: n/a. Cost: n/a. Evidence: Cuts cost "over 2 times" without quality loss (model routing, not intent).
+Semantic-router (Aurelio). It is open under the MIT license. It returns a route, or none. It takes one embedding call. It costs one embedding call. It returns "none" below a threshold, which suits out-of-scope requests.
+
+Sierra Curie. It is closed, inside the Sierra platform. It orchestrates across what Sierra calls its "constellation" of models. Sierra publishes no latency figure. It is in platform pricing. Sierra announced it in October 2026 and also runs Fleming to detect bot and agent callers. Vendor-reported.
+
+RouteLLM. It is open. It picks a strong or a weak model. No latency figure is listed. No cost figure is listed. Its authors report that it cuts cost "over 2 times" without quality loss. It routes between models, not intents.
+
+Several of these options report a score on Banking77, a benchmark of banking questions sorted into 77 intents. The first chart sets them beside a frontier model; Jev's score there is zero-shot, with no training on the task. The second chart compares speed against a budget of 800 milliseconds for a whole turn.
+
+A small fine-tuned classifier leads both charts, with 93.5 percent on Banking77 and 22.5 milliseconds to route one decision. Different labs measured these on different setups and hardware, so both charts are directional.
 
 Banking77 intent accuracy (77 banking intents).
 
-ModernBERT 0.1 billion, fine-tuned93.5.
+The chart shows a fine-tuned ModernBERT with 0.1 billion parameters at 93.5 percent, a bge-small embedding model with logistic regression at 93.3, a frontier model, Opus 5, at 84.4, Jev used zero-shot at 81.0 and the routed Laya base model at 42.5.
 
-Bge-small + logistic reg.93.3.
-
-Frontier LLM (Opus 5)84.4.
-
-Jev, zero-shot81.0.
-
-Laya base, routed42.5.
-
-Different labs and setups; directional. Jev's own score ranges from 76.3 percent to 87.0 percent depending on who measured it.
-
-When a classifier wins, and when an LLM wins.
-
-Fine-tuned RoBERTa beat a small LLM on ATIS (95.9 percent versus 84.1 percent) and tied on CLINC150, at roughly three orders of magnitude lower cost and latency.
-
-The LLM won on out-of-scope recall (85.6 percent versus 58.1 percent) and on very noisy speech (92.5 percent versus 80.0 percent).
-
-A classifier trained on one app's intents scored 0 percent on a new app's; a schema-prompted model served both at about 94 percent.
-
-Implication: classifier for stable, high-volume intents; decision API or LLM for new, rare or out-of-scope ones.
+Jev's own score ranges from 76.3 percent to 87.0 percent depending on who measured it.
 
 Time to route one decision, against an 800 milliseconds turn budget.
 
-Static chart. Measured by different labs on different hardware; directional. Sierra does not publish standalone latency for its orchestration model. Frontier figure is a large model classifying Banking77 intents.
+The chart shows a fine-tuned encoder at 22.5 milliseconds, the open Laya model at 36, Arch-Router at 51, hosted Jev at 175 at the median and 270 at the 95th percentile, and a frontier model at 2.27 seconds at the median, well past the 800-millisecond line.
 
-What a cascade buys.
+The chart is static. Sierra does not publish standalone latency for its orchestration model. The frontier figure is a large model classifying Banking77 intents.
 
-In one public test on 3,080 banking questions across 77 intents, a frontier model scored 84.4 percent at about 2.42 dollars per 1,000 requests. Sending everything to a decision model first, and only the low-confidence cases (below 0.90) on to the frontier model, scored 84.0 percent at about 69 cents per 1,000.
+A classifier does not win everywhere. In a study by Rodrigues and Vas, a fine-tuned RoBERTa classifier beat a small LLM (large language model) on the ATIS intent benchmark (95.9 percent versus 84.1 percent) and tied it on CLINC150, at roughly three orders of magnitude lower cost and latency. The LLM won on out-of-scope recall, the share of out-of-scope requests it catches (85.6 percent versus 58.1 percent), and on very noisy speech (92.5 percent versus 80.0 percent). A classifier trained on one app's intents scored 0 percent on a new app's, while a schema-prompted model served both at about 94 percent.
 
-Frontier only2.42 dollars.
+The two can be chained in a cascade, in which a cheap model answers first and passes on only the cases it is unsure of. In one public test, published by OpenRouter, on 3,080 banking questions across 77 intents, a frontier model scored 84.4 percent at about 2.42 dollars per 1,000 requests. Sending everything to a decision model first, and only the low-confidence cases (below 0.90) on to the frontier model, scored 84.0 percent at about 69 cents per 1,000. Vendor-reported.
 
-Decision model first69 cents.
+The cascade cost about 72 percent less per 1,000 requests than the frontier model alone. It was scored on the same 3,080 examples used to measure accuracy, so the saving is an upper bound. Vendor-reported.
 
-Vendor-reported. The cascade was scored on the same 3,080 examples used to measure accuracy, so treat the 72 percent saving as an upper bound.
+Cost per 1,000 requests.
+
+The frontier model alone costs 2 dollars and 42 cents per 1,000 requests. With a decision model first, the cost is 69 cents.
+
+Against this evidence, the thinker-responder thesis of section 5, a fast System-1 thinker that decides silently and a conversational LLM that speaks, mostly stands.
+
+Two parts of the thesis hold, two need a qualification and one depends on a guardrail. The verdicts are my reading of the studies cited on each line. Author's view.
 
 The thinker-responder thesis, checked.
 
-HoldsRouting a call to a sub-agent or toolset is closed-set classification. Small decision models do it in roughly 20 to 250 milliseconds for fractions of a cent, versus about 2 seconds for a frontier LLM.
+This part holds. Routing a call to a sub-agent or toolset is closed-set classification, a choice from a fixed list. Small decision models do it in roughly 20 to 250 milliseconds for fractions of a cent, versus about 2 seconds for a frontier LLM.
 
-HoldsNarrowing tools first helps. Retrieving the right tools before selection lifted selection accuracy from 13.6 percent to 43.1 percent and cut prompt tokens by more than half in one study; Anthropic reports similar gains once agents have 10 or more tools.
+This part holds. Narrowing tools first helps. In one study, retrieving the right tools before selection lifted selection accuracy from 13.6 percent to 43.1 percent and cut prompt tokens by more than half; Anthropic reports similar gains once agents have 10 or more tools.
 
-QualifyFor a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.
+This part needs a qualification. For a fixed intent list, a plain fine-tuned classifier is often both the fastest and the most accurate router. Hosted decision APIs earn their place when intents change often or labeled data is scarce.
 
-QualifyDecision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61 percent of correct decisions in one study.
+This part needs a qualification. Decision models are not uniformly "great at decisions." Published accuracy for the same model on the same benchmark varies by more than 10 points across labs, and benign-looking context flipped about 61 percent of correct decisions in one study.
 
-GuardrailFraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output.
+This part needs a guardrail. Fraud, clinical concern, complaints and vulnerable-customer signals escalate by rule, never by a threshold. Multi-intent calls ("overcharged again and nobody calls back") need multi-label output, which can return more than one intent.
 
-Routing to tools and MCP servers.
+The same narrowing applies to tools, which agents reach through Model Context Protocol (MCP) servers. Anthropic reports that 58 tools across 5 servers consume about 55K tokens before a conversation starts, and that tool search lifted accuracy from 49 percent to 74 percent on one model. On one benchmark, MCP-Zero selected from about 2,800 tools across 308 servers with 98 percent fewer tokens. Retrieval recall then becomes the new bottleneck: with 4,027 tools, the right tool reached the top results only 56 percent to 64 percent of the time. Taken together, the evidence supports a router design in ten parts.
 
-MCP-Zero selected from about 2,800 tools across 308 servers with 98 percent fewer tokens on one benchmark.
-
-Anthropic reports 58 tools across 5 servers consume about 55K tokens before a conversation starts; tool search lifted accuracy from 49 percent to 74 percent on one model.
-
-With 4,027 tools, the right tool reached the top results only 56 percent to 64 percent of the time, so retrieval recall becomes the new bottleneck.
+The recommended router has ten parts, from the classifier to the audit log and the compliance terms. The design is my recommendation. Author's view.
 
 Recommended router design.
 
-First, tier 0: fine-tuned encoder or self-hosted decision model, multi-label (per-intent sigmoid), so "billing and complaint" returns both. In bilingual markets, start from a multilingual encoder such as XLM-R and test turns that mix languages; English-only encoders misroute them.
+First, tier 0 is a fine-tuned encoder or a self-hosted decision model with multi-label output (one sigmoid per intent), so that "billing and complaint" returns both. In bilingual markets it should start from a multilingual encoder such as XLM-R and be tested on turns that mix languages, because English-only encoders misroute them.
 
-Second, stop control: when the thinker flags risk while the agent is already speaking, it can flush and mute the audio output immediately, then hand off.
+Second, the stop control lets the thinker flush and mute the audio output immediately when it flags risk while the agent is already speaking, and then hand off.
 
-Third, calibrate with temperature scaling on your own data; set per-intent thresholds on a held-out set, never the test set.
+Third, calibration uses temperature scaling, a one-parameter rescaling of the model's probabilities, on the team's own data. Per-intent thresholds are set on a held-out set, never on the test set.
 
-Fourth, gate: below threshold, out of scope, or two high-stakes intents goes to a frontier model with the full schema, or to a person.
+Fourth, the gate sends a turn that is below threshold, out of scope or carrying two high-stakes intents to a frontier model with the full schema, or to a person.
 
-Fifth, hard rules: fraud, clinical concern, complaints and vulnerable-customer signals always escalate.
+Fifth, hard rules always escalate fraud, clinical concern, complaints and vulnerable-customer signals.
 
-Sixth, narrow tools: each sub-agent exposes only its own MCP servers, with a broader-tools fallback when retrieval scores are low.
+Sixth, narrow tools mean that each sub-agent exposes only its own MCP servers, with a fallback to broader tools when retrieval scores are low.
 
-Seventh, injection hygiene: classify the caller's turn only, without retrieved or third-party text in context.
+Seventh, injection hygiene means that the router classifies the caller's turn only, with no retrieved or third-party text in context.
 
-Eighth, who owns state: one call-state object per call, held by the orchestrator. The thinker runs on every finished turn and writes typed fields (intent, risk, speaker, emotion, confidence). The responder owns the conversation, slot filling and clarifying questions ("does Dr. Smith work Fridays?"), and reads the thinker's fields before it speaks. A new intent, topic shift or correction triggers a re-route; slots already filled carry over.
+Eighth, state lives in one call-state object per call, held by the orchestrator. The thinker runs on every finished turn and writes typed fields (intent, risk, speaker, emotion, confidence). The responder owns the conversation, slot filling and clarifying questions ("does Dr. Smith work Fridays?"), and reads the thinker's fields before it speaks. A new intent, topic shift or correction triggers a re-route; slots already filled carry over.
 
-Ninth, audit: log input hash, label, probabilities, threshold, model version and final disposition; re-run evals on every model change.
+Ninth, the audit log records the input hash, label, probabilities, threshold, model version and final disposition, and evaluations are re-run on every model change.
 
-Tenth, compliance: hosted decision APIs need a BAA or equivalent for protected data; self-hosted encoders avoid the question.
+Tenth, compliance depends on hosting: a hosted decision API needs a BAA or equivalent for protected data, and a self-hosted encoder avoids the question.
+
+What a team should take from the comparison is a division of labor: a classifier for stable, high-volume intents, a decision API or an LLM for new, rare or out-of-scope ones, and rules, not thresholds, for fraud, clinical concern and complaints. The next section turns from how an agent decides to where it keeps its facts.

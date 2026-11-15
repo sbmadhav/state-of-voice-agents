@@ -1,27 +1,33 @@
 Unchanged since October.
 
-Read these in the October baseline.
+What did not change, and where to read it.
 
-No new evidence moved these sections, so they are not repeated here. Sections updated in part above (T1 architecture, T4 failure modes, T5 routing, T8 fraud, T9 regulation) still hold where this update does not change them.
+No new evidence moved the October sections listed here, so this update does not repeat them.
 
-Executive summary: The nine-point argument, still current except where this update says otherwise.
+Five technical sections were updated in part above: T1 on architecture, T4 on failure modes, T5 on routing, T8 on fraud and T9 on regulation. They still hold wherever this update does not change them. The table says in a line what each of the other sections covers.
 
-Published health care results, pace of change: Health system outcomes and the 2026 timeline to October.
+These October sections carry no new evidence this month. Each link opens the baseline.
 
-The economics model: Cost per resolved call; break-even near 40 percent resolution under default assumptions.
+Executive summary. Its nine-point argument is still current, except where this update says otherwise.
 
-The thinker-responder model: Silent System-1 decisions beside a conversational LLM, with a live demo.
+Published health care results, pace of change. These cover health system outcomes and the 2026 timeline to October.
 
-What separates a good agent: The golden test set, hearing the right caller, emotion and persona.
+The economics model. It works out cost per resolved call, with break-even near 40 percent resolution under default assumptions.
 
-Readiness by call type, health care: The health care version of the readiness map above.
+The thinker-responder model. A System-1 model decides silently beside a conversational LLM, and the section has a live demo.
 
-Governed memory: Fact stores now, limited-memory models later; no new research this month.
+What separates a good agent. It covers the golden test set built from a team's own calls, hearing the right caller, emotion and persona.
 
-Options, 90-day pilot, debate: Strategic paths, pilot gates and the seven-seat debate.
+Readiness by call type, health care. This is the health care version of the readiness map above.
 
-Latency budget, pass k, LMLM detail: Technical appendix sections with no new data.
+Governed memory. It argues for fact stores now and limited-memory models later, and no new research appeared this month.
 
-Deployment and data posture: Private endpoints under contract; the open speech models above add options.
+Options, 90-day pilot, debate. These set out the strategic paths, the pilot gates and the seven-seat debate.
 
-Tooling and implementation: What to borrow and what to avoid.
+Latency budget, pass k, LMLM detail. These technical appendix sections have no new data.
+
+Deployment and data posture. It describes private endpoints under contract, and the open speech models above add options.
+
+Tooling and implementation. It says what to borrow and what to avoid.
+
+For these sections the October text is still the one to read. The sources for this update follow.

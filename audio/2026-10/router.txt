@@ -1,47 +1,39 @@
 Section 5: Think silently, then respond.
 
-A thinker-responder model for conversational agents.
+A voice agent should decide silently before it speaks.
 
-People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the thinker, making typed decisions silently, and a conversational LLM is the responder, turning those decisions into a natural reply.
+People size up a question before they answer, and they do not say every thought aloud. A voice agent can work the same way if a fast model decides silently and a conversational model speaks.
 
-One caller turn, two ways.
+I call the design thinker-responder. The thinker is a fast System 1 model: a small model that returns typed answers, each with a probability, and never writes prose. OpenAI's Decisions API, the open-source Laya and TypeSafe's Jev are examples. The responder is a conversational LLM that turns those decisions into a natural reply.
 
-Caller: "I got charged twice for my visit last month.".
+The first demo plays one caller turn, "I got charged twice for my visit last month," both ways. The thing to notice is what the caller hears before the first useful word.
 
-What the thinker decides (System 1, silent, typed).
+On the same caller turn, the thinker-responder agent answers directly, and a single model that reasons aloud keeps the caller waiting about 2 seconds for the first useful word. The exchange is not a recording of a product. Illustrative.
 
-Intent: which sub-agent owns this turn (billing, scheduling, complaint).
+On each caller turn the thinker settles seven things, and it returns each as a typed value, not as a sentence.
 
-Risk: fraud, clinical, vulnerable-caller or complaint flags that force a handoff.
+Intent is the sub-agent that owns the turn, such as billing, scheduling or complaints.
 
-Tools: which MCP servers to expose, and which facts to fetch before speaking.
+Risk covers the fraud, clinical, vulnerable-caller and complaint flags that force a handoff.
 
-Turn state: is the caller done, correcting themselves, or just saying "mm-hmm".
+Tools are the servers to expose over the Model Context Protocol (MCP), a standard for connecting a model to outside systems, and the facts to fetch before speaking.
 
-Speaker: is this the caller, or someone else in the room.
+Turn state says whether the caller is done, is correcting themselves or is just saying "mm-hmm".
 
-Emotion: frustration or confusion that should change the tone, slow things down or hand off.
+Speaker says whether this is the caller or someone else in the room.
 
-Confidence: a probability on each, so low-confidence turns hand off instead of guessing.
+Emotion registers frustration or confusion that should change the tone, slow things down or prompt a handoff.
 
-Why it works.
+Confidence is a probability on each of the others, so that a low-confidence turn is handed off instead of guessed at.
 
-Faster: decisions take tens to hundreds of milliseconds, so the responder starts with data already fetched.
+The split pays off in three ways. It is faster, because the decisions take tens to hundreds of milliseconds and the responder starts with its data already fetched. It is cheaper, because the expensive model writes only the reply, not the routing. And it is safer, because the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules, and the responder cannot narrate a tool result it never received.
 
-Cheaper: the expensive model only writes the reply, not the routing.
+This is a deliberate difference from OpenAI and Sierra, which put the fast model on the talking side and a slower reasoner behind it. The design here puts the fast model on the deciding side. The two combine into a fast talker, a fast silent decider and a slower reasoner for when one is needed.
 
-Safer: the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.
+The thinker works with any voice stack, because it does not need a speech-to-text pipeline. Beside a speech-to-speech model, or a full-duplex one that listens and speaks at the same time, it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. A full-duplex model starts speaking within a few hundred milliseconds, so the thinker also needs a stop control. When it flags risk in the middle of a turn, it cuts the audio output at once, before protected data or advice reaches the caller. The thinker's limit is that it handles bounded choices. Open-ended reasoning still needs a deeper planner that the responder can call.
 
-A deliberate difference: OpenAI and Sierra put the fast model on the talking side and a slower reasoner behind it. This design puts the fast model on the deciding side. The two combine: a fast talker, a fast silent decider, and a slower reasoner when needed.
+The second demo shows the routing decision itself. Each caller turn gets a probability for each of six destinations, and more than one can be high at once. The two turns to try are the ambiguous one, which no intent claims, and the clinical one, which a rule sends to a person whatever the threshold says.
 
-Works with any voice stack: the thinker does not need a speech-to-text pipeline. Beside a speech-to-speech or full-duplex model it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. Because a full-duplex model starts speaking within a few hundred milliseconds, the thinker also needs a stop control: when it flags risk mid-turn, it cuts the audio output at once, before protected data or advice reaches the caller.
+An intent that clears the confidence threshold is routed, a turn where none does is handed off, and a fraud or clinical signal goes to a person by rule. The probabilities are examples of a calibrated multi-label router, not output from a specific product. Illustrative.
 
-Limit: the thinker handles bounded choices. Open-ended reasoning still needs a deeper planner the responder can call.
-
-Pick a caller turn.
-
-Confidence threshold Below the threshold, the router hands off instead of guessing.
-
-Illustrative. Probabilities are examples of a calibrated multi-label router, not output from a specific product.
-
-Routing speed, the cost of a cascade and a check of this thesis against the evidence are in the technical appendix (T5).
+Routing speed, the cost of a cascade (a small model first, a large one as the fallback) and a check of this thesis against the evidence are in the technical appendix (T5). The next section turns to two capabilities that carry over whatever model or vendor sits underneath.

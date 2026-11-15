@@ -2,32 +2,42 @@ State of conversational voice agents. Monthly update. Financial services focus, 
 
 Banks and credit unions reach the front door.
 
-Reviewed for the first time, bank and credit union voice-agent results look like October's health care results: routine calls such as balances, payments and branch hours, all reported by the institution or its vendor. A new entrant topped the reliability benchmark, OpenAI's decision API left beta, the FCC gave callers more flexibility on opt-outs, and California tightened rules on AI in health care. The new risk is ordinary: a TV playing in the room broke most voice agents in one test.
+This month's update reviews bank and credit union results for the first time, reports a new leader on the reliability benchmark and corrects October's advice on voice identity checks. The new risk it reports is an ordinary one: a television playing in the room broke most voice agents in one test.
 
 By Madhav Srinivasan. Published November 10, 2026. Updated November 15, 2026.
 
 This update builds on the October 2026 baseline and covers only what changed since then, or is reviewed for the first time.
 
-Best repeat reliability: 87.8 percent. October: 75.6 percent, 7 platforms. A new entrant, PolyAI, leads ten configurations; its range (about 79 percent to 93 percent) overlaps the runner-up's. Vendor-reported.
+Banks and credit unions are putting voice agents on the same kind of call that health systems chose first: the routine one. Their published results cover balances, payments and branch hours, and every performance figure comes from the institution or its vendor. The one dated share-of-calls figure is also the smallest: Southern Cross Credit Union's agent takes 7 percent of all calls (October 27), against the 37 percent to 90 percent claimed in undated vendor case studies. Vendor-reported.
 
-Share of all calls, dated bank result: 7 percent. October: not reviewed. Southern Cross Credit Union's voice agent takes 7 percent of all calls, mostly balances (October 27). Undated vendor case studies claim 37 percent to 90 percent. Vendor-reported.
+The month's most consequential risk finding comes from outside banking. Veris called 14 voice systems as a simulated utility-billing customer, ran 100 tasks three times each and mixed street, café and television audio into the calls at equal loudness. With the television on, task completion fell from 38.7 percent on clean calls to 8.6 percent. Vendor-reported. The calls were simulated and vendors' noise options were off, so the levels are directional.
 
-Task completion, TV on: 8.6 percent. Same test, clean calls: 38.7 percent. Across 14 voice systems on simulated calls with a TV playing in the room. Vendor-reported.
+For a bank, the two findings belong together. Routine banking calls include verifying the caller and taking a payment, and most calls with the television on carried words the caller never said. In banking those words are the risk, in a security answer or a payment amount. Author's view.
 
-TCPA opt-out rules: November 25. October: not reviewed. FCC 26-67 takes effect: one or more approved opt-out methods, disclosed on the call; category-limited opt-outs; a wider fraud-alert exemption. Independent.
+Nine findings moved in all, among them new FCC opt-out rules and a California chatbot law now confirmed as signed. The first section lists them, and October's three theses stand.
+
+Four figures summarize the month, each under a line that gives the October position or the comparison. Three are vendor-reported, and the opt-out date comes from independent sources.
+
+Best repeat reliability: 87.8 percent. October's best was 75.6 percent, among 7 platforms. PolyAI, a new entrant, leads ten configurations on the share of scenarios passed on all three tries. Its range (about 79 percent to 93 percent) overlaps the runner-up's. Vendor-reported.
+
+Share of all calls, dated bank result: 7 percent. October did not review bank results. Southern Cross Credit Union's voice agent takes 7 percent of all calls, mostly for balances, in a result dated October 27. Undated vendor case studies claim 37 percent to 90 percent. Vendor-reported.
+
+Task completion, TV on: 8.6 percent. The same test scored 38.7 percent on clean calls. Veris measured this across 14 voice systems, on simulated calls with a TV playing in the room. Vendor-reported.
+
+New FCC opt-out rules take effect: November 25. October did not review these rules. FCC order 26-67, under the Telephone Consumer Protection Act (TCPA), lets a business designate one or more approved opt-out methods, which it must disclose on the call. Opt-outs can be limited to a message category, and the fraud-alert exemption is wider. Independent.
 
 Unchanged since October.
 
-The three theses stand: reliability is the gap, think silently, then respond, and invest in governed memory. So do the economics model, the 90-day pilot and the router comparison. Everything else is indexed at the end with a link to its October section.
+October's three theses hold: reliability is the gap, an agent should think silently, then respond, and a team should invest in governed memory. The economics model, the 90-day pilot and the router comparison stand too. Everything else is indexed at the end of this update, with a link to its October section.
 
 How to read this update: method, labels and disclosure.
 
-Delta only. Findings published between October 12 and November 14, 2026 carry a "new" tag. Older material appears only if October did not cover it (most of the financial services evidence). Where a figure changed, the October value is shown next to it.
+This update reports only what changed. Findings published between October 12 and November 14, 2026 carry a "new" tag. Older material appears only where October did not cover it, as with most of the financial services evidence. Where a figure changed, the October value is shown next to it.
 
-Labels. Independent. Vendor-reported. Company-reported. Author's view. Every figure links to its source.
+Four labels say where a claim comes from: independent, vendor-reported, company-reported and author's view. Every figure links to its source.
 
-Method. A review of public sources up to the research cutoff. I did not run my own tests.
+The method is a review of public sources up to the research cutoff. I did not run my own tests.
 
-Terms. "Repeat reliability" (pass three) is the share of test scenarios passed on all three tries. Word error rate is the share of words transcribed wrongly. Full-duplex models listen and talk at the same time. A System-1 model makes fast typed decisions (route, risk, done talking) without writing prose.
+Four terms recur. "Repeat reliability" (pass three) is the share of test scenarios passed on all three tries. Word error rate is the share of words transcribed wrongly. Full-duplex models listen and talk at the same time. A System-1 model makes fast typed decisions (route, risk, done talking) without writing prose.
 
-Disclosure. Written in a personal capacity. No commercial relationship with any vendor named, and no sponsorship. Regulatory summaries are not legal advice.
+I wrote this update in a personal capacity, with no commercial relationship with any vendor named and no sponsorship. The regulatory summaries are not legal advice.

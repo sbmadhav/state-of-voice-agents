@@ -2,18 +2,20 @@ T7. Deployment and data posture.
 
 "Sovereign" in practice means private endpoints under contract.
 
-The case for keeping protected data and conversation logs under your control is strong. The case for running voice inference on your own GPUs is weak for 2026 to 2027, except for small models such as routers.
+Private cloud endpoints are common, and I found no named US health system that runs large open-weight models itself for patient-facing voice.
 
-Model API under a BAA or equivalent, modified or zero retention. Status in 2026: OpenAI covers the Realtime API with modified retention; Bedrock stores no prompts by default; Anthropic covers its HIPAA-ready API. Pros: Fastest; frontier quality; vendor carries ops. Cons: Terms can change; contracts needed for every component.
+"Sovereign" deployment covers two different aims. The case for the first, keeping protected data and conversation logs under the organization's own control, is strong. The case for the second, running voice inference on its own GPUs, is weak for 2026 to 2027, except for small models such as routers. The table compares five postures, from a model API under a BAA, the contract that HIPAA, the US health privacy law, requires before a vendor handles protected health data, to large models that a team hosts itself.
 
-Dedicated cloud tenancy over private network. Status in 2026: Stanford runs Secure GPT this way on Azure. Pros: No public internet path; enterprise audit. Cons: More integration work; not every voice model offered.
+Three of the five postures rest on a contract with a provider, and two are self-hosted. The status column cites provider documentation and published deployments.
 
-Managed enterprise agent platform. Status in 2026: Sierra runs the full voice stack (Tandem Voice, Curie, Fleming) and prices on outcomes. Pros: Fastest to production; vendor owns tuning and safety layers. Cons: Least control over models, routing and logs; negotiate export rights.
+Model API under a BAA or equivalent, with modified or zero retention. OpenAI covers the Realtime API with modified retention, Amazon Bedrock stores no prompts by default and Anthropic covers its HIPAA-ready API. It is the fastest route and gives frontier quality, and the vendor carries operations. Terms can change, and every component needs its own contract.
 
-Self-hosted small models (routers, classifiers). Status in 2026: Encoders run in tens of ms on one GPU or CPU. Pros: Cheap; no data leaves; no contract question. Cons: You own training, calibration and monitoring.
+Dedicated cloud tenancy over a private network. Stanford runs Secure GPT this way on Azure. There is no public internet path, and enterprise audit is available. It takes more integration work, and not every voice model is offered.
 
-Self-hosted large open-weight models. Status in 2026: No named US health system found doing this for patient-facing voice. Pros: Full control. Cons: Beat the cheapest API in only 24 percent of 900 modeled scenarios.
+Managed enterprise agent platform. Sierra runs the full voice stack (Tandem Voice, Curie, Fleming) and prices on outcomes. It is the fastest to production, and the vendor owns tuning and the safety layers. It gives the least control over models, routing and logs, so export rights have to be negotiated.
 
-Open versus closed models.
+Self-hosted small models (routers, classifiers). Encoders run in tens of milliseconds on one GPU or CPU. It is cheap, no data leaves and no contract question arises. The team owns training, calibration and monitoring.
 
-Enterprise surveys put open-source models near 11 percent of LLM API share. Open models win on cheap, high-volume work, which is exactly the router's job.
+Self-hosted large open-weight models. I found no named US health system doing this for patient-facing voice. It gives full control. It beat the cheapest API in only 24 percent of 900 modeled scenarios.
+
+Enterprise surveys put open-source models near 11 percent of LLM API share. Open models win on cheap, high-volume work, which is exactly the router's job. That points to a mixed posture: a frontier model behind a contract and a private endpoint for the conversation, and a small open model, hosted by the team, for routing. The next section turns from where data sits to who is calling.

@@ -1,47 +1,33 @@
 Section 2: Published results.
 
-Where it is already working: access and service, not advice.
+The published wins are administrative, and all are self-reported.
 
-The strongest published results so far come from health systems, and every one is administrative. All figures are reported by the organization or its vendor, with no control group, so expect some regression at scale.
+The strongest published results so far come from health systems. Every one covers access and service, not advice, and every one is self-reported.
 
-Tampa General. Hyro.
+The cards below show three of those results. Tampa General and Intermountain both use the vendor Hyro, and WellSpan uses Hippocratic AI. The measure that recurs is call abandonment, the share of callers who hang up before they are answered. None of the figures has a control group, so some regression should be expected at scale. Each card gives a system's figures in its own terms, with before and after values where they were published.
 
-2.4 min.
+Three health systems report shorter waits, high call volumes and less abandonment from voice agents on administrative calls. Every figure is self-reported.
 
-Average wait, down from 6.2 minutes, within two weeks.
+Tampa General, which uses Hyro, reports that its average wait fell from 6.2 minutes to 2.4 within two weeks.
 
-Wait, before6.2 min.
-
-Wait, after2.4 min.
-
-Abandon, before34 percent.
-
-Abandon, after14.9 percent.
-
-Also 21 percent more appointments scheduled.
+It also reports abandonment down from 34 percent to 14.9 percent and 21 percent more appointments scheduled.
 
 Self-reported.
 
-WellSpan. Hippocratic AI.
+WellSpan reports that an AI agent from Hippocratic AI handles more than 160,000 patient calls a month.
 
-160K+.
-
-Patient calls a month handled by an AI agent.
-
-About 7,000 hours of conversation; partnership expanded July 30, 2026.
+The calls add up to about 7,000 hours of conversation, and the two expanded their partnership on July 30, 2026.
 
 Self-reported.
 
-Intermountain. Hyro + Agentforce Health.
+Intermountain, which uses Hyro with Agentforce Health, reports that it has automated 44 percent of its repetitive calls.
 
-44 percent.
-
-Of repetitive calls automated.
-
-Call abandonment down 85 percent on in-scope lines such as patient portal support.
+It also reports call abandonment down 85 percent on in-scope lines such as patient portal support.
 
 Self-reported.
 
-For financial services, I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. Author's view. CX, IT and operations leaders report the same gap: 98 percent have deployed AI in the customer journey, but only 5 percent can quantify its impact on business outcomes. Vendor-reported.
+Measurement trails deployment more widely, too. In a Talkdesk and NewtonX report, 98 percent of customer experience, IT and operations leaders say they have deployed AI in the customer journey, but only 5 percent can quantify its impact on business outcomes. Vendor-reported.
 
-Enterprise agent platforms are moving into healthcare too. Sierra says it serves most Fortune 50 healthcare companies, and announced new voice models at Sierra Summit 2026. No healthcare outcome figures have been published yet. Vendor-reported.
+For financial services, I expect the same pattern as in health care. Balance, card status, payment dates and dispute intake will come first, while advice, fraud adjudication and hardship conversations stay with people. Author's view. Enterprise agent platforms are moving into health care too. Sierra says it serves most Fortune 50 health care companies, and it announced new voice models at Sierra Summit 2026, but no health care outcome figures have been published yet. Vendor-reported.
+
+The published record is also a snapshot, because the models underneath it keep changing, as the next section shows.
