@@ -503,6 +503,12 @@ ol.src li:target{background:var(--accent-soft)}
 @media (max-width:420px){.vd{white-space:normal}}.cmt-off p{margin:0 0 var(--space-3)}.cmt-btns{display:flex;flex-wrap:wrap;gap:var(--space-2)}.cmt-btns .btn{text-decoration:none;font-weight:var(--text-nav-weight)}.cmt-btns .btn:not(.primary){color:var(--ink)}#cmt .utterances{max-width:100%}
 @media print{.bolt-launch,.bolt-panel,.about-links,#comments{display:none!important}}
 
+/* Article prose and exhibits (docs/editorial-style.md): narrative paragraphs at a reading measure, and a caption on each exhibit that states its finding */
+.prose{display:grid;gap:var(--space-3-5);max-width:70ch}
+.prose h3{margin-top:var(--space-2)}
+.exhibit{display:grid;gap:var(--space-2-5);margin:0;min-width:0}
+.caption{font-size:var(--text-small-size);color:var(--ink-muted);max-width:74ch}
+.caption strong{color:var(--ink);font-weight:var(--text-label-weight)}
 /* Edition navigation, standfirst and byline: where the reader is, which edition this is, who wrote it and when */
 .edition-nav{display:grid;gap:var(--space-2);margin-bottom:var(--space-4)}
 .crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:var(--space-1) var(--space-2);margin:0;padding:0;font-family:var(--font-mono);font-size:var(--text-kicker-size);letter-spacing:var(--text-kicker-tracking);color:var(--ink-muted)}
