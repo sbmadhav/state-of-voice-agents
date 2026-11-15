@@ -591,8 +591,9 @@ ol.src li:target{background:var(--accent-soft)}
         </ul>
       </nav>
     </div>
-    <p class="eyebrow">State of conversational voice agents · Healthcare first, with notes for financial services</p>
-    <h1 style="margin-top:var(--space-3)">Voice agents at the front door</h1>
+    <p class="eyebrow">State of conversational voice agents · Health care first, with notes for financial services</p>
+    <h1 style="margin-top:var(--space-3)">Voice agents at the front door: ready for routine calls, not for risky ones</h1>
+    <p class="standfirst">In one vendor-run benchmark, the leading voice platform completed more than nine test scenarios in ten on a single try, and about three in four when each had to succeed three times. This report sets out what that gap means for regulated contact centers, health care first, and what to build before choosing a vendor.</p>
     <p class="byline">By <strong>Madhav Srinivasan</strong>. Published <time datetime="2026-10-12">October 12, 2026</time>.</p>
     <p class="byline byline-note">The text was edited for readability on <time datetime="2026-11-15">November 15, 2026</time>. The findings and figures are as first published. The latest update is the <a href="/state-of-voice-agents/">November 2026 edition</a>.</p>
     <div class="hero-audio" data-narrate-skip>
@@ -611,47 +612,51 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="wave-cap" aria-hidden="true"><span>caller</span><span>agent</span><span>caller</span><span>agent</span><span>handoff</span></div>
 
     <div class="bottom-line">
-      <p class="say">Voice agents are now <b>good enough to take routine calls in regulated contact centers</b>: scheduling, billing questions, balance and status checks. They are <b>not yet consistent enough</b> to run unsupervised on clinical or high-risk financial conversations. In one vendor-run benchmark, the leading platform still failed about one in four test scenarios when each was run three times.<a class="hash" href="#gap" aria-label="See the reliability results">#</a></p>
+      <p class="say">Within two weeks of going live with a voice agent, Tampa General reports, the average wait for callers fell from 6.2 minutes to 2.4, and call abandonment, the share who hung up before being answered, fell from 34 percent to 14.9 percent.<a class="c" data-s="beckersTGH" href="#src-beckersTGH" title="Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout">[1]</a> <span class="chip k-ven">self-reported</span> Voice agents are now <b>good enough to take routine calls in regulated contact centers</b>: scheduling, billing questions, balance and status checks. They are <b>not yet consistent enough</b> to run unsupervised on clinical or high-risk financial conversations. In that vendor-run benchmark, which covered seven platforms, the leading one still failed about one scenario in four when each of 82 scenarios was run three times.<a class="hash" href="#gap" aria-label="See the reliability results">#</a></p>
       <div class="ask">
         <span class="eyebrow">The one-minute read</span>
-        <p><strong>What we know.</strong> The best platform passed 75.6% of test scenarios on all three tries; the top three are within the margin of error. Every published deployment result is administrative and self-reported.</p>
-        <p><strong>What to watch.</strong> Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that any model bet goes stale in a quarter.</p>
-        <p><strong>What to do.</strong> Build a golden test set from your own calls and gate every change on it. Pilot narrow, judged on cost per resolved call. Separate silent decisions from the conversation, and build a governed fact store; trial limited-memory models only once they beat retrieval.</p>
+        <p>What separates the teams that succeed is not which model they buy. It is how they test, how the agent decides, what it remembers, who it is listening to and how it proves who the caller is. I argue that from public sources; I did not run my own tests.</p>
+        <p>The evidence is narrow. The top three platforms in that benchmark are within its margin of error, and every published deployment result is administrative and self-reported. Demos overstate readiness, cloned voices defeat voice-only identity checks, and scores move so fast that a bet on one model goes stale in a quarter.</p>
+        <p>Because scores move that fast, the first thing to build is a golden test set: a team's own calls, with known right answers, that every change must pass. Because the published wins are administrative, a pilot should stay narrow and be judged on cost per resolved call. The agent's silent decisions belong apart from the conversation, and its facts in a governed store. Limited-memory models, which look facts up there, merit a trial only once they beat retrieval, today's way of fetching facts for a model.</p>
       </div>
     </div>
 
-    <div class="stats">
-      <div class="stat"><span class="v num">56<small>%</small></span><p>Lower call abandonment at a large health system within two weeks of go-live <a class="c" data-s="beckersTGH" href="#src-beckersTGH" title="Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout">[1]</a></p><span class="chip k-ven">self-reported</span></div>
-      <div class="stat"><span class="v num">75.6<small>%</small></span><p>Best platform's repeat reliability: share of 82 scenarios passed on all three tries (about 65% to 84% at 95% confidence) <a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a></p><span class="chip k-ven">vendor-reported</span></div>
-      <div class="stat"><span class="v num">5<small>%</small></span><p>Of CX, IT and operations leaders can quantify AI's impact on business outcomes, though 98% have deployed it in the customer journey <a class="c" data-s="talkdesk" href="#src-talkdesk" title="Talkdesk / NewtonX: The State of Agentic Automation in CX (Aug 25, 2026)">[3]</a></p><span class="chip k-ven">vendor-reported</span></div>
-      <div class="stat"><span class="v num">Over half</span><p>Of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice <a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a></p><span class="chip k-ven">vendor-reported</span></div>
-    </div>
+    <figure class="exhibit" style="margin-top:var(--space-7)">
+      <figcaption class="caption"><strong>Four figures frame the report: a strong published result, the best reliability score, a gap in measurement and the share of fraud that uses AI.</strong> All four are vendor-reported or self-reported.</figcaption>
+      <div class="stats" style="margin-top:0">
+        <div class="stat"><span class="eyebrow">Fall in call abandonment</span><span class="v num">56<small>%</small></span><p>Tampa General reports the drop within two weeks of going live with its voice agent. <a class="c" data-s="beckersTGH" href="#src-beckersTGH" title="Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout">[1]</a></p><span class="chip k-ven">self-reported</span></div>
+        <div class="stat"><span class="eyebrow">Best repeat reliability</span><span class="v num">75.6<small>%</small></span><p>In Cekura's benchmark, which a testing vendor runs, the leading platform passed this share of 82 scenarios on all three tries (about 65 to 84 percent at 95 percent confidence). <a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a></p><span class="chip k-ven">vendor-reported</span></div>
+        <div class="stat"><span class="eyebrow">Can quantify AI's impact</span><span class="v num">5<small>%</small></span><p>Only this share of customer experience, IT and operations leaders can quantify AI's impact on business outcomes, a Talkdesk and NewtonX report says, though 98 percent have deployed it in the customer journey. <a class="c" data-s="talkdesk" href="#src-talkdesk" title="Talkdesk / NewtonX: The State of Agentic Automation in CX (Aug 25, 2026)">[3]</a></p><span class="chip k-ven">vendor-reported</span></div>
+        <div class="stat"><span class="eyebrow">Fraud attempts using AI</span><span class="v num">Over half</span><p>Pindrop, a deepfake-detection vendor, reports that this share of fraud attempts at health care contact centers now involves AI-generated elements such as synthetic voice. <a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a></p><span class="chip k-ven">vendor-reported</span></div>
+      </div>
+    </figure>
 
     <div class="thesis">
-      <a href="#gap"><span class="n">Thesis 1</span><span class="t">Reliability is the gap</span><p>In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms. Test repeatability on your own calls.</p></a>
-      <a href="#router"><span class="n">Thesis 2</span><span class="t">A thinker-responder agent</span><p>A fast System-1 thinker decides silently; a conversational LLM speaks. People don't narrate every thought before they answer.</p></a>
-      <a href="#lmlm"><span class="n">Thesis 3</span><span class="t">Invest in governed memory</span><p>A governed fact store pays off today. Limited-memory models that look facts up are promising but research-stage: trial them against retrieval first.</p></a>
+      <a href="#gap"><span class="n" data-say="Thesis 1:">Thesis 1</span> <span class="t">Reliability, not capability, is the gap</span><p>In one benchmark, single-run scores beat repeat reliability by 18 to 38 points on six of seven platforms. A team finds out how ready an agent is only by testing repeatability on its own calls.</p></a>
+      <a href="#router"><span class="n" data-say="Thesis 2:">Thesis 2</span> <span class="t">An agent should decide silently, then speak</span><p>People do not narrate every thought before they answer. A small, fast model, called System 1 after the term for quick, intuitive judgment, decides silently, and a conversational large language model (LLM) speaks.</p></a>
+      <a href="#lmlm"><span class="n" data-say="Thesis 3:">Thesis 3</span> <span class="t">Governed memory pays off now; the models built on it are still research</span><p>A governed fact store, in which every fact has an owner and a version, pays off today through retrieval. Limited-memory models, which look facts up in it instead of memorizing them, are promising but still research, so they should be trialed against retrieval first.</p></a>
     </div>
 
     <div class="legend" style="margin-top:var(--space-4-5)">
-      <span>Evidence labels used throughout:</span>
+      <span>Every figure in this report carries one of four evidence labels:</span>
       <span class="chip k-ind">independent</span>
       <span class="chip k-ven">vendor or self-reported</span>
       <span class="chip k-unv">unverified</span>
       <span class="chip k-our">author's view, arithmetic or illustration</span>
-      <span class="screen-only" style="display:inline-flex;gap:var(--space-2);align-items:center;margin-left:var(--space-2)">Charts and tools you can use carry <span class="ix">interactive</span></span>
+      <span class="screen-only" style="display:inline-flex;gap:var(--space-2);align-items:center;margin-left:var(--space-2)" data-say="Charts and tools that respond to input are marked interactive.">Charts and tools that respond to input are marked <span class="ix">interactive</span></span>
     </div>
     <details class="howto" id="howto">
       <summary>How to read this report: method, limits and disclosure</summary>
       <div class="howto-body">
+        <p class="note">Seven notes explain how to weigh what follows.</p>
         <ul class="tight">
-          <li><strong>Method.</strong> A review of public sources up to the research cutoff. I did not run my own tests; every figure links to its source.</li>
-          <li><strong>Which vendors.</strong> Platforms and models appear when they publish benchmark results or deployment outcomes, or run at large health systems or banks. Sierra is included in the market analysis wherever evidence exists, because of its healthcare footprint. It was not part of the seven-platform reliability test, and that gap is noted rather than filled in.</li>
-          <li><strong>How much weight.</strong> Peer-reviewed and independent tests first, then vendor benchmarks with a published method, then customer-reported outcomes, then vendor claims. The label on each figure says which it is.</li>
-          <li><strong>Illustrative tools.</strong> The router, latency, economics and limited-memory demos are models for exploring trade-offs, not measurements of a product.</li>
-          <li><strong>Recommendations.</strong> Thresholds, pilot gates and suggested paths are proposals to adapt to your risk, call mix and baseline.</li>
-          <li><strong>Disclosure.</strong> Written in a personal capacity; the views are my own, not any employer's. No commercial relationship with any vendor named, and no sponsorship.</li>
-          <li><strong>Corrections.</strong> Post them in the comments or as a GitHub issue; changes are logged in the changelog.</li>
+          <li><strong>This is a review of public sources</strong> up to the research cutoff. I did not run my own tests, and every figure links to its source.</li>
+          <li><strong>A platform or model appears</strong> when it publishes benchmark results or deployment outcomes, or runs at large health systems or banks. Sierra, an enterprise agent platform, is included in the market analysis wherever evidence exists, because of its health care footprint. It was not part of the seven-platform reliability test, and I note that gap instead of filling it in.</li>
+          <li><strong>I weigh the evidence in a fixed order:</strong> peer-reviewed and independent tests first, then vendor benchmarks with a published method, then customer-reported outcomes, then vendor claims. The label on each figure says which it is.</li>
+          <li><strong>The interactive tools are illustrative.</strong> The router, latency, economics and limited-memory demos are models for exploring trade-offs, not measurements of a product.</li>
+          <li><strong>The recommendations are proposals.</strong> A team should adapt the thresholds, pilot gates and suggested paths to its own risk, call mix and baseline.</li>
+          <li><strong>I wrote this in a personal capacity</strong>, and the views are my own, not any employer's. I have no commercial relationship with any vendor named and no sponsor.</li>
+          <li><strong>Corrections are welcome</strong> in the comments or as a GitHub issue, and changes are logged in the changelog.</li>
         </ul>
       </div>
     </details>
@@ -662,38 +667,38 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">Executive summary · about ten minutes</p>
-      <h2>What this report argues, in plain terms</h2>
-      <p class="lede">Voice agents can now take routine calls in regulated contact centers. What separates the teams that succeed is not which model they buy, but how they test, how the agent decides, what it remembers, who it is listening to, and how it proves who the caller is. Nine points, each linked to the evidence.</p>
+      <h2>The argument in nine points</h2>
+      <p class="lede">The report's argument runs in nine steps, from what the evidence shows to what to do in the next 90 days. Each point links to the section that holds its evidence.</p>
     </div>
     <div class="exec-grid">
-      <article class="panel ex"><span class="exn">1</span><h3>Ready for routine calls, not for unsupervised high-risk ones</h3>
-        <p>Agents now handle scheduling, billing questions and status checks well. In one public benchmark, the best platform completed over 90% of scenarios on a single try, but passed only 75.6% when each scenario had to succeed three times in a row.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a> The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44% of repetitive calls automated, but every published result is administrative and self-reported.<a class="c" data-s="hyro" href="#src-hyro" title="Hyro: Tampa General Hospital case study">[5]</a><a class="c" data-s="beckers12" href="#src-beckers12" title="Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)">[6]</a></p>
-        <a class="exlink" href="#gap">Reliability and results</a></article>
-      <article class="panel ex"><span class="exn">2</span><h3>Evaluation is the asset that lasts</h3>
-        <p>Models change every month; the top score on one voice benchmark rose from 30% to 67% in eight months.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> What you keep is a golden test set: hundreds of real, de-identified call scenarios with known right answers, including noisy lines and upset callers, run three times on every change. A drop in score blocks the release, the way failing tests block code. Build it before choosing a vendor: it is how you compare vendors, gate releases and hold contracts to account.</p>
-        <a class="exlink" href="#essentials">The golden test set</a></article>
-      <article class="panel ex"><span class="exn">3</span><h3>Think silently, then respond</h3>
-        <p>People size up a question before they answer it. A voice agent should too. A small, fast "System 1" model answers typed questions in tens of milliseconds, each with a confidence score: which team owns this, is there fraud or clinical risk, is the caller finished, is it even the caller speaking. It never writes prose. A conversational LLM then responds, with the right data already fetched.</p>
-        <p>This is faster and cheaper: in one test, routing first kept accuracy at about 84% while cutting cost from $2.42 to about $0.69 per 1,000 requests.<a class="c" data-s="openrouterJev" href="#src-openrouterJev" title="OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026)">[8]</a> It is also safer, because every decision is a logged record, and fraud, clinical and complaint signals always go to a person by rule. It works beside any voice stack, and it can cut the audio mid-sentence if it spots risk.</p>
-        <a class="exlink" href="#router">The thinker-responder model</a></article>
-      <article class="panel ex"><span class="exn">4</span><h3>Hear the right caller</h3>
-        <p>Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to 22% to 31%, and isolating the main speaker cut them by up to 43%.<a class="c" data-s="aicoustics" href="#src-aicoustics" title="ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026)">[9]</a> Diarization separates the voices, so the agent locks onto the caller and checks identity again if a different voice takes over before a sensitive step. Test with noise and side conversations, not clean demo audio.</p>
-        <a class="exlink" href="#essentials">Noise and diarization</a></article>
-      <article class="panel ex"><span class="exn">5</span><h3>Emotion and persona: worth piloting, not yet proven</h3>
-        <p>Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice: offer callers a choice, then keep each caller's preferred voice consistent. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used,<a class="c" data-s="euai50" href="#src-euai50" title="EU AI Act, Article 50: transparency obligations, including emotion recognition">[10]</a> so run both as experiments behind the golden test set.</p>
-        <a class="exlink" href="#essentials">Emotion and persona</a></article>
-      <article class="panel ex"><span class="exn">6</span><h3>Build governed memory now; train limited-memory models later</h3>
-        <p>Turn plans, policies, fees and provider details into a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Limited-memory models go further: they are trained to look facts up in that store instead of memorizing them. In research, a 382M-parameter model approached a 7B model on factual precision, and deleting a row made the model forget the fact.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a> That research is early (Wikipedia facts, small models, no voice or production use), so trial it on one domain once the store is ready, and scale only if it beats retrieval. Live data such as balances and appointment slots always comes from your systems through tools.</p>
-        <a class="exlink" href="#lmlm">Governed memory</a></article>
-      <article class="panel ex"><span class="exn">7</span><h3>A voice is no longer proof of identity</h3>
-        <p>Over half of fraud attempts at healthcare contact centers now involve AI-generated elements such as synthetic voice.<a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a> Match the check to the risk: passive signals for status checks, a one-time code for account changes, voiceprint plus liveness detection for irreversible actions, and always a person as the fallback. Card numbers should never reach the agent at all. For outbound calls, consent belongs to the current subscriber, so check lists against the FCC's Reassigned Numbers Database.<a class="c" data-s="fccRND" href="#src-fccRND" title="FCC: Reassigned Numbers Database">[12]</a></p>
-        <a class="exlink" href="#fraud">Trust and identity</a></article>
-      <article class="panel ex"><span class="exn">8</span><h3>The money is in resolution, not token price</h3>
-        <p>Savings come from calls the agent truly resolves, meaning no repeat contact on any channel within 48 hours. The calls left for people are the harder ones, so honest models show smaller savings than vendor pitches. With this report's default assumptions, the agent breaks even at about 40% resolution, and each extra point of resolution is worth far more than cheaper tokens. Contract on price per resolved call, with rights to export logs and evaluation data.</p>
-        <a class="exlink" href="#calc">The economics model</a></article>
-      <article class="panel ex"><span class="exn">9</span><h3>What to do in the next 90 days</h3>
-        <p>Pick two or three inbound administrative call types in one market. Build the golden test set (200+ scenarios). Set the go-live bar by risk: about 85% repeat reliability for informational calls, 95% for anything that writes data or moves money, and zero critical failures. Transfer to a person with full context. At day 90, judge on cost per resolved call, abandonment and zero wrong-account actions. Whatever the outcome, keep the test set, routing logs and recordings: they are the most valuable thing the pilot produces.</p>
-        <a class="exlink" href="#pilot">The pilot playbook</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 1.">1</span><h3>Agents can take the routine calls, but not yet the same way every time</h3>
+        <p>Agents now handle scheduling, billing questions and status checks well. In one public benchmark, the best platform completed over 90 percent of scenarios on a single try but passed only 75.6 percent when each scenario had to succeed three times in a row.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a> The gap is consistency, not capability. Health systems report large gains, such as waits cut from 6.2 to 2.4 minutes and 44 percent of repetitive calls automated, but every published result is administrative and self-reported.<a class="c" data-s="hyro" href="#src-hyro" title="Hyro: Tampa General Hospital case study">[5]</a><a class="c" data-s="beckers12" href="#src-beckers12" title="Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)">[6]</a></p>
+        <a class="exlink" href="#gap" data-narrate-skip>Reliability and results</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 2.">2</span><h3>Evaluation is the asset that lasts</h3>
+        <p>Models change every month: the top score on one voice benchmark rose from 30 percent to 67 percent in eight months.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> What a team keeps is its golden test set, hundreds of real, de-identified call scenarios with known right answers, including noisy lines and upset callers, run three times on every change. A drop in score blocks the release, the way failing tests block code. The set is worth building before choosing a vendor, because it is how a team compares vendors, gates releases and holds contracts to account.</p>
+        <a class="exlink" href="#essentials" data-narrate-skip>The golden test set</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 3.">3</span><h3>An agent should think silently, then respond</h3>
+        <p>People size up a question before they answer it, and a voice agent should too. A small, fast "System 1" model answers typed questions in tens of milliseconds, each with a confidence score: which team owns the call, whether there is fraud or clinical risk, whether the caller has finished, whether it is even the caller speaking. It never writes prose. A conversational LLM then responds, with the right data already fetched.</p>
+        <p>The split is faster and cheaper. In one test, routing first kept accuracy at about 84 percent while cutting cost from $2.42 to about $0.69 per 1,000 requests.<a class="c" data-s="openrouterJev" href="#src-openrouterJev" title="OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026)">[8]</a> It is also safer, because every decision is a logged record, and fraud, clinical and complaint signals always go to a person by rule. The fast model works beside any voice stack, and it can cut the audio mid-sentence if it spots risk.</p>
+        <a class="exlink" href="#router" data-narrate-skip>The thinker-responder model</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 4.">4</span><h3>The agent has to hear the right caller</h3>
+        <p>Real calls come from cars, kitchens and waiting rooms. In one vendor test, background speech pushed transcription errors to between 22 and 31 percent, and isolating the main speaker cut them by up to 43 percent.<a class="c" data-s="aicoustics" href="#src-aicoustics" title="ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026)">[9]</a> Diarization separates the voices, so the agent can lock onto the caller and check identity again if a different voice takes over before a sensitive step. Tests therefore need noise and side conversations, not clean demo audio.</p>
+        <a class="exlink" href="#essentials" data-narrate-skip>Noise and diarization</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 5.">5</span><h3>Emotion and persona are worth piloting but not yet proven</h3>
+        <p>Detecting frustration in real time lets the agent slow down or hand off to a person, and scoring sentiment on every call replaces quality reviews that sample a few percent. A persona is the brand's voice, so callers can be offered a choice and then hear their preferred voice on every call. The evidence is still mostly vendor case studies, and the EU requires telling people when emotion recognition is used,<a class="c" data-s="euai50" href="#src-euai50" title="EU AI Act, Article 50: transparency obligations, including emotion recognition">[10]</a> so both belong behind the golden test set as experiments.</p>
+        <a class="exlink" href="#essentials" data-narrate-skip>Emotion and persona</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 6.">6</span><h3>Governed memory comes first, and limited-memory models later</h3>
+        <p>Plans, policies, fees and provider details belong in a governed fact store: versioned rows with owners, access control and deletion. It powers retrieval today. Limited-memory models go further, because they are trained to look facts up in that store instead of memorizing them. In research, a 382M-parameter model approached a 7B model on factual precision, and deleting a row made the model forget the fact.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a> That research is early (Wikipedia facts, small models, no voice or production use), so the sensible order is to trial it on one domain once the store is ready and to scale only if it beats retrieval. Live data such as balances and appointment slots always comes from the organization's own systems through tools.</p>
+        <a class="exlink" href="#lmlm" data-narrate-skip>Governed memory</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 7.">7</span><h3>A voice is no longer proof of identity</h3>
+        <p>Over half of fraud attempts at health care contact centers now involve AI-generated elements such as synthetic voice, a detection vendor reports.<a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a> The check should therefore match the risk: passive signals for status checks, a one-time code for account changes, and a voiceprint plus liveness detection for irreversible actions, with a person always available as the fallback. Liveness detection tests that the speaker is a live person, not a recording or a clone. Card numbers should never reach the agent at all. For outbound calls, consent belongs to the current subscriber, so lists need checking against the Reassigned Numbers Database of the Federal Communications Commission (FCC).<a class="c" data-s="fccRND" href="#src-fccRND" title="FCC: Reassigned Numbers Database">[12]</a></p>
+        <a class="exlink" href="#fraud" data-narrate-skip>Trust and identity</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 8.">8</span><h3>The money is in resolution, not token price</h3>
+        <p>Savings come from calls the agent truly resolves, meaning no repeat contact on any channel within 48 hours. The calls left for people are the harder ones, so honest models show smaller savings than vendor pitches. With this report's default assumptions, the agent breaks even at about 40 percent resolution, and each extra point of resolution is worth far more than cheaper tokens. That argues for a contract priced per resolved call, with rights to export logs and evaluation data.</p>
+        <a class="exlink" href="#calc" data-narrate-skip>The economics model</a></article>
+      <article class="panel ex"><span class="exn" data-say="Point 9.">9</span><h3>The next 90 days should go to a narrow pilot with fixed gates</h3>
+        <p>The pilot should take two or three inbound administrative call types in one market, and it starts with the golden test set, 200 or more scenarios. The go-live bar rises with risk: about 85 percent repeat reliability for informational calls, 95 percent for anything that writes data or moves money, and zero critical failures. A call the agent hands off goes to a person with full context. At day 90 the pilot is judged on cost per resolved call, abandonment and zero wrong-account actions. Whatever the outcome, the test set, routing logs and recordings are worth keeping, because they are the most valuable thing the pilot produces.</p>
+        <a class="exlink" href="#pilot" data-narrate-skip>The pilot playbook</a></article>
     </div>
   </div>
 </section>
@@ -703,8 +708,14 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="head">
       <p class="eyebrow">1 · Reliability</p>
       <h2>A demo call is not a production call</h2>
-      <p class="lede">The same test agent was run on seven voice platforms: 82 realistic caller scenarios (appointments and Medicare), three repeats each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly. Single-run task completion looks ready. Passing every repeat is the number that matters for customers and patients.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a><a class="c" data-s="cekuraBook" href="#src-cekuraBook" title="Cekura: Booking and reservation flow testing for voice agents">[13]</a></p>
+      <p class="lede">A single successful call says little about the next one. In a benchmark that ran every scenario three times, all seven platforms scored well below their single-call results.</p>
     </div>
+    <div class="prose">
+      <p>Cekura, a voice-testing vendor, ran the same test agent on seven voice platforms: 82 realistic caller scenarios about appointments and Medicare, three times each, on live calls. Each provider chose its own configuration, except OpenAI, which Cekura configured directly.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a><a class="c" data-s="cekuraBook" href="#src-cekuraBook" title="Cekura: Booking and reservation flow testing for voice agents">[13]</a> <span class="chip k-ven">vendor-reported</span></p>
+      <p>The benchmark reports two scores. Single-run task completion is the share of calls that finish the task, and on it every platform looks ready. Repeat reliability, which the benchmark calls pass^3, is the share of scenarios that pass all three calls, and it is the number that matters for customers and patients. The best platform, Retell, completed more than 90 percent of single calls but passed only 75.6 percent of scenarios three times out of three. The shaded band on each row of the chart is that difference, the demo gap.</p>
+    </div>
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>On six of the seven platforms, the single-run score is 18 to 38 points above repeat reliability, and on Gemini Live the gap is wider still.</strong> The figures are Cekura's, and selecting a platform shows whether they could be verified.</figcaption>
     <div class="panel">
       <div class="toolbar">
         <div class="seg" role="group" aria-label="Sort platforms">
@@ -723,7 +734,11 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
       <div class="detail" id="db-detail"></div>
     </div>
-    <p class="note" style="margin-top:var(--space-3)">Cekura is a voice-testing vendor and the scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect; the benchmark does not break failures down by type. With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. Treat this as directional, then rerun the test on your own call types, including any Sierra deployment.</p>
+    </figure>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>The result has limits. Cekura sells voice testing, and its scenarios are generic. Sierra, a leading enterprise agent platform, was not among the platforms tested; its own tau-voice benchmark reports single-run scores, not repeat reliability.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> A scenario counts as failed if any of its three runs fails the evaluator's checks or the call does not connect, and the benchmark does not break failures down by type.</p>
+      <p>With 82 scenarios, each score carries a margin of about plus or minus 9 points, so the top three platforms are effectively tied. The result is directional, and a team should rerun the test on its own call types, including any Sierra deployment. Section 2 turns to what health systems report from live calls.</p>
+    </div>
   </div>
 </section>
 
@@ -731,41 +746,48 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">2 · Published results</p>
-      <h2>Where it is already working: access and service, not advice</h2>
-      <p class="lede">The strongest published results so far come from health systems, and every one is administrative. All figures are reported by the organization or its vendor, with no control group, so expect some regression at scale.</p>
+      <h2>The published wins are administrative, and all are self-reported</h2>
+      <p class="lede">The strongest published results so far come from health systems. Every one covers access and service, not advice, and every one is self-reported.</p>
     </div>
+    <div class="prose">
+      <p>The cards below show three of those results. Tampa General and Intermountain both use the vendor Hyro, and WellSpan uses Hippocratic AI. The measure that recurs is call abandonment, the share of callers who hang up before they are answered. None of the figures has a control group, so some regression should be expected at scale. Each card gives a system's figures in its own terms, with before and after values where they were published.</p>
+    </div>
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>Three health systems report shorter waits, high call volumes and less abandonment from voice agents on administrative calls.</strong> Every figure is self-reported.</figcaption>
     <div class="peers">
       <article class="panel peer">
-        <span class="eyebrow">Tampa General · Hyro</span>
-        <span class="big num">2.4 min</span>
-        <p class="who">Average wait, down from 6.2 minutes, within two weeks</p>
-        <div class="minibar">
+        <span class="eyebrow" data-narrate-skip>Tampa General, with Hyro</span>
+        <span class="big num" data-narrate-skip>2.4 min</span>
+        <p class="who">Tampa General, which uses Hyro, reports that its average wait fell from 6.2 minutes to 2.4 within two weeks.</p>
+        <div class="minibar" data-narrate-skip>
           <div class="r"><span>Wait, before</span><div class="b" style="width:100%"></div><span class="num">6.2 min</span></div>
           <div class="r"><span>Wait, after</span><div class="b after" style="width:39%"></div><span class="num">2.4 min</span></div>
           <div class="r"><span>Abandon, before</span><div class="b" style="width:100%"></div><span class="num">34%</span></div>
           <div class="r"><span>Abandon, after</span><div class="b after" style="width:44%"></div><span class="num">14.9%</span></div>
         </div>
-        <p>Also 21% more appointments scheduled. <a class="c" data-s="beckersTGH" href="#src-beckersTGH" title="Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout">[1]</a><a class="c" data-s="hyro" href="#src-hyro" title="Hyro: Tampa General Hospital case study">[5]</a></p>
+        <p>It also reports abandonment down from 34 percent to 14.9 percent and 21 percent more appointments scheduled. <a class="c" data-s="beckersTGH" href="#src-beckersTGH" title="Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout">[1]</a><a class="c" data-s="hyro" href="#src-hyro" title="Hyro: Tampa General Hospital case study">[5]</a></p>
         <span class="chip k-ven">self-reported</span>
       </article>
       <article class="panel peer">
-        <span class="eyebrow">WellSpan · Hippocratic AI</span>
-        <span class="big num">160K+</span>
-        <p class="who">Patient calls a month handled by an AI agent</p>
-        <p>About 7,000 hours of conversation; partnership expanded July 30, 2026. <a class="c" data-s="beckers12" href="#src-beckers12" title="Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)">[6]</a></p>
+        <span class="eyebrow" data-narrate-skip>WellSpan, with Hippocratic AI</span>
+        <span class="big num" data-narrate-skip>160K+</span>
+        <p class="who">WellSpan reports that an AI agent from Hippocratic AI handles more than 160,000 patient calls a month.</p>
+        <p>The calls add up to about 7,000 hours of conversation, and the two expanded their partnership on July 30, 2026. <a class="c" data-s="beckers12" href="#src-beckers12" title="Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)">[6]</a></p>
         <span class="chip k-ven">self-reported</span>
       </article>
       <article class="panel peer">
-        <span class="eyebrow">Intermountain · Hyro + Agentforce Health</span>
-        <span class="big num">44%</span>
-        <p class="who">Of repetitive calls automated</p>
-        <p>Call abandonment down 85% on in-scope lines such as patient portal support. <a class="c" data-s="beckers12" href="#src-beckers12" title="Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)">[6]</a></p>
+        <span class="eyebrow" data-narrate-skip>Intermountain, with Hyro and Agentforce Health</span>
+        <span class="big num" data-narrate-skip>44%</span>
+        <p class="who">Intermountain, which uses Hyro with Agentforce Health, reports that it has automated 44 percent of its repetitive calls.</p>
+        <p>It also reports call abandonment down 85 percent on in-scope lines such as patient portal support. <a class="c" data-s="beckers12" href="#src-beckers12" title="Becker's Hospital Review: 12 health systems expanding their use of agentic AI (2026)">[6]</a></p>
         <span class="chip k-ven">self-reported</span>
       </article>
     </div>
-    <div class="panel" style="margin-top:var(--space-4)">
-      <p><strong>For financial services,</strong> I expect the same pattern: balance, card status, payment dates and dispute intake first; advice, fraud adjudication and hardship conversations stay with people. <span class="chip k-our">author's view</span> CX, IT and operations leaders report the same gap: 98% have deployed AI in the customer journey, but only 5% can quantify its impact on business outcomes.<a class="c" data-s="talkdesk" href="#src-talkdesk" title="Talkdesk / NewtonX: The State of Agentic Automation in CX (Aug 25, 2026)">[3]</a> <span class="chip k-ven">vendor-reported</span></p>
-      <p style="margin-top:var(--space-2-5)"><strong>Enterprise agent platforms are moving into healthcare too.</strong> Sierra says it serves most Fortune 50 healthcare companies, and announced new voice models at Sierra Summit 2026. No healthcare outcome figures have been published yet.<a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> <span class="chip k-ven">vendor-reported</span></p>
+    </figure>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>Measurement trails deployment more widely, too. In a Talkdesk and NewtonX report, 98 percent of customer experience, IT and operations leaders say they have deployed AI in the customer journey, but only 5 percent can quantify its impact on business outcomes.<a class="c" data-s="talkdesk" href="#src-talkdesk" title="Talkdesk / NewtonX: The State of Agentic Automation in CX (Aug 25, 2026)">[3]</a> <span class="chip k-ven">vendor-reported</span></p>
+      <p>For financial services, I expect the same pattern as in health care. Balance, card status, payment dates and dispute intake will come first, while advice, fraud adjudication and hardship conversations stay with people. <span class="chip k-our">author's view</span> Enterprise agent platforms are moving into health care too. Sierra says it serves most Fortune 50 health care companies, and it announced new voice models at Sierra Summit 2026, but no health care outcome figures have been published yet.<a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> <span class="chip k-ven">vendor-reported</span></p>
+      <p>The published record is also a snapshot, because the models underneath it keep changing, as the next section shows.</p>
     </div>
   </div>
 </section>
@@ -774,10 +796,20 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">3 · Pace of change</p>
-      <h2>2026 moved fast. Snapshots go stale in a quarter.</h2>
-      <p class="lede">On Sierra's voice benchmark, the best score rose from 30% to 67% in eight months.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> Lock in your data and evaluations, not a model.</p>
+      <h2>Any ranking here will be stale within a quarter</h2>
+      <p class="lede">The field moved fast in 2026. On one voice benchmark the best score more than doubled in eight months,<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> and the releases kept coming through October.</p>
     </div>
+    <div class="prose">
+      <p>The year opened with money and a sign of the threat: on February 4 the voice platform ElevenLabs raised $500M, at a valuation of $11B,<a class="c" data-s="techcrunchEleven" href="#src-techcrunchEleven" title="TechCrunch: ElevenLabs raises $500M at $11B valuation (Feb 4, 2026)">[15]</a> and on February 26 Pindrop, a deepfake-detection vendor, expanded into health care contact centers.<a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a> On May 1 Sierra published tau-voice, its benchmark of real-time voice agents, on which the best score had risen from 30 percent to 67 percent in eight months.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> <span class="chip k-ven">vendor-reported</span> The pace then picked up, as the timeline shows: six of its eleven entries fall between September 10 and October 9.</p>
+    </div>
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>Between February and October 2026, releases, funding and research changed the models, the money and the threats that this report describes.</strong> Each entry links to its source, and the source list says which sources are independent and which are vendors.</figcaption>
     <div class="year" id="year-strip"></div>
+    </figure>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>The second half of the year brought two kinds of release. One was real-time voice models. GPT-Live began rolling out in ChatGPT Voice on July 8,<a class="c" data-s="flowith" href="#src-flowith" title="Flowith: GPT-Live in ChatGPT Voice guide">[16]</a> and OpenAI released GPT-Live 1 and gpt-realtime-2.1 between September 10 and 14.<a class="c" data-s="runtimewire" href="#src-runtimewire" title="RuntimeWire: DevDay 2026 live updates">[18]</a> The other was small models that make decisions instead of conversation, on which section 5 builds. September 15 brought one of each, with the launch of Gemini 3.8 Live and early access to TypeSafe's Jev.<a class="c" data-s="typesafe" href="#src-typesafe" title="TypeSafe AI: Introducing System One models and Jev (Sep 15, 2026)">[19]</a> The open-source Laya followed between September 18 and 20,<a class="c" data-s="laya" href="#src-laya" title="Convai Innovations: Laya model card, Apache-2.0 (Sep 2026)">[20]</a> and OpenAI announced its Decisions API at DevDay on September 29<a class="c" data-s="infoqDevday" href="#src-infoqDevday" title="InfoQ: OpenAI DevDay 2026">[21]</a> and opened a public beta on October 6, the day Sierra announced Tandem Voice.<a class="c" data-s="openaiDecisions" href="#src-openaiDecisions" title="OpenAI: Decisions API guide and changelog (public beta Oct 6, 2026)">[22]</a></p>
+      <p>The research behind section 9 moved too: the Co-LMLM paper of July 8 extended limited-memory models beyond facts stored as triples.<a class="c" data-s="colmlm" href="#src-colmlm" title="Feldman, Zhao et al., Co-LMLM: Continuous-Query Limited Memory Language Models (arXiv 2607.07707)">[17]</a> On October 9 a field analysis set out where voice agents break.<a class="c" data-s="nuanced" href="#src-nuanced" title="The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026)">[23]</a> Models and rankings age that fast. A team's own test data and evaluations do not, which is why they, and not a model, are the thing to lock in. The next section works out what a resolved call is worth.</p>
+    </div>
   </div>
 </section>
 
@@ -785,21 +817,26 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">4 · Economics</p>
-      <h2>The lever is resolution rate, not token price</h2>
-      <p class="lede">Model your own contact center. Every in-scope call reaches the agent first; calls it cannot resolve go to a person, and those tend to be the longer, harder ones. Some calls the agent closes come back as repeat calls. Defaults use published per-minute pricing<a class="c" data-s="beri" href="#src-beri" title="beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)">[24]</a> and a fully loaded human cost per call<a class="c" data-s="helpware" href="#src-helpware" title="Helpware: Healthcare call center costs (2026)">[25]</a>. Platform, integration and team costs are a fixed annual line.</p>
+      <h2>Resolution rate drives the savings; token price does not</h2>
+      <p class="lede">An agent saves money only on the calls it resolves from start to finish. In the model below, each extra point of resolution is worth far more than a cheaper token.</p>
     </div>
+    <div class="prose">
+      <p>The model follows a call through the contact center. Every in-scope call reaches the agent first. Calls it cannot resolve go to a person, and those tend to be the longer, harder ones; some calls it closes come back as repeat calls. The defaults use published per-minute pricing<a class="c" data-s="beri" href="#src-beri" title="beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)">[24]</a> and a fully loaded human cost per call,<a class="c" data-s="helpware" href="#src-helpware" title="Helpware: Healthcare call center costs (2026)">[25]</a> with platform, integration and team costs as one fixed annual line. The slider to watch is the resolution rate: the note under the chart converts each 5 points of it into dollars a month.</p>
+    </div>
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>On the default assumptions, savings begin at about 40 percent resolution and grow with every point above it.</strong> The model is illustrative only. <span class="chip k-our">author's arithmetic</span></figcaption>
     <div class="calc" data-narrate-skip>
       <div class="panel stack" id="calc-ctrls">
         <span class="ix">Interactive · drag sliders or pick a preset</span>
         <div class="ctrl"><label for="c-calls">Daily inbound calls, all queues <output id="o-calls"></output></label><input type="range" id="c-calls" min="2000" max="60000" step="1000" value="15000"></div>
-        <div class="ctrl"><label for="c-scope">Share in scope for the agent <output id="o-scope"></output></label><input type="range" id="c-scope" min="5" max="80" step="5" value="30"><small>Scheduling, status checks, billing questions, routing</small></div>
+        <div class="ctrl"><label for="c-scope">Share in scope for the agent <output id="o-scope"></output></label><input type="range" id="c-scope" min="5" max="80" step="5" value="30"><small>This covers scheduling, status checks, billing questions and routing</small></div>
         <div class="ctrl"><label for="c-min">Average minutes per call <output id="o-min"></output></label><input type="range" id="c-min" min="1" max="10" step="0.5" value="4"></div>
         <div class="ctrl"><label for="c-rate">AI cost per minute, all-in <output id="o-rate"></output></label><input type="range" id="c-rate" min="0.05" max="0.30" step="0.01" value="0.11"><small>Managed stacks run about $0.08 to $0.14</small></div>
-        <div class="ctrl"><label for="c-res">Resolved end to end by the agent <output id="o-res"></output></label><input type="range" id="c-res" min="0" max="90" step="1" value="55"><small>Count a call only if there is no repeat contact on any channel within 48 hours; hang-ups are not resolutions</small></div>
-        <div class="ctrl"><label for="c-hum">Human cost per call <output id="o-hum"></output></label><input type="range" id="c-hum" min="3" max="12" step="0.25" value="6.04"><small>A published illustration: about $6 at six calls an hour, $9 at four</small></div>
+        <div class="ctrl"><label for="c-res">Resolved end to end by the agent <output id="o-res"></output></label><input type="range" id="c-res" min="0" max="90" step="1" value="55"><small>A call counts only if there is no repeat contact on any channel within 48 hours; a hang-up is not a resolution</small></div>
+        <div class="ctrl"><label for="c-hum">Human cost per call <output id="o-hum"></output></label><input type="range" id="c-hum" min="3" max="12" step="0.25" value="6.04"><small>One published illustration puts it at about $6 at six calls an hour and $9 at four</small></div>
         <div class="ctrl"><label for="c-up">Escalated calls cost more than average <output id="o-up"></output></label><input type="range" id="c-up" min="0" max="60" step="5" value="25"><small>The calls left for people are the harder ones</small></div>
         <div class="ctrl"><label for="c-rep">Agent-closed calls that come back <output id="o-rep"></output></label><input type="range" id="c-rep" min="0" max="20" step="1" value="5"><small>Repeat calls go to a person</small></div>
-        <div class="ctrl"><label for="c-fix">Fixed annual cost: platform, integration, team <output id="o-fix"></output></label><input type="range" id="c-fix" min="0" max="5000000" step="100000" value="1500000"></div>
+        <div class="ctrl"><label for="c-fix">Fixed annual cost of platform, integration and team <output id="o-fix"></output></label><input type="range" id="c-fix" min="0" max="5000000" step="100000" value="1500000"></div>
         <div class="seg" role="group" aria-label="Presets">
           <button type="button" data-preset="cons" aria-pressed="false">Cautious</button>
           <button type="button" data-preset="base" aria-pressed="true">Default</button>
@@ -822,7 +859,11 @@ ol.src li:target{background:var(--accent-soft)}
         <p class="note" style="margin-top:var(--space-2-5)" id="calc-note"></p>
       </div>
     </div>
-    <p class="note" style="margin-top:var(--space-3)"><span class="chip k-our">author's arithmetic</span> Illustrative only. The escalation and repeat-call defaults are assumptions, not sourced figures; use your own. Worst case: resolution 15 points lower, escalations 15 points costlier, 5 points more repeat calls. Best case: resolution 10 points higher, escalations 10 points cheaper, 3 points fewer repeat calls. A published comparison found the pricier stack with higher resolution ($0.14/min, 70% resolved) costs less per 1,000 calls than the cheaper one ($0.09/min, 55%).<a class="c" data-s="beri" href="#src-beri" title="beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)">[24]</a> Cost models that count only LLM token savings miss most of the money.</p>
+    </figure>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>The escalation and repeat-call defaults are my assumptions, not sourced figures, and a team should use its own. The tool's worst case sets resolution 15 points lower, escalations 15 points costlier and repeat calls 5 points higher; its best case sets resolution 10 points higher, escalations 10 points cheaper and repeat calls 3 points lower.</p>
+      <p>A published comparison points the same way: the pricier stack with higher resolution, at $0.14 a minute and 70 percent resolved, costs less per 1,000 calls than the cheaper one, at $0.09 a minute and 55 percent.<a class="c" data-s="beri" href="#src-beri" title="beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)">[24]</a> Cost models that count only LLM token savings miss most of the money. Section 5 turns from what an agent is worth to how it should be built.</p>
+    </div>
   </div>
 </section>
 
@@ -831,11 +872,17 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">5 · Think silently, then respond</p>
-      <h2>A thinker-responder model for conversational agents</h2>
-      <p class="lede">People don't say every thought out loud before they answer. We size up the question, decide what it's about, recall what we need, and then speak. A voice agent should work the same way: a fast System-1 model is the <strong>thinker</strong>, making typed decisions silently, and a conversational LLM is the <strong>responder</strong>, turning those decisions into a natural reply.<a class="c" data-s="openaiDecisions" href="#src-openaiDecisions" title="OpenAI: Decisions API guide and changelog (public beta Oct 6, 2026)">[22]</a><a class="c" data-s="laya" href="#src-laya" title="Convai Innovations: Laya model card, Apache-2.0 (Sep 2026)">[20]</a><a class="c" data-s="typesafe" href="#src-typesafe" title="TypeSafe AI: Introducing System One models and Jev (Sep 15, 2026)">[19]</a></p>
+      <h2>A voice agent should decide silently before it speaks</h2>
+      <p class="lede">People size up a question before they answer, and they do not say every thought aloud. A voice agent can work the same way if a fast model decides silently and a conversational model speaks.</p>
+    </div>
+    <div class="prose">
+      <p>I call the design thinker-responder. The <strong>thinker</strong> is a fast System 1 model: a small model that returns typed answers, each with a probability, and never writes prose. OpenAI's Decisions API, the open-source Laya and TypeSafe's Jev are examples.<a class="c" data-s="openaiDecisions" href="#src-openaiDecisions" title="OpenAI: Decisions API guide and changelog (public beta Oct 6, 2026)">[22]</a><a class="c" data-s="laya" href="#src-laya" title="Convai Innovations: Laya model card, Apache-2.0 (Sep 2026)">[20]</a><a class="c" data-s="typesafe" href="#src-typesafe" title="TypeSafe AI: Introducing System One models and Jev (Sep 15, 2026)">[19]</a> The <strong>responder</strong> is a conversational LLM that turns those decisions into a natural reply.</p>
+      <p>The first demo plays one caller turn, "I got charged twice for my visit last month," both ways. The thing to notice is what the caller hears before the first useful word.</p>
     </div>
 
-    <div class="panel" style="margin-bottom:var(--space-4)">
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>On the same caller turn, the thinker-responder agent answers directly, and a single model that reasons aloud keeps the caller waiting about 2 seconds for the first useful word.</strong> The exchange is not a recording of a product. <span class="chip k-our">illustrative</span></figcaption>
+    <div class="panel" data-narrate-skip>
       <div class="toolbar">
         <span class="stack" style="gap:var(--space-1)"><span class="lbl">One caller turn, two ways</span><span class="ix">Interactive · switch modes</span></span>
         <div class="seg" role="group" aria-label="Agent style" id="tr-mode">
@@ -847,29 +894,28 @@ ol.src li:target{background:var(--accent-soft)}
       <div id="tr-flow" class="arch"></div>
       <p class="note" style="margin-top:var(--space-2-5)" id="tr-note"></p>
     </div>
+    </figure>
 
-    <div class="cols2" style="margin-bottom:var(--space-4)">
-      <div class="panel stack"><span class="lbl">What the thinker decides (System 1, silent, typed)</span>
-        <ul class="tight">
-          <li><strong>Intent:</strong> which sub-agent owns this turn (billing, scheduling, complaint)</li>
-          <li><strong>Risk:</strong> fraud, clinical, vulnerable-caller or complaint flags that force a handoff</li>
-          <li><strong>Tools:</strong> which MCP servers to expose, and which facts to fetch before speaking</li>
-          <li><strong>Turn state:</strong> is the caller done, correcting themselves, or just saying "mm-hmm"</li>
-          <li><strong>Speaker:</strong> is this the caller, or someone else in the room</li>
-          <li><strong>Emotion:</strong> frustration or confusion that should change the tone, slow things down or hand off</li>
-          <li><strong>Confidence:</strong> a probability on each, so low-confidence turns hand off instead of guessing</li>
-        </ul></div>
-      <div class="panel stack"><span class="lbl">Why it works</span>
-        <ul class="tight">
-          <li><strong>Faster:</strong> decisions take tens to hundreds of milliseconds, so the responder starts with data already fetched.</li>
-          <li><strong>Cheaper:</strong> the expensive model only writes the reply, not the routing.</li>
-          <li><strong>Safer:</strong> the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules. The responder can't narrate a tool result it never received.<a class="c" data-s="nuanced" href="#src-nuanced" title="The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026)">[23]</a></li>
-          <li><strong>A deliberate difference:</strong> OpenAI and Sierra put the fast model on the talking side and a slower reasoner behind it.<a class="c" data-s="openaiLive" href="#src-openaiLive" title="OpenAI: Continuous voice interaction with GPT-Live (Aug 3, 2026)">[26]</a><a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> This design puts the fast model on the deciding side. The two combine: a fast talker, a fast silent decider, and a slower reasoner when needed.</li>
-          <li><strong>Works with any voice stack:</strong> the thinker does not need a speech-to-text pipeline. Beside a speech-to-speech or full-duplex model it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. Because a full-duplex model starts speaking within a few hundred milliseconds, the thinker also needs a stop control: when it flags risk mid-turn, it cuts the audio output at once, before protected data or advice reaches the caller.</li>
-          <li><strong>Limit:</strong> the thinker handles bounded choices. Open-ended reasoning still needs a deeper planner the responder can call.</li>
-        </ul></div>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>On each caller turn the thinker settles seven things, and it returns each as a typed value, not as a sentence.</p>
+      <ul class="tight">
+        <li><strong>Intent</strong> is the sub-agent that owns the turn, such as billing, scheduling or complaints.</li>
+        <li><strong>Risk</strong> covers the fraud, clinical, vulnerable-caller and complaint flags that force a handoff.</li>
+        <li><strong>Tools</strong> are the servers to expose over the Model Context Protocol (MCP), a standard for connecting a model to outside systems, and the facts to fetch before speaking.</li>
+        <li><strong>Turn state</strong> says whether the caller is done, is correcting themselves or is just saying "mm-hmm".</li>
+        <li><strong>Speaker</strong> says whether this is the caller or someone else in the room.</li>
+        <li><strong>Emotion</strong> registers frustration or confusion that should change the tone, slow things down or prompt a handoff.</li>
+        <li><strong>Confidence</strong> is a probability on each of the others, so that a low-confidence turn is handed off instead of guessed at.</li>
+      </ul>
+      <p>The split pays off in three ways. It is faster, because the decisions take tens to hundreds of milliseconds and the responder starts with its data already fetched. It is cheaper, because the expensive model writes only the reply, not the routing. And it is safer, because the "thought" is a structured record, not prose, so it can be logged, audited and gated by rules, and the responder cannot narrate a tool result it never received.<a class="c" data-s="nuanced" href="#src-nuanced" title="The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026)">[23]</a></p>
+      <p>This is a deliberate difference from OpenAI and Sierra, which put the fast model on the talking side and a slower reasoner behind it.<a class="c" data-s="openaiLive" href="#src-openaiLive" title="OpenAI: Continuous voice interaction with GPT-Live (Aug 3, 2026)">[26]</a><a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> The design here puts the fast model on the deciding side. The two combine into a fast talker, a fast silent decider and a slower reasoner for when one is needed.</p>
+      <p>The thinker works with any voice stack, because it does not need a speech-to-text pipeline. Beside a speech-to-speech model, or a full-duplex one that listens and speaks at the same time, it reads the transcript stream and decides which tools and policies apply, so the voice model keeps its natural turn-taking. A full-duplex model starts speaking within a few hundred milliseconds, so the thinker also needs a stop control. When it flags risk in the middle of a turn, it cuts the audio output at once, before protected data or advice reaches the caller. The thinker's limit is that it handles bounded choices. Open-ended reasoning still needs a deeper planner that the responder can call.</p>
+      <p>The second demo shows the routing decision itself. Each caller turn gets a probability for each of six destinations, and more than one can be high at once. The two turns to try are the ambiguous one, which no intent claims, and the clinical one, which a rule sends to a person whatever the threshold says.</p>
     </div>
-    <div class="router">
+
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>An intent that clears the confidence threshold is routed, a turn where none does is handed off, and a fraud or clinical signal goes to a person by rule.</strong> The probabilities are examples of a calibrated multi-label router, not output from a specific product. <span class="chip k-our">illustrative</span></figcaption>
+    <div class="router" data-narrate-skip>
       <div class="panel stack">
         <span class="lbl">Pick a caller turn</span><span class="ix">Interactive · tap a turn, then move the threshold</span>
         <div class="utts" id="utts"></div>
@@ -878,11 +924,13 @@ ol.src li:target{background:var(--accent-soft)}
         <div class="ctrl"><label for="r-th">Confidence threshold <output id="o-th"></output></label><input type="range" id="r-th" min="0.4" max="0.95" step="0.05" value="0.75"><small>Below the threshold, the router hands off instead of guessing</small></div>
         <div class="probs" id="probs"></div>
         <div id="rverdict"></div>
-        <p class="note"><span class="chip k-our">illustrative</span> Probabilities are examples of a calibrated multi-label router, not output from a specific product.</p>
       </div>
     </div>
+    </figure>
 
-    <p class="note" style="margin-top:var(--space-3)">Routing speed, the cost of a cascade and a check of this thesis against the evidence are in the <a href="#t-router">technical appendix (T5)</a>.</p>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>Routing speed, the cost of a cascade (a small model first, a large one as the fallback) and a check of this thesis against the evidence are in the <a href="#t-router">technical appendix (T5)</a>. The next section turns to two capabilities that carry over whatever model or vendor sits underneath.</p>
+    </div>
   </div>
 </section>
 
@@ -890,47 +938,43 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">6 · What separates a good agent</p>
-      <h2>Two foundations, and two experiments worth running</h2>
-      <p class="lede">Models change every month. Two capabilities decide whether an agent holds up on real calls, and they carry over from one model or vendor to the next. Two more are promising but early: pilot them behind the golden test set.</p>
+      <h2>Two capabilities outlast any model, and two are still experiments</h2>
+      <p class="lede">Two capabilities decide whether an agent holds up on real calls, and they carry over from one model or vendor to the next. Two more are promising but early.</p>
     </div>
+    <div class="prose">
+      <p>Models change every month, so the things worth building are the ones that outlast a model. Two qualify as foundations: a golden test set with an evaluation framework around it, and audio handling that picks the caller's voice out of a noisy room. Two more, reading the caller's emotion and tuning the agent's persona, are worth piloting behind the golden test set. The four panels take the foundations first, with the evidence for each.</p>
+    </div>
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>The two foundations come with targets a team can test against, and the two experiments come with cautions.</strong> Vendor figures are labeled, and the estimate of test runs is the author's arithmetic.</figcaption>
     <div class="cols2">
       <div class="panel stack">
-        <span class="lbl">Foundation · A golden test set and an evaluation framework</span>
-        <p>The most valuable asset a team builds. Hundreds of real, de-identified call scenarios, each with a known right answer, run three times on every change to models, prompts, tools or personas.</p>
-        <ul class="tight">
-          <li>Common guidance: 200+ scenarios before production, 500+ for multilingual enterprise use, <a class="c" data-s="hammingEval" href="#src-hammingEval" title="Hamming: How to evaluate voice agents, framework, metrics and checklists (Jan 2026)">[27]</a> <span class="chip k-ven">vendor-reported</span> To detect a 5-point change in a pass rate near 80%, plan for several hundred runs per version, not the 100 sometimes quoted. <span class="chip k-our">author's arithmetic</span></li>
-          <li>Mix happy paths with edge cases, errors, adversarial callers and noisy audio, and add every production failure as a new case.</li>
-          <li>Block a release when a score drops, the same way failing tests block code.</li>
-        </ul>
+        <div><span class="lbl">Foundation</span><h3 style="margin-top:var(--space-1-5)">A golden test set gates every change</h3></div>
+        <p>A golden test set is the most valuable asset a team builds. It holds hundreds of real, de-identified call scenarios, each with a known right answer, and it runs three times on every change to models, prompts, tools or personas.</p>
+        <p>Common guidance, here from the vendor Hamming's evaluation guide, is 200 or more scenarios before production and 500 or more for multilingual enterprise use.<a class="c" data-s="hammingEval" href="#src-hammingEval" title="Hamming: How to evaluate voice agents, framework, metrics and checklists (Jan 2026)">[27]</a> <span class="chip k-ven">vendor-reported</span> Detecting a 5-point change in a pass rate near 80 percent takes several hundred runs per version, not the 100 sometimes quoted. <span class="chip k-our">author's arithmetic</span></p>
+        <p>The set should mix calls that go to plan with edge cases, errors, adversarial callers and noisy audio, and every production failure should join it as a new case. A drop in score then blocks a release, the same way failing tests block code.</p>
       </div>
       <div class="panel stack">
-        <span class="lbl">Foundation · Hearing the right caller</span>
+        <div><span class="lbl">Foundation</span><h3 style="margin-top:var(--space-1-5)">The agent has to pick out the caller's voice</h3></div>
         <p>Real callers phone from cars, kitchens and waiting rooms, with a TV on or someone talking beside them. How the agent performs there matters more than how it performs in a quiet demo.</p>
-        <ul class="tight">
-          <li>Background speech pushed streaming speech-to-text error rates to 22% to 31%; isolating the main speaker cut errors by up to 43%.<a class="c" data-s="aicoustics" href="#src-aicoustics" title="ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026)">[9]</a> <span class="chip k-ven">vendor-reported</span></li>
-          <li>Separate the voices (diarization), lock onto the caller, and re-verify identity if a different voice takes over before a sensitive step.<a class="c" data-s="personalvad" href="#src-personalvad" title="Ding et al. (Google): Personal VAD, speaker-conditioned voice activity detection (2020)">[28]</a></li>
-          <li>Test at several noise levels and with side conversations, not just clean audio.</li>
-        </ul>
+        <p>In one vendor test, by ai-coustics, background speech pushed the error rates of streaming speech-to-text to between 22 and 31 percent, and isolating the main speaker cut errors by up to 43 percent.<a class="c" data-s="aicoustics" href="#src-aicoustics" title="ai-coustics: Voice Focus 2.0 deep dive, primary-speaker isolation benchmark (Mar 11, 2026)">[9]</a> <span class="chip k-ven">vendor-reported</span></p>
+        <p>The remedy is diarization, which separates the voices so that the agent can lock onto the caller and verify identity again if a different voice takes over before a sensitive step.<a class="c" data-s="personalvad" href="#src-personalvad" title="Ding et al. (Google): Personal VAD, speaker-conditioned voice activity detection (2020)">[28]</a> For the same reason, tests should run at several noise levels and with side conversations, not just on clean audio.</p>
       </div>
       <div class="panel stack">
-        <span class="lbl">Experiment · Emotion in real time, sentiment on every call</span>
-        <p>During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.</p>
-        <ul class="tight">
-          <li>Treat emotion scores as a signal for routing and review, not a judgment of the caller. Accuracy varies, so check that they work equally across accents and age groups.</li>
-          <li>In the EU, people must be told when an emotion recognition system is used.<a class="c" data-s="euai50" href="#src-euai50" title="EU AI Act, Article 50: transparency obligations, including emotion recognition">[10]</a></li>
-        </ul>
+        <div><span class="lbl">Experiment</span><h3 style="margin-top:var(--space-1-5)">Emotion scores are a signal, not a judgment</h3></div>
+        <p>During the call, frustration or confusion should change how the agent speaks or trigger a warm handoff, a transfer that carries the context with it. After the call, sentiment scored on every call replaces quality reviews that sample a few percent.</p>
+        <p>Accuracy varies, so an emotion score is best treated as a signal for routing and review, not a judgment of the caller, and a team should check that the scores work equally across accents and age groups. In the EU, people must be told when an emotion recognition system is used.<a class="c" data-s="euai50" href="#src-euai50" title="EU AI Act, Article 50: transparency obligations, including emotion recognition">[10]</a></p>
       </div>
       <div class="panel stack">
-        <span class="lbl">Experiment · Persona is the brand</span>
+        <div><span class="lbl">Experiment</span><h3 style="margin-top:var(--space-1-5)">The persona is the brand</h3></div>
         <p>Callers judge the organization by how its agent sounds. Voice, pace, warmth and word choice deserve the same care as a brand guide.</p>
-        <ul class="tight">
-          <li>One subscription business reported resolution rates up more than 50% after tuning its voice persona.<a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> <span class="chip k-ven">vendor-reported</span></li>
-          <li>Offer callers a choice of a few personas, then keep each caller's preferred voice consistent on every call. <span class="chip k-our">author's view</span></li>
-          <li>Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.<a class="c" data-s="clunic" href="#src-clunic" title="Clunic: California AI health care laws">[29]</a></li>
-        </ul>
+        <p>One subscription business reported resolution rates up more than 50 percent after tuning its voice persona, according to Sierra.<a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> <span class="chip k-ven">vendor-reported</span> I would offer callers a choice of a few personas and then keep each caller's preferred voice consistent on every call. <span class="chip k-our">author's view</span></p>
+        <p>Every persona says it is an AI, never implies a professional license, and gives the same facts and policies.<a class="c" data-s="clunic" href="#src-clunic" title="Clunic: California AI health care laws">[29]</a></p>
       </div>
     </div>
-    <p class="note" style="margin-top:var(--space-3)"><span class="chip k-our">author's view</span> The experiments have little evidence so far: mostly vendor case studies, and none yet shows emotion detection or personas improving AI-agent outcomes at scale.</p>
+    </figure>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>The two experiments have little evidence behind them so far. What exists is mostly vendor case studies, and none yet shows emotion detection or personas improving AI-agent outcomes at scale. <span class="chip k-our">author's view</span> The foundations are the place to start, and the next section does the same sorting for the calls themselves.</p>
+    </div>
   </div>
 </section>
 
@@ -938,20 +982,30 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">7 · Where to start</p>
-      <h2>Readiness against risk, by call type</h2>
-      <p class="lede">Healthcare shown, because that is where results are published. Green is the pilot zone. Red stays human until there is independent safety evidence.</p>
+      <h2>Scheduling and routing are ready; nurse triage is not</h2>
+      <p class="lede">Appointment changes and call routing are mature and low in risk, so a pilot should start there. Nurse triage sits at the opposite corner of the grid and stays with people.</p>
     </div>
+    <div class="prose">
+      <p>Not every call is equally ready for an agent. The grid places nine health care call types by the maturity of the technology and the risk of the call; health care is shown because that is where results are published. Green is the pilot zone. Red stays with people until there is independent safety evidence. Selecting a call type shows its reported outcome, example vendors and example deployments.</p>
+    </div>
+    <figure class="exhibit" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>Of nine health care call types, two are ready for a pilot, four form a next wave, two need clinical supervision and one is not ready.</strong> The outcomes are reported by health systems or vendors, and the placement is my judgment. <span class="chip k-our">author's view</span></figcaption>
     <div class="panel">
       <div style="margin-bottom:var(--space-2-5)"><span class="ix">Interactive · tap a call type for details</span></div>
       <div class="ucg" id="ucg"></div>
-      <div class="zonekey">
+      <div class="zonekey" data-narrate-skip>
         <span><i class="z-go"></i>Start here</span>
         <span><i class="z-next"></i>Next wave</span>
         <span><i class="z-sup"></i>Clinically supervised only</span>
         <span><i class="z-no"></i>Not yet</span>
       </div>
       <div id="uc-detail" class="cols2" style="margin-top:var(--space-4-5)"></div>
-      <div class="print-only tbl uc-print" id="uc-print" style="margin-top:var(--space-3-5)"><table><thead><tr><th>Call type</th><th>Zone</th><th>Reported outcome</th><th>Example vendors</th></tr></thead><tbody><tr><td>Confirm, cancel, reschedule</td><td>Start here</td><td>Abandonment down 56%, appointments up 21% at Tampa General</td><td>Hyro, Assort, Hello Patient, Zocdoc Zo</td></tr><tr><td>Routing and FAQ, portal help</td><td>Start here</td><td>44% of repetitive calls automated, abandonment down 85% at Intermountain</td><td>Hyro, Talkdesk, Sierra</td></tr><tr><td>Ambient documentation</td><td>Next wave</td><td>Adjacent category, widely piloted for clinical notes and handoffs</td><td>Abridge, Microsoft/Nuance, Commure</td></tr><tr><td>Refill status</td><td>Next wave</td><td>Included in Tampa General scope; no isolated metric found</td><td>Hyro, Assort</td></tr><tr><td>Billing and revenue cycle</td><td>Next wave</td><td>Billing agent live in 40 days at one urgent care network (vendor-reported)</td><td>Hello Patient, Infinitus, Prosper</td></tr><tr><td>Prior auth and payer calls</td><td>Next wave</td><td>Positioned by vendors; no outcome metric found</td><td>Infinitus, Prosper, Sierra</td></tr><tr><td>Post-discharge follow-up</td><td>Supervised only</td><td>9.0/10 patient rating reported by vendor; heavy clinical supervision</td><td>Hippocratic AI</td></tr><tr><td>Screening outreach (outbound)</td><td>Supervised only</td><td>Higher kit requests among Spanish-speaking patients (vendor-reported); consent rules apply</td><td>Hippocratic AI</td></tr><tr><td>Nurse triage lines</td><td>Not yet</td><td>No validated autonomous deployment found; vendors exclude diagnosis</td><td>None recommended</td></tr></tbody></table></div>
+      <div class="print-only tbl uc-print" id="uc-print" style="margin-top:var(--space-3-5)" data-narrate-skip><table><thead><tr><th>Call type</th><th>Zone</th><th>Reported outcome</th><th>Example vendors</th></tr></thead><tbody><tr><td>Confirm, cancel, reschedule</td><td>Start here</td><td>Tampa General reports abandonment down 56 percent and appointments up 21 percent. <span class="chip k-ven">self-reported</span></td><td>Hyro, Assort, Hello Patient, Zocdoc Zo</td></tr><tr><td>Routing and FAQ, portal help</td><td>Start here</td><td>Intermountain reports 44 percent of repetitive calls automated and abandonment down 85 percent. <span class="chip k-ven">self-reported</span></td><td>Hyro, Talkdesk, Sierra</td></tr><tr><td>Ambient documentation</td><td>Next wave</td><td>This is an adjacent category, widely piloted for clinical notes and handoffs.</td><td>Abridge, Microsoft/Nuance, Commure</td></tr><tr><td>Refill status</td><td>Next wave</td><td>Tampa General includes refill status in its agent's scope, but I found no separate metric for it.</td><td>Hyro, Assort</td></tr><tr><td>Billing and revenue cycle</td><td>Next wave</td><td>A vendor reports a billing agent live in 40 days at one urgent care network. <span class="chip k-ven">vendor-reported</span></td><td>Hello Patient, Infinitus, Prosper</td></tr><tr><td>Prior auth and payer calls</td><td>Next wave</td><td>Vendors position their agents for these calls, but I found no outcome metric.</td><td>Infinitus, Prosper, Sierra</td></tr><tr><td>Post-discharge follow-up</td><td>Supervised only</td><td>The vendor reports a patient rating of 9.0 out of 10, under heavy clinical supervision. <span class="chip k-ven">vendor-reported</span></td><td>Hippocratic AI</td></tr><tr><td>Screening outreach (outbound)</td><td>Supervised only</td><td>The vendor reports a higher rate of kit requests among Spanish-speaking patients. <span class="chip k-ven">vendor-reported</span> Consent rules apply to these outbound calls.</td><td>Hippocratic AI</td></tr><tr><td>Nurse triage lines</td><td>Not yet</td><td>I found no validated autonomous deployment, and vendors exclude diagnosis.</td><td>I recommend none.</td></tr></tbody></table></div>
+    </div>
+    </figure>
+    <div class="prose" style="margin-top:var(--space-5)">
+      <p>The evidence thins as the risk rises. The two "Start here" types have the strongest published outcomes: Tampa General's for appointment changes, and Intermountain's for routing and portal help. The next wave has less to show. Refill status is within Tampa General's scope, but I found no separate metric for it, and a vendor reports a billing agent live in 40 days at one urgent care network. For prior authorization and payer calls I found no outcome metric, and ambient documentation is an adjacent category, widely piloted for clinical notes and handoffs.</p>
+      <p>The two supervised types rest on vendor reports: a patient rating of 9.0 out of 10 for post-discharge follow-up, under heavy clinical supervision, and a higher rate of kit requests among Spanish-speaking patients after outbound screening calls, to which consent rules apply. Hippocratic AI is the example vendor for both. For nurse triage lines I found no validated autonomous deployment, and vendors exclude diagnosis. Whatever the call type, the agent has to know who is calling, and section 8 shows why a voice no longer proves it.</p>
     </div>
   </div>
 </section>
@@ -1672,17 +1726,17 @@ const S={
 };
 
 const YEAR=[
- ["Feb 4","ElevenLabs raises $500M at an $11B valuation","techcrunchEleven"],
- ["Feb 26","Deepfake detection vendor expands into healthcare contact centers","pindrop"],
- ["May 1","Sierra publishes tau-voice: best voice score 67%, up from 30%","sierraTau"],
- ["Jul 8","GPT-Live begins rolling out in ChatGPT Voice","flowith"],
- ["Jul 8","Co-LMLM extends limited-memory models beyond triples","colmlm"],
- ["Sep 10 to 14","GPT-Live 1 and gpt-realtime-2.1 released","runtimewire"],
- ["Sep 15","TypeSafe Jev early access; Gemini 3.8 Live launches","typesafe"],
- ["Sep 18 to 20","Open-source Laya decision model released","laya"],
- ["Sep 29","OpenAI DevDay: Decisions API announced","infoqDevday"],
- ["Oct 6","Decisions API public beta; Sierra Tandem Voice","openaiDecisions"],
- ["Oct 9","Field analysis of where voice agents break","nuanced"]
+ ["Feb 4","ElevenLabs raised $500M, at a valuation of $11B.","techcrunchEleven"],
+ ["Feb 26","Pindrop, a deepfake-detection vendor, expanded into health care contact centers.","pindrop"],
+ ["May 1","Sierra published tau-voice, on which the best voice score was 67 percent, up from 30 percent.","sierraTau"],
+ ["Jul 8","GPT-Live began rolling out in ChatGPT Voice.","flowith"],
+ ["Jul 8","The Co-LMLM paper extended limited-memory models beyond facts stored as triples.","colmlm"],
+ ["Sep 10 to 14","OpenAI released GPT-Live 1 and gpt-realtime-2.1.","runtimewire"],
+ ["Sep 15","TypeSafe opened early access to Jev, and Gemini 3.8 Live launched.","typesafe"],
+ ["Sep 18 to 20","The open-source Laya decision model was released.","laya"],
+ ["Sep 29","OpenAI announced its Decisions API at DevDay.","infoqDevday"],
+ ["Oct 6","The Decisions API entered public beta, and Sierra announced Tandem Voice.","openaiDecisions"],
+ ["Oct 9","A field analysis set out where voice agents break.","nuanced"]
 ];
 document.getElementById('year-strip').innerHTML=YEAR.map(e=>`<div class="ev"><span class="d">${e[0]}, 2026</span><span class="t">${e[1]}<a class="c" data-s="${e[2]}"></a></span></div>`).join('');
 
@@ -1802,7 +1856,7 @@ function calc(){
    <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
    ${be<=0.9?`<line x1="${xs(be)}" x2="${xs(be)}" y1="${T}" y2="${H-B}" stroke="var(--signal)" stroke-dasharray="4 4"/><text x="${xs(be)+6}" y="${T+12}" font-size="12" fill="var(--signal)">break-even</text>`:''}
    <circle cx="${xs(res)}" cy="${ys(save(res))}" r="6" fill="var(--accent)" stroke="var(--card)" stroke-width="2"/>
-   <text x="${W-R}" y="${H-B-8}" text-anchor="end" font-size="11" fill="var(--ink-muted)">resolved by agent →</text>`;
+   <text x="${W-R}" y="${H-B-8}" text-anchor="end" font-size="11" fill="var(--ink-muted)">share resolved by the agent</text>`;
 }
 document.querySelectorAll('#calc-ctrls input').forEach(i=>i.addEventListener('input',()=>{document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed','false'));calc()}));
 seg(document.querySelector('#calc-ctrls .seg'),b=>{const p=PRESETS[b.dataset.preset];Object.keys(p).forEach(k=>$(k).value=p[k]);calc()});
@@ -1818,7 +1872,7 @@ const INT=[
  {k:"clin",n:"Clinical concern",mcp:"nurse line (human)",esc:1}
 ];
 const UT=[
- {tag:"Healthcare billing",t:"I got charged twice for my visit last month.",p:{bill:.91,sched:.04,acct:.08,comp:.12,fraud:.03,clin:.01}},
+ {tag:"Health care billing",t:"I got charged twice for my visit last month.",p:{bill:.91,sched:.04,acct:.08,comp:.12,fraud:.03,clin:.01}},
  {tag:"Multi-intent",t:"Third time I've been overcharged and nobody ever calls me back.",p:{bill:.71,sched:.02,acct:.06,comp:.68,fraud:.04,clin:.01}},
  {tag:"Scheduling",t:"I need to move my Thursday appointment to next week.",p:{bill:.02,sched:.95,acct:.03,comp:.02,fraud:.01,clin:.04}},
  {tag:"Banking",t:"What's the available balance on my checking account?",p:{bill:.07,sched:.01,acct:.92,comp:.01,fraud:.02,clin:.0}},
@@ -1835,10 +1889,10 @@ function renderRouter(){
   const on=INT.filter(x=>u.p[x.k]>=th);
   $('probs').innerHTML=INT.map(x=>{const v=u.p[x.k];const cls=(escHit.includes(x))?'esc':(v>=th?'on':'');return `<div class="pr ${cls}"><span>${x.n}</span><span class="t"><div class="f" style="width:${v*100}%"></div><span class="th" style="left:${th*100}%"></span></span><span>${v.toFixed(2)}</span></div>`}).join('');
   let h,c;
-  if(escHit.length){c='v-esc';h=`<span class="h">Escalate by rule: ${escHit.map(x=>x.n.toLowerCase()).join(', ')}</span><span>Any fraud or clinical signal above 0.30 goes to a person, whatever the threshold says.</span><span class="mcp">→ ${escHit.map(x=>x.mcp).join(' · ')}</span>`}
-  else if(!on.length){c='v-fb';h=`<span class="h">No intent clears ${th.toFixed(2)}: hand off instead of guessing</span><span>Ask one clarifying question, or send the turn to a frontier model with the full intent schema.</span><span class="mcp">→ frontier LLM fallback · adds about 2 s</span>`}
-  else if(on.length>1){const top=on.find(x=>x.esc)||on[0];c='v-multi';h=`<span class="h">Multi-intent: ${on.map(x=>x.n).join(' + ')}</span><span>Route to ${top.n.toLowerCase()} and give it the other sub-agent's tools too, so nothing is dropped.</span><span class="mcp">→ ${on.map(x=>x.mcp).join(' · ')} (${on.length*2} of 40+ tools exposed)</span>`}
-  else{const x=on[0];c=x.esc?'v-esc':'v-go';h=`<span class="h">Route to ${x.n} sub-agent</span><span>Decided in tens of milliseconds, before the conversation model starts talking.</span><span class="mcp">→ ${x.mcp} (2 of 40+ tools exposed)</span>`}
+  if(escHit.length){c='v-esc';h=`<span class="h">This turn goes to a person by rule (${escHit.map(x=>x.n.toLowerCase()).join(', ')})</span><span>Any fraud or clinical signal above 0.30 goes to a person, whatever the threshold says.</span><span class="mcp">The call goes to ${escHit.map(x=>x.mcp).join(', ')}.</span>`}
+  else if(!on.length){c='v-fb';h=`<span class="h">No intent clears ${th.toFixed(2)}, so the router hands off instead of guessing</span><span>The agent asks one clarifying question, or sends the turn to a frontier model with the full intent schema.</span><span class="mcp">The frontier LLM fallback adds about 2 s.</span>`}
+  else if(on.length>1){const top=on.find(x=>x.esc)||on[0];c='v-multi';h=`<span class="h">This turn carries more than one intent: ${on.map(x=>x.n).join(' and ')}</span><span>The router sends it to ${top.n.toLowerCase()} and gives that sub-agent the other's tools too, so nothing is dropped.</span><span class="mcp">The tools exposed are ${on.map(x=>x.mcp).join(', ')} (${on.length*2} of 40+).</span>`}
+  else{const x=on[0];c=x.esc?'v-esc':'v-go';h=`<span class="h">Route to ${x.n} sub-agent</span><span>The decision takes tens of milliseconds and is made before the conversation model starts talking.</span><span class="mcp">The tools exposed are ${x.mcp} (2 of 40+).</span>`}
   $('rverdict').innerHTML=`<div class="verdict ${c}">${h}</div>`;
 }
 $('utts').addEventListener('click',e=>{const b=e.target.closest('.utt');if(!b)return;uSel=+b.dataset.i;renderRouter()});
@@ -1853,11 +1907,11 @@ document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childL
 /* thinker-responder */
 function renderTR(m){
   if(m==='tr'){
-    $('tr-flow').innerHTML=`<div class="lane"><span class="ln">Thinker · silent</span><div class="flow"><span class="box s1">intent = billing (0.91)</span><span class="box s1">risk = none</span><span class="box s1">tools = billing-mcp</span><span class="box s1">fetch = recent charges</span><span class="arr">~50 ms</span></div></div>
-     <div class="lane"><span class="ln">Responder · speaks</span><div class="flow"><span class="box s2">"I can see two charges of $140 on March 3. I'll reverse the duplicate now. Is that the card ending 4471?"</span></div></div>`;
+    $('tr-flow').innerHTML=`<div class="lane"><span class="ln">Thinker, silent</span><div class="flow"><span class="box s1">intent = billing (0.91)</span><span class="box s1">risk = none</span><span class="box s1">tools = billing-mcp</span><span class="box s1">fetch = recent charges</span><span class="arr">about 50 ms</span></div></div>
+     <div class="lane"><span class="ln">Responder, aloud</span><div class="flow"><span class="box s2">"I can see two charges of $140 on March 3. I'll reverse the duplicate now. Is that the card ending 4471?"</span></div></div>`;
     $('tr-note').textContent='The caller hears one direct answer. The decisions are logged as structured data, not spoken.';
   }else{
-    $('tr-flow').innerHTML=`<div class="lane"><span class="ln">One LLM, out loud</span><div class="flow"><span class="box">"Okay, let me think about that. It sounds like a billing question. Let me look up your account... I'm checking your recent charges now... it looks like there may be a duplicate..."</span><span class="arr">~2 s before the first useful word</span></div></div>`;
+    $('tr-flow').innerHTML=`<div class="lane"><span class="ln">One LLM, out loud</span><div class="flow"><span class="box">"Okay, let me think about that. It sounds like a billing question. Let me look up your account... I'm checking your recent charges now... it looks like there may be a duplicate..."</span><span class="arr">about 2 s before the first useful word</span></div></div>`;
     $('tr-note').textContent='Reasoning spoken as filler adds seconds, leaks internal steps, and invites the model to describe results it has not actually received.';
   }
 }
@@ -1866,15 +1920,15 @@ renderTR('tr');
 
 /* use cases */
 const UC=[
- {n:"Confirm, cancel, reschedule",m:0,r:0,o:"Abandonment down 56%, appointments up 21% at Tampa General",v:"Hyro, Assort, Hello Patient, Zocdoc Zo",d:"Tampa General and others"},
- {n:"Routing and FAQ, portal help",m:0,r:0,o:"44% of repetitive calls automated, abandonment down 85% at Intermountain",v:"Hyro, Talkdesk, Sierra",d:"Intermountain Health"},
- {n:"Ambient documentation",m:0,r:1,o:"Adjacent category, widely piloted for clinical notes and handoffs",v:"Abridge, Microsoft/Nuance, Commure",d:"Many health systems"},
- {n:"Refill status",m:1,r:1,o:"Included in Tampa General scope; no isolated metric found",v:"Hyro, Assort",d:"Tampa General"},
- {n:"Billing and revenue cycle",m:1,r:1,o:"Billing agent live in 40 days at one urgent care network (vendor-reported)",v:"Hello Patient, Infinitus, Prosper",d:"Piedmont Urgent Care"},
- {n:"Prior auth and payer calls",m:1,r:1,o:"Positioned by vendors; no outcome metric found",v:"Infinitus, Prosper, Sierra",d:"None found"},
- {n:"Post-discharge follow-up",m:1,r:2,o:"9.0/10 patient rating reported by vendor; heavy clinical supervision",v:"Hippocratic AI",d:"WellSpan, UHS"},
- {n:"Screening outreach (outbound)",m:1,r:2,o:"Higher kit requests among Spanish-speaking patients (vendor-reported); consent rules apply",v:"Hippocratic AI",d:"WellSpan"},
- {n:"Nurse triage lines",m:2,r:2,o:"No validated autonomous deployment found; vendors exclude diagnosis",v:"None recommended",d:"None"}
+ {n:"Confirm, cancel, reschedule",m:0,r:0,o:"Tampa General reports abandonment down 56 percent and appointments up 21 percent. <span class='chip k-ven'>self-reported</span>",v:"Hyro, Assort, Hello Patient, Zocdoc Zo",d:"Tampa General and others"},
+ {n:"Routing and FAQ, portal help",m:0,r:0,o:"Intermountain reports 44 percent of repetitive calls automated and abandonment down 85 percent. <span class='chip k-ven'>self-reported</span>",v:"Hyro, Talkdesk, Sierra",d:"Intermountain Health"},
+ {n:"Ambient documentation",m:0,r:1,o:"This is an adjacent category, widely piloted for clinical notes and handoffs.",v:"Abridge, Microsoft/Nuance, Commure",d:"Many health systems"},
+ {n:"Refill status",m:1,r:1,o:"Tampa General includes refill status in its agent's scope, but I found no separate metric for it.",v:"Hyro, Assort",d:"Tampa General"},
+ {n:"Billing and revenue cycle",m:1,r:1,o:"A vendor reports a billing agent live in 40 days at one urgent care network. <span class='chip k-ven'>vendor-reported</span>",v:"Hello Patient, Infinitus, Prosper",d:"Piedmont Urgent Care"},
+ {n:"Prior auth and payer calls",m:1,r:1,o:"Vendors position their agents for these calls, but I found no outcome metric.",v:"Infinitus, Prosper, Sierra",d:"I found none."},
+ {n:"Post-discharge follow-up",m:1,r:2,o:"The vendor reports a patient rating of 9.0 out of 10, under heavy clinical supervision. <span class='chip k-ven'>vendor-reported</span>",v:"Hippocratic AI",d:"WellSpan, UHS"},
+ {n:"Screening outreach (outbound)",m:1,r:2,o:"The vendor reports a higher rate of kit requests among Spanish-speaking patients. <span class='chip k-ven'>vendor-reported</span> Consent rules apply to these outbound calls.",v:"Hippocratic AI",d:"WellSpan"},
+ {n:"Nurse triage lines",m:2,r:2,o:"I found no validated autonomous deployment, and vendors exclude diagnosis.",v:"I recommend none.",d:"I found none."}
 ];
 const zone=(m,r)=>m===2&&r===2?'z-no':r===2?'z-sup':m===0&&r===0?'z-go':(m===2?'z-empty':'z-next');
 const ML=["High","Medium","Low"],RL=["Low risk","Medium risk","High risk"];
