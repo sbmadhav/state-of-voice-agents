@@ -24,7 +24,7 @@ These conventions are borrowed, and each is worth rereading at the source.
 
 **Headings.** A heading states the section's finding, so that the headings read in order summarize the piece. Section numbers stay in the eyebrow above the heading.
 
-**Numbers.** The first mention of a figure says who measured it, what was measured, on how many, and what it compares with ("from 6.2 minutes to 2.4"). Write the attribution into the sentence ("Tampa General reports", "in Cekura's benchmark, which a testing vendor runs") and put the evidence chip after that sentence. Where a paragraph mixes evidence types, each sentence carries its own chip. Citation markers stay next to the claim they support.
+**Numbers.** The first mention of a figure says who measured it, what was measured, on how many, and what it compares with ("from 6.2 minutes to 2.4"). Write the attribution into the sentence ("Tampa General reports", "in Cekura's benchmark, which a testing vendor runs") and put the evidence chip after that sentence. Where a paragraph mixes evidence types, each sentence carries its own chip. Citation markers stay next to the claim they support. Percentages are numerals with the % sign (75.6%), in prose and in exhibits alike; the narration reads the sign as "percent".
 
 **Exhibits.** Use a table when items are compared on the same attributes. Use a list when three or more items are parallel, such as criteria, steps or controls. Each exhibit has a caption that states its finding and its evidence label, and the prose refers to it. Table cells are complete clauses.
 
@@ -44,8 +44,8 @@ Brackets show where an existing evidence chip stays.
 
 | Before | After |
 |---|---|
-| "On Sierra's voice benchmark, the best score rose from 30 percent to 67 percent in eight months. Lock in your data and evaluations, not a model." | "Any ranking in this report has a short shelf life. On Sierra's voice benchmark the best score more than doubled in eight months, from 30 percent to 67 percent. A team's own test data and evaluations do not age that way, which is why they, and not a model, are the thing to lock in." |
-| "44 percent. Of repetitive calls automated." | "Intermountain, which uses Hyro with Agentforce Health, reports that it has automated 44 percent of its repetitive calls. [self-reported]" |
+| "On Sierra's voice benchmark, the best score rose from 30% to 67% in eight months. Lock in your data and evaluations, not a model." | "Any ranking in this report has a short shelf life. On Sierra's voice benchmark the best score more than doubled in eight months, from 30% to 67%. A team's own test data and evaluations do not age that way, which is why they, and not a model, are the thing to lock in." |
+| "44%. Of repetitive calls automated." | "Intermountain, which uses Hyro with Agentforce Health, reports that it has automated 44% of its repetitive calls. [self-reported]" |
 | "Peers compound gains. IVR frustration persists. No internal evaluation muscle. ROI logic: Negative. Verdict: Not recommended." | "Waiting has costs. Peers compound their gains, callers stay frustrated with the phone menu (the interactive voice response system, or IVR), and the organization builds no evaluation skill of its own. The return is negative, because the abandonment and scheduling gains are forgone. I do not recommend it." |
 | "Mechanism: Echo treated as interruption; agent stops mid-word." | "The agent hears its own echo, takes it for the caller interrupting and stops mid-word." |
 | "Reviewed for the first time, bank and credit union voice-agent results look like October's health care results" | "Banks and credit unions are putting voice agents on the same kind of call that health systems chose first: the routine one." |
