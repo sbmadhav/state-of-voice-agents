@@ -194,7 +194,7 @@ Existing bank rules already cover a voice agent, and four items are new this mon
 
 Most of the rules that bear on a bank's voice agent are already in force. October named these regimes without reviewing them, so most rows are reviewed for the first time.
 
-Four rows carry the NEW tag, for changes since October 12. The Federal Communications Commission (FCC) changed the TCPA opt-out rules, and California's AB 1609 is confirmed as signed. Wiretap suits under California law target AI call vendors, and New York's RAISE Act puts duties on the model makers.
+Four rows carry the NEW tag, for changes since October 12. The FCC changed the TCPA opt-out rules, and California's AB 1609 is confirmed as signed. Wiretap suits under California law target AI call vendors, and New York's RAISE Act puts duties on the model makers.
 
 The summary has a US focus and is orientation only, not legal advice. Health care rules, recording consent among them, are in October, T9, with one addition in the health care notes. The author's view label marks my reading of how a rule applies.
 
@@ -203,7 +203,7 @@ RULE	FOR THE AGENT	STATUS
 DISPUTES, COLLECTIONS AND EQUAL SERVICE
 Regulation E (electronic transfers)	An oral notice of an error can start investigation duties, so a dispute raised to the agent likely counts. The agent should log it and hand off. author's view	The rule is in force.[37]
 Regulation Z (card billing errors)	Billing-error notices must be written, so the agent should tell the caller how to give written notice rather than treat the call as notice. author's view	The rule is in force.[38]
-UDAAP (unfair, deceptive or abusive acts or practices) and CFPB chatbot expectations	The Consumer Financial Protection Bureau (CFPB) names inaccurate answers, unrecognized disputes and loops with no path to a person as risks.	Its issue spotlight dates from June 2023. The CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation, but the statutes and regulations are unchanged.[29][39]
+UDAAP (unfair, deceptive or abusive acts or practices) and CFPB chatbot expectations	The CFPB names inaccurate answers, unrecognized disputes and loops with no path to a person as risks.	Its issue spotlight dates from June 2023. The CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation, but the statutes and regulations are unchanged.[29][39]
 Debt collection (Fair Debt Collection Practices Act, Regulation F)	For collectors covered by Regulation F, more than 7 calls in 7 days is presumed harassment, and nothing about the debt may be disclosed to a wrong party who answers. First-party lenders face UDAAP and state law instead.	Both are in force.[11][40]
 Fair lending and equal service	Speech recognition that works worse for some accents can mean unequal service or collections outcomes, so a bank should test accuracy by accent and language.[25] author's view	The duty is ongoing.
 Accessibility	Callers with speech disabilities and callers on relay services need a route past the agent and should never be trapped in it. author's view	The duty is ongoing.
@@ -274,7 +274,7 @@ Pipecat NEW is an open-source framework that now pairs a fast front-end model wi
 ConvFill, a research system, has a small talker cover a frontier model's delay. A later paper notes that it does not measure the risk of the filler contradicting the final answer.[80][81] independent
 Block's Dessa NEW is a full-duplex model trained only on audio, with no benchmarks.[82]
 
-With the Decisions API out of beta, adopting it turns on the contract: data use, third-party risk and, in health care, a business associate agreement. author's view
+With the Decisions API out of beta, adopting it turns on the contract: data use, third-party risk and, in health care, a BAA. author's view
 
 8 · NEW RELEASES
 

@@ -52,4 +52,4 @@ ConvFill, a research system, has a small talker cover a frontier model's delay. 
 
 Block's Dessa is a full-duplex model trained only on audio, with no benchmarks.
 
-With the Decisions API out of beta, adopting it turns on the contract: data use, third-party risk and, in health care, a business associate agreement. Author's view.
+With the Decisions API out of beta, adopting it turns on the contract: data use, third-party risk and, in health care, a BAA. Author's view.

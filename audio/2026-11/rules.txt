@@ -4,7 +4,7 @@ Existing bank rules already cover a voice agent, and four items are new this mon
 
 Most of the rules that bear on a bank's voice agent are already in force. October named these regimes without reviewing them, so most rows are reviewed for the first time.
 
-Four rows carry the "new" tag, for changes since October 12. The Federal Communications Commission (FCC) changed the TCPA opt-out rules, and California's AB 1609 is confirmed as signed. Wiretap suits under California law target AI call vendors, and New York's RAISE Act puts duties on the model makers.
+Four rows carry the "new" tag, for changes since October 12. The FCC changed the TCPA opt-out rules, and California's AB 1609 is confirmed as signed. Wiretap suits under California law target AI call vendors, and New York's RAISE Act puts duties on the model makers.
 
 The summary has a US focus and is orientation only, not legal advice. Health care rules, recording consent among them, are in October, T9, with one addition in the health care notes. The author's view label marks my reading of how a rule applies.
 
@@ -16,7 +16,7 @@ Regulation E (electronic transfers). An oral notice of an error can start invest
 
 Regulation Z (card billing errors). Billing-error notices must be written, so the agent should tell the caller how to give written notice rather than treat the call as notice. Author's view. The rule is in force.
 
-UDAAP (unfair, deceptive or abusive acts or practices) and CFPB chatbot expectations. The Consumer Financial Protection Bureau (CFPB) names inaccurate answers, unrecognized disputes and loops with no path to a person as risks. Its issue spotlight dates from June 2023. The CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation, but the statutes and regulations are unchanged.
+UDAAP (unfair, deceptive or abusive acts or practices) and CFPB chatbot expectations. The CFPB names inaccurate answers, unrecognized disputes and loops with no path to a person as risks. Its issue spotlight dates from June 2023. The CFPB withdrew 67 guidance documents in May 2025 and its leadership is in litigation, but the statutes and regulations are unchanged.
 
 Debt collection (Fair Debt Collection Practices Act, Regulation F). For collectors covered by Regulation F, more than 7 calls in 7 days is presumed harassment, and nothing about the debt may be disclosed to a wrong party who answers. First-party lenders face UDAAP and state law instead. Both are in force.
 
