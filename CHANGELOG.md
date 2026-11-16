@@ -36,9 +36,17 @@ The first monthly update. From this edition on, the root page carries only what 
 - Every section has a heading that states its finding, a short deck, a narrative opening, a caption on each exhibit and a close. Table cells, tiles and cards are complete sentences, and terms are defined where they first appear.
 - No finding, figure, source or evidence label changed. A second, independent copy-desk pass compared the new text with the old, sentence by sentence, and corrected 69 places where the rewrite had said more than the original did.
 - Section headings are now claims; for example "The TV in the room" became "A second voice in the room breaks most voice agents". Section ids and numbers are unchanged, so existing links still work.
-- Edition navigation on every edition: a breadcrumb, an edition switcher, and a byline with the publication date (November 10, 2026 for this update).
+- Edition navigation on every edition: a breadcrumb, an edition switcher, and a byline with the publication date (November 15, 2026 for this update).
 - Read time is about 34 minutes (was 26), because fragments became sentences.
 - Bolt's context was regenerated from the rewritten text and now includes the method and disclosure notes.
+
+### Links, sharing and read-along, November 16, 2026
+
+- Every section is linkable: a "#" by each heading copies a permanent link to that section in the archived edition.
+- Every chart and table has a Share button: copy link, LinkedIn, X, or download the image. A shared link previews as a picture of the exhibit and opens the report at that exhibit (53 exhibits across both editions).
+- Read-along: while a section's narration plays, the paragraph, table row or tile being read is tinted. The page never scrolls on its own. Timings come from a speech recognizer run over the recordings, which matched 98% of the script words; that also served as a check of the recordings.
+- Voice-overs: from the December 2026 edition on, evidence chips are not read aloud. The two recorded editions keep them, so transcripts still match the audio.
+- The byline gives one date: published November 15, 2026. The hero narration was re-recorded to match.
 
 ## October 2026 (first edition), published October 12, 2026
 

@@ -8,7 +8,17 @@
       "bytes": 612310,
       "characters": 578,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        1.5,
+        2.9,
+        15.8,
+        22.0,
+        23.2,
+        25.1,
+        28.9
+      ]
     },
     "brief": {
       "file": "brief.mp3",
@@ -17,7 +27,30 @@
       "bytes": 5038079,
       "characters": 4298,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        7.1,
+        10.5,
+        29.6,
+        38.4,
+        47.3,
+        82.8,
+        118.0,
+        140.6,
+        148.7,
+        168.4,
+        186.7,
+        200.0,
+        223.4,
+        225.5,
+        245.8,
+        250.5,
+        267.7,
+        278.4,
+        285.0,
+        304.7
+      ]
     },
     "delta": {
       "file": "delta.mp3",
@@ -26,7 +59,24 @@
       "bytes": 4055039,
       "characters": 3427,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.4,
+        5.2,
+        10.2,
+        22.1,
+        32.4,
+        56.3,
+        84.0,
+        105.2,
+        142.8,
+        169.6,
+        192.0,
+        211.5,
+        230.6,
+        247.9
+      ]
     },
     "fraud": {
       "file": "fraud.mp3",
@@ -35,7 +85,16 @@
       "bytes": 2147056,
       "characters": 1793,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        3.2,
+        8.6,
+        18.9,
+        32.7,
+        60.1,
+        115.8
+      ]
     },
     "fs": {
       "file": "fs.mp3",
@@ -44,7 +103,38 @@
       "bytes": 7090675,
       "characters": 6348,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.9,
+        7.3,
+        16.2,
+        40.5,
+        51.7,
+        68.8,
+        87.2,
+        100.2,
+        118.6,
+        136.4,
+        148.1,
+        170.9,
+        186.8,
+        203.2,
+        208.7,
+        214.2,
+        226.7,
+        241.4,
+        257.3,
+        267.1,
+        286.7,
+        308.8,
+        323.4,
+        346.4,
+        351.1,
+        390.0,
+        394.3,
+        433.3
+      ]
     },
     "hc": {
       "file": "hc.mp3",
@@ -53,7 +143,15 @@
       "bytes": 1620009,
       "characters": 1354,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.7,
+        8.0,
+        19.4,
+        49.4,
+        87.6
+      ]
     },
     "models": {
       "file": "models.mp3",
@@ -62,7 +160,37 @@
       "bytes": 6682330,
       "characters": 5420,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        4.0,
+        11.0,
+        22.3,
+        63.4,
+        93.5,
+        111.1,
+        114.1,
+        126.8,
+        132.6,
+        150.7,
+        170.0,
+        173.1,
+        199.2,
+        212.2,
+        227.4,
+        238.4,
+        252.4,
+        271.5,
+        291.0,
+        303.4,
+        324.4,
+        340.6,
+        363.6,
+        374.8,
+        388.6,
+        401.0,
+        406.6
+      ]
     },
     "reliability": {
       "file": "reliability.mp3",
@@ -71,7 +199,22 @@
       "bytes": 2934491,
       "characters": 2343,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.6,
+        7.7,
+        15.2,
+        38.8,
+        45.1,
+        60.3,
+        71.4,
+        90.7,
+        105.5,
+        119.8,
+        143.6,
+        174.4
+      ]
     },
     "rules": {
       "file": "rules.mp3",
@@ -80,7 +223,40 @@
       "bytes": 10633298,
       "characters": 8544,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.8,
+        8.8,
+        19.9,
+        42.3,
+        59.8,
+        67.2,
+        71.0,
+        87.7,
+        102.8,
+        135.0,
+        158.1,
+        174.6,
+        187.2,
+        190.7,
+        225.7,
+        266.9,
+        318.6,
+        335.0,
+        355.1,
+        384.9,
+        387.6,
+        419.2,
+        453.6,
+        474.1,
+        504.5,
+        537.2,
+        586.5,
+        588.7,
+        630.6,
+        652.7
+      ]
     },
     "sources": {
       "file": "sources.mp3",
@@ -89,7 +265,11 @@
       "bytes": 196440,
       "characters": 178,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        1.8
+      ]
     },
     "tv": {
       "file": "tv.mp3",
@@ -98,7 +278,29 @@
       "bytes": 4048770,
       "characters": 3237,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        3.2,
+        7.0,
+        16.1,
+        39.9,
+        87.4,
+        93.8,
+        121.4,
+        136.1,
+        144.6,
+        157.3,
+        165.4,
+        174.5,
+        183.5,
+        209.1,
+        213.6,
+        218.8,
+        223.7,
+        233.4,
+        244.5
+      ]
     },
     "unchanged": {
       "file": "unchanged.mp3",
@@ -107,7 +309,25 @@
       "bytes": 1933479,
       "characters": 1636,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.2,
+        5.3,
+        11.5,
+        16.3,
+        23.3,
+        31.8,
+        40.7,
+        49.8,
+        58.0,
+        64.5,
+        73.1,
+        81.9,
+        89.7,
+        98.1,
+        103.3
+      ]
     },
     "verify": {
       "file": "verify.mp3",
@@ -116,7 +336,32 @@
       "bytes": 5098266,
       "characters": 4233,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.5,
+        6.7,
+        30.8,
+        46.2,
+        51.3,
+        68.8,
+        81.3,
+        100.6,
+        119.4,
+        134.2,
+        148.9,
+        164.6,
+        178.5,
+        191.2,
+        208.4,
+        226.7,
+        241.3,
+        258.4,
+        275.5,
+        287.3,
+        301.8,
+        315.0
+      ]
     },
     "whatsnew": {
       "file": "whatsnew.mp3",
@@ -125,7 +370,25 @@
       "bytes": 4887196,
       "characters": 4253,
       "voice_id": "WQP7cQUF5aAS6Axh5yaa",
-      "model_id": "eleven_v4"
+      "model_id": "eleven_v4",
+      "cues": [
+        0.0,
+        2.6,
+        6.3,
+        18.7,
+        30.7,
+        34.7,
+        67.0,
+        94.5,
+        120.6,
+        144.2,
+        169.2,
+        193.9,
+        219.3,
+        245.4,
+        271.2,
+        298.9
+      ]
     }
   },
   "total_duration": 3561.1

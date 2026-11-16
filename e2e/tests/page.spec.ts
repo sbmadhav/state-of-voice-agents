@@ -128,8 +128,8 @@ for (const ed of EDITIONS) {
 
 test('every edition has a breadcrumb, an edition switcher and its publication date', async ({ page }) => {
   for (const [url, label, published] of [
-    ['/state-of-voice-agents/', 'November 2026', '2026-11-10'],
-    ['/state-of-voice-agents/editions/2026-11/', 'November 2026', '2026-11-10'],
+    ['/state-of-voice-agents/', 'November 2026', '2026-11-15'],
+    ['/state-of-voice-agents/editions/2026-11/', 'November 2026', '2026-11-15'],
     ['/state-of-voice-agents/editions/2026-10/', 'October 2026', '2026-10-12'],
   ]) {
     await page.goto(url);
