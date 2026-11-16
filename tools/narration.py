@@ -10,8 +10,14 @@ The edition comes from <main data-audio-base="/state-of-voice-agents/audio/YYYY-
 the hero (#brief) and for each <section id> in <main>, except the comments widget. Scripts carry the
 full visible text, written for the ear: tables become sentences (a <table data-narrate="{0}: {1}..."> template
 names the row pattern; otherwise "Column: value" pairs), citation markers, interactive controls and anything
-marked data-narrate-skip are left out, evidence labels are read as short phrases, and symbols are expanded
-(%, $, ms, pass^3, WER). The Sources list becomes one sentence. The .txt files double as transcripts.
+marked data-narrate-skip are left out, and symbols are expanded (%, $, ms, pass^3, WER). The Sources list
+becomes one sentence. The .txt files double as transcripts.
+
+Evidence chips (vendor-reported, author's view and the rest) are labels for the eye. From the December 2026
+edition on they are not read aloud, so the sentence itself has to say who reported a figure (see
+docs/editorial-style.md). A chip is still read where it is the content: in the labels legend and the "How to
+read" box, as the whole value of a table cell (a claim's verdict), or when it carries data-say. The two
+editions recorded before the rule (2026-10 and 2026-11) keep their labels, so their transcripts match their audio.
 
 The read time is the visible text of <main>, without the Sources list, at 230 words a minute, rounded up. It is
 pre-rendered into <span id="read-min">About N min read</span> so readers without JavaScript see it too.
@@ -116,6 +122,30 @@ def skipped(n):
 # Evidence labels and recency tags become markers, resolved once the surrounding text is known
 LABEL = "\x01{}\x02"
 
+# Editions up to this one were recorded with the evidence chips read aloud; later editions leave them out
+LABELS_SPOKEN_THROUGH = "2026-11"
+SPEAK_LABELS = False
+
+
+def set_edition(edition):
+    """Choose how evidence chips are narrated for an edition (YYYY-MM)."""
+    global SPEAK_LABELS
+    SPEAK_LABELS = edition <= LABELS_SPOKEN_THROUGH
+
+
+def chip_spoken(n):
+    """Whether an evidence chip is read aloud: always in the older editions, otherwise only where it is content."""
+    if SPEAK_LABELS:
+        return True
+    p = n.parent
+    if p is not None and p.tag == "td" and squash(raw_text(p)) == squash(raw_text(n)):
+        return True   # the cell's whole value, such as a claim's verdict
+    while p is not None:
+        if p.classes & {"legend", "howto"}:
+            return True   # where the labels themselves are explained
+        p = p.parent
+    return False
+
 
 def label_phrase(n):
     t = squash(raw_text(n))
@@ -146,6 +176,8 @@ def render(node):
     if node.tag == "br":
         return " "
     if "chip" in c or ("vd" in c and squash(raw_text(node)) == "new"):
+        if "chip" in c and not chip_spoken(node):
+            return ""
         return label_phrase(node)
     if node.tag == "table":
         return render_table(node)
@@ -360,6 +392,7 @@ def main():
     if not ed:
         sys.exit('narration: <main> needs data-audio-base="/state-of-voice-agents/audio/YYYY-MM/"')
     out_dir = ROOT / "audio" / ed.group(1)
+    set_edition(ed.group(1))
     scripts = narration(m)
     count, minutes = read_minutes(m)
     if not READ_RE.search(source):
