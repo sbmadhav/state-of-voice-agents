@@ -417,10 +417,19 @@ test('a share is counted by network name only, with no personal data', async ({ 
   await fig.locator('button.share').click();
   const [popup] = await Promise.all([page.waitForEvent('popup'), fig.locator('.share-menu').getByRole('link', { name: /^Share on X/ }).click()]);
   await popup.close();
-  expect(await page.evaluate(() => (window as any).__events)).toEqual([
+  const events: [string, string][] = await page.evaluate(() => (window as any).__events);
+  // On the live host the site-wide analytics script also counts the new tab as an outbound link, like every
+  // other external link on the site: the host and path only, never the query string that carries the shared URL
+  const outbound = events.filter(([name]) => name.startsWith('out/'));
+  for (const [name, title] of outbound) {
+    expect(name).toMatch(/^out\/(www\.)?(x|linkedin)\.com\/[\w/-]*$/);
+    expect(title).toMatch(/^Outbound: Share on (X|LinkedIn)/);
+  }
+  expect(events.filter(([name]) => !name.startsWith('out/'))).toEqual([
     ['voice/share/copy', 'Shared an exhibit'],
     ['voice/share/x', 'Shared an exhibit'],
   ]);
+  expect(JSON.stringify(events)).not.toMatch(/[?=&]|sbmadhav|fig-/);
 });
 
 test('an exhibit opened from a shared link is marked on the page', async ({ page }) => {
