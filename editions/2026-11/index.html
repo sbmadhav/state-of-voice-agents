@@ -544,6 +544,21 @@ ol.src li:target{background:var(--accent-soft)}
 .listen-links{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
 .listen-next{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;font-size:inherit}
 @media print{.listen,.listen-all,#listen-min{display:none!important}}
+/* Section permalinks and exhibit sharing. The "#" after a section heading is a link to that section, and each
+   exhibit's caption ends with a Share control that opens a small menu. Both are hidden in print. */
+h2 .hash{margin-left:0;padding:var(--space-1) var(--space-2);border-radius:var(--radius-xs)}
+h2 .hash::before{content:"#"}
+.exhibit:target{outline:2px solid var(--accent);outline-offset:var(--space-2-5);border-radius:var(--radius-2xs)}
+.share{--share-ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='18' cy='5' r='3.4'/%3E%3Ccircle cx='6' cy='12' r='3.4'/%3E%3Ccircle cx='18' cy='19' r='3.4'/%3E%3Cpath d='M8.7 10.4l6.6-3.8M8.7 13.6l6.6 3.8' fill='none' stroke='black' stroke-width='2.2'/%3E%3C/svg%3E");
+  display:inline-flex;align-items:center;gap:var(--space-1-5);min-height:var(--space-7);margin:0 0 0 var(--space-1);padding:0 var(--space-2-5);border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--card);color:var(--ink);font-family:var(--font-sans);font-size:var(--text-label-sm-size);font-weight:var(--text-nav-weight);line-height:var(--text-label-sm-leading);text-decoration:none;white-space:nowrap;vertical-align:middle;cursor:pointer}
+.share::before{content:"";flex:none;width:var(--space-3);height:var(--space-3);background:currentColor;-webkit-mask:var(--share-ico) center/contain no-repeat;mask:var(--share-ico) center/contain no-repeat}
+.share:hover,.share[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+.share-box{position:relative;display:inline-block;vertical-align:middle}
+.share-menu{position:absolute;top:calc(100% + var(--space-1-5));left:0;z-index:var(--z-popover);display:grid;gap:2px;width:max-content;max-width:calc(100vw - 2 * var(--space-4));padding:var(--space-1-5);border:1px solid var(--line);border-radius:var(--radius-sm);background:linear-gradient(var(--card),var(--card)),var(--bg);box-shadow:var(--shadow-modal);color:var(--ink);font-size:var(--text-label-size)}
+.share-menu>*{display:flex;align-items:center;min-height:var(--control-height-sm);margin:0;padding:var(--space-1-5) var(--space-3);border:0;border-radius:var(--radius-xs);background:transparent;color:var(--ink);font:inherit;font-weight:var(--text-nav-weight);text-align:left;text-decoration:none;white-space:nowrap}
+.share-menu>*:hover,.share-menu>*:focus-visible{background:var(--accent-soft);color:var(--accent)}
+.share-menu>*:focus-visible{outline-offset:-3px}
+@media print{.share,.share-box,.md-toasts{display:none!important}.exhibit:target{outline:0}}
 </style>
 
 </head>
@@ -582,7 +597,7 @@ ol.src li:target{background:var(--accent-soft)}
 </nav>
 </div>
 
-<main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-11/">
+<main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-11/" data-edition="2026-11">
 <header class="hero" id="brief">
   <div class="wrap">
     <div class="edition-nav" data-narrate-skip>
@@ -625,8 +640,8 @@ ol.src li:target{background:var(--accent-soft)}
       <p>Nine findings moved in all. Among the others, a new entrant topped the benchmark of repeat reliability (pass^3), the share of test scenarios an agent passes on all three tries. The Federal Communications Commission (FCC) also changed the opt-out rules under the Telephone Consumer Protection Act (TCPA).</p>
     </div>
 
-    <figure class="exhibit" style="margin-top:var(--space-7)">
-      <figcaption class="caption"><strong>Four figures summarize the month.</strong> The first three are vendor-reported, and the opt-out date comes from independent sources.</figcaption>
+    <figure class="exhibit" id="fig-brief-1" style="margin-top:var(--space-7)">
+      <figcaption class="caption"><strong>Four figures summarize the month.</strong> The first three are vendor-reported, and the opt-out date comes from independent sources. <a class="share" href="/state-of-voice-agents/share/2026-11/fig-brief-1/" data-narrate-skip>Share</a></figcaption>
       <div class="stats delta-stats" style="margin-top:0">
         <div class="stat"><span class="eyebrow">Best repeat reliability</span><span class="was">October's best was 75.6%, among 7 platforms</span><span class="v num">87.8<small>%</small></span><p>PolyAI, a new entrant, leads ten configurations, but its range (about 79% to 93%) overlaps the runner-up's.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026)">[4]</a></p><span class="chip k-ven" data-narrate-skip>vendor-reported</span></div>
         <div class="stat"><span class="eyebrow">Share of all calls, dated bank result</span><span class="was">October did not review bank results</span><span class="v num">7<small>%</small></span><p>Southern Cross Credit Union's voice agent takes 7% of all calls, mostly for balances. Undated vendor case studies claim 37% to 90%.<a class="c" data-s="southernCross" href="#src-southernCross" title="Salesforce: Southern Cross Credit Union and Agentforce Voice (Oct 27, 2026)">[1]</a><a class="c" data-s="interfaceCases" href="#src-interfaceCases" title="interface.ai: credit union case studies (undated)">[2]</a></p><span class="chip k-ven" data-narrate-skip>vendor-reported</span></div>
@@ -656,13 +671,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="delta">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">1 · At a glance</p><h2>Nine findings moved since October</h2>
+    <div class="head"><p class="eyebrow">1 · At a glance</p><h2>Nine findings moved since October<a class="hash" href="#delta" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Two are first reviews, one is a correction and six are updates.</p></div>
     <div class="prose">
       <p>This update covers October 12 to November 14, 2026. The first reviews are of bank results and bank regulation, and the correction is to October's advice on identity checks.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>Each row sets what October said beside what this update found, then says what follows.</strong> Rows link to the sections that carry the sources and evidence labels.</figcaption>
+    <figure class="exhibit" id="fig-delta-1">
+      <figcaption class="caption"><strong>Each row sets what October said beside what this update found, then says what follows.</strong> Rows link to the sections that carry the sources and evidence labels. <a class="share" href="/state-of-voice-agents/share/2026-11/fig-delta-1/" data-narrate-skip>Share</a></figcaption>
       <div class="tbl"><table data-narrate="{0}. {1}. {2}. {3}.">
       <thead><tr><th>Area</th><th>October 2026</th><th>November 2026</th><th>What it means</th></tr></thead>
       <tbody>
@@ -685,13 +700,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="fs">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">2 · Financial services</p><h2>Banks are automating the same routine calls that health systems did</h2>
+    <div class="head"><p class="eyebrow">2 · Financial services</p><h2>Banks are automating the same routine calls that health systems did<a class="hash" href="#fs" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Every performance figure in this first review of bank and credit union results is reported by the institution or its vendor, with no control group.</p></div>
     <div class="prose">
       <p>October did not review financial services, so most of these results predate it; those published since October 12 are tagged <span class="vd" data-say="&quot;new&quot;">new</span>. They repeat the pattern of October's <a href="/state-of-voice-agents/editions/2026-10/#peers">health care results</a>, and I expect the figures to regress at scale, as with those. I found no voice-agent metrics for the largest US banks. The table's one dated share of calls is also its lowest.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>Published results from banks, credit unions and lenders sit mostly on routine servicing calls.</strong> Each row carries its evidence label, and only the last is independent.</figcaption>
+    <figure class="exhibit" id="fig-fs-1">
+      <figcaption class="caption"><strong>Published results from banks, credit unions and lenders sit mostly on routine servicing calls.</strong> Each row carries its evidence label, and only the last is independent. <a class="share" href="/state-of-voice-agents/share/2026-11/fig-fs-1/" data-narrate-skip>Share</a></figcaption>
       <div class="tbl"><table data-narrate="{0}. {1}. {2}.">
       <thead><tr><th>Institution</th><th>Agent and calls</th><th>Reported result</th></tr></thead>
       <tbody>
@@ -710,8 +725,8 @@ ol.src li:target{background:var(--accent-soft)}
       <h3>Status calls are ready, payments need a pilot and fraud claims stay with people</h3>
       <p>I sort a bank's calls by the evidence behind each and by what an error would cost.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>Six groups of financial calls fall into three readiness tiers.</strong> They are a starting point for operations and compliance teams; the health care version is in <a href="/state-of-voice-agents/editions/2026-10/#usecases">October, section 7</a>. <span class="chip k-our">author's view</span></figcaption>
+    <figure class="exhibit" id="fig-fs-2">
+      <figcaption class="caption"><strong>Six groups of financial calls fall into three readiness tiers.</strong> They are a starting point for operations and compliance teams; the health care version is in <a href="/state-of-voice-agents/editions/2026-10/#usecases">October, section 7</a>. <span class="chip k-our">author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-fs-2/" data-narrate-skip>Share</a></figcaption>
       <div class="tbl"><table data-narrate="{0} {1}. {2}. {3}.">
         <thead><tr><th>Call type</th><th>Readiness</th><th>Why</th><th>Must-have controls</th></tr></thead>
         <tbody>
@@ -736,15 +751,15 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="tv">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">3 · New failure mode</p><h2>A second voice in the room breaks most voice agents</h2>
+    <div class="head"><p class="eyebrow">3 · New failure mode</p><h2>A second voice in the room breaks most voice agents<a class="hash" href="#tv" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">October listed background chatter as one failure among many (<a href="/state-of-voice-agents/editions/2026-10/#t-fail">T4</a>). A test on simulated calls this month puts it first.</p></div>
     <div class="stack" id="tv-in-room">
       <div class="prose">
         <p>The noise that hurts most is not traffic or wind. It is another voice. The evidence comes from a Veris test <span class="vd" data-narrate-skip>new</span> that called 14 voice systems as a simulated utility-billing customer. It ran 100 tasks three times each (1,906 calls scored) and mixed street, café and TV audio into the calls at equal loudness.</p>
         <p>With the TV on, task completion fell from 38.7% (372 of 961 calls) to 8.6% (81 of 945). Nine of the 14 systems fell below 5%, and only GPT-Live 1 (36.1%) and Grok Voice (33.8%) stayed above 20%. Caller verification fell from 81.3% to 52.5%, and 90% of TV calls carried 10 or more words the caller never said, against 2% of clean calls.<a class="c" data-s="veris" href="#src-veris" title="Veris: Vamos Pro findings, a TV in the room (Joshua Meyer, Oct 12, 2026)">[3]</a> <span class="chip k-ven">vendor-reported</span> Vendors' noise options were left off and the calls were simulated, so the levels are directional.</p>
       </div>
-      <figure class="exhibit">
-        <figcaption class="caption"><strong>In Veris's test, a TV in the room cut both task completion and caller verification.</strong></figcaption>
+      <figure class="exhibit" id="fig-tv-1">
+        <figcaption class="caption"><strong>In Veris's test, a TV in the room cut both task completion and caller verification.</strong> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-tv-1/" data-narrate-skip>Share</a></figcaption>
         <div class="panel">
           <div class="bars" data-narrate-skip role="img" aria-label="Clean calls versus TV on: task completion 38.7% versus 8.6%; caller verification 81.3% versus 52.5%">
             <div class="r"><span>Task completion, clean</span><div class="b" style="width:38.7%"></div><span>38.7%</span></div>
@@ -757,8 +772,8 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="prose">
         <p>In banking, those inserted words are the risk: a newsreader's number in a payment amount, a bystander answering a security question, the agent stopping mid-disclosure because the TV spoke. Generic noise suppression does not remove speech. Caller-voice isolation, which passes on only the caller's voice, does. <span class="chip k-our">author's view</span> The table sets four isolation tools against unprocessed audio.</p>
       </div>
-      <figure class="exhibit">
-        <figcaption class="caption"><strong>On Krisp's benchmark of 265 real recordings, the open VoxLock model had the lowest error rate and leaked the fewest words.</strong> The comparison is the VoxLock developer's own, scored with one speech-to-text model. <span class="chip k-ven" data-narrate-skip>vendor-reported</span></figcaption>
+      <figure class="exhibit" id="fig-tv-2">
+        <figcaption class="caption"><strong>On Krisp's benchmark of 265 real recordings, the open VoxLock model had the lowest error rate and leaked the fewest words.</strong> The comparison is the VoxLock developer's own, scored with one speech-to-text model. <span class="chip k-ven" data-narrate-skip>vendor-reported</span> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-tv-2/" data-narrate-skip>Share</a></figcaption>
         <div class="tbl"><table data-narrate="{0} had a word error rate of {1} and leaked {2} words a minute.">
           <thead><tr><th>Tool</th><th>Error rate (WER)</th><th>Leaked words a minute</th></tr></thead>
           <tbody>
@@ -772,8 +787,8 @@ ol.src li:target{background:var(--accent-soft)}
       <div class="prose">
         <p>The result has a limit: on meeting audio, ai-coustics leaked fewer words. VoxLock learns the caller's voice from the first 3 to 15 seconds with no enrollment, adds 24 ms of delay and keeps up on one CPU core.<a class="c" data-s="voxlock" href="#src-voxlock" title="VoxLock: caller-voice isolation model card and paper (arXiv 2610.40727), Apache-2.0 (Oct 2026)">[9]</a> <span class="chip k-ven">vendor-reported</span> Because it learns from the opening seconds, a team should test calls where another voice is louder at the start. <span class="chip k-our">author's view</span></p>
       </div>
-      <figure class="exhibit">
-        <figcaption class="caption"><strong>I recommend four controls to keep a second voice from steering the agent.</strong> <span class="chip k-our" data-narrate-skip>author's view</span></figcaption>
+      <figure class="exhibit" id="fig-tv-3">
+        <figcaption class="caption"><strong>I recommend four controls to keep a second voice from steering the agent.</strong> <span class="chip k-our" data-narrate-skip>author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-tv-3/" data-narrate-skip>Share</a></figcaption>
         <div class="panel">
           <ol class="tight" style="margin:0">
             <li>Isolate the caller's voice before speech-to-text and turn detection.</li>
@@ -792,13 +807,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="reliability">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">4 · Reliability</p><h2>PolyAI leads the benchmark, but its range overlaps Retell's</h2>
+    <div class="head"><p class="eyebrow">4 · Reliability</p><h2>PolyAI leads the benchmark, but its range overlaps Retell's<a class="hash" href="#reliability" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Three platforms joined Cekura's benchmark this month, and one of them, PolyAI, took first place from Retell.</p></div>
     <div class="prose">
       <p>Cekura's benchmark, which a testing vendor runs, puts each platform through 82 appointment and Medicare scenarios three times. It is a frozen release, so October's seven results stand and are in <a href="/state-of-voice-agents/editions/2026-10/#gap">October, section 1</a>; only the additions and status changes are here.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent workflow benchmark (updated Nov 3, 2026)">[4]</a> The table sets each platform's repeat reliability beside its single-run score.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>PolyAI now leads on repeat reliability.</strong> Cekura reports all of the scores. <span class="chip k-ven" data-narrate-skip>vendor-reported</span></figcaption>
+    <figure class="exhibit" id="fig-reliability-1">
+      <figcaption class="caption"><strong>PolyAI now leads on repeat reliability.</strong> Cekura reports all of the scores. <span class="chip k-ven" data-narrate-skip>vendor-reported</span> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-reliability-1/" data-narrate-skip>Share</a></figcaption>
       <div class="tbl"><table data-narrate="{0} passed {1} of scenarios on all three tries. Its single-run score is {2}. {3}.">
       <thead><tr><th>Platform</th><th>Passed all 3 tries</th><th>Single run</th><th>Change since October</th></tr></thead>
       <tbody>
@@ -819,13 +834,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="rules">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">5 · Regulation</p><h2>Existing bank rules already cover a voice agent, and four items are new this month</h2>
+    <div class="head"><p class="eyebrow">5 · Regulation</p><h2>Existing bank rules already cover a voice agent, and four items are new this month<a class="hash" href="#rules" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Most of the rules that bear on a bank's voice agent are already in force. October named these regimes without reviewing them, so most rows are reviewed for the first time.</p></div>
     <div class="prose">
       <p>Four rows carry the <span class="vd" data-say="&quot;new&quot;">new</span> tag, for changes since October 12. The FCC changed the TCPA opt-out rules, and California's AB 1609 is confirmed as signed. Wiretap suits under California law target AI call vendors, and New York's RAISE Act puts duties on the model makers.</p>
       <p>The summary has a US focus and is orientation only, not legal advice. Health care rules, recording consent among them, are in <a href="/state-of-voice-agents/editions/2026-10/#t-reg">October, T9</a>, with one addition in the <a href="#hc">health care notes</a>. The author's view label marks my reading of how a rule applies.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The rules, guidance, proposals and lawsuits that bear on a bank's voice agent fall into four groups.</strong></figcaption>
+    <figure class="exhibit" id="fig-rules-1"><figcaption class="caption"><strong>The rules, guidance, proposals and lawsuits that bear on a bank's voice agent fall into four groups.</strong> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-rules-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}. {1}. {2}">
       <thead><tr><th>Rule</th><th>For the agent</th><th>Status</th></tr></thead>
       <tbody>
@@ -863,7 +878,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="fraud">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">6 · Fraud and identity</p><h2>Correction: a voice is a risk signal, not a way to approve a payment</h2>
+    <div class="head"><p class="eyebrow">6 · Fraud and identity</p><h2>Correction: a voice is a risk signal, not a way to approve a payment<a class="hash" href="#fraud" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">This section corrects the October edition. Its risk tiers (<a href="/state-of-voice-agents/editions/2026-10/#t-fraud">T8</a>) put voiceprint plus liveness at the top, which missed guidance already in place.</p></div>
     <div class="prose">
       <p>The guidance is New York's. In October 2024 the state's financial regulator advised against using voice as an authentication factor, preferring liveness checks or phishing-resistant methods.<a class="c" data-s="nydfs" href="#src-nydfs" title="Alston &amp; Bird: NYDFS guidance on AI-related cybersecurity risks (Oct 24, 2024)">[13]</a> <span class="chip k-ind">independent</span></p>
@@ -876,13 +891,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="models">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">7 · Models, platforms and routing</p><h2>OpenAI's decision API left beta, and two new models are too slow for live voice</h2>
+    <div class="head"><p class="eyebrow">7 · Models, platforms and routing</p><h2>OpenAI's decision API left beta, and two new models are too slow for live voice<a class="hash" href="#models" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The releases that change a recommendation come first, and a short list of everything else follows. The architecture and routing analysis is in <a href="/state-of-voice-agents/editions/2026-10/#t-arch">October, T1</a> and <a href="/state-of-voice-agents/editions/2026-10/#t-router">T5</a>.</p></div>
     <div class="prose">
       <p>OpenAI's Decisions API <span class="vd" data-narrate-skip>new</span> was in public beta in October and became generally available on October 22. It is a System-1 service, one that makes fast typed decisions (route, risk, done talking) without writing prose. It runs on GPT-6 Luna, takes up to 400 questions in a request and costs $0.10 per million input tokens. GPT-Live, OpenAI's voice model, sends turns to it while the caller is still speaking, and Sierra, a customer, reported a 95th-percentile latency under 280 ms in launch coverage.<a class="c" data-s="openaiChangelog" href="#src-openaiChangelog" title="OpenAI: API changelog (Decisions API GA Oct 22, 2026; GPT-Live integration Oct 15, 2026)">[15]</a><a class="c" data-s="uniteDecisions" href="#src-uniteDecisions" title="Unite.AI: OpenAI makes Decisions API generally available with GPT-6 Luna (Oct 22, 2026)">[57]</a> <span class="chip k-ven">vendor-reported</span></p>
       <p>Speed cuts the other way for two new language models. Regal's benchmark for voice agents <span class="vd" data-narrate-skip>new</span> ran on October 15. GPT-6.1 Sol (1,711 ms) and Gemini 3.8 Flash (2,516 ms) missed the bar of 1,300 ms that Regal sets for live voice, while GPT-6 Sol led at 786 of 1,000.<a class="c" data-s="regalOct" href="#src-regalOct" title="Regal: Best LLMs for voice AI agents, October 2026 benchmark (Oct 15, 2026)">[58]</a> <span class="chip k-ven">vendor-reported</span></p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The other releases that change a recommendation fall into two groups.</strong> Zoom Decisions, LiveKit's DecisionModel, the ElevenLabs integrations, Deepgram's Think-Live, Nemotron 3.5 Transcribe, Phonon and the two acquisitions are new this month.</figcaption>
+    <figure class="exhibit" id="fig-models-1"><figcaption class="caption"><strong>The other releases that change a recommendation fall into two groups.</strong> Zoom Decisions, LiveKit's DecisionModel, the ElevenLabs integrations, Deepgram's Think-Live, Nemotron 3.5 Transcribe, Phonon and the two acquisitions are new this month. <a class="share" href="/state-of-voice-agents/share/2026-11/fig-models-1/" data-narrate-skip>Share</a></figcaption>
     <div class="cols2">
       <div class="panel"><span class="lbl">Fast decision models (System 1)</span>
         <ul class="tight" style="margin-top:var(--space-2)">
@@ -903,7 +918,7 @@ ol.src li:target{background:var(--accent-soft)}
         </ul></div>
     </div>
     </figure>
-    <figure class="exhibit"><figcaption class="caption"><strong>These releases also shipped, and none changes a recommendation.</strong> All but NVIDIA's VoiceChat and ConvFill are new this month, and the figures are the makers' own unless an item is labeled independent.</figcaption>
+    <figure class="exhibit" id="fig-models-2"><figcaption class="caption"><strong>These releases also shipped, and none changes a recommendation.</strong> All but NVIDIA's VoiceChat and ConvFill are new this month, and the figures are the makers' own unless an item is labeled independent. <a class="share" href="/state-of-voice-agents/share/2026-11/fig-models-2/" data-narrate-skip>Share</a></figcaption>
     <div class="panel">
       <ul class="tight">
         <li>Anthropic's Claude Fable 5.2 (November 9) <span class="vd" data-narrate-skip>new</span> is a text model, usable as the reasoner behind a voice layer. It costs $8 and $40 per million input and output tokens and is up to 30% faster than 5.1. It has no audio and no voice-agent benchmarks yet.<a class="c" data-s="fable52" href="#src-fable52" title="Anthropic: Claude Fable 5.2 and Mythos 5.2 (Nov 9, 2026)">[74]</a> <span class="chip k-ven">vendor-reported</span></li>
@@ -923,12 +938,12 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="whatsnew">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">8 · New releases</p><h2>Ten releases to know about, in order of relevance</h2>
+    <div class="head"><p class="eyebrow">8 · New releases</p><h2>Ten releases to know about, in order of relevance<a class="hash" href="#whatsnew" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">These are the ten releases and launches since October 12 that I judge most relevant to teams building voice agents for regulated contact centers. This is a link list, not an endorsement.</p></div>
     <div class="prose">
       <p>The releases that change a recommendation are analyzed in <a href="#models">section 7</a>. An entry here says so where a maker has published no tests or compliance terms. Dates are 2026.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The figures in these ten entries are the makers' own claims.</strong></figcaption>
+    <figure class="exhibit" id="fig-whatsnew-1"><figcaption class="caption"><strong>The figures in these ten entries are the makers' own claims.</strong> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-whatsnew-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="Number {0} is {1}, on {2}. {3}.">
       <thead><tr><th>Rank</th><th>Release</th><th>Date</th><th>What it is and why it matters</th><th>Source</th></tr></thead>
       <tbody>
@@ -953,7 +968,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="hc">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">9 · Health care notes</p><h2>For health systems, October stands and California adds a rule</h2>
+    <div class="head"><p class="eyebrow">9 · Health care notes</p><h2>For health systems, October stands and California adds a rule<a class="hash" href="#hc" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">October's health care analysis stands: its <a href="/state-of-voice-agents/editions/2026-10/#peers">published results</a>, <a href="/state-of-voice-agents/editions/2026-10/#usecases">readiness by call type</a> and <a href="/state-of-voice-agents/editions/2026-10/#t-reg">regulation</a>. One California law and three vendor reports are new.</p></div>
     <div class="prose">
       <p>California's AB 1979 <span class="vd" data-narrate-skip>new</span> was signed in October 2026 and takes effect on January 1, 2027. A licensed provider must exercise independent judgment when AI output informs care, AI may not perform reserved clinical functions, and health care chatbot operators are treated as providers under the state's medical privacy law. Scheduling and routine messages are exempt.<a class="c" data-s="chcf" href="#src-chcf" title="California Health Care Foundation: Newsom approves 3 health care AI bills, vetoes 2 (Oct 8, 2026)">[18]</a> <span class="chip k-ind">independent</span></p>
@@ -965,12 +980,12 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="verify">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">10 · Claim check</p><h2>Four claims October could not verify are now confirmed</h2>
+    <div class="head"><p class="eyebrow">10 · Claim check</p><h2>Four claims October could not verify are now confirmed<a class="hash" href="#verify" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The four are the Decisions API's general availability, GPT Realtime's benchmark score, the signing of California's AB 1609 and the effective date of Colorado's replacement AI law. Of the other 13 claims, all checked for the first time this month, six are partly true or vendor-only and seven are unverified or wrong.</p></div>
     <div class="prose">
       <p>Several of the newly checked claims fail in the same way: a maker names a capability and publishes no test. The other October verdicts stand, and are in <a href="/state-of-voice-agents/editions/2026-10/#verify">October, T10</a>. The buttons above the table filter it by verdict.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The verdicts on these 17 claims are mine, and each row cites a source.</strong></figcaption>
+    <figure class="exhibit" id="fig-verify-1"><figcaption class="caption"><strong>The verdicts on these 17 claims are mine, and each row cites a source.</strong> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-verify-1/" data-narrate-skip>Share</a></figcaption>
     <span class="ix">Interactive · filter by verdict</span>
     <div class="seg" role="group" aria-label="Filter claims" id="vf">
       <button type="button" data-f="all" aria-pressed="true">All</button>
@@ -990,9 +1005,9 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="unchanged">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">Unchanged since October</p><h2>What did not change, and where to read it</h2>
+    <div class="head"><p class="eyebrow">Unchanged since October</p><h2>What did not change, and where to read it<a class="hash" href="#unchanged" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">No new evidence moved the October sections listed here, so this update does not repeat them.</p></div>
-    <figure class="exhibit"><figcaption class="caption"><strong>Each link opens an October section that this update leaves as it stands.</strong></figcaption>
+    <figure class="exhibit" id="fig-unchanged-1"><figcaption class="caption"><strong>Each link opens an October section that this update leaves as it stands.</strong> <a class="share" href="/state-of-voice-agents/share/2026-11/fig-unchanged-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}. {1}.">
       <thead><tr><th>Section</th><th>What it covers</th></tr></thead>
       <tbody>
@@ -1017,7 +1032,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="sources">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">Sources</p><h2>Sources for this update</h2>
+    <div class="head"><p class="eyebrow">Sources</p><h2>Sources for this update<a class="hash" href="#sources" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Numbered in order of first use. October's sources are in the <a href="/state-of-voice-agents/editions/2026-10/#sources">October baseline</a>.</p></div>
     <span class="ix">Interactive · filter by source type</span>
     <div class="seg" role="group" aria-label="Filter sources" id="sf">
@@ -1031,7 +1046,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="comments" class="comments">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">Discussion</p><h2>Questions and comments</h2>
+    <div class="head"><p class="eyebrow">Discussion</p><h2>Questions and comments<a class="hash" href="#comments" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Corrections, counterpoints and field experience are welcome. Comments are public and stored as GitHub issues on this report's repository through utterances, which is free and open source, with no ads or tracking. Sign in with GitHub to post.</p></div>
     <div class="panel"><div id="cmt"><div class="cmt-off"><p id="cmt-msg">Comments appear here when the page runs scripts. You can also read and post them on GitHub.</p><p class="cmt-btns"><a class="btn primary" href="https://github.com/sbmadhav/state-of-voice-agents/issues?q=label%3Acomments" target="_blank" rel="noopener">Read comments on GitHub</a> <a class="btn" href="https://github.com/sbmadhav/state-of-voice-agents/issues/new?labels=comments&amp;title=Comment%3A%20November%202026%20edition" target="_blank" rel="noopener">Post on GitHub</a></p></div></div></div>
   </div>
@@ -1039,7 +1054,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="about" class="about">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">About</p><h2>About this report</h2></div>
+    <div class="head"><p class="eyebrow">About</p><h2>About this report<a class="hash" href="#about" aria-label="Link to this section" data-narrate-skip></a></h2></div>
     <div class="cols2">
       <div class="panel stack">
         <span class="lbl">The report</span>
@@ -1346,6 +1361,86 @@ document.querySelectorAll('.tbl tbody').forEach(tb=>_labelObs.observe(tb,{childL
  new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['data-theme']});
  mq.addEventListener('change',sync);
 })();
+/* Section permalinks and exhibit sharing. Links that are copied or shared point at the archived edition
+   (<main data-edition>), never at the root page, which a new edition replaces every month. An exhibit is shared
+   through its share page, /share/<edition>/<figure id>/, whose link preview is a picture of the exhibit; the
+   pages and pictures are written by e2e/share-images.mjs. Without JavaScript, Share is a plain link to that page. */
+(function(){
+ const main=$('main'),ed=main&&main.dataset.edition;if(!ed)return;
+ const SITE='https://sbmadhav.com/state-of-voice-agents/';
+ // The visible confirmation is also the polite live region, in the page before any message is added to it
+ const toasts=document.createElement('div');toasts.className='md-toasts';toasts.setAttribute('role','status');toasts.setAttribute('aria-live','polite');
+ document.body.appendChild(toasts);
+ let timer;
+ const say=(text,url)=>{
+  const el=document.createElement('div');el.className='md-toast';el.textContent=text;
+  if(url){const a=document.createElement('a');a.href=a.textContent=url;el.append(' ',a)}
+  toasts.replaceChildren(el);clearTimeout(timer);timer=setTimeout(()=>el.remove(),url?12000:3000);
+ };
+ const copy=async url=>{
+  let ok=false;
+  try{await navigator.clipboard.writeText(url);ok=true}
+  catch(e){ // no Clipboard API (an http page, an older browser) or permission refused: the older copy command
+   const back=document.activeElement,ta=document.createElement('textarea');
+   ta.value=url;ta.readOnly=true;ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
+   document.body.appendChild(ta);ta.select();
+   try{ok=document.execCommand('copy')}catch(e2){}
+   ta.remove();if(back&&back.focus)back.focus();
+  }
+  if(ok)say('Link copied');else say('Copy this link:',url);
+ };
+ // Section permalinks: the click still moves to the section (a plain in-page link) and also copies its link
+ main.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('h2>a.hash');
+  if(a&&!(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey))copy(SITE+'editions/'+ed+'/'+a.getAttribute('href'));
+ });
+ // Exhibits: Share becomes a button that opens a menu. The menu's links are built when it first opens.
+ let cur=null;
+ const shut=focus=>{if(!cur)return;const c=cur;cur=null;c.menu.hidden=true;c.btn.setAttribute('aria-expanded','false');if(focus)c.btn.focus()};
+ document.addEventListener('click',e=>{if(cur&&!cur.box.contains(e.target))shut()});
+ main.querySelectorAll('figure.exhibit[id]').forEach(fig=>{
+  const link=fig.querySelector('figcaption a.share');if(!link)return;
+  const strong=fig.querySelector('figcaption strong'),claim=strong?strong.textContent.trim():document.title;
+  const url=SITE+'share/'+ed+'/'+fig.id+'/',enc=encodeURIComponent;
+  const box=document.createElement('div'),btn=document.createElement('button'),menu=document.createElement('div');
+  box.className='share-box';box.setAttribute('data-narrate-skip','');
+  btn.type='button';btn.className='share';btn.textContent='Share';btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-controls','share-'+fig.id);
+  menu.className='share-menu';menu.id='share-'+fig.id;menu.hidden=true;menu.setAttribute('role','group');menu.setAttribute('aria-label','Share this exhibit');
+  box.append(btn,menu);link.replaceWith(box);
+  const tab=' <span class="md-sr-only">(opens in a new tab)</span>';
+  const build=()=>{menu.innerHTML='<button type="button" data-net="copy">Copy link</button>'+
+   `<a data-net="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}" target="_blank" rel="noopener noreferrer">Share on LinkedIn${tab}</a>`+
+   `<a data-net="x" href="https://x.com/intent/post?url=${enc(url)}&amp;text=${enc(claim)}" target="_blank" rel="noopener noreferrer">Share on X${tab}</a>`+
+   `<a data-net="image" href="/state-of-voice-agents/share/${ed}/${fig.id}-full.png" download="voice-agents-${ed}-${fig.id}.png">Download image</a>`+
+   (navigator.share?'<button type="button" data-net="more">More options</button>':'')};
+  const open=()=>{
+   shut();if(!menu.firstChild)build();
+   menu.hidden=false;btn.setAttribute('aria-expanded','true');cur={box,btn,menu};
+   // Keep the menu inside the viewport on narrow screens
+   menu.style.left='0px';
+   const r=menu.getBoundingClientRect(),over=r.right-(document.documentElement.clientWidth-8);
+   if(over>0)menu.style.left=-Math.max(0,Math.min(over,r.left-8))+'px';
+   menu.firstElementChild.focus();
+  };
+  btn.addEventListener('click',()=>{if(cur&&cur.menu===menu)shut();else open()});
+  menu.addEventListener('click',e=>{
+   const item=e.target.closest('[data-net]');if(!item)return;
+   if(item.dataset.net==='copy')copy(url);
+   else if(item.dataset.net==='more')navigator.share({title:claim,text:claim,url}).catch(()=>{});
+   shut(true);
+  });
+  box.addEventListener('keydown',e=>{
+   if(menu.hidden)return;
+   const items=[...menu.children],i=items.indexOf(document.activeElement),n=items.length;
+   if(e.key==='Escape'){e.preventDefault();shut(true)}
+   else if(e.key==='ArrowDown'){e.preventDefault();items[(i+1)%n].focus()}
+   else if(e.key==='ArrowUp'){e.preventDefault();items[(Math.max(i,0)+n-1)%n].focus()}
+   else if(e.key==='Home'||e.key==='End'){e.preventDefault();items[e.key==='Home'?0:n-1].focus()}
+  });
+  // Tabbing out of the menu closes it
+  box.addEventListener('focusout',e=>{if(cur&&cur.menu===menu&&e.relatedTarget&&!box.contains(e.relatedTarget))shut()});
+ });
+})();
 })();
 </script>
 
@@ -1360,6 +1455,7 @@ document.addEventListener('click', function (e) {
   else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
   else if (e.target.closest('#listen-all-btn')) siteTrack('voice/listen-all', 'Opened Listen to the whole update');
   else if (e.target.closest('.listen > button')) siteTrack('voice/listen', 'Opened a section voice-over');
+  else if (e.target.closest('.share-menu [data-net]')) siteTrack('voice/share/' + e.target.closest('[data-net]').dataset.net, 'Shared an exhibit');
 }, true);
 </script>
 

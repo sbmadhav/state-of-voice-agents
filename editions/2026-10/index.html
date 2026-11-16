@@ -527,6 +527,21 @@ ol.src li:target{background:var(--accent-soft)}
 .cmt-alt{margin:var(--space-3) 0 0;color:var(--ink-muted)}
 .exec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}.exec-grid .ex{display:flex;flex-direction:column;gap:var(--space-2-5)}.exec-grid .ex:last-child{grid-column:1/-1}.exec-grid h3{font-size:var(--text-card-title-size);line-height:var(--text-card-title-leading)}.exec-grid p{color:var(--ink)}.exn{font-family:var(--font-mono);font-size:var(--text-kicker-size);color:var(--accent);font-weight:var(--text-code-weight)}.exlink{margin-top:auto;font-size:var(--text-label-size);font-weight:var(--text-nav-weight)}.exlink::after{content:" \2192"}@media (max-width:760px){.exec-grid{grid-template-columns:1fr}}.stophere{margin:0 auto;padding:var(--space-3-5) var(--space-4-5);border:1px dashed var(--line);border-radius:var(--radius-md);color:var(--ink-muted);text-align:center}.vd{display:inline-block;font-family:var(--font-mono);font-size:var(--text-kicker-size);font-weight:var(--text-code-weight);letter-spacing:var(--text-kicker-tracking);text-transform:uppercase;border:1px solid var(--line);border-radius:var(--radius-pill);padding:1px var(--space-2);color:var(--ink);white-space:nowrap}.cmt-off p{margin:0 0 var(--space-3)}.cmt-btns{display:flex;flex-wrap:wrap;gap:var(--space-2)}.cmt-btns .btn{text-decoration:none;font-weight:var(--text-nav-weight)}.cmt-btns .btn:not(.primary){color:var(--ink)}#cmt .utterances{max-width:100%}
 @media print{.bolt-launch,.bolt-panel,.about-links,#comments{display:none!important}}
+/* Section permalinks and exhibit sharing. The "#" after a section heading is a link to that section, and each
+   exhibit's caption ends with a Share control that opens a small menu. Both are hidden in print. */
+h2 .hash{margin-left:0;padding:var(--space-1) var(--space-2);border-radius:var(--radius-xs)}
+h2 .hash::before{content:"#"}
+.exhibit:target{outline:2px solid var(--accent);outline-offset:var(--space-2-5);border-radius:var(--radius-2xs)}
+.share{--share-ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='18' cy='5' r='3.4'/%3E%3Ccircle cx='6' cy='12' r='3.4'/%3E%3Ccircle cx='18' cy='19' r='3.4'/%3E%3Cpath d='M8.7 10.4l6.6-3.8M8.7 13.6l6.6 3.8' fill='none' stroke='black' stroke-width='2.2'/%3E%3C/svg%3E");
+  display:inline-flex;align-items:center;gap:var(--space-1-5);min-height:var(--space-7);margin:0 0 0 var(--space-1);padding:0 var(--space-2-5);border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--card);color:var(--ink);font-family:var(--font-sans);font-size:var(--text-label-sm-size);font-weight:var(--text-nav-weight);line-height:var(--text-label-sm-leading);text-decoration:none;white-space:nowrap;vertical-align:middle;cursor:pointer}
+.share::before{content:"";flex:none;width:var(--space-3);height:var(--space-3);background:currentColor;-webkit-mask:var(--share-ico) center/contain no-repeat;mask:var(--share-ico) center/contain no-repeat}
+.share:hover,.share[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+.share-box{position:relative;display:inline-block;vertical-align:middle}
+.share-menu{position:absolute;top:calc(100% + var(--space-1-5));left:0;z-index:var(--z-popover);display:grid;gap:2px;width:max-content;max-width:calc(100vw - 2 * var(--space-4));padding:var(--space-1-5);border:1px solid var(--line);border-radius:var(--radius-sm);background:linear-gradient(var(--card),var(--card)),var(--bg);box-shadow:var(--shadow-modal);color:var(--ink);font-size:var(--text-label-size)}
+.share-menu>*{display:flex;align-items:center;min-height:var(--control-height-sm);margin:0;padding:var(--space-1-5) var(--space-3);border:0;border-radius:var(--radius-xs);background:transparent;color:var(--ink);font:inherit;font-weight:var(--text-nav-weight);text-align:left;text-decoration:none;white-space:nowrap}
+.share-menu>*:hover,.share-menu>*:focus-visible{background:var(--accent-soft);color:var(--accent)}
+.share-menu>*:focus-visible{outline-offset:-3px}
+@media print{.share,.share-box,.md-toasts{display:none!important}.exhibit:target{outline:0}}
 </style>
 
 </head>
@@ -572,7 +587,7 @@ ol.src li:target{background:var(--accent-soft)}
 </nav>
 </div>
 
-<main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-10/">
+<main id="main" tabindex="-1" data-audio-base="/state-of-voice-agents/audio/2026-10/" data-edition="2026-10">
 <header class="hero" id="brief">
   <div class="wrap">
     <div class="edition-nav" data-narrate-skip>
@@ -620,8 +635,8 @@ ol.src li:target{background:var(--accent-soft)}
       </div>
     </div>
 
-    <figure class="exhibit" style="margin-top:var(--space-7)">
-      <figcaption class="caption"><strong>Four figures frame the report.</strong> All four are vendor-reported or self-reported.</figcaption>
+    <figure class="exhibit" id="fig-brief-1" style="margin-top:var(--space-7)">
+      <figcaption class="caption"><strong>Four figures frame the report.</strong> All four are vendor-reported or self-reported. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-brief-1/" data-narrate-skip>Share</a></figcaption>
       <div class="stats" style="margin-top:0">
         <div class="stat"><span class="eyebrow">Fall in call abandonment</span><span class="v num">56<small>%</small></span><p>Tampa General reports the drop within two weeks of going live with its voice agent.&nbsp;<a class="c" data-s="beckersTGH" href="#src-beckersTGH" title="Becker's Hospital Review: Tampa General cuts call wait times 58% with AI rollout">[1]</a></p><span class="chip k-ven" data-narrate-skip>self-reported</span></div>
         <div class="stat"><span class="eyebrow">Best repeat reliability</span><span class="v num">75.6<small>%</small></span><p>In Cekura's benchmark, which a testing vendor runs, the leading platform passed this share of 82 scenarios on all three tries (about 65% to 84% at 95% confidence).&nbsp;<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a></p><span class="chip k-ven" data-narrate-skip>vendor-reported</span></div>
@@ -665,7 +680,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">Executive summary · about ten minutes</p>
-      <h2>The argument in nine points</h2>
+      <h2>The argument in nine points<a class="hash" href="#summary" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The report's argument runs in nine steps, from what the evidence shows to what to do in the next 90 days. Each point links to the section that holds its evidence.</p>
     </div>
     <div class="exec-grid">
@@ -706,15 +721,15 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">1 · Reliability</p>
-      <h2>A demo call is not a production call</h2>
+      <h2>A demo call is not a production call<a class="hash" href="#gap" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">A single successful call says little about the next one. In a benchmark that ran every scenario three times, all seven platforms scored well below their single-call results.</p>
     </div>
     <div class="prose">
       <p>Cekura, a voice-testing vendor, ran the same test agent on seven voice platforms: 82 realistic caller scenarios about appointments and Medicare, three times each, on live calls.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a><a class="c" data-s="cekuraBook" href="#src-cekuraBook" title="Cekura: Booking and reservation flow testing for voice agents">[13]</a> <span class="chip k-ven" data-narrate-skip>vendor-reported</span> Each provider chose its own configuration, except OpenAI, which Cekura configured directly.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a></p>
       <p>The benchmark reports two scores. Single-run task completion is the share of calls that finish the task, and on it every platform looks ready. Repeat reliability, which the benchmark calls pass^3, is the share of scenarios that pass all three calls, and it is the number that matters for customers and patients. The best platform, Retell, completed more than 90% of single calls but passed only 75.6% of scenarios three times out of three. The shaded band on each row of the chart is that difference, the demo gap.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>On six of the seven platforms, the single-run score is 18 to 38 points above repeat reliability, and on Gemini Live the gap is wider still.</strong> The figures are Cekura's, and selecting a platform shows whether they could be verified.</figcaption>
+    <figure class="exhibit" id="fig-gap-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>On six of the seven platforms, the single-run score is 18 to 38 points above repeat reliability, and on Gemini Live the gap is wider still.</strong> The figures are Cekura's, and selecting a platform shows whether they could be verified. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-gap-1/" data-narrate-skip>Share</a></figcaption>
     <div class="panel">
       <div class="toolbar">
         <div class="seg" role="group" aria-label="Sort platforms">
@@ -745,14 +760,14 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">2 · Published results</p>
-      <h2>The published wins are administrative, and all are self-reported</h2>
+      <h2>The published wins are administrative, and all are self-reported<a class="hash" href="#peers" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The strongest published results so far come from health systems, and every one covers access and service, not advice.</p>
     </div>
     <div class="prose">
       <p>Three of those results follow, from Tampa General, WellSpan and Intermountain. All the figures are reported by the organization or its vendor, with no control group, so some regression should be expected at scale. Where a system published before and after values, its card shows both.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>The three systems report shorter waits, high call volumes and less abandonment from voice agents on administrative calls.</strong> Every figure is self-reported.</figcaption>
+    <figure class="exhibit" id="fig-peers-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>The three systems report shorter waits, high call volumes and less abandonment from voice agents on administrative calls.</strong> Every figure is self-reported. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-peers-1/" data-narrate-skip>Share</a></figcaption>
     <div class="peers">
       <article class="panel peer">
         <span class="eyebrow" data-narrate-skip>Tampa General, with Hyro</span>
@@ -795,14 +810,14 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">3 · Pace of change</p>
-      <h2>Any ranking here will be stale within a quarter</h2>
+      <h2>Any ranking here will be stale within a quarter<a class="hash" href="#year" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The field moved fast in 2026. On Sierra's voice benchmark the best score more than doubled in eight months, from 30% to 67%.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a></p>
     </div>
     <div class="prose">
       <p>Sierra published that benchmark, tau-voice, on May 1, and the figures are its own.<a class="c" data-s="sierraTau" href="#src-sierraTau" title="Sierra: tau-voice, benchmarking real-time voice agents (May 1, 2026)">[7]</a> <span class="chip k-ven" data-narrate-skip>vendor-reported</span> The pace then picked up. September and early October brought new voice models and three small models that make decisions instead of conversation, on which section 5 builds. The timeline shows how closely the releases followed one another.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>Six of the timeline's eleven entries fall between September 10 and October 9.</strong> Each entry links to its source, and the source list says which sources are independent and which are vendors.</figcaption>
+    <figure class="exhibit" id="fig-year-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>Six of the timeline's eleven entries fall between September 10 and October 9.</strong> Each entry links to its source, and the source list says which sources are independent and which are vendors. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-year-1/" data-narrate-skip>Share</a></figcaption>
     <div class="year" id="year-strip"></div>
     </figure>
     <div class="prose" style="margin-top:var(--space-5)">
@@ -815,14 +830,14 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">4 · Economics</p>
-      <h2>Resolution rate drives the savings; token price does not</h2>
+      <h2>Resolution rate drives the savings; token price does not<a class="hash" href="#calc" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">An agent saves money only on the calls it resolves from start to finish. In this section's model of a contact center, each extra point of resolution is worth far more than a cheaper token.</p>
     </div>
     <div class="prose">
       <p>Every in-scope call in the model reaches the agent first. Calls it cannot resolve go to a person, and those tend to be the longer, harder ones; some calls it closes come back as repeat calls. The defaults use published per-minute pricing<a class="c" data-s="beri" href="#src-beri" title="beri.net: Voice AI per-minute pricing and cost per resolved call (Oct 2, 2026)">[24]</a> and a fully loaded human cost per call,<a class="c" data-s="helpware" href="#src-helpware" title="Helpware: Healthcare call center costs (2026)">[25]</a> with platform, integration and team costs as one fixed annual line. The slider to watch is the resolution rate: the note under the chart converts each 5 points of it into dollars a month.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>On the default assumptions, savings begin at about 40% resolution and grow with every point above it.</strong> The model is illustrative only. <span class="chip k-our">author's arithmetic</span></figcaption>
+    <figure class="exhibit" id="fig-calc-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>On the default assumptions, savings begin at about 40% resolution and grow with every point above it.</strong> The model is illustrative only. <span class="chip k-our">author's arithmetic</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-calc-1/" data-narrate-skip>Share</a></figcaption>
     <div class="calc" data-narrate-skip>
       <div class="panel stack" id="calc-ctrls">
         <span class="ix">Interactive · drag sliders or pick a preset</span>
@@ -870,7 +885,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">5 · Think silently, then respond</p>
-      <h2>A voice agent should decide silently before it speaks</h2>
+      <h2>A voice agent should decide silently before it speaks<a class="hash" href="#router" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">People size up a question before they answer, and they do not say every thought aloud. A voice agent can work the same way if a fast model decides silently and a conversational model speaks.</p>
     </div>
     <div class="prose">
@@ -878,8 +893,8 @@ ol.src li:target{background:var(--accent-soft)}
       <p>The first demo plays one caller turn, "I got charged twice for my visit last month," both ways. The thing to notice is what the caller hears before the first useful word.</p>
     </div>
 
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>On the same caller turn, the thinker-responder agent answers directly, and a single model that reasons aloud keeps the caller waiting about 2 seconds for the first useful word.</strong> The exchange is illustrative, not a recording of a product. <span class="chip k-our" data-narrate-skip>illustrative</span></figcaption>
+    <figure class="exhibit" id="fig-router-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>On the same caller turn, the thinker-responder agent answers directly, and a single model that reasons aloud keeps the caller waiting about 2 seconds for the first useful word.</strong> The exchange is illustrative, not a recording of a product. <span class="chip k-our" data-narrate-skip>illustrative</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-router-1/" data-narrate-skip>Share</a></figcaption>
     <div class="panel" data-narrate-skip>
       <div class="toolbar">
         <span class="stack" style="gap:var(--space-1)"><span class="lbl">One caller turn, two ways</span><span class="ix">Interactive · switch modes</span></span>
@@ -912,8 +927,8 @@ ol.src li:target{background:var(--accent-soft)}
       <p>The second demo shows the routing decision itself. Each caller turn gets a probability for each of six destinations, and more than one can be high at once. The two turns to try are the ambiguous one and the clinical one.</p>
     </div>
 
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>An intent that clears the confidence threshold is routed, a turn where none does is handed off, and a fraud or clinical signal goes to a person by rule.</strong> The probabilities are examples of a calibrated multi-label router, not output from a specific product. <span class="chip k-our" data-narrate-skip>illustrative</span></figcaption>
+    <figure class="exhibit" id="fig-router-2" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>An intent that clears the confidence threshold is routed, a turn where none does is handed off, and a fraud or clinical signal goes to a person by rule.</strong> The probabilities are examples of a calibrated multi-label router, not output from a specific product. <span class="chip k-our" data-narrate-skip>illustrative</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-router-2/" data-narrate-skip>Share</a></figcaption>
     <div class="router" data-narrate-skip>
       <div class="panel stack">
         <span class="lbl">Pick a caller turn</span><span class="ix">Interactive · tap a turn, then move the threshold</span>
@@ -937,14 +952,14 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">6 · What separates a good agent</p>
-      <h2>Two capabilities outlast any model, and two are still experiments</h2>
+      <h2>Two capabilities outlast any model, and two are still experiments<a class="hash" href="#essentials" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Two capabilities decide whether an agent holds up on real calls, and they carry over from one model or vendor to the next. Two more are promising but early.</p>
     </div>
     <div class="prose">
       <p>Models change every month. The two foundations are a golden test set with an evaluation framework around it, and audio handling that picks the caller's voice out of a noisy room. The two experiments, reading the caller's emotion and tuning the agent's persona, are worth piloting behind the golden test set.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>The two foundations come with targets a team can test against, and the two experiments come with cautions.</strong> Vendor figures are labeled, and the estimate of test runs is my arithmetic.</figcaption>
+    <figure class="exhibit" id="fig-essentials-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>The two foundations come with targets a team can test against, and the two experiments come with cautions.</strong> Vendor figures are labeled, and the estimate of test runs is my arithmetic. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-essentials-1/" data-narrate-skip>Share</a></figcaption>
     <div class="cols2">
       <div class="panel stack">
         <div><span class="lbl">Foundation</span><h3 style="margin-top:var(--space-1-5)">A golden test set gates every change</h3></div>
@@ -979,14 +994,14 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">7 · Where to start</p>
-      <h2>Scheduling and routing are ready; nurse triage is not</h2>
+      <h2>Scheduling and routing are ready; nurse triage is not<a class="hash" href="#usecases" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Appointment changes and call routing are mature and low in risk, so a pilot should start there. Nurse triage sits at the opposite corner of the grid and stays with people.</p>
     </div>
     <div class="prose">
       <p>The grid places nine health care call types by the maturity of the technology and the risk of the call. Health care is shown because that is where results are published. Green is the pilot zone, and red stays with people until there is independent safety evidence. Selecting a call type shows its reported outcome, example vendors and example deployments.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-    <figcaption class="caption"><strong>Of nine health care call types, two are ready for a pilot, four form a next wave, two need clinical supervision and one is not ready.</strong> The outcomes are reported by health systems or vendors, and the placement is my judgment. <span class="chip k-our" data-narrate-skip>author's view</span></figcaption>
+    <figure class="exhibit" id="fig-usecases-1" style="margin-top:var(--space-5)">
+    <figcaption class="caption"><strong>Of nine health care call types, two are ready for a pilot, four form a next wave, two need clinical supervision and one is not ready.</strong> The outcomes are reported by health systems or vendors, and the placement is my judgment. <span class="chip k-our" data-narrate-skip>author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-usecases-1/" data-narrate-skip>Share</a></figcaption>
     <div class="panel">
       <div style="margin-bottom:var(--space-2-5)"><span class="ix">Interactive · tap a call type for details</span></div>
       <div class="ucg" id="ucg"></div>
@@ -1013,21 +1028,21 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">8 · Trust and identity</p>
-      <h2>A voice is no longer proof of identity</h2>
+      <h2>A voice is no longer proof of identity<a class="hash" href="#fraud" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Voices can now be cloned, so an identity check has to rise with the harm that a wrong answer could do.</p>
     </div>
     <div class="callout">
-      <figure class="exhibit">
+      <figure class="exhibit" id="fig-fraud-1">
         <p class="big num" data-narrate-skip>Over half</p>
-        <figcaption class="caption"><strong>Pindrop reports that over half of fraud attempts at health care contact centers now involve AI-generated elements.</strong> They include synthetic voice, bots and reconnaissance through the phone menu (the interactive voice response system, or IVR).<a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a> <span class="chip k-ven">vendor-reported</span></figcaption>
+        <figcaption class="caption"><strong>Pindrop reports that over half of fraud attempts at health care contact centers now involve AI-generated elements.</strong> They include synthetic voice, bots and reconnaissance through the phone menu (the interactive voice response system, or IVR).<a class="c" data-s="pindrop" href="#src-pindrop" title="Pindrop expands AI-powered deepfake detection to healthcare (Feb 26, 2026)">[4]</a> <span class="chip k-ven">vendor-reported</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-fraud-1/" data-narrate-skip>Share</a></figcaption>
       </figure>
       <div class="prose">
         <p>Identity on the phone is a brand question as much as a security one. Customers will be targeted by callers pretending to be the organization, and its agent will hear callers pretending to be customers.<a class="c" data-s="techcrunchDeep" href="#src-techcrunchDeep" title="TechCrunch: After a deepfake voice fooled her grandfather, this founder sprang into action (Sep 28, 2026)">[30]</a> A voiceprint alone can be fooled: in 2023 a reporter got into his own bank account with an AI clone of his voice.<a class="c" data-s="voiceIdBreach" href="#src-voiceIdBreach" title="AI Incident Database #485: reporter accesses own bank account with AI-cloned voice (2023)">[31]</a></p>
         <p>Heavier checks have costs too. Liveness checks reject some genuine callers over phone-quality audio, and texted codes lose some older or distressed callers. That is why the controls below always keep a person as the fallback. <span class="chip k-our">author's view</span></p>
       </div>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-6)">
-      <figcaption class="caption"><strong>Six controls put the strongest checks on the requests that can do the most harm.</strong> They are my recommendations.</figcaption>
+    <figure class="exhibit" id="fig-fraud-2" style="margin-top:var(--space-6)">
+      <figcaption class="caption"><strong>Six controls put the strongest checks on the requests that can do the most harm.</strong> They are my recommendations. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-fraud-2/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <ul class="tight">
           <li>Run liveness and deepfake detection in the contact center platform, before any protected data is disclosed.</li>
@@ -1050,7 +1065,7 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">9 · What comes next</p>
-      <h2>The next step is a model that looks facts up</h2>
+      <h2>The next step is a model that looks facts up<a class="hash" href="#lmlm" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The research on such models is early, but the fact store they depend on is worth building now.</p>
     </div>
     <div class="prose">
@@ -1058,8 +1073,8 @@ ol.src li:target{background:var(--accent-soft)}
       <p>The approach suits slow-changing knowledge such as benefits, policies and fees. Live data such as balances, claims and appointment slots stays on tool and MCP calls. The demo below deletes a customer's record and shows what each kind of model then says.</p>
     </div>
 
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-      <figcaption class="caption"><strong>Once the record is deleted, the limited-memory model can no longer give the answer, while the standard model goes on repeating it from its weights.</strong> The demo mirrors the paper's unlearning result. Removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning, which adjusts a model's weights to make it forget, degraded it.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a> <span class="chip k-our">illustrative</span></figcaption>
+    <figure class="exhibit" id="fig-lmlm-1" style="margin-top:var(--space-5)">
+      <figcaption class="caption"><strong>Once the record is deleted, the limited-memory model can no longer give the answer, while the standard model goes on repeating it from its weights.</strong> The demo mirrors the paper's unlearning result. Removing records from the store made the model forget them with no loss of general ability, where gradient-based unlearning, which adjusts a model's weights to make it forget, degraded it.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a> <span class="chip k-our">illustrative</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-lmlm-1/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <div class="toolbar">
 <span class="ix">Interactive · switch models, then delete the record</span>
@@ -1095,8 +1110,8 @@ ol.src li:target{background:var(--accent-soft)}
       <h3>The fact store is the safe investment, and training is a gated bet</h3>
       <p>Retrieval on a frontier model, one of the largest general-purpose language models, is the safe default today. The evidence for limited-memory models is still research-stage: Wikipedia facts, models under 400M parameters, and no dialog, voice or production use. A governed fact store pays off either way, so I would build it now and treat training as a bet to stage behind gates. <span class="chip k-our">author's view</span></p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-4)">
-      <figcaption class="caption"><strong>Only the first of the three stages is a commitment; each of the others waits on the one before it.</strong> The staging is my recommendation.</figcaption>
+    <figure class="exhibit" id="fig-lmlm-2" style="margin-top:var(--space-4)">
+      <figcaption class="caption"><strong>Only the first of the three stages is a commitment; each of the others waits on the one before it.</strong> The staging is my recommendation. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-lmlm-2/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <div class="invest">
           <div class="st"><span class="w" data-say="The first stage starts now and carries no regret. ">Now, with no regret</span><span class="t" style="font-weight:var(--text-nav-weight)">Build the governed fact store</span><p class="note" style="font-size:var(--text-label-size)">Plans, policies, products, providers and fees become versioned rows with owners, access control and deletion. The store powers retrieval today and a limited-memory model later.</p></div>
@@ -1117,14 +1132,14 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">10 · The decision</p>
-      <h2>Buy now, but own the router and the tests</h2>
+      <h2>Buy now, but own the router and the tests<a class="hash" href="#options" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Of four ways to play the next 12 months, I recommend the hybrid: buy a vendor's agent now, and build the tests, the router, the logs and the fact store in parallel.</p>
     </div>
     <div class="prose">
       <p>The choice is less about which vendor wins than about what the organization ends up owning. Each card gives the case for an option, the case against it and the source of its return.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-      <figcaption class="caption"><strong>Each of the four options earns a different verdict, and only the hybrid is recommended.</strong> The verdicts are mine, and the build option's cost figures are the published ones behind the <a href="#calc">economics model</a>.</figcaption>
+    <figure class="exhibit" id="fig-options-1" style="margin-top:var(--space-5)">
+      <figcaption class="caption"><strong>Each of the four options earns a different verdict, and only the hybrid is recommended.</strong> The verdicts are mine, and the build option's cost figures are the published ones behind the <a href="#calc">economics model</a>. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-options-1/" data-narrate-skip>Share</a></figcaption>
       <span class="ix">Interactive · tap an option</span>
       <div class="opts" id="opts"></div>
       <div class="panel" style="margin-top:var(--space-3-5)" id="opt-detail"></div>
@@ -1140,15 +1155,15 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">11 · A pilot playbook</p>
-      <h2>Set the gates before launch and let day 90 decide</h2>
+      <h2>Set the gates before launch and let day 90 decide<a class="hash" href="#pilot" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">A 90-day pilot settles the question only if the conditions for scaling and for stopping are written down before the first live call.</p>
     </div>
     <div class="prose">
       <p>Teams are at different points on this path. For a team that is starting out, expanding to new call types or resetting a stalled rollout, this is one way to run a pilot. For a team already in production, the golden test set, the gates and the kill criteria work as an audit of what it has.</p>
       <p>The shape is narrow by design: one market or line of business, inbound calls only, two or three call types, and a warm transfer to a person with full context. The agent takes no live call until it clears a gate at the end of week 4.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-      <figcaption class="caption"><strong>The pilot runs in four steps, from the first test scenario to the decision on day 90.</strong> The schedule and the bar are my proposal.</figcaption>
+    <figure class="exhibit" id="fig-pilot-1" style="margin-top:var(--space-5)">
+      <figcaption class="caption"><strong>The pilot runs in four steps, from the first test scenario to the decision on day 90.</strong> The schedule and the bar are my proposal. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-pilot-1/" data-narrate-skip>Share</a></figcaption>
       <div class="pilot">
         <div class="ph"><span class="w" data-say="In weeks 0 to 4, ">Weeks 0 to 4</span><span class="t" data-say="the team builds the golden test set.">Build the golden test set</span><p>The set holds 200 or more scenarios from the team's own de-identified calls: accents, older callers, Spanish, number dictation, mid-call corrections, background noise and chatter, and upset callers. The agent is then tested silently, in shadow mode, on recorded audio.</p></div>
         <div class="ph"><span class="w" data-say="At the gate, at the end of week 4, ">Gate, end of week 4</span><span class="t" data-say="risk sets the bar for repeat reliability.">Risk sets the pass^3 bar</span><p>The bar is about 85% for informational calls and 95% for anything that writes data or moves money, with zero critical failures at any rate. Every scenario is run three times on phone-grade audio. Router thresholds are calibrated on held-out data, and identity controls are signed off.</p></div>
@@ -1156,8 +1171,8 @@ ol.src li:target{background:var(--accent-soft)}
         <div class="ph"><span class="w" data-say="On day 90, ">Day 90</span><span class="t" data-say="the team decides to scale, adjust or stop.">Scale, adjust or stop</span><p>The decision is made against the criteria below, not against a demo.</p></div>
       </div>
     </figure>
-    <figure class="exhibit" style="margin-top:var(--space-6)">
-      <figcaption class="caption"><strong>Five conditions justify scaling at day 90, and any one of four stops the pilot at any time.</strong> The thresholds are starting points tied to the published results earlier in this report, not an industry standard.</figcaption>
+    <figure class="exhibit" id="fig-pilot-2" style="margin-top:var(--space-6)">
+      <figcaption class="caption"><strong>Five conditions justify scaling at day 90, and any one of four stops the pilot at any time.</strong> The thresholds are starting points tied to the published results earlier in this report, not an industry standard. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-pilot-2/" data-narrate-skip>Share</a></figcaption>
       <div class="gates">
         <div class="panel gate ok"><h3><span class="vd">scale if</span> all five of these hold at day 90</h3>
           <ul>
@@ -1182,8 +1197,8 @@ ol.src li:target{background:var(--accent-soft)}
       <p>With 200 scenarios, a measured 90% carries a margin of about plus or minus 4 points. A 30% fall in abandonment is about half of what peers report (56% to 85%), and 50% resolution is in the range of reported automation (44% at one health system). <span class="chip k-ven">self-reported</span> A team should tighten the bar for higher-risk call types and lower the resolution target for complex queues. <span class="chip k-our">author's view</span></p>
     </div>
 
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-      <figcaption class="caption"><strong>Meeting the gates leads to scaling in waves, missing some leads to a fix and a second run, and hitting a kill criterion stops the pilot.</strong> The plans are my recommendation.</figcaption>
+    <figure class="exhibit" id="fig-pilot-3" style="margin-top:var(--space-5)">
+      <figcaption class="caption"><strong>Meeting the gates leads to scaling in waves, missing some leads to a fix and a second run, and hitting a kill criterion stops the pilot.</strong> The plans are my recommendation. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-pilot-3/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <div class="toolbar">
           <span class="stack" style="gap:var(--space-1)"><span class="lbl" data-narrate-skip>After day 90</span><span class="ix">Interactive · pick a pilot outcome</span></span>
@@ -1209,21 +1224,21 @@ ol.src li:target{background:var(--accent-soft)}
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">12 · Think tank</p>
-      <h2>Seven seats agree on five things and leave three unresolved</h2>
+      <h2>Seven seats agree on five things and leave three unresolved<a class="hash" href="#debate" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The seats are synthetic perspectives, written to stress-test this report's argument. They are not a survey of real people.</p>
     </div>
     <div class="prose">
       <p>I staged a structured debate on one question: what should a regulated enterprise do about voice agents in the next 12 months, and how much should it bet on fast routers and governed-memory models? I wrote each seat to argue from the evidence its role would weigh most, to name its main concern and to say what would change its mind.</p>
     </div>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-      <figcaption class="caption"><strong>Each of the seven seats makes its case in the first person.</strong> The figures the seats quote carry their sources and evidence labels elsewhere in this report.</figcaption>
+    <figure class="exhibit" id="fig-debate-1" style="margin-top:var(--space-5)">
+      <figcaption class="caption"><strong>Each of the seven seats makes its case in the first person.</strong> The figures the seats quote carry their sources and evidence labels elsewhere in this report. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-debate-1/" data-narrate-skip>Share</a></figcaption>
       <div style="margin-bottom:var(--space-2-5)"><span class="ix">Interactive · tap a seat to hear that view</span></div>
       <div class="personas" id="personas" role="group" aria-label="Choose a perspective"></div>
       <div class="panel pdetail" id="pdetail"></div>
       <div class="print-only" id="per-print"><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The Chief Digital &amp; CX Officer seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Expand in phases. Voice is the front door, and it is now also a brand-trust channel.</p><p style="margin-top:var(--space-1)">A large health system reports that it cut abandonment 56% and scheduled 21% more appointments in two weeks. My worry is that one bad call becomes the story, and that scammers posing as the brand erode trust in every legitimate call. I would change my mind if pilot satisfaction fell below the human baseline.</p></div><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The CFO seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Fund a pilot, not a platform. Pay for resolved calls.</p><p style="margin-top:var(--space-1)">The stack that resolves more calls is cheaper per 1,000 calls despite its higher per-minute rate, and in one test a decision-first cascade cut classification cost by about 72%. Pricing is what worries me: vertical vendors rarely publish theirs, and early-access model prices may be subsidized. A verified cost per resolved call below half the human cost at day 90 would change my mind.</p></div><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The CISO &amp; Privacy Officer seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Use hosted APIs only under contract. Self-host the small models, and prefer facts in governed stores.</p><p style="margin-top:var(--space-1)">A hosted decision API needs a business associate agreement (BAA), the contract US health privacy law requires of vendors that handle patient data, or an equivalent; a self-hosted encoder avoids the question. Extraction attacks have pulled personal data out of model weights. What concerns me is voice cloning, prompt injection and retention terms that change. It would take a signed contract and a SOC 2 Type II report from every layer, the testing vendor included, to change my mind.</p></div><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The Contact Center Operations seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Start with scheduling, billing and status checks, and make every transfer warm, with full context.</p><p style="margin-top:var(--space-1)">Intermountain reports that it automated 44% of its repetitive calls and cut abandonment by 85%. I worry about wrong write-backs, misroutes, authentication failures and staff morale. A misroute or wrong-action rate above 0.5% on audit would change my mind.</p></div><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The Clinical &amp; Risk Safety Lead seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Keep the agent administrative. It gives no triage and no advice, and it escalates by rule, not by threshold.</p><p style="margin-top:var(--space-1)">No validated deployment of autonomous triage has been found, and the best models reach only about 53% on multi-intent benchmarks. My concerns are missed red flags, older and non-English callers, and regulatory exposure. An independent safety evaluation with prospective outcomes would change my mind.</p></div><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The AI Platform Architect seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Build a thinker-responder: a tiered router in front, narrowed tools for each sub-agent and a governed fact store, with a limited-memory trial for static knowledge once it beats retrieval. On a managed platform such as Sierra, insist on exporting routing decisions and logs.</p><p style="margin-top:var(--space-1)">A fine-tuned classifier with 0.1B parameters hits 93.5% on the Banking77 intent benchmark in 22 ms. Tool retrieval more than tripled selection accuracy in one study, and a 382M limited-memory model approached a 7B model on factual precision. My concern is lock-in at the orchestration and integration layers, and model churn every few weeks. A vendor that refused to export logs or routing decisions would change my mind.</p></div><div class="panel persona-print" style="margin-top:var(--space-2-5)"><p style="font-weight:var(--text-nav-weight)">The Skeptic / red team seat, a synthetic persona, argues:</p><p style="margin-top:var(--space-1)">Do not trust vendor benchmarks or one-lab results. Demand your own repeat-reliability numbers.</p><p style="margin-top:var(--space-1)">The Banking77 score of Jev, a hosted decision model, varies by 10.7 points from lab to lab, and benign context flipped 61% of correct decisions in one study. The limited-memory approach is untested above 400M parameters or on dialog, and Sierra publishes single-run voice scores, not repeat reliability. Every outcome figure in this report is customer- or vendor-reported, with no control group. Show me 90% or more on pass^3 on your own scenarios, audited by an independent party, and I will change my mind.</p></div></div>
     </figure>
-    <figure class="exhibit" style="margin-top:var(--space-5)">
-      <figcaption class="caption"><strong>The seven seats agree on five points and leave three questions unresolved.</strong> Both lists are my synthesis of the synthetic positions above.</figcaption>
+    <figure class="exhibit" id="fig-debate-2" style="margin-top:var(--space-5)">
+      <figcaption class="caption"><strong>The seven seats agree on five points and leave three questions unresolved.</strong> Both lists are my synthesis of the synthetic positions above. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-debate-2/" data-narrate-skip>Share</a></figcaption>
       <div class="cols2">
         <div class="panel"><span class="lbl">Where the seats agree</span>
           <ul class="tight">
@@ -1251,7 +1266,7 @@ ol.src li:target{background:var(--accent-soft)}
 <div class="partdiv" id="tech">
   <div class="wrap">
     <p class="eyebrow">Part II · Technical appendix</p>
-    <h2 style="margin-top:var(--space-2-5);font-size:clamp(1.8rem,4vw,2.6rem)">For architects, platform and AI engineering teams</h2>
+    <h2 style="margin-top:var(--space-2-5);font-size:clamp(1.8rem,4vw,2.6rem)">For architects, platform and AI engineering teams<a class="hash" href="#tech" aria-label="Link to this section" data-narrate-skip></a></h2>
     <p class="lede">Part I made the case for where to start, what to build and how to pilot it. Part II sets out the engineering evidence behind that case. Its eleven sections cover architecture, latency, reliability measurement, failure modes, System-1 routing, limited-memory models, deployment and data posture, fraud controls, regulation, a check of claims circulating in the market, and implementation tooling.</p>
   </div>
 </div>
@@ -1259,14 +1274,14 @@ ol.src li:target{background:var(--accent-soft)}
 <div class="tech">
 <section id="t-arch">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T1 · Architecture</p><h2>Three generations, converging on "talk fast, think slow"</h2>
+    <div class="head"><p class="eyebrow">T1 · Architecture</p><h2>Three generations, converging on "talk fast, think slow"<a class="hash" href="#t-arch" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The newest voice systems pair a fast conversational layer with a slower reasoning one. The older cascade still offers the most control.</p></div>
     <div class="prose">
       <p>Voice agents have been built in three ways. A cascade chains three models: speech-to-text (STT) transcribes the caller, a large language model (LLM) writes the reply and text-to-speech (TTS) speaks it. Native speech-to-speech replaces the chain with one model that takes audio in and gives audio out. Continuous full-duplex goes a step further, with a model that listens and speaks at the same time.</p>
       <p>The newest systems share one design: talk fast, think slow. OpenAI's GPT-Live removes the separate turn detector and delegates search and reasoning to a frontier model behind an asynchronous boundary, so a slow tool call cannot stall audio.<a class="c" data-s="openaiLive" href="#src-openaiLive" title="OpenAI: Continuous voice interaction with GPT-Live (Aug 3, 2026)">[26]</a><a class="c" data-s="infoqLive" href="#src-infoqLive" title="InfoQ: OpenAI details GPT-Live's architecture (Sep 2, 2026)">[37]</a> Sierra's Tandem Voice pairs a real-time conversation layer with a reasoning layer,<a class="c" data-s="sierraSummit" href="#src-sierraSummit" title="Sierra: Summit 2026 recap (Oct 2026)">[14]</a> and Gemini 3.8 Live calls tools in the background.<a class="c" data-s="marktech" href="#src-marktech" title="MarkTechPost: Google releases Gemini 3.8 Live (Sep 15, 2026)">[38]</a> A System-1 router, a small model that returns typed decisions and never writes prose, fits beside any of these as the dispatch layer.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>A cascade gives the most control and text at every step, while full-duplex handles turns itself and offers the least control today.</strong> The table is my summary of the announcements and documentation cited, not a set of measurements.</figcaption>
+    <figure class="exhibit" id="fig-t-arch-1">
+      <figcaption class="caption"><strong>A cascade gives the most control and text at every step, while full-duplex handles turns itself and offers the least control today.</strong> The table is my summary of the announcements and documentation cited, not a set of measurements. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-arch-1/" data-narrate-skip>Share</a></figcaption>
       <div class="tbl"><table data-narrate="{0}. {1}. {2}. {3}.">
         <thead><tr><th>Dimension</th><th>Cascaded</th><th>Native speech-to-speech</th><th>Continuous full-duplex</th></tr></thead>
         <tbody>
@@ -1283,8 +1298,8 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="prose">
       <p>Production adds two constraints of its own. Calls arrive over telephone (SIP) trunks as compressed 8 kHz audio, with jitter and packet loss, so tests should run on that audio and not on clean recordings. Integrations with scheduling, customer (CRM) and health record (EHR) systems are usually the slowest and most brittle part of a launch, so they should be budgeted first. <span class="chip k-our">author's view</span></p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>In this reference flow for a cascade, the System-1 router decides before the language model speaks.</strong> The flow is my own design, not a description of a product.</figcaption>
+    <figure class="exhibit" id="fig-t-arch-2">
+      <figcaption class="caption"><strong>In this reference flow for a cascade, the System-1 router decides before the language model speaks.</strong> The flow is my own design, not a description of a product. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-arch-2/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <span class="lbl" data-narrate-skip>Reference flow (cascaded, with a System-1 router)</span>
         <div class="arch" style="margin-top:var(--space-3)">
@@ -1303,15 +1318,15 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-latency">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T2 · Latency budget</p><h2>Even with a fast router, a cascade lands near 1.5 seconds a turn</h2>
+    <div class="head"><p class="eyebrow">T2 · Latency budget</p><h2>Even with a fast router, a cascade lands near 1.5 seconds a turn<a class="hash" href="#t-latency" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">People leave about a quarter of a second between turns, and a cascade cannot be pushed much below a second and a half without clipping callers.</p></div>
     <div class="prose">
       <p>Across ten languages, the gaps between speakers' turns cluster around a quarter second.<a class="c" data-s="stivers" href="#src-stivers" title="Stivers et al., Universals and cultural variation in turn-taking, PNAS 2009">[40]</a> <span class="chip k-ind">independent</span> Measured platform turns in Cekura's benchmark, which a testing vendor runs, averaged 1.27 s to 3.08 s.<a class="c" data-s="cekura" href="#src-cekura" title="Cekura Bench: voice agent benchmark hub (updated Oct 7, 2026)">[2]</a> <span class="chip k-ven" data-narrate-skip>vendor-reported</span></p>
       <p>The trade-off deserves candor. A cascade takes turns like a walkie-talkie: it waits for silence, transcribes, reasons and only then speaks. Even with a fast router and prefetch it lands near 1.5 s a turn, and cutting endpointing (the wait for silence that ends a turn) any further clips callers mid-sentence. A team that needs turns under 800 ms as a hard requirement should use a speech-to-speech or full-duplex model and accept a coarser, after-the-fact audit trail. The thinker fits beside either.</p>
       <p>The tool below splits one turn into six stages, and the total is the figure to watch.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>In all three presets, endpointing and the language model's first token take most of the turn.</strong> The presets rest on three sourced anchors. Fixed silence endpointing of 500 to 800 ms is still common<a class="c" data-s="nuanced" href="#src-nuanced" title="The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026)">[23]</a>, the fastest LLM first-token time in Regal's 27-model test was 584 ms<a class="c" data-s="regal" href="#src-regal" title="Regal: Best LLMs for voice AI agents, Voice CX Benchmark (Oct 6, 2026)">[41]</a>, and a self-hosted router costs 20 to 50 ms. The remaining timings are assumptions. <span class="chip k-our">illustrative</span></figcaption>
+    <figure class="exhibit" id="fig-t-latency-1">
+      <figcaption class="caption"><strong>In all three presets, endpointing and the language model's first token take most of the turn.</strong> The presets rest on three sourced anchors. Fixed silence endpointing of 500 to 800 ms is still common<a class="c" data-s="nuanced" href="#src-nuanced" title="The Nuanced Perspective: Where voice agents actually break (Oct 9, 2026)">[23]</a>, the fastest LLM first-token time in Regal's 27-model test was 584 ms<a class="c" data-s="regal" href="#src-regal" title="Regal: Best LLMs for voice AI agents, Voice CX Benchmark (Oct 6, 2026)">[41]</a>, and a self-hosted router costs 20 to 50 ms. The remaining timings are assumptions. <span class="chip k-our">illustrative</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-latency-1/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <div class="toolbar">
           <div class="seg" role="group" aria-label="Latency presets">
@@ -1336,13 +1351,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-rel">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T3 · Measuring reliability</p><h2>Single-run scores flatter every vendor</h2>
+    <div class="head"><p class="eyebrow">T3 · Measuring reliability</p><h2>Single-run scores flatter every vendor<a class="hash" href="#t-rel" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">An agent that completes a scenario once may fail it on the next call, and a single-run score hides that.</p></div>
     <div class="prose">
       <p>Repeat reliability, written pass^k, counts a scenario only when all k of its runs succeed. The measure came from Sierra's tau-bench and now appears in Cekura Bench and in the voice mode of tau2-bench. Even if the runs are independent, small per-call error rates compound quickly. The slider below sets the per-call success rate, and the bars show how far pass^2 to pass^5 fall below it.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>Each extra pass that a scenario must clear lowers the share of scenarios that succeed.</strong> The chart is arithmetic on the per-call rate, not a measurement of any product. <span class="chip k-our">author's arithmetic</span></figcaption>
+    <figure class="exhibit" id="fig-t-rel-1">
+      <figcaption class="caption"><strong>Each extra pass that a scenario must clear lowers the share of scenarios that succeed.</strong> The chart is arithmetic on the per-call rate, not a measurement of any product. <span class="chip k-our">author's arithmetic</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-rel-1/" data-narrate-skip>Share</a></figcaption>
       <div class="panel">
         <div style="margin-bottom:var(--space-2-5)"><span class="ix">Interactive · drag the slider</span></div>
         <div class="ctrl" data-narrate-skip><label for="pk-p">Per-call success probability <output id="o-pk"></output></label><input type="range" id="pk-p" min="50" max="99.5" step="0.5" value="94"></div>
@@ -1354,8 +1369,8 @@ ol.src li:target{background:var(--accent-soft)}
       <p>Two findings complicate even this measure. The first is that a score depends on the test setup, or harness, and on the exact model. In Cekura's speech-to-speech benchmark (11 models, 2,952 calls), GPT Realtime 2.1 alone reached 79.3% pass^3, while its mini sibling scored 50.0%. The mini model also saved all fields correctly on only 64.5% of data-saving calls, versus 92.0%.<a class="c" data-s="cekuraS2S" href="#src-cekuraS2S" title="Cekura: Speech-to-speech benchmark">[42]</a> <span class="chip k-ven">vendor-reported</span></p>
       <p>The second is that recovery is its own axis. A 2026 interruption benchmark found task completion and recovery quality only partly related.<a class="c" data-s="ihbench" href="#src-ihbench" title="IHBench: interruption handling benchmark (arXiv 2606.19595)">[43]</a> Barge-in, when the caller interrupts the agent, and correction should therefore be tested separately from happy paths.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>The release scorecard covers eight areas, and an exact match on tool-call arguments is the hard gate.</strong> The scorecard is my synthesis; its hard gate and release thresholds are taken from the sources cited.</figcaption>
+    <figure class="exhibit" id="fig-t-rel-2">
+      <figcaption class="caption"><strong>The release scorecard covers eight areas, and an exact match on tool-call arguments is the hard gate.</strong> The scorecard is my synthesis; its hard gate and release thresholds are taken from the sources cited. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-rel-2/" data-narrate-skip>Share</a></figcaption>
       <div class="panel"><span class="lbl" data-narrate-skip>Release scorecard</span>
         <ul class="tight">
           <li><strong>Perception</strong> is measured by word error rate (the share of words transcribed wrongly) on phone-grade audio, by accent and language, and on noisy, multi-speaker recordings (a TV, a car, a family member talking). Entity accuracy is measured for names, dates, and phone and account numbers.</li>
@@ -1376,13 +1391,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-fail">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T4 · Failure modes</p><h2>Agents mostly break on audio, identity and integration</h2>
+    <div class="head"><p class="eyebrow">T4 · Failure modes</p><h2>Agents mostly break on audio, identity and integration<a class="hash" href="#t-fail" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">The published evidence points to twelve failure modes, and each has a known mitigation.</p></div>
     <div class="prose">
       <p>When a voice agent fails, the language model is seldom where the trouble starts. A television in the room is transcribed as the caller, the agent answers its own echo, or a correctly transcribed phone number reaches the tool as a different value. The evidence is uneven: it comes from vendor benchmarks, a public echo test by webrtcHacks, and research papers.</p>
     </div>
-    <figure class="exhibit">
-      <figcaption class="caption"><strong>Most of the twelve failures arise in the audio path, the identity check or the integrations.</strong> Each evidence cell names its source, and vendors' figures carry the vendor-reported label.</figcaption>
+    <figure class="exhibit" id="fig-t-fail-1">
+      <figcaption class="caption"><strong>Most of the twelve failures arise in the audio path, the identity check or the integrations.</strong> Each evidence cell names its source, and vendors' figures carry the vendor-reported label. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-fail-1/" data-narrate-skip>Share</a></figcaption>
       <div class="tbl"><table data-narrate="{0}. {1}. {2}. {3}.">
         <thead><tr><th>Failure</th><th>Mechanism</th><th>Evidence</th><th>Mitigation</th></tr></thead>
         <tbody>
@@ -1408,12 +1423,12 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-router">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T5 · System-1 routing</p><h2>For a fixed intent list, a small classifier is often the fastest and most accurate router</h2>
+    <div class="head"><p class="eyebrow">T5 · System-1 routing</p><h2>For a fixed intent list, a small classifier is often the fastest and most accurate router<a class="hash" href="#t-router" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">On published figures, a fine-tuned classifier with 0.1B parameters labels banking questions faster and more accurately than a hosted decision model or a frontier model, one of the largest general-purpose language models. The figures come from different labs, so the comparison is directional.</p></div>
     <div class="prose">
       <p>The previous section traced two failures to the router, the step that decides what a call is about before the agent speaks. A System-1 model returns a typed answer (a choice, a score, or a yes or no) with probabilities in one pass and never writes prose. Three families compete for the routing job: hosted decision APIs, open decision models and plain fine-tuned classifiers. The table reports what each maker, model card or outside test has published.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The eight options run from hosted APIs priced per token to open models that a team hosts itself, and four have a latency measured in milliseconds.</strong> <span data-narrate-skip>Each row cites its source, and two cells are vendor-reported.</span></figcaption>
+    <figure class="exhibit" id="fig-t-router-1"><figcaption class="caption"><strong>The eight options run from hosted APIs priced per token to open models that a team hosts itself, and four have a latency measured in milliseconds.</strong> <span data-narrate-skip>Each row cites its source, and two cells are vendor-reported.</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-router-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table class="t-router" data-narrate="{0}. {1}. {2}. {3}. {4}. {5}.">
       <colgroup><col style="width:17%"><col style="width:16%"><col style="width:16%"><col style="width:11%"><col style="width:11%"><col style="width:29%"></colgroup>
       <thead><tr><th>Option</th><th>Type</th><th>Output</th><th>Latency</th><th>Cost</th><th>Evidence</th></tr></thead>
@@ -1432,7 +1447,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="prose">
       <p>Two charts compare the options on accuracy and on speed. The accuracy test is Banking77, a benchmark of banking questions sorted into 77 intents, on which Jev was scored zero-shot, with no training on the task.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>A small fine-tuned classifier leads both charts, with 93.5% on Banking77 and 22.5 ms to route one decision.</strong> Different labs measured these on different setups and hardware, so both charts are directional.</figcaption>
+    <figure class="exhibit" id="fig-t-router-2"><figcaption class="caption"><strong>A small fine-tuned classifier leads both charts, with 93.5% on Banking77 and 22.5 ms to route one decision.</strong> Different labs measured these on different setups and hardware, so both charts are directional. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-router-2/" data-narrate-skip>Share</a></figcaption>
     <div class="cols2">
       <div class="panel stack">
         <span class="lbl" data-narrate-skip>Banking77 intent accuracy (77 banking intents)</span>
@@ -1457,7 +1472,7 @@ ol.src li:target{background:var(--accent-soft)}
       <p>A classifier does not win everywhere, and a study by Rodrigues and Vas shows where. A fine-tuned RoBERTa classifier beat a small LLM on the ATIS intent benchmark (95.9% vs 84.1%) and tied it on CLINC150, at roughly three orders of magnitude lower cost and latency.<a class="c" data-s="rodrigues" href="#src-rodrigues" title="Rodrigues and Vas: classifiers vs LLMs for intent detection (arXiv 2608.20371)">[57]</a> The LLM won on out-of-scope recall, the share of out-of-scope requests it catches (85.6% vs 58.1%), and on very noisy speech (92.5% vs 80.0%). A classifier trained on one app's intents scored 0% on a new app's, while a schema-prompted model served both at about 94%.</p>
       <p>The two can be chained in a cascade, in which a cheap model answers first and passes on only the cases it is unsure of. In one public test, published by OpenRouter, on 3,080 banking questions across 77 intents, a frontier model scored 84.4% at about $2.42 per 1,000 requests. Sending everything to a decision model first, and only the low-confidence cases (below 0.90) on to the frontier model, scored 84.0% at about $0.69 per 1,000.<a class="c" data-s="openrouterJev" href="#src-openrouterJev" title="OpenRouter: Jev vs Claude Opus 5 on classification (Sep 22, 2026)">[8]</a> <span class="chip k-ven" data-narrate-skip>vendor-reported</span></p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The cascade cost about 72% less per 1,000 requests than the frontier model alone.</strong> It was scored on the same 3,080 examples used to measure accuracy, so the saving is an upper bound. <span class="chip k-ven">vendor-reported</span></figcaption>
+    <figure class="exhibit" id="fig-t-router-3"><figcaption class="caption"><strong>The cascade cost about 72% less per 1,000 requests than the frontier model alone.</strong> It was scored on the same 3,080 examples used to measure accuracy, so the saving is an upper bound. <span class="chip k-ven">vendor-reported</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-router-3/" data-narrate-skip>Share</a></figcaption>
     <div class="panel stack">
       <span class="lbl" data-narrate-skip>Cost per 1,000 requests</span>
       <div class="bars" data-narrate-skip data-say="The frontier model alone costs 2 dollars and 42 cents per 1,000 requests. With a decision model first, the cost is 69 cents.">
@@ -1470,7 +1485,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="prose">
       <p>Section 5 argued for a thinker-responder design, in which a fast System-1 thinker decides silently and a conversational LLM speaks. Checked against the evidence, the thesis divides into five parts.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>Two parts of the thesis hold, two need a qualification and one needs a guardrail.</strong> The verdicts are my reading of the studies cited on each line. <span class="chip k-our" data-narrate-skip>author's view</span></figcaption>
+    <figure class="exhibit" id="fig-t-router-4"><figcaption class="caption"><strong>Two parts of the thesis hold, two need a qualification and one needs a guardrail.</strong> The verdicts are my reading of the studies cited on each line. <span class="chip k-our" data-narrate-skip>author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-router-4/" data-narrate-skip>Share</a></figcaption>
     <div class="panel">
       <span class="lbl" data-narrate-skip>The thinker-responder thesis, checked</span>
       <div class="check" style="margin-top:var(--space-3)">
@@ -1486,7 +1501,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="prose">
       <p>Routing also chooses tools, which an agent reaches through Model Context Protocol (MCP) servers. Anthropic reports that 58 tools across 5 servers consume about 55K tokens before a conversation starts, and that tool search lifted accuracy from 49% to 74% on one model.<a class="c" data-s="anthropicTool" href="#src-anthropicTool" title="Anthropic Engineering: Advanced tool use (Nov 24, 2025)">[59]</a> On one benchmark, MCP-Zero selected from about 2,800 tools across 308 servers with 98% fewer tokens.<a class="c" data-s="mcpzero" href="#src-mcpzero" title="Fei et al., MCP-Zero: proactive toolchain construction (arXiv 2506.01056)">[60]</a> Retrieval recall then becomes the new bottleneck: with 4,027 tools, the right tool reached the top results only 56% to 64% of the time.<a class="c" data-s="arcade" href="#src-arcade" title="Arcade: Testing tool search with 4,000 tools (Dec 3, 2025)">[61]</a> The router design I recommend builds on these findings.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The design has ten parts, from the classifier to the audit log and the compliance terms.</strong> <span class="chip k-our">author's view</span></figcaption>
+    <figure class="exhibit" id="fig-t-router-5"><figcaption class="caption"><strong>The design has ten parts, from the classifier to the audit log and the compliance terms.</strong> <span class="chip k-our">author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-router-5/" data-narrate-skip>Share</a></figcaption>
     <div class="panel stack">
       <span class="lbl" data-narrate-skip>Recommended router design</span>
       <ol class="tight">
@@ -1511,14 +1526,14 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-lmlm">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T6 · Limited Memory Language Models</p><h2>What the limited-memory research shows, and what it does not</h2>
+    <div class="head"><p class="eyebrow">T6 · Limited Memory Language Models</p><h2>What the limited-memory research shows, and what it does not<a class="hash" href="#t-lmlm" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">In its authors' tests, a model with 382M parameters that looks facts up came close to one with 7B on factual accuracy. There is no evidence yet on dialog, speech, models above about 400M or enterprise data.</p></div>
     <div class="prose">
       <p>Section 9 introduced the Limited Memory Language Model (LMLM), which keeps facts in an external store that people can inspect, correct and delete, and not in its weights. The research behind it is a paper by Zhao et al., "Pre-training Limited Memory Language Models with Internal and External Knowledge," at ICLR 2026. Its code and its <span data-say="176 million and 382 million parameter">176M and 382M</span> checkpoints are public under the MIT license.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a><a class="c" data-s="lmlmCode" href="#src-lmlmCode" title="kilian-group/LMLM code and checkpoints (GitHub, MIT)">[35]</a></p>
       <p>In training, the text is annotated with inline lookups: an entity, a relation and then the retrieved value. The training loss is zeroed on the tokens of the retrieved value. The model still trains on every other token, so it learns when and how to look up, not the value itself. The store holds 54.6M (entity, relation, value) triples, extracted from Wikipedia by an <span data-say="8-billion-parameter">8B</span> annotator trained on GPT-4o-labeled seeds.</p>
       <p>At inference a lookup token pauses generation, the query is matched by embedding similarity (with a rejection threshold of 0.6) and the value is inserted. The training budget was about 3B tokens, 8 epochs and at most 8 H100-days per model.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>With its store, the 382M LMLM scores close to the 7B LLaMA2 on FactScore and T-REx and well above it on PopQA; without the store, it falls below the standard 382M model.</strong> The scores, on three tests of factual accuracy, are from Zhao et al.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a> <span data-narrate-skip>EM stands for exact match.</span></figcaption>
+    <figure class="exhibit" id="fig-t-lmlm-1"><figcaption class="caption"><strong>With its store, the 382M LMLM scores close to the 7B LLaMA2 on FactScore and T-REx and well above it on PopQA; without the store, it falls below the standard 382M model.</strong> The scores, on three tests of factual accuracy, are from Zhao et al.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a> <span data-narrate-skip>EM stands for exact match.</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-lmlm-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}, with {1} parameters, scored {2} on FactScore, {3} on T-REx exact match and {4} on PopQA.">
       <thead><tr><th>Model</th><th>Params</th><th>FactScore</th><th>T-REx EM</th><th>PopQA</th></tr></thead>
       <tbody>
@@ -1534,7 +1549,7 @@ ol.src li:target{background:var(--accent-soft)}
       <p>A follow-up paper in July 2026, Co-LMLM, replaces the relational triples with vector keys and free-text values, so knowledge is no longer limited to entity attributes. A retrieval takes about 2.2 ms, which fits inside a voice turn, against 28.6 ms for a lookup that generates a question. Its authors also report that lookup timing is imperfect: forcing lookups added 5.9 points on SimpleQA.<a class="c" data-s="colmlm" href="#src-colmlm" title="Feldman, Zhao et al., Co-LMLM: Continuous-Query Limited Memory Language Models (arXiv 2607.07707)">[17]</a></p>
       <p>How much of a model is fact storage? The research answers only indirectly, by showing how much smaller a model can be once it retrieves.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>Retrieval models have matched models 18 to 50 times larger on knowledge-heavy tasks.</strong> The reductions are those reported for LMLM, RETRO and Atlas.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a><a class="c" data-s="retro" href="#src-retro" title="Borgeaud et al. (DeepMind), RETRO: Improving language models by retrieving from trillions of tokens">[62]</a><a class="c" data-s="atlas" href="#src-atlas" title="Izacard et al. (Meta), Atlas: Few-shot learning with retrieval augmented language models">[63]</a></figcaption>
+    <figure class="exhibit" id="fig-t-lmlm-2"><figcaption class="caption"><strong>Retrieval models have matched models 18 to 50 times larger on knowledge-heavy tasks.</strong> The reductions are those reported for LMLM, RETRO and Atlas.<a class="c" data-s="lmlm" href="#src-lmlm" title="Zhao et al., Pre-training Limited Memory Language Models (arXiv 2505.15962; ICLR 2026)">[11]</a><a class="c" data-s="retro" href="#src-retro" title="Borgeaud et al. (DeepMind), RETRO: Improving language models by retrieving from trillions of tokens">[62]</a><a class="c" data-s="atlas" href="#src-atlas" title="Izacard et al. (Meta), Atlas: Few-shot learning with retrieval augmented language models">[63]</a> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-lmlm-2/" data-narrate-skip>Share</a></figcaption>
     <div class="panel stack"><span class="lbl" data-narrate-skip>Parameter reduction at comparable performance on knowledge-heavy tasks</span>
       <div class="bars" data-say="LMLM, with 382 million parameters, is comparable to LLaMA2 with 7 billion, a reduction of 18 times. RETRO, with 7.5 billion, is comparable to GPT-3 with 175 billion, or 25 times. Atlas, with 11 billion, outscored a model with 540 billion on the NQ benchmark, or 50 times.">
         <div class="r"><span>LMLM 382M ≈ LLaMA2-7B</span><div class="b hi" style="width:36%"></div><span>18x</span></div>
@@ -1546,7 +1561,7 @@ ol.src li:target{background:var(--accent-soft)}
     <div class="prose">
       <p>Models store about 2 bits of knowledge per parameter, falling toward 1 bit for rarely seen facts,<a class="c" data-s="allenzhu" href="#src-allenzhu" title="Allen-Zhu and Li, Physics of Language Models 3.3: Knowledge Capacity Scaling Laws (ICLR 2025)">[64]</a> and question-answering accuracy tracks how often a fact appears in training data.<a class="c" data-s="kandpal" href="#src-kandpal" title="Kandpal et al., Large Language Models Struggle to Learn Long-Tail Knowledge (ICML 2023)">[65]</a> None of these studies measures the share of a frontier model's weights spent on facts, and reasoning, code and multilingual skill need parameters too.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>None of five claims often made for limited-memory models is fully supported.</strong> The verdicts and the defensible versions are my reading of the papers cited. <span class="chip k-our" data-narrate-skip>author's view</span></figcaption>
+    <figure class="exhibit" id="fig-t-lmlm-3"><figcaption class="caption"><strong>None of five claims often made for limited-memory models is fully supported.</strong> The verdicts and the defensible versions are my reading of the papers cited. <span class="chip k-our" data-narrate-skip>author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-lmlm-3/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}. I rate that claim {1}. {2}.">
       <thead><tr><th>Claim often made</th><th>Verdict</th><th>Defensible version</th></tr></thead>
       <tbody>
@@ -1557,7 +1572,7 @@ ol.src li:target{background:var(--accent-soft)}
         <tr><td>It keeps sensitive data out of weights.</td><td><span class="vd" data-say="plausible but untested">plausible, untested</span></td><td><span>It is designed to, and extraction attacks show why that matters, but no privacy-attack evaluation has been published.<a class="c" data-s="carlini21" href="#src-carlini21" title="Carlini et al., Extracting Training Data from Large Language Models (USENIX Security 2021)">[33]</a><a class="c" data-s="nasr" href="#src-nasr" title="Nasr et al., Scalable Extraction of Training Data from Production Language Models (2023)">[34]</a></span></td></tr>
       </tbody></table></div>
     </figure>
-    <figure class="exhibit"><figcaption class="caption"><strong>Six things have to be true before a regulated contact center can rely on a limited-memory model.</strong> <span class="chip k-our">author's view</span></figcaption>
+    <figure class="exhibit" id="fig-t-lmlm-4"><figcaption class="caption"><strong>Six things have to be true before a regulated contact center can rely on a limited-memory model.</strong> <span class="chip k-our">author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-lmlm-4/" data-narrate-skip>Share</a></figcaption>
     <div class="panel stack"><span class="lbl" data-narrate-skip>What has to be true for regulated contact centers</span>
       <ul class="tight">
         <li><strong>Extraction has to be accurate.</strong> Turning policy text and records from customer (CRM) and health record (EHR) systems into rows relies on LLM annotators, and their errors become confident wrong answers.</li>
@@ -1576,12 +1591,12 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-deploy">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T7 · Deployment and data posture</p><h2>"Sovereign" in practice means private endpoints under contract</h2>
+    <div class="head"><p class="eyebrow">T7 · Deployment and data posture</p><h2>"Sovereign" in practice means private endpoints under contract<a class="hash" href="#t-deploy" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Private cloud endpoints are common, and I found no named US health system that runs large open-weight models itself for patient-facing voice.</p></div>
     <div class="prose">
       <p>"Sovereign" deployment covers two different aims. The case for the first, keeping protected data and conversation logs under the organization's own control, is strong. The case for the second, running voice inference on its own GPUs, is weak for 2026 to 2027, except for small models such as routers. Five postures span the range, from a model API under a BAA to large models that a team hosts itself.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>Three of the five postures depend on a provider, and two are self-hosted.</strong> <span data-narrate-skip>Each row cites its sources.</span></figcaption>
+    <figure class="exhibit" id="fig-t-deploy-1"><figcaption class="caption"><strong>Three of the five postures depend on a provider, and two are self-hosted.</strong> <span data-narrate-skip>Each row cites its sources.</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-deploy-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}. {1}. {2}. {3}.">
       <thead><tr><th>Posture</th><th>Status in 2026</th><th>Pros</th><th>Cons</th></tr></thead>
       <tbody>
@@ -1600,12 +1615,12 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-fraud">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T8 · Fraud and identity controls</p><h2>The identity check should match the harm a wrong answer can do</h2>
+    <div class="head"><p class="eyebrow">T8 · Fraud and identity controls</p><h2>The identity check should match the harm a wrong answer can do<a class="hash" href="#t-fraud" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">A status question, an address change and a payment do not need the same proof of identity. Ten controls and three risk tiers set out which check belongs where.</p></div>
     <div class="prose">
       <p>Section 8 argued that a voice no longer proves who is calling. Identity has to be designed in from day one, and its controls sit in different layers, from the contact center platform and the speech-to-text layer to the dialer and the marketing team.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>Each of ten identity risks has a control and a layer where that control runs.</strong> Three rows rest on vendor reports and two on my own judgment.</figcaption>
+    <figure class="exhibit" id="fig-t-fraud-1"><figcaption class="caption"><strong>Each of ten identity risks has a control and a layer where that control runs.</strong> Three rows rest on vendor reports and two on my own judgment. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-fraud-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}. {1}. {2}. {3}.">
       <thead><tr><th>Risk</th><th>Control</th><th>Runs in</th><th>Evidence</th></tr></thead>
       <tbody>
@@ -1621,7 +1636,7 @@ ol.src li:target{background:var(--accent-soft)}
         <tr><td>Scammers posing as your organization</td><td>The organization publishes a callback policy and a "we never ask" policy, and educates customers.</td><td><span data-say="It runs in marketing and communications">Marketing and communications</span></td><td><span>Family-impersonation clone scams are documented.<a class="c" data-s="techcrunchDeep" href="#src-techcrunchDeep" title="TechCrunch: After a deepfake voice fooled her grandfather, this founder sprang into action (Sep 28, 2026)">[30]</a></span></td></tr>
       </tbody></table></div>
     </figure>
-    <figure class="exhibit"><figcaption class="caption"><strong>Three risk tiers match the check to the harm.</strong> The tiers and examples are a starting point for fraud and compliance teams. <span class="chip k-our">author's view</span></figcaption>
+    <figure class="exhibit" id="fig-t-fraud-2"><figcaption class="caption"><strong>Three risk tiers match the check to the harm.</strong> The tiers and examples are a starting point for fraud and compliance teams. <span class="chip k-our">author's view</span> <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-fraud-2/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0} risk. {1}. {2}. {3}.">
       <thead><tr><th>Risk tier</th><th>Examples</th><th>Checks</th><th>Friction to plan for</th></tr></thead>
       <tbody>
@@ -1638,12 +1653,12 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-reg">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T9 · Regulation</p><h2>The rules ask mostly for disclosure and consent, and they are tightening</h2>
+    <div class="head"><p class="eyebrow">T9 · Regulation</p><h2>The rules ask mostly for disclosure and consent, and they are tightening<a class="hash" href="#t-reg" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Most of the selected US rules ask for disclosure of AI use or for consent, and new state laws took effect in 2025 and 2026.</p></div>
     <div class="prose">
       <p>The ten rules summarized here are a selection, given for orientation. This is not legal advice and not a complete list. The focus is US health care. Financial services adds its own regimes, not reviewed here: the Gramm-Leach-Bliley Act (GLBA), the card industry's data security standard (PCI DSS) and the rules on unfair, deceptive or abusive acts or practices (UDAAP). Items marked unverified come from secondary sources and need confirmation against the enacted text and by counsel.</p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>The newest of the ten rules carry dates in 2026 and 2027, and two of those dates are unverified.</strong> All of it is orientation, not legal advice.</figcaption>
+    <figure class="exhibit" id="fig-t-reg-1"><figcaption class="caption"><strong>The newest of the ten rules carry dates in 2026 and 2027, and two of those dates are unverified.</strong> All of it is orientation, not legal advice. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-t-reg-1/" data-narrate-skip>Share</a></figcaption>
     <div class="tbl"><table data-narrate="{0}. {1}. {2}.">
       <thead><tr><th>Rule</th><th>What it requires</th><th>Status</th></tr></thead>
       <tbody>
@@ -1667,13 +1682,13 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="verify">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T10 · Claim check</p><h2>Of 21 circulating claims, six check out</h2>
+    <div class="head"><p class="eyebrow">T10 · Claim check</p><h2>Of 21 circulating claims, six check out<a class="hash" href="#verify" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">I traced 21 circulating claims to their sources: benchmark figures, vendor claims and one widely shared decision-offload cost model. Fewer than a third hold up as stated.</p></div>
     <div class="prose">
       <p>Each claim carries one of three verdicts. It is verified when the source matches it. It is partial or vendor when the source confirms only part of it or is the vendor's own statement. It is unverified or wrong when I could not find it or the source says otherwise.</p>
       <p>The nine claims in the last group include ones about latency, about cost and about models that supposedly cannot hallucinate. <span data-narrate-skip>The buttons above the table show one verdict at a time.</span></p>
     </div>
-    <figure class="exhibit"><figcaption class="caption"><strong>Six claims are verified, six are partial or rest on a vendor's word, and nine are unverified or wrong.</strong> Each row gives the claim as it circulates, then my verdict and what the source I checked shows.</figcaption>
+    <figure class="exhibit" id="fig-verify-1"><figcaption class="caption"><strong>Six claims are verified, six are partial or rest on a vendor's word, and nine are unverified or wrong.</strong> Each row gives the claim as it circulates, then my verdict and what the source I checked shows. <a class="share" href="/state-of-voice-agents/share/2026-10/fig-verify-1/" data-narrate-skip>Share</a></figcaption>
     <span class="ix">Interactive · filter by verdict</span>
     <div class="seg" role="group" aria-label="Filter claims" id="vf">
       <button type="button" data-f="all" aria-pressed="true">All</button>
@@ -1693,7 +1708,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="t-research">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">T11 · Tooling and implementation</p><h2>By one vendor's account, implementations fail on vague goals and missing handoffs</h2>
+    <div class="head"><p class="eyebrow">T11 · Tooling and implementation</p><h2>By one vendor's account, implementations fail on vague goals and missing handoffs<a class="hash" href="#t-research" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">A published account of failed chatbot projects points to goals, integration, handoff, knowledge and measurement.</p></div>
     <div class="prose">
       <p>The last question for an engineering team is what to borrow and what to avoid. On the frontend, Vercel's AI Voice Elements give React components for persona, microphone capture, transcript and playback.<a class="c" data-s="vercelVoice" href="#src-vercelVoice" title="Vercel changelog: AI Voice Elements (Jan 14, 2026)">[84]</a> They are useful for web prototypes and irrelevant to telephony, which is how a contact center's calls arrive.</p>
@@ -1705,7 +1720,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="sources">
   <div class="wrap stack">
-    <div class="head"><p class="eyebrow">Sources</p><h2>Every number traces back here</h2>
+    <div class="head"><p class="eyebrow">Sources</p><h2>Every number traces back here<a class="hash" href="#sources" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Numbered in order of first use.</p></div>
     <span class="ix">Interactive · filter by source type</span>
     <div class="seg" role="group" aria-label="Filter sources" id="sf">
@@ -1720,7 +1735,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="comments" class="comments">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">Discussion</p><h2>Questions and comments</h2>
+    <div class="head"><p class="eyebrow">Discussion</p><h2>Questions and comments<a class="hash" href="#comments" aria-label="Link to this section" data-narrate-skip></a></h2>
       <p class="lede">Corrections, counterpoints and field experience are welcome. Comments are public and stored as GitHub issues on this report's repository through utterances, which is free and open source, with no ads or tracking. Sign in with GitHub to post.</p></div>
     <div class="panel"><div id="cmt"><div class="cmt-off"><p id="cmt-msg">Comments appear here when the page runs scripts. You can also read and post them on GitHub.</p><p class="cmt-btns"><a class="btn primary" href="https://github.com/sbmadhav/state-of-voice-agents/issues?q=label%3Acomments" target="_blank" rel="noopener">Read comments on GitHub</a> <a class="btn" href="https://github.com/sbmadhav/state-of-voice-agents/issues/new?labels=comments&amp;title=Comment%3A%20October%202026%20edition" target="_blank" rel="noopener">Post on GitHub</a></p></div></div></div>
   </div>
@@ -1728,7 +1743,7 @@ ol.src li:target{background:var(--accent-soft)}
 
 <section id="about" class="about">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">About</p><h2>About this report</h2></div>
+    <div class="head"><p class="eyebrow">About</p><h2>About this report<a class="hash" href="#about" aria-label="Link to this section" data-narrate-skip></a></h2></div>
     <div class="cols2">
       <div class="panel stack">
         <span class="lbl">The report</span>
@@ -2331,6 +2346,86 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
  new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['data-theme']});
  mq.addEventListener('change',sync);
 })();
+/* Section permalinks and exhibit sharing. Links that are copied or shared point at the archived edition
+   (<main data-edition>), never at the root page, which a new edition replaces every month. An exhibit is shared
+   through its share page, /share/<edition>/<figure id>/, whose link preview is a picture of the exhibit; the
+   pages and pictures are written by e2e/share-images.mjs. Without JavaScript, Share is a plain link to that page. */
+(function(){
+ const main=$('main'),ed=main&&main.dataset.edition;if(!ed)return;
+ const SITE='https://sbmadhav.com/state-of-voice-agents/';
+ // The visible confirmation is also the polite live region, in the page before any message is added to it
+ const toasts=document.createElement('div');toasts.className='md-toasts';toasts.setAttribute('role','status');toasts.setAttribute('aria-live','polite');
+ document.body.appendChild(toasts);
+ let timer;
+ const say=(text,url)=>{
+  const el=document.createElement('div');el.className='md-toast';el.textContent=text;
+  if(url){const a=document.createElement('a');a.href=a.textContent=url;el.append(' ',a)}
+  toasts.replaceChildren(el);clearTimeout(timer);timer=setTimeout(()=>el.remove(),url?12000:3000);
+ };
+ const copy=async url=>{
+  let ok=false;
+  try{await navigator.clipboard.writeText(url);ok=true}
+  catch(e){ // no Clipboard API (an http page, an older browser) or permission refused: the older copy command
+   const back=document.activeElement,ta=document.createElement('textarea');
+   ta.value=url;ta.readOnly=true;ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
+   document.body.appendChild(ta);ta.select();
+   try{ok=document.execCommand('copy')}catch(e2){}
+   ta.remove();if(back&&back.focus)back.focus();
+  }
+  if(ok)say('Link copied');else say('Copy this link:',url);
+ };
+ // Section permalinks: the click still moves to the section (a plain in-page link) and also copies its link
+ main.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('h2>a.hash');
+  if(a&&!(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey))copy(SITE+'editions/'+ed+'/'+a.getAttribute('href'));
+ });
+ // Exhibits: Share becomes a button that opens a menu. The menu's links are built when it first opens.
+ let cur=null;
+ const shut=focus=>{if(!cur)return;const c=cur;cur=null;c.menu.hidden=true;c.btn.setAttribute('aria-expanded','false');if(focus)c.btn.focus()};
+ document.addEventListener('click',e=>{if(cur&&!cur.box.contains(e.target))shut()});
+ main.querySelectorAll('figure.exhibit[id]').forEach(fig=>{
+  const link=fig.querySelector('figcaption a.share');if(!link)return;
+  const strong=fig.querySelector('figcaption strong'),claim=strong?strong.textContent.trim():document.title;
+  const url=SITE+'share/'+ed+'/'+fig.id+'/',enc=encodeURIComponent;
+  const box=document.createElement('div'),btn=document.createElement('button'),menu=document.createElement('div');
+  box.className='share-box';box.setAttribute('data-narrate-skip','');
+  btn.type='button';btn.className='share';btn.textContent='Share';btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-controls','share-'+fig.id);
+  menu.className='share-menu';menu.id='share-'+fig.id;menu.hidden=true;menu.setAttribute('role','group');menu.setAttribute('aria-label','Share this exhibit');
+  box.append(btn,menu);link.replaceWith(box);
+  const tab=' <span class="md-sr-only">(opens in a new tab)</span>';
+  const build=()=>{menu.innerHTML='<button type="button" data-net="copy">Copy link</button>'+
+   `<a data-net="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}" target="_blank" rel="noopener noreferrer">Share on LinkedIn${tab}</a>`+
+   `<a data-net="x" href="https://x.com/intent/post?url=${enc(url)}&amp;text=${enc(claim)}" target="_blank" rel="noopener noreferrer">Share on X${tab}</a>`+
+   `<a data-net="image" href="/state-of-voice-agents/share/${ed}/${fig.id}-full.png" download="voice-agents-${ed}-${fig.id}.png">Download image</a>`+
+   (navigator.share?'<button type="button" data-net="more">More options</button>':'')};
+  const open=()=>{
+   shut();if(!menu.firstChild)build();
+   menu.hidden=false;btn.setAttribute('aria-expanded','true');cur={box,btn,menu};
+   // Keep the menu inside the viewport on narrow screens
+   menu.style.left='0px';
+   const r=menu.getBoundingClientRect(),over=r.right-(document.documentElement.clientWidth-8);
+   if(over>0)menu.style.left=-Math.max(0,Math.min(over,r.left-8))+'px';
+   menu.firstElementChild.focus();
+  };
+  btn.addEventListener('click',()=>{if(cur&&cur.menu===menu)shut();else open()});
+  menu.addEventListener('click',e=>{
+   const item=e.target.closest('[data-net]');if(!item)return;
+   if(item.dataset.net==='copy')copy(url);
+   else if(item.dataset.net==='more')navigator.share({title:claim,text:claim,url}).catch(()=>{});
+   shut(true);
+  });
+  box.addEventListener('keydown',e=>{
+   if(menu.hidden)return;
+   const items=[...menu.children],i=items.indexOf(document.activeElement),n=items.length;
+   if(e.key==='Escape'){e.preventDefault();shut(true)}
+   else if(e.key==='ArrowDown'){e.preventDefault();items[(i+1)%n].focus()}
+   else if(e.key==='ArrowUp'){e.preventDefault();items[(Math.max(i,0)+n-1)%n].focus()}
+   else if(e.key==='Home'||e.key==='End'){e.preventDefault();items[e.key==='Home'?0:n-1].focus()}
+  });
+  // Tabbing out of the menu closes it
+  box.addEventListener('focusout',e=>{if(cur&&cur.menu===menu&&e.relatedTarget&&!box.contains(e.relatedTarget))shut()});
+ });
+})();
 })();
 </script>
 
@@ -2345,6 +2440,7 @@ document.addEventListener('click', function (e) {
   else if (e.target.closest('.bolt-launch')) siteTrack('voice/ask-bolt', 'Opened Ask Bolt');
   else if (e.target.closest('#listen-all-btn')) siteTrack('voice/listen-all', 'Opened Listen to the whole report');
   else if (e.target.closest('.listen > button')) siteTrack('voice/listen', 'Opened a section voice-over');
+  else if (e.target.closest('.share-menu [data-net]')) siteTrack('voice/share/' + e.target.closest('[data-net]').dataset.net, 'Shared an exhibit');
 }, true);
 </script>
 
