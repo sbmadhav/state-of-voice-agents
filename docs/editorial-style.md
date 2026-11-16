@@ -26,6 +26,8 @@ These conventions are borrowed, and each is worth rereading at the source.
 
 **Numbers.** The first mention of a figure says who measured it, what was measured, on how many, and what it compares with ("from 6.2 minutes to 2.4"). Write the attribution into the sentence ("Tampa General reports", "in Cekura's benchmark, which a testing vendor runs") and put the evidence chip after that sentence. Where a paragraph mixes evidence types, each sentence carries its own chip. Citation markers stay next to the claim they support. Percentages are numerals with the % sign (75.6%), in prose and in exhibits alike; the narration reads the sign as "percent".
 
+**Listening.** Each section is also read aloud. Evidence chips are for the eye and are not read (from the December 2026 edition on), so the sentence itself must say who reported a figure: "Veris reports", "by the vendor's account". The "new" tag is read once per item. Read a section's script (`python3 tools/narration.py --stdout`) before recording it.
+
 **Exhibits.** Use a table when items are compared on the same attributes. Use a list when three or more items are parallel, such as criteria, steps or controls. Each exhibit has a caption that states its finding and its evidence label, and the prose refers to it. Table cells are complete clauses.
 
 **Jargon.** Define each term in the sentence where it first appears in each edition: repeat reliability (pass^3), BAA, TCPA, VAD, MCP, IVR, diarization, full-duplex, System 1. A product name gets a short gloss the first time.
