@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Narration scripts and read time for the report page. Standard library only, deterministic.
 
-    python3 tools/narration.py            write audio/<edition>/<section-id>.txt and update the read time in index.html
-    python3 tools/narration.py --check    exit 1 if a script or the read time is out of date (changes nothing)
+    python3 tools/narration.py            write audio/<edition>/<section-id>.txt and .blocks.json, and update the read time
+    python3 tools/narration.py --check    exit 1 if a script, a blocks file or the read time is out of date (changes nothing)
     python3 tools/narration.py --stdout   print the scripts instead of writing them
     python3 tools/narration.py --page editions/2026-10/index.html   another edition's page
 
@@ -21,8 +21,16 @@ editions recorded before the rule (2026-10 and 2026-11) keep their labels, so th
 
 The read time is the visible text of <main>, without the Sources list, at 230 words a minute, rounded up. It is
 pre-rendered into <span id="read-min">About N min read</span> so readers without JavaScript see it too.
+
+Beside each script, audio/<edition>/<section-id>.blocks.json says which element of the page each paragraph comes
+from, so the page can highlight what is being read: {"sha256": <of the script>, "blocks": [[path, prefix], ...]},
+one entry per paragraph, in order. `path` lists the element-child indexes that lead from the section (or the
+hero) down to the element, counted in this static HTML; `prefix` is the start of the element's text (see
+text_key), which the page compares before it highlights anything. A table row maps to its <tr>, a stat tile to
+its .stat, a numbered-list item to its <li>, and both paragraphs of the Sources script to the section's <h2>.
+The paragraph timings ("cues" in manifest.json) come from tools/cues.py.
 """
-import argparse, html, html.parser, math, pathlib, re, sys
+import argparse, hashlib, html, html.parser, json, math, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGE = ROOT / "index.html"
@@ -100,6 +108,26 @@ def raw_text(node):
 
 BR = "\x03"  # a block break, kept through whitespace squashing
 
+# Inside render() only, each paragraph starts with a marker that names the element it comes from: control
+# characters that no pattern in this tool matches. narration_blocks() reads the markers right after render()
+# and removes them, so the rest of the pipeline works on exactly the text it always did.
+MARK_OPEN, MARK_CLOSE = "\x04", "\x05"
+MARK_RE = re.compile(MARK_OPEN + r"(\d+)" + MARK_CLOSE)
+_marked = []  # the elements named by markers, for the section being rendered
+
+
+def mark(node, text):
+    """`text`, a whole paragraph, marked as coming from `node`. Empty text stays empty."""
+    if not text:
+        return text
+    _marked.append(node)
+    return f"{MARK_OPEN}{len(_marked) - 1}{MARK_CLOSE}{text}"
+
+
+def unmark(s):
+    """Without markers: for the branches that flatten their children into one paragraph of their own."""
+    return MARK_RE.sub("", s)
+
 
 def squash(s):
     return re.sub(r"\s+", " ", s).strip()
@@ -172,7 +200,7 @@ def render(node):
     if "data-say" in node.attrs:
         return node.attrs["data-say"]
     if node.attrs.get("role") == "img" and node.attrs.get("aria-label"):
-        return BR + end(node.attrs["aria-label"]) + BR
+        return BR + mark(node, end(node.attrs["aria-label"])) + BR
     if node.tag == "br":
         return " "
     if "chip" in c or ("vd" in c and squash(raw_text(node)) == "new"):
@@ -188,21 +216,23 @@ def render(node):
         head = node.parent.find(lambda n: n.tag in ("h1", "h2")) if node.parent is not None else None
         if head is not None and squash(raw_text(head)).startswith(t):
             return ""  # "About" above "About this report"
-        return BR + end(eyebrow(t)) + BR
+        return BR + mark(node, end(eyebrow(t))) + BR
     if node.tag == "ol":
         items = [x for x in node.children if isinstance(x, Node) and x.tag == "li" and not skipped(x)]
         out = []
         for i, li in enumerate(items):
-            body = squash(render_children(li).replace(BR, " "))
+            body = squash(unmark(render_children(li)).replace(BR, " "))
             lead = ORDINALS[i] if i < len(ORDINALS) else f"Number {i + 1}"
             if len(body) > 1 and body[0].isupper() and body[1].islower():
                 body = body[0].lower() + body[1:]
-            out.append(end(f"{lead}, {body}"))
+            out.append(mark(li, end(f"{lead}, {body}")))
         return BR + BR.join(out) + BR
     inner = render_children(node)
     if node.tag in BLOCK or c & BLOCK_CLASSES:
+        # A part that already carries a marker is a nested block's paragraph; the rest is this element's own text
         parts = squash_blocks(inner).split(BR)
-        return BR + BR.join(end(x) for x in parts if x) + BR if any(parts) else ""
+        return BR + BR.join(end(x) if x.startswith(MARK_OPEN) else mark(node, end(x))
+                            for x in parts if x) + BR if any(parts) else ""
     return inner
 
 
@@ -218,7 +248,7 @@ def eyebrow(t):
 
 
 def cell(td):
-    return squash(render_children(td).replace(BR, " ")).rstrip(".")
+    return squash(unmark(render_children(td)).replace(BR, " ")).rstrip(".")
 
 
 def render_table(t):
@@ -235,19 +265,19 @@ def render_table(t):
             parts = [end(cells[0])] if cells else []
             parts += [end(f"{h}: {v}") for h, v in zip(heads[1:], cells[1:]) if v]
             line = " ".join(parts)
-        out.append(end(line))
+        out.append(mark(r, end(line)))
     return BR + BR.join(out) + BR
 
 
 def render_stat(n):
     def part(cls):
         x = n.find(lambda k: cls in k.classes)
-        return squash(render_children(x).replace(BR, " ")) if x is not None else ""
+        return squash(unmark(render_children(x)).replace(BR, " ")) if x is not None else ""
     label, was, value = part("eyebrow"), part("was"), part("v")
     rest = "".join(render(x) for x in n.children
                    if isinstance(x, Node) and not x.classes & {"eyebrow", "was", "v"})
-    rest = squash(rest.replace(BR, " "))
-    return BR + " ".join(s for s in (end(f"{label}: {value}"), end(was), end(rest)) if s) + BR
+    rest = squash(unmark(rest).replace(BR, " "))
+    return BR + mark(n, " ".join(s for s in (end(f"{label}: {value}"), end(was), end(rest)) if s)) + BR
 
 
 def resolve_labels(text):
@@ -317,7 +347,8 @@ def speak(s):
     return s
 
 
-def tidy(s):
+def tidy_lines(s):
+    """One cleaned-up line for each block of `s`; the empty ones are the blocks a script leaves out."""
     s = s.replace("\u00a0", " ")
     lines = []
     for line in s.split(BR):
@@ -332,9 +363,37 @@ def tidy(s):
         line = re.sub(r"\.\s*\.", ".", line)
         line = re.sub(r":\.", ".", line)
         line = re.sub(r"\s{2,}", " ", line)
-        if line:
-            lines.append(line)
-    return "\n\n".join(lines) + "\n"
+        lines.append(line)
+    return lines
+
+
+def tidy(s):
+    return "\n\n".join(line for line in tidy_lines(s) if line) + "\n"
+
+
+def paragraphs(script):
+    """The paragraphs of a script, as tools/voiceover.py and tools/cues.py split it."""
+    return [p for p in script.strip().split("\n\n") if p]
+
+
+def sha256(text):
+    """The script's hash, as tools/voiceover.py records it in manifest.json."""
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def text_key(node):
+    """The start of an element's text: lowercase, ASCII letters and digits only, 16 characters. The page
+    computes the same from textContent and compares before it highlights the element."""
+    return re.sub(r"[^a-z0-9]", "", raw_text(node).lower())[:16]
+
+
+def path_from(sec, node):
+    """Element-child indexes from `sec` down to `node` (text and comments are not counted)."""
+    out = []
+    while node is not sec:
+        out.append([c for c in node.parent.children if isinstance(c, Node)].index(node))
+        node = node.parent
+    return out[::-1]
 
 
 def main_node(root):
@@ -343,23 +402,52 @@ def main_node(root):
 
 def narration(main):
     """Ordered (section id, script) pairs."""
+    return [(sid, text) for sid, text, _ in narration_blocks(main)]
+
+
+def narration_blocks(main):
+    """Ordered (section id, script, blocks) triples; blocks has one [path, prefix] for each paragraph."""
     out = []
     # Every section in <main>, in page order, also those inside a wrapper (the October baseline's Part II)
     targets = [n for n in main.find_all(lambda n: n.attrs.get("id") and (n.tag == "section" or "hero" in n.classes))
                if n.attrs["id"] not in SKIP_SECTIONS]
     for sec in targets:
         sid = sec.attrs["id"]
+        del _marked[:]
         if sid == "sources":
-            h2 = squash(raw_text(sec.find(lambda n: n.tag == "h2")))
+            head = sec.find(lambda n: n.tag == "h2")
+            h2 = squash(raw_text(head))
             count = len(list(sec.find_all(lambda n: n.tag == "li" and (n.attrs.get("id") or "").startswith("src-"))))
             update = "October baseline" in raw_text(sec)   # a monthly update points back to the baseline's list
             text = (f"{end(h2)}{BR}The {count} sources for this {'update' if update else 'report'} are listed on the "
                     f"page, numbered in order of first use, each with a link."
                     + (" October's sources are in the October baseline." if update else ""))
+            nodes = [head] * len(text.split(BR))   # written here, not rendered: both paragraphs sit under the heading
         else:
-            text = resolve_labels(render(sec))
-        out.append((sid, tidy(speak(text))))
+            marked = render(sec)
+            nodes = []
+            for part in marked.split(BR):
+                m = MARK_RE.match(part)
+                nodes.append(_marked[int(m.group(1))] if m else None)
+            text = resolve_labels(unmark(marked))
+        spoken = speak(text)
+        script = tidy(spoken)
+        # tidy() drops the blocks that end up empty; the same filter keeps elements and paragraphs in step
+        lines = tidy_lines(spoken)
+        if len(lines) != len(nodes):
+            sys.exit(f"narration: {sid}: {len(nodes)} rendered blocks became {len(lines)}")
+        kept = [n for n, line in zip(nodes, lines) if line]
+        if len(kept) != len(paragraphs(script)) or any(n is None for n in kept):
+            sys.exit(f"narration: {sid}: {len(paragraphs(script))} paragraphs but {len(kept)} elements, "
+                     f"{sum(n is None for n in kept)} of them unknown")
+        out.append((sid, script, [[path_from(sec, n), text_key(n)] for n in kept]))
     return out
+
+
+def blocks_json(script, blocks):
+    """The text of a <section-id>.blocks.json file: one block to a line, so a diff shows what moved."""
+    rows = ",\n".join("  " + json.dumps(b, separators=(",", ":")) for b in blocks)
+    return '{"sha256": "%s", "blocks": [\n%s\n]}\n' % (sha256(script), rows)
 
 
 def read_minutes(main):
@@ -393,26 +481,27 @@ def main():
         sys.exit('narration: <main> needs data-audio-base="/state-of-voice-agents/audio/YYYY-MM/"')
     out_dir = ROOT / "audio" / ed.group(1)
     set_edition(ed.group(1))
-    scripts = narration(m)
+    scripts = narration_blocks(m)
     count, minutes = read_minutes(m)
     if not READ_RE.search(source):
         sys.exit('narration: the page needs <span id="read-min">About N min read</span> in the hero')
     new_source = READ_RE.sub(lambda x: f"{x.group(1)}About {minutes} min read{x.group(2)}", source)
 
     if a.stdout:
-        for sid, text in scripts:
+        for sid, text, _ in scripts:
             print(f"=== {sid} ({len(text)} characters)\n{text}")
         return
     stale = []
-    for sid, text in scripts:
-        f = out_dir / f"{sid}.txt"
-        if not f.exists() or f.read_text(encoding="utf-8") != text:
-            stale.append(str(f.relative_to(ROOT)))
-            if not a.check:
-                out_dir.mkdir(parents=True, exist_ok=True)
-                f.write_text(text, encoding="utf-8")
-    known = {f"{sid}.txt" for sid, _ in scripts}
-    extra = sorted(p for p in out_dir.glob("*.txt") if p.name not in known) if out_dir.exists() else []
+    for sid, text, blocks in scripts:
+        for f, body in ((out_dir / f"{sid}.txt", text), (out_dir / f"{sid}.blocks.json", blocks_json(text, blocks))):
+            if not f.exists() or f.read_text(encoding="utf-8") != body:
+                stale.append(str(f.relative_to(ROOT)))
+                if not a.check:
+                    out_dir.mkdir(parents=True, exist_ok=True)
+                    f.write_text(body, encoding="utf-8")
+    known = {f"{sid}{ext}" for sid, _, _ in scripts for ext in (".txt", ".blocks.json")}
+    extra = sorted(p for pat in ("*.txt", "*.blocks.json") for p in out_dir.glob(pat)
+                   if p.name not in known) if out_dir.exists() else []
     for p in extra:
         stale.append(f"{p.relative_to(ROOT)} (no longer a section)")
         if not a.check:
@@ -422,7 +511,7 @@ def main():
         if not a.check:
             page.write_text(new_source, encoding="utf-8")
 
-    total = sum(len(t) for _, t in scripts)
+    total = sum(len(t) for _, t, _ in scripts)
     print(f"narration: edition {ed.group(1)}, {len(scripts)} scripts, {total:,} characters; "
           f"{count:,} words, about {minutes} min read at {WPM} wpm")
     if stale:

@@ -542,6 +542,22 @@ h2 .hash::before{content:"#"}
 .share-menu>*:hover,.share-menu>*:focus-visible{background:var(--accent-soft);color:var(--accent)}
 .share-menu>*:focus-visible{outline-offset:-3px}
 @media print{.share,.share-box,.md-toasts{display:none!important}.exhibit:target{outline:0}}
+/* Read-along: while a narration plays, the element being read carries .reading (set by the voice-over script,
+   from the section's blocks file and the cues in the audio manifest). Paint only: no size, border or margin
+   changes, so nothing moves when the highlight does, and the page never scrolls to follow it. On screens only. */
+@media screen{
+  .reading{background-color:var(--accent-soft);box-shadow:0 0 0 var(--space-1-5) var(--accent-soft)}
+  :where(.reading){border-radius:var(--radius-2xs)}
+  /* A table row is tinted through its cells; a stat tile keeps the hairlines around it */
+  .reading:is(tr,tbody,.stat){box-shadow:none}
+  tr.reading>*{background-color:var(--accent-soft)}
+  /* Two labels would vanish into the tint: the author's-view chip, which has the tint's own color, takes the
+     card color, and the "new" tag, whose outline is pale, takes a darker one */
+  .reading .k-our{background-color:var(--card)}
+  .reading .vd:not([class*="rd-"]){border-color:var(--ink-muted)}
+}
+@media screen and (prefers-reduced-motion:no-preference){html:not(.motion-paused) :is(.reading,tr.reading>*){transition:background-color .25s ease-out,box-shadow .25s ease-out}}
+@media screen and (forced-colors:active){.reading{outline:2px solid Highlight;outline-offset:2px}}
 </style>
 
 </head>
@@ -2289,7 +2305,8 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
  }
 })();
 /* Voice-overs: one Listen control per narrated section and a playlist in the hero, from the edition's
-   manifest (written by .github/workflows/voiceover.yml). No autoplay; only one player sounds at a time. */
+   manifest (written by .github/workflows/voiceover.yml). No autoplay; only one player sounds at a time.
+   While one plays, the element being read is highlighted (read-along, below). */
 (function(){
  const main=$('main'),base=main&&main.dataset.audioBase;if(!base||!window.fetch)return;
  const fmt=s=>{s=Math.max(0,Math.round(s));const m=Math.floor(s/60),r=s%60;return m+':'+String(r).padStart(2,'0')};
@@ -2305,14 +2322,63 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
   const files=(m&&m.sections)||{};
   const secs=[...main.querySelectorAll('section[id], header.hero[id]')].filter(sec=>files[sec.id]&&(files[sec.id].file||files[sec.id].url));
   if(!secs.length)return;
+  /* Read-along: the element being read carries the class "reading". Each section's <id>.blocks.json
+     (tools/narration.py) names the element behind each paragraph of its script as [path, prefix]: the
+     element-child indexes from the section down to the element, counted in the static HTML, and the start of
+     its text. The manifest's "cues" (tools/cues.py) give the second at which each paragraph starts. Without
+     cues, or when the two counts differ, nothing is highlighted. The highlight is visual only, and nothing
+     here scrolls the page or moves focus. */
+  const INS='data-inserted';   // on what a script adds beside static content (the Listen controls), so that paths skip it;
+                               // an element that takes the place of a static one (the Share menu's box) is counted in its place
+  const keyOf=el=>{let s='';const walk=n=>{for(let c=n.firstChild;c&&s.length<16;c=c.nextSibling){
+    if(c.nodeType===3)s+=c.data.toLowerCase().replace(/[^a-z0-9]/g,'');
+    else if(c.nodeType===1&&!c.hasAttribute(INS)&&!/^(script|style|template)$/i.test(c.tagName))walk(c)}};walk(el);return s.slice(0,16)};
+  const boxed=el=>el.checkVisibility?el.checkVisibility():el.getClientRects().length>0;
+  const find=(sec,b)=>{
+   let el=sec;
+   for(const i of b[0]){el=[...el.children].filter(c=>!c.hasAttribute(INS))[i];if(!el)return null}
+   if(keyOf(el)!==b[1])return null;   // not the element the script was written from
+   // No layout box (the print-only mirror of a tool, a filtered row, the closed "How to read" box): the
+   // closest ancestor that has one, short of the section itself
+   while(el!==sec&&!boxed(el))el=el.parentElement;
+   return el===sec?null:el;
+  };
+  let lit=null,cur=null;            // the highlighted element, and the player it follows
+  const shut=new WeakSet(),got={},asked={};
+  const paint=el=>{if(el===lit)return;if(lit)lit.classList.remove('reading');lit=el;if(el)el.classList.add('reading')};
+  // A player that ended or was closed gives up the highlight until it plays again; a pause keeps it
+  const quit=au=>{shut.add(au);if(cur===au){cur=null;paint(null)}};
+  const follow=(au,secOf)=>{
+   const sync=()=>{
+    const sec=secOf(),cues=files[sec.id].cues;
+    if(!Array.isArray(cues)||!cues.length)return paint(null);
+    const mark=blocks=>{
+     if(cur!==au||secOf()!==sec)return;   // the player moved on while the blocks file loaded
+     if(!Array.isArray(blocks)||blocks.length!==cues.length)return paint(null);
+     const t=au.currentTime;let k=-1;while(k+1<cues.length&&cues[k+1]<=t)k++;   // the last cue at or before now
+     let el=null;try{if(k>=0)el=find(sec,blocks[k])}catch(e){}
+     paint(el);
+    };
+    if(sec.id in got)return mark(got[sec.id]);
+    (asked[sec.id]=asked[sec.id]||fetch(base+sec.id+'.blocks.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
+      .then(j=>got[sec.id]=j&&j.blocks,()=>got[sec.id]=null)).then(mark);
+   };
+   ['play','timeupdate','seeking','seeked'].forEach(ev=>au.addEventListener(ev,()=>{
+    if(ev==='play')shut.delete(au);
+    else if(shut.has(au)||(cur&&cur!==au&&!cur.paused))return;
+    cur=au;sync();
+   }));
+   au.addEventListener('ended',()=>quit(au));
+  };
   secs.forEach(sec=>{
    const f=files[sec.id],id=sec.id,title=titleOf(sec);
-   const box=document.createElement('div');box.className='listen';box.setAttribute('data-narrate-skip','');
+   const box=document.createElement('div');box.className='listen';box.setAttribute('data-narrate-skip','');box.setAttribute(INS,'');
    box.innerHTML=`<button type="button" class="md-btn md-btn--sm" aria-expanded="false" aria-controls="listen-${id}-panel">${icon}Listen<span class="md-sr-only"> to ${esc(title)}, ${spoken(f.duration||0)}</span> <span class="listen-dur" aria-hidden="true">${fmt(f.duration||0)}</span></button>`+
     `<div class="listen-panel" id="listen-${id}-panel" hidden><audio controls preload="none"></audio><p class="note listen-links"><a href="${base}${id}.txt">Transcript<span class="md-sr-only"> of ${esc(title)}</span></a><span>AI voice by ElevenLabs</span></p></div>`;
    const btn=box.querySelector('button'),panel=box.querySelector('.listen-panel'),au=box.querySelector('audio');
    au.src=srcOf(f);au.setAttribute('aria-label','Narration: '+title+', '+spoken(f.duration||0));
-   btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
+   btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else{au.pause();quit(au)}});
+   follow(au,()=>sec);
    if(sec.classList.contains('hero')){sec.querySelector('.hero-audio').appendChild(box);box.style.marginTop='var(--space-2)'}
    else{const head=sec.querySelector('.head');(head||sec.querySelector('.wrap')||sec).appendChild(box)}
   });
@@ -2321,12 +2387,13 @@ $('uc-print').innerHTML=`<table><thead><tr><th>Call type</th><th>Zone</th><th>Re
   if(total>0){const lm=$('listen-min');lm.textContent=' · '+Math.max(1,Math.round(total/60))+' min listen';lm.hidden=false}
   const all=$('listen-all'),btn=$('listen-all-btn'),panel=$('listen-all-panel'),au=$('listen-all-audio'),now=$('listen-now'),tx=$('listen-all-tx'),next=$('listen-next');
   let i=0;
-  const load=k=>{i=k;const sec=secs[i];au.src=srcOf(files[sec.id]);tx.href=base+sec.id+'.txt';
+  const load=k=>{i=k;const sec=secs[i];au.src=srcOf(files[sec.id]);tx.href=base+sec.id+'.txt';if(cur===au)paint(null);
    now.textContent='Now playing '+(i+1)+' of '+secs.length+': '+titleOf(sec);next.hidden=i>=secs.length-1};
   load(0);
   au.addEventListener('ended',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});
   next.addEventListener('click',()=>{if(i<secs.length-1){load(i+1);au.play().catch(()=>{})}});
-  btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else au.pause()});
+  btn.addEventListener('click',()=>{const open=panel.hidden;panel.hidden=!open;btn.setAttribute('aria-expanded',String(open));if(open){au.play().catch(()=>{})}else{au.pause();quit(au)}});
+  follow(au,()=>secs[i]);
   all.hidden=false;
  }).catch(()=>{});
 })();

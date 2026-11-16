@@ -4,6 +4,10 @@ name: Voice-over
 # (audio/<edition>/<section>.txt, committed: they are also the transcripts), and tools/voiceover.py generates MP3s
 # only for scripts whose SHA-256 differs from audio/<edition>/manifest.json.
 #
+# Read-along: tools/narration.py also writes <section>.blocks.json (the page element behind each paragraph), and
+# after a recording tools/cues.py times the paragraphs with a speech recognizer on the runner (free, no key)
+# and stores the times as "cues" in the manifest, so the page can highlight what is being read.
+#
 # Needs the repository secret ELEVENLABS_API_KEY (Settings > Secrets and variables > Actions). Optional repository
 # variables: ELEVENLABS_VOICE_ID (default WQP7cQUF5aAS6Axh5yaa, "Elara - Crisp Pro Narrator") and
 # ELEVENLABS_MODEL_ID (default eleven_v4). Without the secret, the audio job skips with a notice.
@@ -25,10 +29,10 @@ on:
         default: ''
   push:
     branches: [main]
-    paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/test_narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
+    paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/test_narration.py, tools/voiceover.py, tools/cues.py, tools/test_cues.py, .github/workflows/voiceover.yml]
   pull_request:
     branches: [main]
-    paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/test_narration.py, tools/voiceover.py, .github/workflows/voiceover.yml]
+    paths: [index.html, 'editions/*/index.html', 'audio/**', tools/narration.py, tools/test_narration.py, tools/voiceover.py, tools/cues.py, tools/test_cues.py, .github/workflows/voiceover.yml]
 
 permissions:
   contents: read
@@ -48,10 +52,13 @@ jobs:
           persist-credentials: false
 
       - name: Narration tool tests
-        run: python3 tools/test_narration.py
+        run: |
+          python3 tools/test_narration.py
+          python3 tools/test_cues.py
 
-      # The scripts and the read time are derived from index.html; a stale copy would narrate an old page
-      - name: Scripts and read time match index.html
+      # The scripts, the blocks files and the read time are derived from index.html; a stale copy would narrate
+      # an old page, or highlight the wrong element
+      - name: Scripts, blocks and read time match index.html
         run: |
           ok=true
           python3 tools/narration.py --check || ok=false
@@ -62,9 +69,15 @@ jobs:
             fi
           done
           if [ "$ok" != "true" ]; then
-            echo "::error::Narration text or read time is out of date. Run python3 tools/narration.py (add --page editions/YYYY-MM/index.html for an archived edition) and commit the result."
+            echo "::error::Narration text, blocks or read time is out of date. Run python3 tools/narration.py (add --page editions/YYYY-MM/index.html for an archived edition) and commit the result."
             exit 1
           fi
+
+      # No recognizer here: only that a section with cues has one for each paragraph of its script. A script
+      # edited after its recording is reported, not failed; the page shows no highlight for it meanwhile.
+      - name: Read-along cues fit the scripts
+        run: |
+          for m in audio/*/manifest.json; do python3 tools/cues.py "$(dirname "$m")" --check || exit 1; done
 
   audio:
     name: Generate audio
@@ -134,6 +147,26 @@ jobs:
           # Latest edition first, so a quota that runs out mid-run costs the archive, not the current page
           status=0
           for ed in $(echo $EDITIONS | tr ' ' '\n' | sort -r); do python3 tools/voiceover.py "audio/$ed" || { status=$?; break; }; done
+          exit $status
+
+      # Read-along cues: the second each paragraph starts in its recording (tools/cues.py), from a speech
+      # recognizer on this runner's CPU. No key, no paid service. Only sections without fitting cues are timed,
+      # which after a run means the ones just recorded. This step may fail, or run out of time, without
+      # consequence: the audio above is paid for and is committed either way, and a section without cues
+      # plays without a highlight. It needs the MP3s in the folder, so audio hosted on Cloudflare R2 is skipped.
+      - name: Time the paragraphs for the read-along highlight
+        if: ${{ !cancelled() && steps.key.outputs.present == 'true' && steps.ed.outcome == 'success' }}
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          EDITIONS: ${{ steps.ed.outputs.editions }}
+        run: |
+          command -v ffmpeg >/dev/null || sudo apt-get install -y --no-install-recommends ffmpeg || true
+          python3 -m venv "$RUNNER_TEMP/cues"
+          "$RUNNER_TEMP/cues/bin/pip" install --quiet faster-whisper==1.2.1
+          status=0
+          for ed in $(echo $EDITIONS | tr ' ' '\n' | sort -r); do "$RUNNER_TEMP/cues/bin/python" tools/cues.py "audio/$ed" || status=$?; done
+          for ed in $EDITIONS; do python3 tools/cues.py "audio/$ed" --check || status=$?; done
           exit $status
 
       # Runs even when generation stopped partway (for example, the ElevenLabs quota ran out): the script
