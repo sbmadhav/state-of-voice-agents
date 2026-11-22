@@ -22,6 +22,17 @@ const SITE = 'https://sbmadhav.com/state-of-voice-agents/';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthOf = (edition: string) => `${MONTHS[+edition.slice(5) - 1]} ${edition.slice(0, 4)}`;
 const sideways = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+/** The elements that reach past the right edge of the page, widest first, so a failed no-horizontal-scroll check names its cause. */
+const overflowing = (page: Page) => page.evaluate(() => {
+  const w = document.documentElement.clientWidth;
+  return [...document.querySelectorAll('body *')]
+    .map(el => ({ el, right: Math.round(el.getBoundingClientRect().right + scrollX) }))
+    .filter(({ el, right }) => right > w && el.getClientRects().length > 0)
+    .sort((a, b) => b.right - a.right)
+    .slice(0, 5)
+    .map(({ el, right }) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList.length ? '.' + [...el.classList].join('.') : ''} (right ${right}px)`)
+    .join(', ');
+});
 
 const editionOf = (page: Page) => page.locator('main').getAttribute('data-edition') as Promise<string>;
 
@@ -241,7 +252,10 @@ for (const url of PAGES) {
       await expect(page.locator('figure.exhibit button.share')).toHaveCount(list.length);
       await expect(page.locator('figure.exhibit a.share')).toHaveCount(0);
       await expect(page.locator('.share-menu > *')).toHaveCount(0);
-      const external = () => page.locator('a[href]').evaluateAll(as => as.map(a => (a as HTMLAnchorElement).host).filter(h => /(^|\.)(linkedin|x|twitter)\.com$/.test(h)).length);
+      // Count only the report's own links: the site-wide Explore menu (dialog.xpm, from /assets/explore.js) adds its
+      // own LinkedIn link when it is built at idle time. Safari has no requestIdleCallback, so explore.js builds it 800 ms
+      // after load, which can land between the two counts below and add one.
+      const external = () => page.locator('a[href]').evaluateAll(as => as.filter(a => !a.closest('dialog.xpm')).map(a => (a as HTMLAnchorElement).host).filter(h => /(^|\.)(linkedin|x|twitter)\.com$/.test(h)).length);
       const before = await external();
       await expect(btn).toHaveText('Share');
       await expect(btn).toHaveAttribute('aria-expanded', 'false');
@@ -361,7 +375,8 @@ for (const url of PAGES) {
         const box = (await menu.boundingBox())!;
         expect(box.x, `${id}: left edge`).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width, `${id}: right edge`).toBeLessThanOrEqual(320);
-        expect(await sideways(page), `${id}: no horizontal scroll`).toBe(0);
+        const over = await sideways(page);
+        expect(over, `${id}: no horizontal scroll (past the edge: ${over ? await overflowing(page) : 'none'})`).toBe(0);
         await page.keyboard.press('Escape');
         await expect(menu).toBeHidden();
       }
