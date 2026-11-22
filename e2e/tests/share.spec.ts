@@ -22,16 +22,29 @@ const SITE = 'https://sbmadhav.com/state-of-voice-agents/';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthOf = (edition: string) => `${MONTHS[+edition.slice(5) - 1]} ${edition.slice(0, 4)}`;
 const sideways = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-/** The elements that reach past the right edge of the page, widest first, so a failed no-horizontal-scroll check names its cause. */
+/**
+ * The elements that reach past the right edge of the page, widest first, so a failed no-horizontal-scroll check names
+ * its cause. Skips elements inside a scroll or clip container (the container is judged on its own) and fixed elements,
+ * since neither widens the page.
+ */
 const overflowing = (page: Page) => page.evaluate(() => {
   const w = document.documentElement.clientWidth;
-  return [...document.querySelectorAll('body *')]
+  const contained = (el: Element) => {
+    if (getComputedStyle(el).position === 'fixed') return true;
+    for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) {
+      const cs = getComputedStyle(p);
+      if (cs.overflowX !== 'visible' || cs.position === 'fixed') return true;
+    }
+    return false;
+  };
+  const name = (el: Element) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList.length ? '.' + [...el.classList].join('.') : ''}`;
+  const list = [...document.querySelectorAll('body *')]
     .map(el => ({ el, right: Math.round(el.getBoundingClientRect().right + scrollX) }))
-    .filter(({ el, right }) => right > w && el.getClientRects().length > 0)
+    .filter(({ el, right }) => right > w && el.getClientRects().length > 0 && !contained(el))
     .sort((a, b) => b.right - a.right)
     .slice(0, 5)
-    .map(({ el, right }) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList.length ? '.' + [...el.classList].join('.') : ''} (right ${right}px)`)
-    .join(', ');
+    .map(({ el, right }) => `${name(el)} in ${el.parentElement ? name(el.parentElement) : '?'} (right ${right}px)`);
+  return list.length ? list.join(', ') : 'nothing found outside scroll containers';
 });
 
 const editionOf = (page: Page) => page.locator('main').getAttribute('data-edition') as Promise<string>;
@@ -369,6 +382,7 @@ for (const url of PAGES) {
       const ids = await page.locator('figure.exhibit').evaluateAll(fs => fs.map(f => f.id));
       for (const id of ids) {
         const fig = page.locator(`[id="${id}"]`);
+        const before = await sideways(page);
         await fig.locator('button.share').click();
         const menu = fig.locator('.share-menu');
         await expect(menu).toBeVisible();
@@ -376,7 +390,7 @@ for (const url of PAGES) {
         expect(box.x, `${id}: left edge`).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width, `${id}: right edge`).toBeLessThanOrEqual(320);
         const over = await sideways(page);
-        expect(over, `${id}: no horizontal scroll (past the edge: ${over ? await overflowing(page) : 'none'})`).toBe(0);
+        expect(over, `${id}: no horizontal scroll (${before}px before the menu opened; past the edge: ${over ? await overflowing(page) : 'none'})`).toBe(0);
         await page.keyboard.press('Escape');
         await expect(menu).toBeHidden();
       }
