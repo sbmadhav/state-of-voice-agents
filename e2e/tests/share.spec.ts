@@ -47,6 +47,26 @@ const overflowing = (page: Page) => page.evaluate(() => {
   return list.length ? list.join(', ') : 'nothing found outside scroll containers';
 });
 
+/**
+ * Why the page scrolls sideways with a Share menu open: what reaches past the edge, whether the scroll is still there a
+ * couple of frames later, and where the menu's right edge sat at left 0 (the open() code places it there first, then
+ * moves it left), to tell a real overflow from scroll width WebKit kept from that first placement.
+ */
+const whyWide = async (page: Page, id: string) => {
+  const past = await overflowing(page);
+  await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
+  const later = await sideways(page);
+  const menu = await page.evaluate(figId => {
+    const m = document.getElementById('share-' + figId) as HTMLElement;
+    const left = m.style.left, now = Math.round(m.getBoundingClientRect().right);
+    m.style.left = '0px';
+    const atZero = Math.round(m.getBoundingClientRect().right);
+    m.style.left = left;
+    return `menu right ${now}px now, ${atZero}px at left 0, left style ${left || 'unset'}`;
+  }, id);
+  return `past the edge: ${past}; ${later}px two frames later; ${menu}`;
+};
+
 const editionOf = (page: Page) => page.locator('main').getAttribute('data-edition') as Promise<string>;
 
 /** Every exhibit on the page: its id, the caption's claim and the text after it, and how many Share controls it has. */
@@ -390,7 +410,7 @@ for (const url of PAGES) {
         expect(box.x, `${id}: left edge`).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width, `${id}: right edge`).toBeLessThanOrEqual(320);
         const over = await sideways(page);
-        expect(over, `${id}: no horizontal scroll (${before}px before the menu opened; past the edge: ${over ? await overflowing(page) : 'none'})`).toBe(0);
+        expect(over, `${id}: no horizontal scroll (${before}px before the menu opened; ${over ? await whyWide(page, id) : ''})`).toBe(0);
         await page.keyboard.press('Escape');
         await expect(menu).toBeHidden();
       }
