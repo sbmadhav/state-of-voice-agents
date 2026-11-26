@@ -22,6 +22,50 @@ const SITE = 'https://sbmadhav.com/state-of-voice-agents/';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthOf = (edition: string) => `${MONTHS[+edition.slice(5) - 1]} ${edition.slice(0, 4)}`;
 const sideways = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+/**
+ * The elements that reach past the right edge of the page, widest first, so a failed no-horizontal-scroll check names
+ * its cause. Skips elements inside a scroll or clip container (the container is judged on its own) and fixed elements,
+ * since neither widens the page.
+ */
+const overflowing = (page: Page) => page.evaluate(() => {
+  const w = document.documentElement.clientWidth;
+  const contained = (el: Element) => {
+    if (getComputedStyle(el).position === 'fixed') return true;
+    for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) {
+      const cs = getComputedStyle(p);
+      if (cs.overflowX !== 'visible' || cs.position === 'fixed') return true;
+    }
+    return false;
+  };
+  const name = (el: Element) => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${el.classList.length ? '.' + [...el.classList].join('.') : ''}`;
+  const list = [...document.querySelectorAll('body *')]
+    .map(el => ({ el, right: Math.round(el.getBoundingClientRect().right + scrollX) }))
+    .filter(({ el, right }) => right > w && el.getClientRects().length > 0 && !contained(el))
+    .sort((a, b) => b.right - a.right)
+    .slice(0, 5)
+    .map(({ el, right }) => `${name(el)} in ${el.parentElement ? name(el.parentElement) : '?'} (right ${right}px)`);
+  return list.length ? list.join(', ') : 'nothing found outside scroll containers';
+});
+
+/**
+ * Why the page scrolls sideways with a Share menu open: what reaches past the edge, whether the scroll is still there a
+ * couple of frames later, and where the menu's right edge sat at left 0 (the open() code places it there first, then
+ * moves it left), to tell a real overflow from scroll width WebKit kept from that first placement.
+ */
+const whyWide = async (page: Page, id: string) => {
+  const past = await overflowing(page);
+  await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
+  const later = await sideways(page);
+  const menu = await page.evaluate(figId => {
+    const m = document.getElementById('share-' + figId) as HTMLElement;
+    const left = m.style.left, now = Math.round(m.getBoundingClientRect().right);
+    m.style.left = '0px';
+    const atZero = Math.round(m.getBoundingClientRect().right);
+    m.style.left = left;
+    return `menu right ${now}px now, ${atZero}px at left 0, left style ${left || 'unset'}`;
+  }, id);
+  return `past the edge: ${past}; ${later}px two frames later; ${menu}`;
+};
 
 const editionOf = (page: Page) => page.locator('main').getAttribute('data-edition') as Promise<string>;
 
@@ -241,7 +285,10 @@ for (const url of PAGES) {
       await expect(page.locator('figure.exhibit button.share')).toHaveCount(list.length);
       await expect(page.locator('figure.exhibit a.share')).toHaveCount(0);
       await expect(page.locator('.share-menu > *')).toHaveCount(0);
-      const external = () => page.locator('a[href]').evaluateAll(as => as.map(a => (a as HTMLAnchorElement).host).filter(h => /(^|\.)(linkedin|x|twitter)\.com$/.test(h)).length);
+      // Count only the report's own links: the site-wide Explore menu (dialog.xpm, from /assets/explore.js) adds its
+      // own LinkedIn link when it is built at idle time. Safari has no requestIdleCallback, so explore.js builds it 800 ms
+      // after load, which can land between the two counts below and add one.
+      const external = () => page.locator('a[href]').evaluateAll(as => as.filter(a => !a.closest('dialog.xpm')).map(a => (a as HTMLAnchorElement).host).filter(h => /(^|\.)(linkedin|x|twitter)\.com$/.test(h)).length);
       const before = await external();
       await expect(btn).toHaveText('Share');
       await expect(btn).toHaveAttribute('aria-expanded', 'false');
@@ -355,13 +402,15 @@ for (const url of PAGES) {
       const ids = await page.locator('figure.exhibit').evaluateAll(fs => fs.map(f => f.id));
       for (const id of ids) {
         const fig = page.locator(`[id="${id}"]`);
+        const before = await sideways(page);
         await fig.locator('button.share').click();
         const menu = fig.locator('.share-menu');
         await expect(menu).toBeVisible();
         const box = (await menu.boundingBox())!;
         expect(box.x, `${id}: left edge`).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width, `${id}: right edge`).toBeLessThanOrEqual(320);
-        expect(await sideways(page), `${id}: no horizontal scroll`).toBe(0);
+        const over = await sideways(page);
+        expect(over, `${id}: no horizontal scroll (${before}px before the menu opened; ${over ? await whyWide(page, id) : ''})`).toBe(0);
         await page.keyboard.press('Escape');
         await expect(menu).toBeHidden();
       }
